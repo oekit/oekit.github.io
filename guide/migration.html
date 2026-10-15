@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迁移指南 · oekit</title>
+<meta name="description" content="oekit（Open Easy Kit）— 从 ekit 单体 / yi-nology 前缀仓迁移到 oekit：路径映射、API 变更、版本对照。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">oe<span>kit</span></a>
+  <nav>
+      <a href="/">首页</a>
+      <a href="/#modules">模块</a>
+      <a href="/guide/getting-started.html" class="">指南</a>
+      <a href="/guide/migration.html">迁移</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <div class="crumb"><a href="/">oekit</a> / 指南 / 迁移指南</div>
+  <h1 class="page">迁移指南</h1>
+  <p class="lede">从 ekit 单体 / yi-nology 前缀仓迁移到 oekit：路径映射、API 变更、版本对照。</p>
+
+<h2>路径映射</h2>
+<table>
+  <tr><th>旧</th><th>新</th><th>状态</th></tr>
+  <tr><td class="m">git.enjoye.top/enjoydream/ekit/&lt;pkg&gt;</td><td class="m">github.com/oekit/&lt;module&gt;/&lt;pkg&gt;</td><td>单体冻结维护，仅安全修复</td></tr>
+  <tr><td class="m">github.com/yi-nology/ekit-&lt;name&gt;</td><td class="m">github.com/oekit/&lt;name&gt;</td><td>yi-nology 仓已转出</td></tr>
+  <tr><td class="m">github.com/openekit/&lt;name&gt;</td><td class="m">github.com/oekit/&lt;name&gt;</td><td>openekit 已更名</td></tr>
+  <tr><td class="m">github.com/oekit/&lt;micro&gt;（16 微库）</td><td class="m">github.com/oekit/pkg/&lt;micro&gt;</td><td>微仓已删除；旧版本经 proxy 缓存仍可解析</td></tr>
+</table>
+<h3>一条命令完成 import 改写</h3>
+<pre>grep -rl --include='*.go' 'github.com/yi-nology/ekit-' . | xargs sed -i '' \
+  -E 's,github\.com/yi-nology/ekit-(errors|validator|stringx|slicex|enumx|convert|encoding|jsonrepair|httpjson|mathx|pathx|pagination|ptrx|timex|uidgen|cache),github.com/oekit/pkg/\1,g;
+      s,github\.com/yi-nology/ekit-([a-z-]+),github.com/oekit/\1,g'</pre>
+<div class="warn"><b>类型同一性</b>：同一进程内所有模块必须使用<b>同一个</b> <code>oekit/pkg/errors</code>。
+混用旧 <code>oekit/errors</code> 会导致 BizError 的 As/Is 互相不识别（Not Found 变 500）。</div>
+
+<h2>API 变更对照（相对 ekit 单体）</h2>
+<table>
+  <tr><th>旧（ekit 单体）</th><th>新（oekit）</th><th>说明</th></tr>
+  <tr><td class="m">middleware 包（含 contrib）</td><td class="m">oekit/middleware（包名 <code>mw</code>）+ contrib 子包</td><td>Round-2 拆出，Round-3 成独立仓</td></tr>
+  <tr><td class="m">handler/crudh·validatorh（在 hertz 仓）</td><td class="m">oekit/handler</td><td>Round-3 拆出；hertz 主仓不再依赖 gorm</td></tr>
+  <tr><td class="m">nns.MakeHTTPEndpoint / MakeGRPCEndpoint</td><td class="m">oekit/nns-endpoint：<code>endpoint.NewHTTPEndpointFactory(nnsClient.ServiceClient())</code></td><td>Round-4 分家，工厂生命周期由调用方管理</td></tr>
+  <tr><td class="m">observability/logx · metrics · tracing</td><td class="m">oekit/logx · oekit/metrics · oekit/tracing</td><td>Round-2 解散 observability</td></tr>
+  <tr><td class="m">workflow（在单体）</td><td class="m">oekit/workflow</td><td>依赖 logx，独立成仓</td></tr>
+  <tr><td class="m">examples/kitex（在单体）</td><td class="m">oekit/kitex-examples</td><td>kitex 主仓 shed bootstrap 链</td></tr>
+</table>
+
+<h2>版本对照（2026-10-15 快照）</h2>
+<table>
+  <tr><th>模块</th><th>版本</th><th>模块</th><th>版本</th></tr>
+  <tr><td class="m">pkg</td><td class="m">v0.1.1</td><td class="m">registry</td><td class="m">v0.2.5</td></tr>
+  <tr><td class="m">concurrency</td><td class="m">v0.1.3</td><td class="m">timertask</td><td class="m">v0.1.3</td></tr>
+  <tr><td class="m">logx</td><td class="m">v0.1.6</td><td class="m">nns / nns-endpoint</td><td class="m">v0.3.2 / v0.1.2</td></tr>
+  <tr><td class="m">metrics / tracing</td><td class="m">v0.1.4 / v0.1.5</td><td class="m">middleware</td><td class="m">v0.1.8</td></tr>
+  <tr><td class="m">core / istio</td><td class="m">v0.3.2 / v0.1.3</td><td class="m">gorm / redis / data</td><td class="m">v0.1.7 / v0.1.4 / v0.3.2</td></tr>
+  <tr><td class="m">httpx</td><td class="m">v0.1.4</td><td class="m">bootstrap / handler</td><td class="m">v0.2.4 / v0.1.9</td></tr>
+  <tr><td class="m">hertz / kitex</td><td class="m">v0.3.4 / v0.3.8</td><td class="m">workflow / kitex-examples</td><td class="m">v0.2.4 / v0.1.2</td></tr>
+</table>
+<p>各模块以各自 tag 为准（<code>go get github.com/oekit/&lt;mod&gt;@latest</code>），上表仅作迁移快照。</p>
+
+<h2>归档仓去向</h2>
+<ul>
+  <li>ekit 单体（git.enjoye.top）— 冻结维护，完整历史与架构文档（docs/PLATFORM_CONTRACT.md）</li>
+  <li>oekit/observability — Round-2 解散（仓已删除）：logx→oekit/logx，metrics→oekit/metrics，tracing→oekit/tracing</li>
+  <li>oekit/{errors,validator,stringx,slicex,enumx,convert,encoding,jsonrepair,httpjson,mathx,pathx,pagination,ptrx,timex,uidgen,cache} — Round-4 微库，已并入 oekit/pkg（仓已删除）</li>
+</ul>
+
+  <div class="prevnext"><a href="/guide/observability.html">← 可观测性</a></div>
+</div>
+<footer><div class="wrap">
+  <div class="logo">oe<span>kit</span></div>
+  <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+</div></footer>
+</body>
+</html>

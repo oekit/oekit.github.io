@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP 服务指南 · oekit</title>
+<meta name="description" content="oekit（Open Easy Kit）— config + gorm + crud + middleware + hertz + nns + bootstrap：从零组一个生产级 HTTP 服务。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">oe<span>kit</span></a>
+  <nav>
+      <a href="/">首页</a>
+      <a href="/#modules">模块</a>
+      <a href="/guide/getting-started.html" class="">指南</a>
+      <a href="/guide/migration.html">迁移</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <div class="crumb"><a href="/">oekit</a> / 指南 / HTTP 服务指南</div>
+  <h1 class="page">HTTP 服务指南</h1>
+  <p class="lede">config + gorm + crud + middleware + hertz + nns + bootstrap：从零组一个生产级 HTTP 服务。</p>
+
+<h2>依赖</h2>
+<pre><code class="g">go get</code> github.com/oekit/pkg github.com/oekit/logx github.com/oekit/registry \
+  github.com/oekit/gorm github.com/oekit/middleware github.com/oekit/hertz github.com/oekit/bootstrap</pre>
+
+<h2>1. 配置加载</h2>
+<pre>import <span class="g">"github.com/oekit/registry/config"</span>
+
+func init() { config.LoadDotEnv(<span class="s">".env"</span>) }          <span class="c">// 可选：本地 .env</span>
+cfg, err := config.LoadBootstrap[MyConfig](<span class="s">"dev"</span>)   <span class="c">// 自动选 etc/config-dev.yaml</span>
+token := config.Get(<span class="s">"API_TOKEN"</span>)                    <span class="c">// 环境变量优先</span>
+d := config.ParseDuration(cfg.WorkerInterval, time.Second)</pre>
+
+<h2>2. 存储层：gormx + crud</h2>
+<pre>import (
+    <span class="g">"github.com/oekit/gorm/crud"</span>
+    <span class="g">"github.com/oekit/gorm/crud/gormrepo"</span>
+    <span class="g">"github.com/oekit/gorm/gormx"</span>
+)
+
+db, err := gormx.Open(dialector, gormx.WithConnectionPool(10, 100, time.Hour))
+repo := gormrepo.NewGormRepository[Project](db)
+svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)</pre>
+<div class="note"><b>并发语义</b>：repo 实现 <code>TxRepository</code> 时（GormRepository 已实现），
+Update 自动走「事务 + FOR UPDATE 行锁读」消除丢更新；afterUpdate 钩子失败整体回滚。</div>
+
+<h2>3. HTTP 层：crudh + middleware 栈</h2>
+<pre>import (
+    hertzserver <span class="g">"github.com/cloudwego/hertz/pkg/app/server"</span>
+    <span class="g">"github.com/oekit/hertz/handler/crudh"</span>
+    mw <span class="g">"github.com/oekit/middleware/middleware"</span>
+)
+
+h := hertzserver.New(hertzserver.WithHostPorts(<span class="s">":8080"</span>))
+<span class="c">// 标准栈：Prometheus → TraceID → Recovery → Response → AccessLog</span>
+<span class="c">// v0.28.1 起 Recovery 入栈——引擎无默认 PanicHandler，裸奔会直接断连</span>
+<span class="kw">for</span> _, m := range mw.DefaultMiddleware(mw.StackConfig{ServiceName: <span class="s">"order-service"</span>}) {
+    h.Use(m)
+}
+crudh.NewHandler(svc).RegisterRoutes(h.Group(<span class="s">"/api/v1"</span>), <span class="s">"/projects"</span>)</pre>
+<p>常用中间件（同在 oekit/middleware）：</p>
+<pre>h.Use(mw.RateLimitMiddleware(mw.WithRateLimit(100, 200)))
+h.Use(mw.BearerTokenAuth(mw.WithBearerToken(token), mw.WithAuthSkipPaths(<span class="s">"/healthz"</span>)))
+<span class="c">// contrib 桥接：JWT/Sessions/Swagger/CSRF/pprof/Debug/Gzip/ETag/Lark… 见仓库 contrib/ 目录</span></pre>
+
+<h2>4. 服务注册：nns 一行接入</h2>
+<pre>import (
+    <span class="g">"github.com/oekit/nns"</span>
+    nacospkg <span class="g">"github.com/oekit/registry/nacos"</span>
+    <span class="g">"github.com/oekit/registry/registry"</span>
+)
+
+nnsc := nns.New(nacospkg.Bootstrap{ServiceName: <span class="s">"order-service"</span>},
+    nns.WithStaticInstance(<span class="s">"dep-svc"</span>, []registry.Instance{{IP: <span class="s">"10.0.0.1"</span>, Port: 9000}}))
+_ = nnsc.Init(ctx, <span class="s">"order-service"</span>, []string{<span class="s">"dep-svc"</span>})
+<span class="c">// mock/本地开发：nns.WithMockMode(true) 全链路无 Nacos 依赖</span></pre>
+
+<h2>5. 生命周期：bootstrap 骨架</h2>
+<pre>import (
+    ekithertz <span class="g">"github.com/oekit/hertz/hertz"</span>
+    <span class="g">"github.com/oekit/bootstrap/bootstrap"</span>
+)
+
+bootstrap.Run(cfg, func(app *bootstrap.App) error {
+    h := hertzserver.New(...)
+    ekithertz.RunServer(app, <span class="s">"order-service"</span>, h)   <span class="c">// 注册进生命周期，优雅关闭</span>
+    ekithertz.AddShutdownHook(h, func(ctx context.Context) error {
+        return flushLastBatch(ctx)                 <span class="c">// 关停前刷数据</span>
+    })
+    nnsc.RunWithLifecycle(app, <span class="s">"order-service"</span>, 8080,
+        registry.WithWeight(99), registry.WithMetadata(map[string]string{<span class="s">"region"</span>: <span class="s">"cn-east"</span>}))
+    &lt;-app.Context().Done()                         <span class="c">// ★ 必须阻塞：返回即视为服务结束</span>
+    return nil
+})</pre>
+<div class="warn"><b>时间关系</b>（K8s 必须满足）：
+client 发现延迟 &lt; preStop 宽限 &lt; server 最大延迟 &lt; <code>ExitWaitTime</code>（默认 5s，<code>server.WithExitWaitTime</code> 调整）&lt;
+<code>terminationGracePeriodSeconds</code>。有长耗时请求时调大 ExitWaitTime。</div>
+
+<h2>6. 健康检查 / 指标 / SSE</h2>
+<pre><span class="c">// K8s liveness/readiness：多 check 并发、总超时、panic 隔离</span>
+healthz.RegisterHealthRoutes(h, healthz.WithHealthCheck(<span class="s">"db"</span>, pingDB))
+<span class="c">// Prometheus（oekit/metrics）</span>
+h.GET(<span class="s">"/metrics"</span>, hertzmetrics.MetricsHandler())
+<span class="c">// SSE 流式推送（基于 Hertz 官方 protocol/sse）</span>
+h.GET(<span class="s">"/stream"</span>, func(ctx context.Context, c *app.RequestContext) {
+    s := ekitsse.NewStream(c)
+    defer s.Close()
+    _ = s.Send(<span class="s">"progress"</span>, map[string]any{<span class="s">"percent"</span>: 50})
+})</pre>
+
+  <div class="prevnext"></div>
+</div>
+<footer><div class="wrap">
+  <div class="logo">oe<span>kit</span></div>
+  <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+</div></footer>
+</body>
+</html>

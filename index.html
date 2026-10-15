@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oekit — Open Easy Kit | 开源易用的 Go 工具集</title>
+<meta name="description" content="oekit（Open Easy Kit）— 22 个独立发版的 Go 模块：日志、追踪、服务发现、中间件、微工具库。开源、易用、工具集合。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">oe<span>kit</span></div>
+    <nav>
+      <a href="#modules">模块</a>
+      <a href="/guide/getting-started.html">指南</a>
+      <a href="#quickstart">快速开始</a>
+      <a href="#why">为什么是 oekit</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Open · Easy · Kit</div>
+    <h1>oe<b>kit</b></h1>
+    <div class="expansion"><b>O</b>pen <b>E</b>asy <b>Kit</b> — 开源 · 易用 · 工具集合</div>
+    <p class="sub">22 个独立发版的 Go 模块：微工具库、日志与可观测门面、注册发现、HTTP/RPC 生态、应用引导。
+    按需取用一个，或组全套骨架；每仓独立 SemVer、独立 CI、零强制捆绑。</p>
+    <div class="cta">
+      <a class="btn primary" href="#quickstart">go get oekit</a>
+      <a class="btn" href="https://github.com/orgs/oekit/repositories">浏览全部仓库 →</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="triad" id="why">
+    <div class="card"><h3><span class="en">Open</span>开源</h3>
+      <p>全部 MIT 协议，源码即文档。38 个仓库全部公开、可审计、可 fork——不锁平台，不玩闭源阉割。</p></div>
+    <div class="card"><h3><span class="en">Easy</span>易用</h3>
+      <p>每个模块只做一件事，import 即用；微库零依赖或至多一条内部依赖，不会为了一个字符串函数拖进整个框架。</p></div>
+    <div class="card"><h3><span class="en">Kit</span>工具集合</h3>
+      <p>从 <code>errors</code>/<code>stringx</code> 微库到 Hertz/Kitex 生态适配器，同套规范同套接口分层，既能单点取用也能组全套骨架。</p></div>
+  </div>
+
+  <section id="modules">
+    <h2>模块矩阵 <span class="sub">依赖严格自底向上 · 每仓独立发版</span></h2>
+
+    <div class="layer"><div class="name">L0 · 微工具库 / 基础件（零矩阵依赖）</div>
+      <div class="chips">
+        <a href="https://github.com/oekit/pkg">pkg<small>16 合 1 微工具集：errors/stringx/convert/timex/…</small></a>
+        <a href="https://github.com/oekit/concurrency">concurrency<small>并发原语</small></a>
+        <a href="https://github.com/oekit/logx">logx<small>日志门面</small></a>
+        <a href="https://github.com/oekit/istio">istio<small>Istio XDS</small></a>
+        <a href="https://github.com/oekit/core">core<small>治理 schema/契约</small></a>
+      </div>
+    </div>
+
+    <div class="layer"><div class="name">L1 · 可观测门面 / 注册发现</div>
+      <div class="chips">
+        <a href="https://github.com/oekit/metrics">metrics<small>Prometheus</small></a>
+        <a href="https://github.com/oekit/tracing">tracing<small>OTel + traceid</small></a>
+        <a href="https://github.com/oekit/registry">registry<small>注册发现 + Nacos</small></a>
+      </div>
+    </div>
+
+    <div class="layer"><div class="name">L2 · 领域件</div>
+      <div class="chips">
+        <a href="https://github.com/oekit/data">data<small>缓存抽象</small></a>
+        <a href="https://github.com/oekit/gorm">gorm<small>SQL/CRUD</small></a>
+        <a href="https://github.com/oekit/redis">redis<small>Redis 全家</small></a>
+        <a href="https://github.com/oekit/httpx">httpx<small>HTTP 客户端</small></a>
+        <a href="https://github.com/oekit/timertask">timertask<small>分片定时任务</small></a>
+        <a href="https://github.com/oekit/middleware">middleware<small>Hertz 中间件栈</small></a>
+        <a href="https://github.com/oekit/nns">nns<small>服务治理</small></a>
+        <a href="https://github.com/oekit/nns-endpoint">nns-endpoint<small>端点熔断</small></a>
+      </div>
+    </div>
+
+    <div class="layer"><div class="name">L3 · 应用层 / 框架生态</div>
+      <div class="chips">
+        <a href="https://github.com/oekit/bootstrap">bootstrap<small>应用引导</small></a>
+        <a href="https://github.com/oekit/handler">handler<small>CRUD handler</small></a>
+        <a href="https://github.com/oekit/hertz">hertz<small>Hertz 运行时</small></a>
+        <a href="https://github.com/oekit/kitex">kitex<small>Kitex 生态</small></a>
+        <a href="https://github.com/oekit/workflow">workflow<small>流程编排</small></a>
+        <a href="https://github.com/oekit/kitex-examples">kitex-examples<small>示例</small></a>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="guides">
+    <h2>指南 <span class="sub">从单个 import 到生产级服务，逐层展开</span></h2>
+    <div class="cards">
+      <a class="card" href="/guide/getting-started.html"><h3><span class="no">01</span>快速开始</h3><p>三种起步姿势：单微库、门面组合、全栈骨架；模块地图。</p></a>
+      <a class="card" href="/guide/logging.html"><h3><span class="no">02</span>日志（logx）</h3><p>接口分层、Delegating 懒解析、多后端替换、Sink 多目标、caller 归属。</p></a>
+      <a class="card" href="/guide/errors.html"><h3><span class="no">03</span>错误处理</h3><p>Wrap/Cause、BizError 双码、统一 Fail 出口；类型同一性红线。</p></a>
+      <a class="card" href="/guide/http-service.html"><h3><span class="no">04</span>HTTP 服务全栈</h3><p>config→gorm→crud→中间件栈→nns 注册→bootstrap 生命周期。</p></a>
+      <a class="card" href="/guide/rpc-service.html"><h3><span class="no">05</span>RPC 服务（Kitex）</h3><p>治理热更三条纪律、BizError 桥接、元信息透传、端点熔断重试。</p></a>
+      <a class="card" href="/guide/observability.html"><h3><span class="no">06</span>可观测性</h3><p>metrics/tracing/traceid 三件套；OTel 与 OpenTracing 二选一。</p></a>
+      <a class="card" href="/guide/migration.html"><h3><span class="no">07</span>迁移指南</h3><p>三段历史路径映射、API 变更对照、一条命令改写 import。</p></a>
+    </div>
+  </section>
+
+  <section id="quickstart">
+    <h2>快速开始 <span class="sub">按需取用，一个 import 就能跑</span></h2>
+<pre><span class="c"># 微工具集（16 合 1）</span>
+<span class="g">go get</span> github.com/oekit/pkg@latest
+
+<span class="c"># 日志 + 追踪 + 注册发现</span>
+<span class="g">go get</span> github.com/oekit/logx github.com/oekit/tracing github.com/oekit/registry
+
+<span class="c"># HTTP 服务全家（中间件栈 + Hertz 运行时）</span>
+<span class="g">go get</span> github.com/oekit/middleware github.com/oekit/hertz</pre>
+<pre><span class="c">package main</span>
+
+import (
+    <span class="g">"github.com/oekit/logx"</span>
+    <span class="g">"github.com/oekit/pkg/stringx"</span>
+)
+
+var svcLog = logx.WithService("my-service")
+
+func main() {
+    svcLog.Info(stringx.Pluralize(3, "module"), "version", 1)
+}</pre>
+
+    <h2>兼容性 <span class="sub">从 ekit 单体迁移</span></h2>
+    <table>
+      <tr><th>旧路径（已归档，重定向仍可用）</th><th>新路径</th></tr>
+      <tr><td class="m">git.enjoye.top/enjoydream/ekit/…</td><td class="m">github.com/oekit/…</td></tr>
+      <tr><td class="m">github.com/yi-nology/ekit-…</td><td class="m">github.com/oekit/…</td></tr>
+    </table>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">oe<span>kit</span></div>
+    <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

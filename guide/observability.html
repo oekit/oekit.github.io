@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可观测性指南 · oekit</title>
+<meta name="description" content="oekit（Open Easy Kit）— metrics + tracing + traceid 三件套，Hertz/Kitex 双侧 instrumentation。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">oe<span>kit</span></a>
+  <nav>
+      <a href="/">首页</a>
+      <a href="/#modules">模块</a>
+      <a href="/guide/getting-started.html" class="">指南</a>
+      <a href="/guide/migration.html">迁移</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <div class="crumb"><a href="/">oekit</a> / 指南 / 可观测性指南</div>
+  <h1 class="page">可观测性指南</h1>
+  <p class="lede">metrics + tracing + traceid 三件套，Hertz/Kitex 双侧 instrumentation。</p>
+
+<h2>Prometheus 指标（oekit/metrics）</h2>
+<pre>import (
+    <span class="g">"github.com/oekit/metrics"</span>
+    hertzmetrics <span class="g">"github.com/oekit/hertz/hertz/metrics"</span>
+)
+
+metrics.Init(<span class="s">"my-service"</span>)
+h.GET(<span class="s">"/metrics"</span>, hertzmetrics.MetricsHandler())
+<span class="c">// 或一步到位：</span>
+hertzmetrics.InitAndRegister(<span class="s">"my-service"</span>, h)</pre>
+<p>弹性指标族（<code>metrics/resilience</code>）覆盖 httpx / nns-endpoint / kitex 三路的
+熔断状态/迁移/拒绝与重试计数，labels 统一带 <code>service</code> 与 <code>kind</code>。</p>
+
+<h2>OpenTelemetry 追踪（oekit/tracing）</h2>
+<pre>provider, err := tracing.Init(tracing.Config{
+    ServiceName: <span class="s">"my-service"</span>,
+    Endpoint:    <span class="s">"otel-collector:4317"</span>,  <span class="c">// 为空 = 仅本地 provider，零网络</span>
+    Insecure:    true,
+})
+defer provider.Shutdown(context.Background())</pre>
+
+<h2>框架挂载（二选一，勿叠加）</h2>
+<table>
+  <tr><th>框架</th><th>OTel（新生态）</th><th>OpenTracing（旧生态）</th></tr>
+  <tr><td>Hertz</td><td class="m">oekit/hertz → hertzotel.NewServerTracing()</td><td class="m">oekit/hertz → hertztracer</td></tr>
+  <tr><td>Kitex</td><td class="m">oekit/kitex → NewServerTracingSuite()</td><td class="m">hertz-contrib/tracer 自行桥接</td></tr>
+</table>
+<div class="warn"><b>二选一</b>：同一服务叠用 OTel 与 OpenTracing 会 double-instrument（每请求两条 span）。</div>
+
+<h2>trace_id：全链路串起来的那根线</h2>
+<pre><span class="c">// HTTP 入口注入（middleware 栈已内置 TraceID）</span>
+h.Use(traceid.Middleware()...)
+<span class="c">// 任意层提取</span>
+id := traceid.FromContext(ctx)
+<span class="c">// 跨 RPC 传播：Kitex 走 kitexmeta（TTHeader），HTTP 出站走 httpx WithTracePropagation</span></pre>
+<p>logx 的 <code>Ctx*</code> 方法自动读取 ctx 里的 trace_id 输出 <code>[trace=xxx]</code>；
+响应体 <code>ResponseMiddleware</code> 也会回填 <code>trace_id</code> 字段，用户报障直接可查。</p>
+
+<h2>弹性指标怎么用</h2>
+<pre><span class="c"># 熔断状态 / 迁移 / 拒绝 / 重试——httpx、nns-endpoint、kitex 三路同款</span>
+http_client_breaker_state{service="payment",kind="httpx"} 1
+http_client_retry_attempts_total{service="payment",kind="httpx"} 42</pre>
+
+  <div class="prevnext"></div>
+</div>
+<footer><div class="wrap">
+  <div class="logo">oe<span>kit</span></div>
+  <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+</div></footer>
+</body>
+</html>

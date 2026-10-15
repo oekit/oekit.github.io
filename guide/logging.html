@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日志指南（logx） · oekit</title>
+<meta name="description" content="oekit（Open Easy Kit）— 面向接口的统一日志门面：多后端可替换、kv 结构化、caller 自动归属、trace_id 注入。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">oe<span>kit</span></a>
+  <nav>
+      <a href="/">首页</a>
+      <a href="/#modules">模块</a>
+      <a href="/guide/getting-started.html" class="">指南</a>
+      <a href="/guide/migration.html">迁移</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <div class="crumb"><a href="/">oekit</a> / 指南 / 日志指南（logx）</div>
+  <h1 class="page">日志指南（logx）</h1>
+  <p class="lede">面向接口的统一日志门面：多后端可替换、kv 结构化、caller 自动归属、trace_id 注入。</p>
+
+<h2>核心设计</h2>
+<p><code>logx</code> 是接口门面，底层实现可整体替换。接口分四层，按需依赖：</p>
+<table>
+  <tr><th>接口</th><th>方法</th><th>用途</th></tr>
+  <tr><td class="m">CoreLogger</td><td class="m">Debug/Info/Warn/Error</td><td>kv 结构化（禁止 printf 风格）</td></tr>
+  <tr><td class="m">FormattedLogger</td><td class="m">+ Debugf/Infof/Warnf/Errorf</td><td>printf 风格</td></tr>
+  <tr><td class="m">ContextLogger</td><td class="m">+ CtxDebug/CtxInfo/…（8 个）</td><td>自动从 ctx 提取 trace_id</td></tr>
+  <tr><td class="m">Logger</td><td class="m">+ WithService/WithAttrs/WithGroup/WithCtx/SetLevel</td><td>派生子 logger</td></tr>
+</table>
+
+<h2>业务服务接入</h2>
+<pre>import <span class="g">"github.com/oekit/logx"</span>
+
+var svcLog = logx.WithService(<span class="s">"order-service"</span>)
+
+func handle() {
+    svcLog.Info(<span class="s">"creating order"</span>, <span class="s">"order_id"</span>, ord, <span class="s">"amount"</span>, amt)
+    svcLog.CtxError(ctx, <span class="s">"create failed"</span>, <span class="s">"err"</span>, err) <span class="c">// 自动带 trace_id</span>
+}</pre>
+<ul>
+  <li>kv 风格是<b>默认规范</b>，printf 风格（<code>Infof</code>）仅用于确需格式化的场景</li>
+  <li><code>LOG_LEVEL=DEBUG|INFO|WARN|ERROR</code> 环境变量对所有后端统一生效</li>
+  <li><code>Ctx*</code> 方法的 trace_id 由 tracing 模块的 <code>traceid.Middleware()</code> 注入 ctx 后自动提取</li>
+</ul>
+
+<h2>SDK / 基础库接入：Delegating</h2>
+<div class="warn"><b>硬规则</b>：SDK 基础包<b>禁止</b>用 <code>logx.Default()</code> 或 <code>WithService</code> 声明包级 logger——
+包级 var 在 init 时求值，先于 main() 的 SetDefault，消费方后续设置永远不生效。必须用 <code>Delegating</code> 懒解析。</div>
+<pre>var flowLog = logx.Delegating(<span class="s">"workflow"</span>) <span class="c">// 调用时才解析 Default()，组件名渲染为 component=workflow</span></pre>
+
+<h2>后端与 SetDefault</h2>
+<pre>import (
+    <span class="g">"github.com/oekit/logx"</span>
+    logslog <span class="g">"github.com/oekit/logx"</span> <span class="c">// 根包内置 slog / std 两种实现</span>
+)
+
+logx.SetDefault(logslog.NewSlogLogger(<span class="s">"my-service"</span>))</pre>
+<table>
+  <tr><th>后端</th><th>位置</th><th>场景</th></tr>
+  <tr><td class="m">stdLogger</td><td class="m">logx 根包 <code>NewStdLogger</code></td><td>默认（标准库 log），零 Hertz 依赖</td></tr>
+  <tr><td class="m">slogLogger</td><td class="m">logx 根包 <code>NewSlogLogger</code></td><td>结构化 JSON 输出</td></tr>
+  <tr><td class="m">hlog 适配</td><td class="m"><a href="https://github.com/oekit/logx/tree/main/hlog">oekit/logx/hlog</a> <code>NewHlogLogger</code></td><td>与 Hertz hlog 输出格式一致（降级为字符串拼接）</td></tr>
+  <tr><td class="m">hertzlog 桥接</td><td class="m"><a href="https://github.com/oekit/logx/tree/main/hertzlog">oekit/logx/hertzlog</a></td><td>logrus/zap/zerolog/slog 四后端 → hlog</td></tr>
+</table>
+<div class="warn"><b>防递归</b>：把 hlog 后端的 Logger 再传给 <code>hertz.NewLogger</code>/<code>kitex.NewLogger</code> 会无限递归——
+桥接框架日志请用 <code>NewSlogLogger</code> 或 <code>NewStdLogger</code>。</div>
+
+<h2>多目标输出：Sink</h2>
+<pre><span class="c">// 同时写 stdout + 按大小轮转文件</span>
+fileSink, _ := logx.NewFileSink(<span class="s">"/var/log/my-service/app.log"</span>)
+rotSink, _ := logx.NewRotatingSink(<span class="s">"/var/log/my-service/app.log"</span>, 100) <span class="c">// 100MB</span>
+logx.SetDefault(logx.NewSlogLogger(<span class="s">"my-service"</span>))
+<span class="c">// Sink 接口可自行实现接 Loki/OTLP；单 sink 失败不阻塞整体（MultiSink 隔离）</span></pre>
+
+<h2>caller 归属</h2>
+<p>每个后端自动追踪真实调用方（<code>caller</code> 字段），内部帧按 module 路径前缀跳过；
+桥接适配器（如 kitex/hertz 的日志桥）通过 <code>logx.SkipCallerFiles(file)</code> 注册自身文件，
+框架日志的 caller 指向真实调用方而非桥接帧。</p>
+
+  <div class="prevnext"></div>
+</div>
+<footer><div class="wrap">
+  <div class="logo">oe<span>kit</span></div>
+  <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+</div></footer>
+</body>
+</html>

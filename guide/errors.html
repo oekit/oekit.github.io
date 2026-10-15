@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>错误处理指南 · oekit</title>
+<meta name="description" content="oekit（Open Easy Kit）— pkg/errors 一套贯穿存储层到 HTTP 响应的错误链：Wrap/Cause、BizError 双码、统一 Fail 出口。">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="/">oe<span>kit</span></a>
+  <nav>
+      <a href="/">首页</a>
+      <a href="/#modules">模块</a>
+      <a href="/guide/getting-started.html" class="">指南</a>
+      <a href="/guide/migration.html">迁移</a>
+      <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <div class="crumb"><a href="/">oekit</a> / 指南 / 错误处理指南</div>
+  <h1 class="page">错误处理指南</h1>
+  <p class="lede">pkg/errors 一套贯穿存储层到 HTTP 响应的错误链：Wrap/Cause、BizError 双码、统一 Fail 出口。</p>
+
+<h2>包装与解包</h2>
+<pre>import <span class="g">"github.com/oekit/pkg/errors"</span>
+
+if err := db.Query(...); err != nil {
+    <span class="c">// nil-safe（避免 fmt.Errorf 的 %!w(&lt;nil&gt;) 歧义），kv 用于结构化日志关联</span>
+    return errors.Wrap(err, <span class="s">"query user"</span>, <span class="s">"user_id"</span>, uid)
+}
+<span class="c">// 判定仍走标准库 errors.Is / errors.As；解包到最底层用 Cause</span>
+if errors.Is(err, sql.ErrNoRows) { ... }
+root := errors.Cause(err)</pre>
+
+<h2>BizError：业务码与 HTTP 码双轨</h2>
+<pre><span class="c">// BizCode 写入响应 body；HTTPCode 为 0 时经 StatusMapper 从 BizCode 推导</span>
+err := errors.NewBizError(40010, <span class="s">"库存不足"</span>)
+<span class="c">// 显式双码</span>
+err := errors.NewBizErrorWithStatus(40010, 409, <span class="s">"库存不足"</span>)
+<span class="c">// 命名工厂（同时设两码）：NewNotFoundError / NewBadRequestError / …</span>
+err := errors.NewNotFoundError(<span class="s">"order not found"</span>)</pre>
+<ul>
+  <li><code>ValidationError</code> 自动映射为 400</li>
+  <li>Kitex RPC 的对端业务异常经 <a href="https://github.com/oekit/kitex">oekit/kitex</a> 的
+  <code>WithBizErrorBridge()</code> 转成本地 BizError（timeout→50400/504、no-instance→50300/503、ACL→40301/403）</li>
+</ul>
+
+<h2>统一出口：middleware.Fail</h2>
+<pre>import mw <span class="g">"github.com/oekit/middleware/middleware"</span>
+
+func getOrder(ctx context.Context, c *app.RequestContext) {
+    ord, err := svc.Get(ctx, id)
+    if err != nil {
+        mw.Fail(ctx, c, err) <span class="c">// BizError→对应码；crud.ErrNotFound→404；registry.ErrNoInstances→503；兜底 500</span>
+        return
+    }
+    mw.SuccessResp(c, ord)
+}</pre>
+<p>500 路径自动记录结构化日志（<code>logx.CtxError</code>，携带 trace_id），错误细节不泄漏给客户端。</p>
+
+<div class="warn"><b>类型同一性</b>：BizError 的 <code>errors.As/Is</code> 识别依赖 import 路径一致。
+整条链路（存储层 → service → handler/middleware）必须使用<b>同一个</b> errors 包。
+混用 <code>oekit/pkg/errors</code> 与旧 <code>oekit/errors</code> 会导致 404 判定断裂成 500（两套类型互不相认）。</div>
+
+<h2>规范清单</h2>
+<ul>
+  <li>所有 error 必须处理，禁止 <code>_</code> 忽略</li>
+  <li>包装用 <code>errors.Wrap</code>（或 <code>fmt.Errorf("...: %w", err)</code>），保持链路可 Is/As</li>
+  <li>包级 sentinel 用 <code>var ErrXxx = errors.New(...)</code></li>
+  <li>Redis <code>redis.Nil</code> 视为缓存未命中，不是错误</li>
+  <li>业务错误一律 BizError，HTTP 层统一走 <code>mw.Fail</code>，禁止 handler 各写各的响应格式</li>
+</ul>
+
+  <div class="prevnext"></div>
+</div>
+<footer><div class="wrap">
+  <div class="logo">oe<span>kit</span></div>
+  <div>Open Easy Kit · MIT License · <a href="https://github.com/orgs/oekit/repositories">github.com/oekit</a></div>
+</div></footer>
+</body>
+</html>
