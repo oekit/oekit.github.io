@@ -10,6 +10,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/getting-started' },
       { text: '参考文档', items: [
+        { text: '架构总览', link: '/about/architecture' },
         { text: '平台契约', link: '/about/PLATFORM_CONTRACT' },
         { text: '服务模板', link: '/about/SERVICE_TEMPLATE' },
         { text: 'llms.txt', link: '/llms.txt' }
@@ -34,6 +35,7 @@ export default defineConfig({
         {
           text: '参考文档',
           items: [
+            { text: '架构总览', link: '/about/architecture' },
             { text: '平台契约', link: '/about/PLATFORM_CONTRACT' },
             { text: '服务模板', link: '/about/SERVICE_TEMPLATE' }
           ]
@@ -43,6 +45,7 @@ export default defineConfig({
         {
           text: '参考文档',
           items: [
+            { text: '架构总览', link: '/about/architecture' },
             { text: '平台契约', link: '/about/PLATFORM_CONTRACT' },
             { text: '服务模板', link: '/about/SERVICE_TEMPLATE' },
             { text: '指南目录', link: '/guide/getting-started' }

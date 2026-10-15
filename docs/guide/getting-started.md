@@ -59,12 +59,13 @@ go get github.com/oekit/kitex github.com/oekit/nns github.com/oekit/nns-endpoint
 
 依赖严格自底向上——上层随意组合，下层永不反向依赖：
 
-| 层 | 模块 | 说明 |
+| 能力层 | 模块 | 说明 |
 |---|---|---|
-| L0 | [pkg](https://github.com/oekit/pkg) · [concurrency](https://github.com/oekit/concurrency) · [logx](https://github.com/oekit/logx) · [core](https://github.com/oekit/core) · [istio](https://github.com/oekit/istio) | 微工具集、并发原语、日志门面、治理 schema、Istio XDS |
-| L1 | [metrics](https://github.com/oekit/metrics) · [tracing](https://github.com/oekit/tracing) · [registry](https://github.com/oekit/registry) | Prometheus、OTel、注册发现 + Nacos + 配置加载 |
-| L2 | [data](https://github.com/oekit/data) · [gorm](https://github.com/oekit/gorm) · [redis](https://github.com/oekit/redis) · [httpx](https://github.com/oekit/httpx) · [timertask](https://github.com/oekit/timertask) · [middleware](https://github.com/oekit/middleware) · [nns](https://github.com/oekit/nns) · [nns-endpoint](https://github.com/oekit/nns-endpoint) | 缓存、SQL/CRUD、Redis、HTTP 客户端、定时任务、中间件栈、服务治理 |
-| L3 | [bootstrap](https://github.com/oekit/bootstrap) · [handler](https://github.com/oekit/handler) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [workflow](https://github.com/oekit/workflow) | 应用引导、CRUD handler、Hertz/Kitex 运行时、流程编排 |
+| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [handler](https://github.com/oekit/handler) · [workflow](https://github.com/oekit/workflow) · [istio](https://github.com/oekit/istio) · [kitex-examples](https://github.com/oekit/kitex-examples) | 组合根、Hertz/Kitex 运行时、中间件栈、CRUD handler、流程编排、xDS 熔断 |
+| 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) | HTTP 客户端、端点熔断、WS/NATS、服务治理、注册发现 + Nacos |
+| 数据访问 | [gorm](https://github.com/oekit/gorm) · [redis](https://github.com/oekit/redis) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) | SQL/CRUD、Redis、缓存、定时任务 |
+| 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) | 日志门面、OTel、Prometheus |
+| 基础库 | [pkg](https://github.com/oekit/pkg) · [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) | 微工具集 16 合 1、并发原语、治理 schema |
 
 > [!TIP] 提示
 > > **提示**：版本一律 `@latest`。每仓独立 SemVer，升级互不牵连。

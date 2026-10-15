@@ -6,38 +6,44 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 ## 模块
 
-### L0 基础件
-- [pkg](https://github.com/oekit/pkg): 16 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache
-- [concurrency](https://github.com/oekit/concurrency): GoSafe 系列 safe-go、键控闸门、扇出、令牌桶、重试
-- [logx](https://github.com/oekit/logx): 统一日志门面（接口分层、多后端、Sink、caller 归属）+ shutdown
-- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
-- [istio](https://github.com/oekit/istio): Istio Proxyless——Kitex xDS 动态熔断
+依赖严格自底向上，五个能力层（架构图：https://oekit.github.io/about/architecture.html）
 
-### L1 门面
-- [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
-- [tracing](https://github.com/oekit/tracing): OTel Init + traceid 真相源 + http/redis 插桩
+### 应用引导 · 框架生态
+- [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/Run 应用骨架 + healthz + 优雅关停
+- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）
+- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）
+- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw）+ contrib 桥接
+- [handler](https://github.com/oekit/handler): 泛型 CRUD HTTP Handler
+- [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
+- [istio](https://github.com/oekit/istio): Istio Proxyless——Kitex xDS 动态熔断（零内部依赖）
+- [kitex-examples](https://github.com/oekit/kitex-examples): Kitex echo 示例（client/server + 治理配置）
+
+### 通信 · 服务治理
+- [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传）
+- [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（per-service 熔断/换实例重试）
+- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus
+- [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
 - [registry](https://github.com/oekit/registry): 注册发现 SPI + Nacos 实现 + config 配置加载 + sdbridge
 
-### L2 领域件
-- [data](https://github.com/oekit/data): 缓存检查器 + LocalCache
+### 数据访问
 - [gorm](https://github.com/oekit/gorm): SQL/GORM 全家（crud Service 事务防丢更新）
 - [redis](https://github.com/oekit/redis): Redis 客户端/缓存后端/分布式锁
-- [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传）
-- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus
+- [data](https://github.com/oekit/data): 缓存检查器 + LocalCache
 - [timertask](https://github.com/oekit/timertask): 分片定时任务
-- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw）+ contrib 桥接
-- [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
-- [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（熔断/换实例重试）
 
-### L3 应用层
-- [bootstrap](https://github.com/oekit/bootstrap): bootstrap.Run 应用骨架 + healthz
-- [handler](https://github.com/oekit/handler): 泛型 CRUD HTTP Handler
-- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE）
-- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）
-- [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
+### 可观测性
+- [logx](https://github.com/oekit/logx): 统一日志门面（接口分层、多后端、Sink、caller 归属）+ shutdown
+- [tracing](https://github.com/oekit/tracing): OTel Init + traceid 真相源 + http/redis 插桩
+- [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
+
+### 基础库
+- [pkg](https://github.com/oekit/pkg): 16 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache
+- [concurrency](https://github.com/oekit/concurrency): GoSafe 系列 safe-go、键控闸门、扇出、令牌桶、重试
+- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
 
 ## 文档
 
+- [架构总览](https://oekit.github.io/about/architecture.html): 五能力层架构图 + 关键依赖链 + 设计原则
 - [快速开始](https://oekit.github.io/guide/getting-started.html): 三种起步姿势 + 模块地图
 - [日志指南](https://oekit.github.io/guide/logging.html): logx 全量用法
 - [错误处理](https://oekit.github.io/guide/errors.html): Wrap/BizError/Fail 链路与类型同一性红线

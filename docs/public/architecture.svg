@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1056" viewBox="0 0 1240 1056" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#868E96"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4C6EF5"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1240" height="1056" rx="16" fill="#FFFFFF"/>
+  <rect x="0.5" y="0.5" width="1239" height="1055" rx="16" fill="none" stroke="#E9ECEF"/>
+
+  <!-- header -->
+  <text x="40" y="48" font-size="26" font-weight="700" fill="#1B1F3B">oekit 模块矩阵 · 架构总览</text>
+  <text x="40" y="74" font-size="13" fill="#66708A">23 个独立发版的 Go 模块（SemVer + 独立 CI）· 依赖自底向上 · github.com/oekit</text>
+  <text x="1200" y="48" font-size="12" fill="#98A2B3" text-anchor="end">Go 1.25+ · MIT</text>
+
+  <!-- ============ 你的服务 ============ -->
+  <rect x="32" y="96" width="1176" height="56" rx="10" fill="#FFFFFF" stroke="#868E96" stroke-dasharray="6 4"/>
+  <text x="620" y="130" font-size="15" font-weight="600" fill="#495057" text-anchor="middle">你的服务 · 业务微服务（Hertz HTTP / Kitex RPC）</text>
+
+  <line x1="620" y1="154" x2="620" y2="172" stroke="#868E96" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="634" y="168" font-size="11" fill="#98A2B3">组合 · 引导</text>
+
+  <!-- ============ 应用引导 · 框架生态 ============ -->
+  <rect x="32" y="178" width="1176" height="190" rx="12" fill="#F5F8FF" stroke="#BAC8FF"/>
+  <text x="48" y="202" font-size="13" font-weight="700" fill="#3B5BDB">应用引导 · 框架生态</text>
+
+  <!-- row 1 -->
+  <rect x="48" y="214" width="220" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="64" y="238" font-size="15" font-weight="600" fill="#364FC7">workflow</text>
+  <text x="64" y="260" font-size="11.5" fill="#6B7280">串行/并行/异步编排 · Hook</text>
+
+  <rect x="288" y="214" width="200" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="304" y="238" font-size="15" font-weight="600" fill="#364FC7">istio</text>
+  <text x="304" y="260" font-size="11.5" fill="#6B7280">xDS 熔断 · 零内部依赖</text>
+
+  <rect x="508" y="214" width="210" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF" stroke-dasharray="5 4"/>
+  <text x="524" y="238" font-size="15" font-weight="600" fill="#364FC7">kitex-examples</text>
+  <text x="524" y="260" font-size="11.5" fill="#6B7280">echo 示例 · 治理配置</text>
+
+  <rect x="738" y="214" width="454" height="64" rx="8" fill="#EDF2FF" stroke="#BAC8FF"/>
+  <text x="754" y="240" font-size="11.5" fill="#3B5BDB">hertz.RunServer / kitex.RunServer → bootstrap 组合根</text>
+  <text x="754" y="260" font-size="11.5" fill="#3B5BDB">统一组合与优雅关停：排空连接 → 释放资源</text>
+
+  <!-- row 2 -->
+  <rect x="48" y="290" width="210" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="64" y="314" font-size="15" font-weight="600" fill="#364FC7">hertz</text>
+  <text x="64" y="336" font-size="11.5" fill="#6B7280">SSE/health/metrics · OTel</text>
+
+  <rect x="276" y="290" width="270" height="64" rx="8" fill="#DBE4FF" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="292" y="314" font-size="15" font-weight="700" fill="#2B3FA8">bootstrap</text>
+  <text x="292" y="336" font-size="11.5" fill="#4C5FD5">组合根 · App/Run · healthz</text>
+
+  <rect x="564" y="290" width="190" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="580" y="314" font-size="15" font-weight="600" fill="#364FC7">middleware</text>
+  <text x="580" y="336" font-size="11.5" fill="#6B7280">标准栈 · contrib 桥接</text>
+
+  <rect x="772" y="290" width="170" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="788" y="314" font-size="15" font-weight="600" fill="#364FC7">handler</text>
+  <text x="788" y="336" font-size="11.5" fill="#6B7280">CRUD Handler · 绑定</text>
+
+  <rect x="960" y="290" width="230" height="64" rx="8" fill="#FFFFFF" stroke="#BAC8FF"/>
+  <text x="976" y="314" font-size="15" font-weight="600" fill="#364FC7">kitex</text>
+  <text x="976" y="336" font-size="11.5" fill="#6B7280">治理热更 · BizError 桥接</text>
+
+  <!-- internal arrows: hertz -> bootstrap, kitex -> bootstrap -->
+  <line x1="258" y1="322" x2="272" y2="322" stroke="#4C6EF5" stroke-width="1.5" marker-end="url(#arrBlue)"/>
+  <path d="M 1075 288 C 980 280, 620 280, 436 288" fill="none" stroke="#4C6EF5" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrBlue)"/>
+
+  <line x1="620" y1="370" x2="620" y2="388" stroke="#868E96" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ============ 通信 · 服务治理 ============ -->
+  <rect x="32" y="392" width="1176" height="190" rx="12" fill="#F0FBF7" stroke="#96F2D7"/>
+  <text x="48" y="416" font-size="13" font-weight="700" fill="#087F5B">通信 · 服务治理</text>
+
+  <!-- row 1 -->
+  <rect x="48" y="428" width="240" height="64" rx="8" fill="#FFFFFF" stroke="#96F2D7"/>
+  <text x="64" y="452" font-size="15" font-weight="600" fill="#087F5B">httpx</text>
+  <text x="64" y="474" font-size="11.5" fill="#6B7280">LB · 熔断/重试 · OTel 透传</text>
+
+  <rect x="308" y="428" width="240" height="64" rx="8" fill="#FFFFFF" stroke="#96F2D7"/>
+  <text x="324" y="452" font-size="15" font-weight="600" fill="#087F5B">nns-endpoint</text>
+  <text x="324" y="474" font-size="11.5" fill="#6B7280">per-service 熔断 · 换实例重试</text>
+
+  <rect x="568" y="428" width="220" height="64" rx="8" fill="#FFFFFF" stroke="#96F2D7"/>
+  <text x="584" y="452" font-size="15" font-weight="600" fill="#087F5B">network</text>
+  <text x="584" y="474" font-size="11.5" fill="#6B7280">WS/NATS/MQ · 连接工具</text>
+
+  <rect x="808" y="428" width="384" height="64" rx="8" fill="#E6FCF5" stroke="#96F2D7"/>
+  <text x="824" y="454" font-size="11.5" fill="#087F5B">hertz / kitex → nns → registry（服务发现链）</text>
+  <text x="824" y="474" font-size="11.5" fill="#087F5B">nns-endpoint → httpx（端点级弹性）</text>
+
+  <!-- row 2 -->
+  <rect x="48" y="504" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#96F2D7"/>
+  <text x="64" y="528" font-size="15" font-weight="600" fill="#087F5B">nns</text>
+  <text x="64" y="550" font-size="11.5" fill="#6B7280">发现/配置/实例缓存 · 降级</text>
+
+  <rect x="328" y="504" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#96F2D7"/>
+  <text x="344" y="528" font-size="15" font-weight="600" fill="#087F5B">registry</text>
+  <text x="344" y="550" font-size="11.5" fill="#6B7280">注册发现核心 + Nacos 实现</text>
+
+  <line x1="308" y1="536" x2="324" y2="536" stroke="#0CA678" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <line x1="620" y1="584" x2="620" y2="602" stroke="#868E96" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ============ 数据访问 ============ -->
+  <rect x="32" y="606" width="1176" height="114" rx="12" fill="#FFF9E8" stroke="#FFD8A8"/>
+  <text x="48" y="630" font-size="13" font-weight="700" fill="#D9480F">数据访问</text>
+
+  <rect x="48" y="642" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#FFD8A8"/>
+  <text x="64" y="666" font-size="15" font-weight="600" fill="#D9480F">gorm</text>
+  <text x="64" y="688" font-size="11.5" fill="#6B7280">连接池增强 · CRUD Service</text>
+
+  <rect x="318" y="642" width="250" height="64" rx="8" fill="#FFFFFF" stroke="#FFD8A8"/>
+  <text x="334" y="666" font-size="15" font-weight="600" fill="#D9480F">redis</text>
+  <text x="334" y="688" font-size="11.5" fill="#6B7280">客户端 · 缓存后端 · 分布式锁</text>
+
+  <rect x="588" y="642" width="230" height="64" rx="8" fill="#FFFFFF" stroke="#FFD8A8"/>
+  <text x="604" y="666" font-size="15" font-weight="600" fill="#D9480F">data</text>
+  <text x="604" y="688" font-size="11.5" fill="#6B7280">LocalCache · 缓存检查器</text>
+
+  <rect x="838" y="642" width="200" height="64" rx="8" fill="#FFFFFF" stroke="#FFD8A8"/>
+  <text x="854" y="666" font-size="15" font-weight="600" fill="#D9480F">timertask</text>
+  <text x="854" y="688" font-size="11.5" fill="#6B7280">分片定时 · 心跳续约</text>
+
+  <line x1="568" y1="674" x2="584" y2="674" stroke="#E67700" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <line x1="620" y1="722" x2="620" y2="740" stroke="#868E96" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ============ 可观测性 ============ -->
+  <rect x="32" y="744" width="1176" height="114" rx="12" fill="#F7F3FF" stroke="#D0BFFF"/>
+  <text x="48" y="768" font-size="13" font-weight="700" fill="#6741D9">可观测性</text>
+
+  <rect x="48" y="780" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#D0BFFF"/>
+  <text x="64" y="804" font-size="15" font-weight="600" fill="#6741D9">logx</text>
+  <text x="64" y="826" font-size="11.5" fill="#6B7280">统一门面 · 多后端 · Sink</text>
+
+  <rect x="328" y="780" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#D0BFFF"/>
+  <text x="344" y="804" font-size="15" font-weight="600" fill="#6741D9">tracing</text>
+  <text x="344" y="826" font-size="11.5" fill="#6B7280">OpenTelemetry · trace_id</text>
+
+  <rect x="608" y="780" width="260" height="64" rx="8" fill="#FFFFFF" stroke="#D0BFFF"/>
+  <text x="624" y="804" font-size="15" font-weight="600" fill="#6741D9">metrics</text>
+  <text x="624" y="826" font-size="11.5" fill="#6B7280">Prometheus · 弹性指标族</text>
+
+  <text x="900" y="806" font-size="11.5" fill="#845EF7">全矩阵统一可观测门面</text>
+  <text x="900" y="826" font-size="11.5" fill="#845EF7">结构化日志 / OTel 链路 / 指标</text>
+
+  <line x1="620" y1="860" x2="620" y2="878" stroke="#868E96" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ============ 基础库 ============ -->
+  <rect x="32" y="882" width="1176" height="114" rx="12" fill="#F4F6F8" stroke="#CED4DA"/>
+  <text x="48" y="906" font-size="13" font-weight="700" fill="#343A40">基础库</text>
+
+  <rect x="48" y="918" width="420" height="64" rx="8" fill="#FFFFFF" stroke="#CED4DA"/>
+  <text x="64" y="940" font-size="15" font-weight="600" fill="#343A40">pkg <tspan font-size="11.5" font-weight="400" fill="#868E96">微工具集 16 合 1</tspan></text>
+  <text x="64" y="956" font-size="10" fill="#868E96">errors · validator · stringx · slicex · enumx · convert · encoding · jsonrepair · httpjson</text>
+  <text x="64" y="970" font-size="10" fill="#868E96">mathx · pathx · pagination · ptrx · timex · uidgen · cache</text>
+
+  <rect x="488" y="918" width="280" height="64" rx="8" fill="#FFFFFF" stroke="#CED4DA"/>
+  <text x="504" y="940" font-size="15" font-weight="600" fill="#343A40">concurrency</text>
+  <text x="504" y="962" font-size="11.5" fill="#6B7280">GoSafe · singleflight · retry</text>
+
+  <rect x="788" y="918" width="280" height="64" rx="8" fill="#FFFFFF" stroke="#CED4DA"/>
+  <text x="804" y="940" font-size="15" font-weight="600" fill="#343A40">core</text>
+  <text x="804" y="962" font-size="11.5" fill="#6B7280">governance · lifecycle · IP 工具</text>
+
+  <!-- footer -->
+  <text x="40" y="1022" font-size="11.5" fill="#98A2B3">依赖方向：上层依赖下层，全矩阵无环 · 每仓独立发版（SemVer）+ 独立 CI（Lint / Test）</text>
+  <text x="40" y="1040" font-size="11.5" fill="#98A2B3">模块索引：https://github.com/oekit · 文档：https://oekit.github.io · llms.txt 供 AI Agent 检索</text>
+</svg>
