@@ -17,6 +17,7 @@ import (
 	"context"
 
 	"github.com/oekit/bootstrap/bootstrap"
+	bootstrapobs "github.com/oekit/bootstrap/obs"
 	ekithertz "github.com/oekit/hertz/hertz"
 	health "github.com/oekit/hertz/hertz/health"
 	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
@@ -32,14 +33,17 @@ func main() {
 	hlog.SetLogger(ekithertz.NewLogger(logx.WithService("my-http")))
 
 	// 2. 启动编排
-	if err := bootstrap.Run(bootstrap.Config{
-		ServiceName: "my-http",
-		Port:        8080,
-		Tracing: &tracing.Config{
+	b, err := bootstrap.New(
+		bootstrap.WithServiceName("my-http"),
+		bootstrapobs.WithTracing(tracing.Config{
 			Endpoint: "otel-collector:4317",
 			Insecure: true,
-		},
-	}, func(app *bootstrap.App) error {
+		}),
+	)
+	if err != nil {
+		return err
+	}
+	_ = b.Run(func(app *bootstrap.App) error {
 		tracing := ekithertz.NewServerTracing()
 		h := server.New(server.WithHostPorts(":8080"), tracing.Option)
 
@@ -75,6 +79,7 @@ package main
 
 import (
 	"github.com/oekit/bootstrap/bootstrap"
+	bootstrapobs "github.com/oekit/bootstrap/obs"
 	ekithertz "github.com/oekit/hertz/hertz"
 	health "github.com/oekit/hertz/hertz/health"
 	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
@@ -91,14 +96,17 @@ func main() {
 	klog.SetLogger(ekitkitex.NewLogger(logx.WithService("my-rpc")))
 
 	// 2. 启动编排
-	if err := bootstrap.Run(bootstrap.Config{
-		ServiceName: "my-rpc",
-		Port:        9090,
-		Tracing: &tracing.Config{
+	b, err := bootstrap.New(
+		bootstrap.WithServiceName("my-rpc"),
+		bootstrapobs.WithTracing(tracing.Config{
 			Endpoint: "otel-collector:4317",
 			Insecure: true,
-		},
-	}, func(app *bootstrap.App) error {
+		}),
+	)
+	if err != nil {
+		return err
+	}
+	_ = b.Run(func(app *bootstrap.App) error {
 		svr := echo.NewServer(new(Impl),
 			server.WithSuite(ekitkitex.NewServerTracingSuite()),
 		)
@@ -126,6 +134,7 @@ package main
 
 import (
 	"github.com/oekit/bootstrap/bootstrap"
+	bootstrapobs "github.com/oekit/bootstrap/obs"
 	ekithertz "github.com/oekit/hertz/hertz"
 	health "github.com/oekit/hertz/hertz/health"
 	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
