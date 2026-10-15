@@ -13,17 +13,23 @@
   <nav>
       <a href="/">首页</a>
       <a href="/#modules">模块</a>
-      <a href="/guide/getting-started.html" class="">指南</a>
-      <a href="/guide/migration.html">迁移</a>
+      <a href="/guide/" class="active">指南</a>
+      <a href="/docs/PLATFORM_CONTRACT.html">平台契约</a>
       <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
   </nav>
 </div></header>
 <div class="wrap">
-  <div class="crumb"><a href="/">oekit</a> / 指南 / 错误处理指南</div>
-  <h1 class="page">错误处理指南</h1>
-  <p class="lede">pkg/errors 一套贯穿存储层到 HTTP 响应的错误链：Wrap/Cause、BizError 双码、统一 Fail 出口。</p>
+  <div class="crumb"><a href="/">oekit</a> / <a href="/guide/">指南</a> / <span>错误处理指南</span></div>
 
-<h2>包装与解包</h2>
+<div class="note"><b>本页目录</b></div>
+<ul class="toc">
+<li><a href="#sec-1">包装与解包</a></li>
+<li><a href="#sec-2">BizError：业务码与 HTTP 码双轨</a></li>
+<li><a href="#sec-3">统一出口：middleware.Fail</a></li>
+<li><a href="#sec-4">规范清单</a></li>
+</ul>
+
+<h2 id="sec-1">包装与解包</h2>
 <pre>import <span class="g">"github.com/oekit/pkg/errors"</span>
 
 if err := db.Query(...); err != nil {
@@ -34,7 +40,7 @@ if err := db.Query(...); err != nil {
 if errors.Is(err, sql.ErrNoRows) { ... }
 root := errors.Cause(err)</pre>
 
-<h2>BizError：业务码与 HTTP 码双轨</h2>
+<h2 id="sec-2">BizError：业务码与 HTTP 码双轨</h2>
 <pre><span class="c">// BizCode 写入响应 body；HTTPCode 为 0 时经 StatusMapper 从 BizCode 推导</span>
 err := errors.NewBizError(40010, <span class="s">"库存不足"</span>)
 <span class="c">// 显式双码</span>
@@ -47,7 +53,7 @@ err := errors.NewNotFoundError(<span class="s">"order not found"</span>)</pre>
   <code>WithBizErrorBridge()</code> 转成本地 BizError（timeout→50400/504、no-instance→50300/503、ACL→40301/403）</li>
 </ul>
 
-<h2>统一出口：middleware.Fail</h2>
+<h2 id="sec-3">统一出口：middleware.Fail</h2>
 <pre>import mw <span class="g">"github.com/oekit/middleware/middleware"</span>
 
 func getOrder(ctx context.Context, c *app.RequestContext) {
@@ -64,7 +70,7 @@ func getOrder(ctx context.Context, c *app.RequestContext) {
 整条链路（存储层 → service → handler/middleware）必须使用<b>同一个</b> errors 包。
 混用 <code>oekit/pkg/errors</code> 与旧 <code>oekit/errors</code> 会导致 404 判定断裂成 500（两套类型互不相认）。</div>
 
-<h2>规范清单</h2>
+<h2 id="sec-4">规范清单</h2>
 <ul>
   <li>所有 error 必须处理，禁止 <code>_</code> 忽略</li>
   <li>包装用 <code>errors.Wrap</code>（或 <code>fmt.Errorf("...: %w", err)</code>），保持链路可 Is/As</li>
@@ -72,8 +78,9 @@ func getOrder(ctx context.Context, c *app.RequestContext) {
   <li>Redis <code>redis.Nil</code> 视为缓存未命中，不是错误</li>
   <li>业务错误一律 BizError，HTTP 层统一走 <code>mw.Fail</code>，禁止 handler 各写各的响应格式</li>
 </ul>
-
-  <div class="prevnext"></div>
+  <div class="prevnext"><a href="/guide/logging.html">← 日志指南（logx）</a>
+<a href="/guide/">☰ 目录</a>
+<a href="/guide/http-service.html">HTTP 服务指南 →</a></div>
 </div>
 <footer><div class="wrap">
   <div class="logo">oe<span>kit</span></div>

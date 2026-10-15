@@ -69,3 +69,6 @@ td.m { font-family: var(--mono); font-size: 13px; white-space: nowrap; }
 footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 26px 0 40px; color: var(--muted); font-size: 13px; }
 footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 footer .logo { font-size: 15px; }
+
+ul.toc { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 12px 34px; margin: 12px 0; font-size: 14px; }
+ul.toc li { margin: 3px 0; }

@@ -13,21 +13,30 @@
   <nav>
       <a href="/">首页</a>
       <a href="/#modules">模块</a>
-      <a href="/guide/getting-started.html" class="">指南</a>
-      <a href="/guide/migration.html">迁移</a>
+      <a href="/guide/" class="active">指南</a>
+      <a href="/docs/PLATFORM_CONTRACT.html">平台契约</a>
       <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
   </nav>
 </div></header>
 <div class="wrap">
-  <div class="crumb"><a href="/">oekit</a> / 指南 / HTTP 服务指南</div>
-  <h1 class="page">HTTP 服务指南</h1>
-  <p class="lede">config + gorm + crud + middleware + hertz + nns + bootstrap：从零组一个生产级 HTTP 服务。</p>
+  <div class="crumb"><a href="/">oekit</a> / <a href="/guide/">指南</a> / <span>HTTP 服务指南</span></div>
 
-<h2>依赖</h2>
+<div class="note"><b>本页目录</b></div>
+<ul class="toc">
+<li><a href="#sec-1">依赖</a></li>
+<li><a href="#sec-2">1. 配置加载</a></li>
+<li><a href="#sec-3">2. 存储层：gormx + crud</a></li>
+<li><a href="#sec-4">3. HTTP 层：crudh + middleware 栈</a></li>
+<li><a href="#sec-5">4. 服务注册：nns 一行接入</a></li>
+<li><a href="#sec-6">5. 生命周期：bootstrap 骨架</a></li>
+<li><a href="#sec-7">6. 健康检查 / 指标 / SSE</a></li>
+</ul>
+
+<h2 id="sec-1">依赖</h2>
 <pre><code class="g">go get</code> github.com/oekit/pkg github.com/oekit/logx github.com/oekit/registry \
   github.com/oekit/gorm github.com/oekit/middleware github.com/oekit/hertz github.com/oekit/bootstrap</pre>
 
-<h2>1. 配置加载</h2>
+<h2 id="sec-2">1. 配置加载</h2>
 <pre>import <span class="g">"github.com/oekit/registry/config"</span>
 
 func init() { config.LoadDotEnv(<span class="s">".env"</span>) }          <span class="c">// 可选：本地 .env</span>
@@ -35,7 +44,7 @@ cfg, err := config.LoadBootstrap[MyConfig](<span class="s">"dev"</span>)   <span
 token := config.Get(<span class="s">"API_TOKEN"</span>)                    <span class="c">// 环境变量优先</span>
 d := config.ParseDuration(cfg.WorkerInterval, time.Second)</pre>
 
-<h2>2. 存储层：gormx + crud</h2>
+<h2 id="sec-3">2. 存储层：gormx + crud</h2>
 <pre>import (
     <span class="g">"github.com/oekit/gorm/crud"</span>
     <span class="g">"github.com/oekit/gorm/crud/gormrepo"</span>
@@ -48,7 +57,7 @@ svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)</p
 <div class="note"><b>并发语义</b>：repo 实现 <code>TxRepository</code> 时（GormRepository 已实现），
 Update 自动走「事务 + FOR UPDATE 行锁读」消除丢更新；afterUpdate 钩子失败整体回滚。</div>
 
-<h2>3. HTTP 层：crudh + middleware 栈</h2>
+<h2 id="sec-4">3. HTTP 层：crudh + middleware 栈</h2>
 <pre>import (
     hertzserver <span class="g">"github.com/cloudwego/hertz/pkg/app/server"</span>
     <span class="g">"github.com/oekit/hertz/handler/crudh"</span>
@@ -67,7 +76,7 @@ crudh.NewHandler(svc).RegisterRoutes(h.Group(<span class="s">"/api/v1"</span>), 
 h.Use(mw.BearerTokenAuth(mw.WithBearerToken(token), mw.WithAuthSkipPaths(<span class="s">"/healthz"</span>)))
 <span class="c">// contrib 桥接：JWT/Sessions/Swagger/CSRF/pprof/Debug/Gzip/ETag/Lark… 见仓库 contrib/ 目录</span></pre>
 
-<h2>4. 服务注册：nns 一行接入</h2>
+<h2 id="sec-5">4. 服务注册：nns 一行接入</h2>
 <pre>import (
     <span class="g">"github.com/oekit/nns"</span>
     nacospkg <span class="g">"github.com/oekit/registry/nacos"</span>
@@ -79,7 +88,7 @@ nnsc := nns.New(nacospkg.Bootstrap{ServiceName: <span class="s">"order-service"<
 _ = nnsc.Init(ctx, <span class="s">"order-service"</span>, []string{<span class="s">"dep-svc"</span>})
 <span class="c">// mock/本地开发：nns.WithMockMode(true) 全链路无 Nacos 依赖</span></pre>
 
-<h2>5. 生命周期：bootstrap 骨架</h2>
+<h2 id="sec-6">5. 生命周期：bootstrap 骨架</h2>
 <pre>import (
     ekithertz <span class="g">"github.com/oekit/hertz/hertz"</span>
     <span class="g">"github.com/oekit/bootstrap/bootstrap"</span>
@@ -100,7 +109,7 @@ bootstrap.Run(cfg, func(app *bootstrap.App) error {
 client 发现延迟 &lt; preStop 宽限 &lt; server 最大延迟 &lt; <code>ExitWaitTime</code>（默认 5s，<code>server.WithExitWaitTime</code> 调整）&lt;
 <code>terminationGracePeriodSeconds</code>。有长耗时请求时调大 ExitWaitTime。</div>
 
-<h2>6. 健康检查 / 指标 / SSE</h2>
+<h2 id="sec-7">6. 健康检查 / 指标 / SSE</h2>
 <pre><span class="c">// K8s liveness/readiness：多 check 并发、总超时、panic 隔离</span>
 healthz.RegisterHealthRoutes(h, healthz.WithHealthCheck(<span class="s">"db"</span>, pingDB))
 <span class="c">// Prometheus（oekit/metrics）</span>
@@ -111,8 +120,9 @@ h.GET(<span class="s">"/stream"</span>, func(ctx context.Context, c *app.Request
     defer s.Close()
     _ = s.Send(<span class="s">"progress"</span>, map[string]any{<span class="s">"percent"</span>: 50})
 })</pre>
-
-  <div class="prevnext"></div>
+  <div class="prevnext"><a href="/guide/errors.html">← 错误处理指南</a>
+<a href="/guide/">☰ 目录</a>
+<a href="/guide/rpc-service.html">RPC 服务指南（Kitex） →</a></div>
 </div>
 <footer><div class="wrap">
   <div class="logo">oe<span>kit</span></div>

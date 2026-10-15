@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Agent 使用指南 · oekit</title>
-<meta name="description" content="oekit（Open Easy Kit）— 人与 AI Agent 如何快速使用这套 Go 模块矩阵：AGENTS.md、llms.txt、模块选型、硬规则红线。">
+<meta name="description" content="oekit（Open Easy Kit）— 让人和 AI Agent 都能在 5 分钟内正确使用 oekit：机器可读入口、模块选型决策树、必须遵守的硬规则。">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
@@ -13,17 +13,24 @@
   <nav>
       <a href="/">首页</a>
       <a href="/#modules">模块</a>
-      <a href="/guide/getting-started.html" class="active">指南</a>
-      <a href="/guide/migration.html">迁移</a>
+      <a href="/guide/" class="active">指南</a>
+      <a href="/docs/PLATFORM_CONTRACT.html">平台契约</a>
       <a href="https://github.com/orgs/oekit/repositories">GitHub</a>
   </nav>
 </div></header>
 <div class="wrap">
-  <div class="crumb"><a href="/">oekit</a> / 指南 / AI Agent 使用</div>
-  <h1 class="page">AI Agent 使用指南</h1>
-  <p class="lede">让人和 AI Agent 都能在 5 分钟内正确使用 oekit：机器可读入口、模块选型决策树、必须遵守的硬规则。</p>
+  <div class="crumb"><a href="/">oekit</a> / <a href="/guide/">指南</a> / <span>AI Agent 使用指南</span></div>
 
-  <h2>给 Agent 的三个入口</h2>
+<div class="note"><b>本页目录</b></div>
+<ul class="toc">
+<li><a href="#sec-1">给 Agent 的三个入口</a></li>
+<li><a href="#sec-2">模块选型决策树</a></li>
+<li><a href="#sec-3">硬规则红线（违反即产出错误代码）</a></li>
+<li><a href="#sec-4">推荐的工作流</a></li>
+<li><a href="#sec-5">人该怎么用</a></li>
+</ul>
+
+  <h2 id="sec-1">给 Agent 的三个入口</h2>
   <table>
     <tr><th>入口</th><th>地址</th><th>用途</th></tr>
     <tr><td class="m">llms.txt</td><td class="m"><a href="https://oekit.github.io/llms.txt">oekit.github.io/llms.txt</a></td><td>全矩阵机器可读索引：23 个模块一句话说明 + 全部文档链接，一次抓取即建立全局认知</td></tr>
@@ -31,7 +38,7 @@
     <tr><td class="m">go doc</td><td class="m"><code>go doc github.com/oekit/&lt;mod&gt;</code></td><td>接口签名以源码为准；每仓均带测试，可疑用法直接看 _test.go</td></tr>
   </table>
 
-  <h2>模块选型决策树</h2>
+  <h2 id="sec-2">模块选型决策树</h2>
   <pre>需要字符串/切片/类型转换/时间/ID？
   └─ <span class="g">go get github.com/oekit/pkg</span>     <span class="c">// 16 合 1，一个 module 全有</span>
 错误处理？也用 pkg/errors（BizError 双码）
@@ -43,7 +50,7 @@
 搭 RPC 服务？ ── <span class="g">oekit/kitex</span>（+ oekit/nns + oekit/nns-endpoint）
 要数据库？ ── <span class="g">oekit/gorm</span>（CRUD Service）；要 Redis？ ── <span class="g">oekit/redis</span></pre>
 
-  <h2>硬规则红线（违反即产出错误代码）</h2>
+  <h2 id="sec-3">硬规则红线（违反即产出错误代码）</h2>
   <ol>
     <li><b>错误处理只用一套</b>：<code>github.com/oekit/pkg/errors</code>。混用旧 <code>oekit/errors</code>
         会导致 BizError 的 As/Is 互不识别——Not Found 会断裂成 500（这是真实发生过的事故）。</li>
@@ -57,7 +64,7 @@
     <li><b>组件关闭签名 <code>Close(ctx) error</code></b> + sync.Once 幂等。</li>
   </ol>
 
-  <h2>推荐的工作流</h2>
+  <h2 id="sec-4">推荐的工作流</h2>
   <pre>1. 抓 <a href="https://oekit.github.io/llms.txt">llms.txt</a> 建立模块地图，按上面的决策树选模块
 2. <span class="g">go get github.com/oekit/&lt;mod&gt;@latest</span>
 3. 读该仓 AGENTS.md（硬规则）+ README 快速使用示例
@@ -68,12 +75,12 @@
   旧路径 <code>git.enjoye.top/enjoydream/ekit</code>（单体，冻结）、<code>yi-nology</code>、
   <code>openekit</code> 均已迁移到 <code>github.com/oekit</code>，不要生成旧路径的代码。</div>
 
-  <h2>人该怎么用</h2>
+  <h2 id="sec-5">人该怎么用</h2>
   <p>同样的入口对人更简单：从 <a href="/">首页</a> 的模块地图选仓 → README 顶部有可复制的最小示例 →
   深入看 <a href="/guide/getting-started.html">指南</a>；每个模块的「矩阵总览」表告诉你它依赖谁、
   被谁依赖，避免引入不需要的层。</p>
-
-  <div class="prevnext"><a href="/guide/observability.html">← 可观测性</a><a href="/guide/migration.html">迁移指南 →</a></div>
+  <div class="prevnext"><a href="/guide/migration.html">← 迁移指南</a>
+<a href="/guide/">☰ 目录</a></div>
 </div>
 <footer><div class="wrap">
   <div class="logo">oe<span>kit</span></div>
