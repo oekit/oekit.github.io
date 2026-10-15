@@ -1,0 +1,4 @@
+/* 暗色模式下架构图切换为深色变体（VitePress 暗色是 html.dark 类，媒体查询不适用） */
+.dark img[src="/architecture.svg"] {
+  content: url("/architecture-dark.svg");
+}
