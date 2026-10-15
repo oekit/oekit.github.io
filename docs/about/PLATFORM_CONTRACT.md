@@ -255,10 +255,11 @@ exporter（独立端口 + 启动失败 log.Fatal）；tracer 按 Registry 幂等
 
 ## 6. 中间件栈顺序
 
-`mw.DefaultMiddleware(StackConfig{ServiceName: "svc"})` 注册顺序：
+`mw.DefaultMiddleware(StackConfig{SkipPaths: [...]})` 注册顺序（middleware v0.2.0 起
+Prometheus 从默认栈拆出，需要指标时 `h.Use(pm.Middleware())` 显式拼最前）：
 
 ```
-Prometheus → TraceID(gen) → TraceID(bridge) → Recovery → Response → AccessLog
+(Prometheus 可选，显式拼装) → TraceID(gen) → TraceID(bridge) → Recovery → Response → AccessLog
 ```
 
 TraceID 必须在 Response 和 AccessLog 之前，确保 trace_id 可被后续中间件提取。
@@ -317,16 +318,16 @@ ekit 提供两层 HTTP 客户端抽象，职责清晰、不重叠：
 | 包 | 定位 | 适用场景 |
 |---|---|---|
 | `network/httpx` | 高层 Hertz client 客户端（v0.25.1 起，替代 req/v3） | 业务服务间 RPC、需服务发现/熔断/重试/指标的场景。默认推荐。 |
-| `observability/tracing/instrumentation/httpotel`（Go 包名 `httpxotel`） | 标准 `http.Client` 的低层 transport 工具 | 已有标准库 `http.Client` 链路，仅需注入 OpenTelemetry tracing 的场景。 |
+| `tracing/httpotel`（oekit/tracing 拆分仓；单体时代为 `observability/tracing/instrumentation/httpotel`，包名 `httpxotel` 已于 tracing v0.2.0 对齐为 `httpotel`） | 标准 `http.Client` 的低层 transport 工具 | 已有标准库 `http.Client` 链路，仅需注入 OpenTelemetry tracing 的场景。 |
 
 ### 边界与协作
 
 - `network/httpx` 是推荐入口，自带 NNS 服务发现、熔断、重试、Prometheus 指标。
-- 两者**不是重复**，前者封装 Hertz client（v0.25.1 起，原 req/v3 已移除），后者封装 `net/http` transport（`httpxotel.Transport()` / `httpxotel.WrapTransport`）。
-- `network/httpx.WithTracePropagation`（v0.26.0 起为现行 API，旧 `WithTracing` 已移除）走 Hertz client `UseAsLast` 注入 W3C TraceContext + Baggage 头；替换/包装既有 `net/http` transport 用 `httpxotel.Transport()`，两条路径的 propagator 语义一致（均读 `otel.GetTextMapPropagator()`）。
+- 两者**不是重复**，前者封装 Hertz client（v0.25.1 起，原 req/v3 已移除），后者封装 `net/http` transport（`httpotel.Transport()` / `httpotel.WrapTransport`）。
+- `network/httpx.WithTracePropagation`（v0.26.0 起为现行 API，旧 `WithTracing` 已移除）走 Hertz client `UseAsLast` 注入 W3C TraceContext + Baggage 头；替换/包装既有 `net/http` transport 用 `httpotel.Transport()`，两条路径的 propagator 语义一致（均读 `otel.GetTextMapPropagator()`）。
 
 ### 决策
 
 - 新业务代码 → `network/httpx`
-- 替换/包装既有 `http.Client` 接入 tracing → `observability/tracing/instrumentation/httpotel`
+- 替换/包装既有 `http.Client` 接入 tracing → `tracing/httpotel`
 - 两者**不要在同一调用链上叠加**（tracing span 会重复）

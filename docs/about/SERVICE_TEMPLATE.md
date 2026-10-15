@@ -184,9 +184,9 @@ h := server.New(server.WithHostPorts(":8080"), tracing.Option)
 ## 接入检查清单
 
 - [ ] 日志桥接：`hlog.SetLogger` / `klog.SetLogger` 已配置
-- [ ] OTel 追踪：`tracing.Init` 或 `WithTracing` 已配置
-- [ ] 中间件栈：`DefaultMiddleware` 已注册（Prometheus + TraceID + Response + AccessLog）
-- [ ] 指标暴露：`hertzmetrics.InitAndRegister` 或 `h.GET("/metrics", hertzmetrics.MetricsHandler())` 已配置（注册表与 `DefaultMiddleware` 缺省一致，均为 `observability/metrics.Registry`）
+- [ ] OTel 追踪：`tracing.Init` 已配置；**核心组件零注入，装饰器显式接入**——GORM 用 `db.Use(gormotel.NewPlugin())`、Redis 用 `redisotel.InstrumentTracing(c.Client())`（无 SDK 时 noop）
+- [ ] 中间件栈：`DefaultMiddleware` 已注册（TraceID + Recovery + Response + AccessLog，零指标强制）；需要 HTTP 指标时 `h.Use(pm.Middleware())` 显式拼最前
+- [ ] 指标暴露：`hertzmetrics.InitAndRegister` 或 `h.GET("/metrics", hertzmetrics.MetricsHandler())` 已配置（注册表与 `PrometheusConfig.Registry` 缺省一致，均为 `metrics.Registry`）
 - [ ] 服务注册：`RunServer` 已调用（自动注册 shutdown 钩子）；userFn 内 `<-app.Context().Done()` 阻塞等信号
 - [ ] 健康检查：`health.RegisterHealthRoutes(h)` 已注册（包 `github.com/oekit/hertz/hertz/health`；/ping, /health, /buildVersion）
 - [ ] 错误处理：业务错误使用 `mw.Fail(ctx, c, err)` 而非手动构造响应

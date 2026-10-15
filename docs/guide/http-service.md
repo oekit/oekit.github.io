@@ -49,11 +49,14 @@ import (
 )
 
 h := hertzserver.New(hertzserver.WithHostPorts(":8080"))
-// 标准栈：Prometheus → TraceID → Recovery → Response → AccessLog
-// v0.28.1 起 Recovery 入栈——引擎无默认 PanicHandler，裸奔会直接断连
-for _, m := range mw.DefaultMiddleware(mw.StackConfig{ServiceName: "order-service"}) {
+// 标准栈：TraceID → Recovery → Response → AccessLog（零指标强制）
+// Recovery 入栈——引擎无默认 PanicHandler，裸奔会直接断连
+for _, m := range mw.DefaultMiddleware(mw.StackConfig{SkipPaths: []string{"/healthz"}}) {
     h.Use(m)
 }
+// 需要 HTTP 指标时显式拼在栈最前（middleware v0.2.0 起 Prometheus 从默认栈拆出）
+pm := mw.NewPrometheusMetrics(mw.PrometheusConfig{ServiceName: "order-service"})
+h.Use(pm.Middleware())
 crudh.NewHandler(svc).RegisterRoutes(h.Group("/api/v1"), "/projects")
 ```
 
