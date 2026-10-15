@@ -7,7 +7,12 @@ updates:
     groups:
       site-deps:
         patterns: ["*"]
+  # 分组：每月最多一个 actions 升级 PR，组合兼容性一次验证
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      gh-actions:
+        patterns:
+          - "*"
