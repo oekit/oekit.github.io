@@ -14,13 +14,16 @@ go get github.com/oekit/pkg github.com/oekit/logx github.com/oekit/registry \
 ## 1. 配置加载
 
 ```go
-import "github.com/oekit/registry/config"
+import "github.com/oekit/core/config"
 
 func init() { config.LoadDotEnv(".env") }          // 可选：本地 .env
 cfg, err := config.LoadBootstrap[MyConfig]("dev")   // 自动选 etc/config-dev.yaml
 token := config.Get("API_TOKEN")                    // 环境变量优先
 d := config.ParseDuration(cfg.WorkerInterval, time.Second)
 ```
+
+> 配置加载已自 `registry/config` 迁至 `core/config`（2026-10-16，core v0.4.0）；
+> Nacos 远端配置源适配器仍在 `registry/nacos.NewConfigSource`。
 
 ## 2. 存储层：gormx + crud
 
