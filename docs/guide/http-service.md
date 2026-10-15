@@ -86,9 +86,14 @@ _ = nnsc.Init(ctx, "order-service", []string{"dep-svc"})
 import (
     ekithertz "github.com/oekit/hertz/hertz"
     "github.com/oekit/bootstrap/bootstrap"
+    bootstrapnacos "github.com/oekit/bootstrap/nacos"
 )
 
-bootstrap.Run(cfg, func(app *bootstrap.App) error {
+b, _ := bootstrap.New(
+    bootstrap.WithServiceName("order-service"),
+    bootstrapnacos.WithNNS(cfg.Nacos, cfg.Port, cfg.DepServices), // 注册发现（按需注入）
+)
+_ = b.Run(func(app *bootstrap.App) error {
     h := hertzserver.New(...)
     ekithertz.RunServer(app, "order-service", h)   // 注册进生命周期，优雅关闭
     ekithertz.AddShutdownHook(h, func(ctx context.Context) error {
