@@ -45,7 +45,6 @@ go get github.com/oekit/middleware github.com/oekit/hertz
 | 旧路径（重定向仍可用） | 新路径 |
 |---|---|
 | `git.enjoye.top/enjoydream/ekit/…`（ekit 单体，冻结维护） | `github.com/oekit/…` |
-| `github.com/yi-nology/ekit-…` | `github.com/oekit/…` |
 
 ## License
 
@@ -93,7 +92,6 @@ go get github.com/oekit/middleware github.com/oekit/hertz
 | 旧路径（重定向仍可用） | 新路径 |
 |---|---|
 | `git.enjoye.top/enjoydream/ekit/…`（ekit 单体，冻结维护） | `github.com/oekit/…` |
-| `github.com/yi-nology/ekit-…` | `github.com/oekit/…` |
 
 ## License
 

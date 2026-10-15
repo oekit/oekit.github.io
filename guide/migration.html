@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>迁移指南 · oekit</title>
-<meta name="description" content="oekit（Open Easy Kit）— 从 ekit 单体 / yi-nology 前缀仓迁移到 oekit：路径映射、API 变更、版本对照。">
+<meta name="description" content="oekit（Open Easy Kit）— 从 ekit 单体迁移到 oekit：路径映射、API 变更、版本对照。">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
@@ -21,20 +21,18 @@
 <div class="wrap">
   <div class="crumb"><a href="/">oekit</a> / 指南 / 迁移指南</div>
   <h1 class="page">迁移指南</h1>
-  <p class="lede">从 ekit 单体 / yi-nology 前缀仓迁移到 oekit：路径映射、API 变更、版本对照。</p>
+  <p class="lede">从 ekit 单体迁移到 oekit：路径映射、API 变更、版本对照。</p>
 
 <h2>路径映射</h2>
 <table>
   <tr><th>旧</th><th>新</th><th>状态</th></tr>
   <tr><td class="m">git.enjoye.top/enjoydream/ekit/&lt;pkg&gt;</td><td class="m">github.com/oekit/&lt;module&gt;/&lt;pkg&gt;</td><td>单体冻结维护，仅安全修复</td></tr>
-  <tr><td class="m">github.com/yi-nology/ekit-&lt;name&gt;</td><td class="m">github.com/oekit/&lt;name&gt;</td><td>yi-nology 仓已转出</td></tr>
-  <tr><td class="m">github.com/openekit/&lt;name&gt;</td><td class="m">github.com/oekit/&lt;name&gt;</td><td>openekit 已更名</td></tr>
   <tr><td class="m">github.com/oekit/&lt;micro&gt;（16 微库）</td><td class="m">github.com/oekit/pkg/&lt;micro&gt;</td><td>微仓已删除；旧版本经 proxy 缓存仍可解析</td></tr>
 </table>
 <h3>一条命令完成 import 改写</h3>
-<pre>grep -rl --include='*.go' 'github.com/yi-nology/ekit-' . | xargs sed -i '' \
-  -E 's,github\.com/yi-nology/ekit-(errors|validator|stringx|slicex|enumx|convert|encoding|jsonrepair|httpjson|mathx|pathx|pagination|ptrx|timex|uidgen|cache),github.com/oekit/pkg/\1,g;
-      s,github\.com/yi-nology/ekit-([a-z-]+),github.com/oekit/\1,g'</pre>
+<pre><span class="c"># 单体微库：pkg/* → oekit/pkg/*（16 个包同理，逐包替换）</span>
+sed -E <span class="s">'s,git\.enjoye\.top/enjoydream/ekit/pkg/(errors|stringx),github.com/oekit/pkg/\1,g'</span> main.go
+<span class="c"># 门面：observability/logx → oekit/logx（逐仓对照见上表）</span></pre>
 <div class="warn"><b>类型同一性</b>：同一进程内所有模块必须使用<b>同一个</b> <code>oekit/pkg/errors</code>。
 混用旧 <code>oekit/errors</code> 会导致 BizError 的 As/Is 互相不识别（Not Found 变 500）。</div>
 
