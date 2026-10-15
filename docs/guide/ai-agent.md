@@ -49,6 +49,23 @@ title: AI Agent 使用指南
 > > **给 Agent 的提示**：本矩阵模块升级频繁（0.x 阶段），写死版本号前先查最新 tag；   旧路径 `git.enjoye.top/enjoydream/ekit`（单体，冻结）、`yi-nology`、   `openekit` 均已迁移到 `github.com/oekit`，不要生成旧路径的代码。
 
   
+## 统一 CI 规则（改 CI 只去一个仓）
+
+  全部模块仓的 `.github/workflows/ci.yml` 都是**薄调用层**，指向
+  [oekit/.github](https://github.com/oekit/.github) 的共享 reusable workflow `go-ci.yml@main`
+  （gofmt → golangci-lint → vet → race 测试 → 覆盖率门禁 → coverage 产物）。
+
+  - **升级 lint 版本 / 加门禁步骤：只改 `oekit/.github`，merge 即全 org 生效**——
+    不要在各模块仓的 ci.yml 里复制规则（那是迁移前的旧模式）。
+  - 各仓 ci.yml 只携带按仓参数：`go-version`（跟仓库 go.mod 主次版本）、
+    `coverage-threshold`（默认 30，0 关闭）、`test-script`、`additional-script`。
+  - 已知特例：`bootstrap` 用 `additional-script` 补测嵌套子模块；`kitex-examples`
+    只 build 不测试（`test-script: go build ./...` + 关闭覆盖率门禁）。
+  - 新仓接入：拷 `.github` README 里的接入模板，或跑其 `scripts/sync-callers.sh`
+    从旧版完整 ci.yml 自动生成。
+  - caller 引用 `@main` 即时生效；要锁定稳定性可改为 tag 引用（如 `@v1`）。
+
+  
 ## 人该怎么用
 
   同样的入口对人更简单：从 [首页](/) 的模块地图选仓 → README 顶部有可复制的最小示例 →

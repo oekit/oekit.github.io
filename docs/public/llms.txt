@@ -52,6 +52,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
 - [AI Agent 指南](https://oekit.github.io/guide/ai-agent.html): 人与 Agent 的接入手册
 - [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射
+- [统一 CI](https://github.com/oekit/.github): 共享 reusable workflow——各仓 ci.yml 是薄调用层，改规则只改这一个仓
 - [平台契约](https://oekit.github.io/docs/PLATFORM_CONTRACT.html): 分层契约（ekit 时期文档）
 - [服务模板](https://oekit.github.io/docs/SERVICE_TEMPLATE.html): 服务脚手架示例
 
@@ -61,3 +62,4 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
   日志用 logx kv 风格、SDK 包用 Delegating、禁止裸 go func（用 concurrency/async）
 - 安装一律 `go get github.com/oekit/<mod>@latest`；不要 pin 旧路径（ekit 单体 / yi-nology 均已迁移）
 - 不确定 API 时以源码为准确：每仓均带测试，`go doc github.com/oekit/<mod>[/<pkg>]` 可查
+- 改 CI 规则只去 oekit/.github 仓（go-ci.yml@main）；各仓 ci.yml 只带按仓参数，不要在各仓复制规则
