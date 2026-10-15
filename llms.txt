@@ -1,0 +1,57 @@
+# oekit
+
+> Open Easy Kit — 开源 · 易用 · 工具集合。23 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导。
+
+oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格自底向上，每仓独立 SemVer + 独立 CI。每个仓库根目录都有 AGENTS.md（面向 AI Agent 的规范与硬规则）。
+
+## 模块
+
+### L0 基础件
+- [pkg](https://github.com/oekit/pkg): 16 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache
+- [concurrency](https://github.com/oekit/concurrency): GoSafe 系列 safe-go、键控闸门、扇出、令牌桶、重试
+- [logx](https://github.com/oekit/logx): 统一日志门面（接口分层、多后端、Sink、caller 归属）+ shutdown
+- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
+- [istio](https://github.com/oekit/istio): Istio Proxyless——Kitex xDS 动态熔断
+
+### L1 门面
+- [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
+- [tracing](https://github.com/oekit/tracing): OTel Init + traceid 真相源 + http/redis 插桩
+- [registry](https://github.com/oekit/registry): 注册发现 SPI + Nacos 实现 + config 配置加载 + sdbridge
+
+### L2 领域件
+- [data](https://github.com/oekit/data): 缓存检查器 + LocalCache
+- [gorm](https://github.com/oekit/gorm): SQL/GORM 全家（crud Service 事务防丢更新）
+- [redis](https://github.com/oekit/redis): Redis 客户端/缓存后端/分布式锁
+- [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传）
+- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus
+- [timertask](https://github.com/oekit/timertask): 分片定时任务
+- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw）+ contrib 桥接
+- [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
+- [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（熔断/换实例重试）
+
+### L3 应用层
+- [bootstrap](https://github.com/oekit/bootstrap): bootstrap.Run 应用骨架 + healthz
+- [handler](https://github.com/oekit/handler): 泛型 CRUD HTTP Handler
+- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE）
+- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）
+- [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
+
+## 文档
+
+- [快速开始](https://oekit.github.io/guide/getting-started.html): 三种起步姿势 + 模块地图
+- [日志指南](https://oekit.github.io/guide/logging.html): logx 全量用法
+- [错误处理](https://oekit.github.io/guide/errors.html): Wrap/BizError/Fail 链路与类型同一性红线
+- [HTTP 服务](https://oekit.github.io/guide/http-service.html): 全栈七步走
+- [RPC 服务](https://oekit.github.io/guide/rpc-service.html): 治理热更/BizError 桥接/端点熔断
+- [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
+- [AI Agent 指南](https://oekit.github.io/guide/ai-agent.html): 人与 Agent 的接入手册
+- [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射
+- [平台契约](https://oekit.github.io/docs/PLATFORM_CONTRACT.html): 分层契约（ekit 时期文档）
+- [服务模板](https://oekit.github.io/docs/SERVICE_TEMPLATE.html): 服务脚手架示例
+
+## AI Agent 要点
+
+- 每仓根目录的 AGENTS.md 是该仓的权威规范：错误处理必须用 pkg/errors（类型同一性红线）、
+  日志用 logx kv 风格、SDK 包用 Delegating、禁止裸 go func（用 concurrency/async）
+- 安装一律 `go get github.com/oekit/<mod>@latest`；不要 pin 旧路径（ekit 单体 / yi-nology 均已迁移）
+- 不确定 API 时以源码为准确：每仓均带测试，`go doc github.com/oekit/<mod>[/<pkg>]` 可查
