@@ -4,12 +4,23 @@
 
 本站为纯静态站点（无构建系统）：改完直接推 main 即发布。
 
-## 结构
+## 结构（VitePress）
 
-- `index.html` — 落地页（模块矩阵、快速开始）
-- `guide/` — 7 篇指南（快速开始/日志/错误处理/HTTP/RPC/可观测性/迁移）
-- `assets/style.css` — 全站共享样式
-- `oekit/` — 旧子路径 `/oekit/` 的重定向占位
+- `docs/index.md` — 落地页（hero + 模块矩阵 + 快速开始）
+- `docs/guide/*.md` — 8 篇指南（Markdown 书写，TOC/侧边栏/上下篇自动生成）
+- `docs/about/*.md` — 平台契约、服务模板
+- `docs/public/` — 原样拷贝资产（llms.txt、旧路径重定向）
+- `docs/.vitepress/config.mjs` — 导航与侧边栏配置
+
+## 本地开发
+
+```bash
+npm install
+npm run dev      # 本地热更预览
+npm run build    # 构建到 docs/.vitepress/dist
+```
+
+推 main 后由 GitHub Actions 自动构建并部署到 Pages。
 
 ## 名字由来
 
