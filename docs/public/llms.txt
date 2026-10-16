@@ -28,7 +28,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 ### 数据访问
 - [gormx](https://github.com/oekit/gormx): SQL/GORM 全家（crud Service 事务防丢更新）
 - [redis](https://github.com/oekit/redisx): Redis 客户端/缓存后端/分布式锁
-- [data](https://github.com/oekit/data): 缓存检查器 + LocalCache
+- [data](https://github.com/oekit/data): LocalCache/SingleFlightCache + cachetest 契约套件；嵌套聚合模块 all/ 一键拉齐数据全家桶（含 TwoLevelCache 两级缓存）
 - [timertask](https://github.com/oekit/timertask): 分片定时任务
 
 ### 可观测性
