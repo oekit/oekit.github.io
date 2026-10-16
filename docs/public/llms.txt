@@ -35,7 +35,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
 
 ### 基础库
-- [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache（Checker + CacheAside 接口 + LocalCache/SingleFlightCache + cachetest 契约）、collectionx（Set/Ring/Queue/SafeMap 泛型容器）
+- [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError/Chain/In）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、collectionx（Set/Ring/Queue/SafeMap 泛型容器）、validator、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair、httpjson、mathx（Unstable 抖动）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、uidgen、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）
 - [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮
 - [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
 
