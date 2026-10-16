@@ -28,7 +28,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 ### 数据访问
 - [gormx](https://github.com/oekit/gormx): SQL/GORM 全家（crud Service 事务防丢更新）
 - [redis](https://github.com/oekit/redisx): Redis 客户端/缓存后端/分布式锁
-- [data](https://github.com/oekit/data): LocalCache/SingleFlightCache + cachetest 契约套件；嵌套聚合模块 all/ 一键拉齐数据全家桶（含 TwoLevelCache 两级缓存）
+- [data](https://github.com/oekit/data): 数据访问门面——cache/rediscache/crud/distlock/gormx/redisx/timertask/cachetest 八子包 re-export（复刻 ekit data/ 能力面，类型同一）
 - [timertask](https://github.com/oekit/timertask): 分片定时任务
 
 ### 可观测性
@@ -37,7 +37,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
 
 ### 基础库
-- [pkg](https://github.com/oekit/pkg): 16 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache
+- [pkg](https://github.com/oekit/pkg): 20 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache（Checker + CacheAside 接口 + LocalCache/SingleFlightCache + cachetest 契约）
 - [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载
 - [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
 
