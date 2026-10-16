@@ -309,7 +309,7 @@ TraceID 必须在 Response 和 AccessLog 之前，确保 trace_id 可被后续�
 
 - 业务服务不得直接 import `github.com/nacos-group/nacos-sdk-go`，应通过 `registry/nacos` 或 `nns` 间接使用。
 - 业务服务不得直接 import `github.com/go-redis/redis`，应通过 `data/redisx` 间接使用。
-- 业务服务不得直接 import `gorm.io/gorm` 的 logger，应通过 `data/gormx` 间接使用。
+- 业务服务不得直接 import `gorm.io/gorm` 的 logger，应通过 `github.com/oekit/gormx` 间接使用。
 
 ## 8. HTTP 客户端选型指南
 

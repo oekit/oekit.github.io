@@ -52,15 +52,19 @@ import (
 logx.SetDefault(logslog.NewSlogLogger("my-service"))
 ```
 
+桥接子包 `hlog`/`hertzlog`/`kitexlog` 是**独立嵌套模块**（v0.2.0 起），按需引入，
+主模块零 Hertz/Kitex 依赖：`go get github.com/oekit/logx/hlog`（及 `/hertzlog`、`/kitexlog`）。
+
 | 后端 | 位置 | 场景 |
 |---|---|---|
 | stdLogger | logx 根包 `NewStdLogger` | 默认（标准库 log），零 Hertz 依赖 |
 | slogLogger | logx 根包 `NewSlogLogger` | 结构化 JSON 输出 |
 | hlog 适配 | [oekit/logx/hlog](https://github.com/oekit/logx/tree/main/hlog) `NewHlogLogger` | 与 Hertz hlog 输出格式一致（降级为字符串拼接） |
 | hertzlog 桥接 | [oekit/logx/hertzlog](https://github.com/oekit/logx/tree/main/hertzlog) | logrus/zap/zerolog/slog 四后端 → hlog |
+| kitexlog 桥接 | [oekit/logx/kitexlog](https://github.com/oekit/logx/tree/main/kitexlog) `NewLogger` | Kitex klog → logx（FullLogger + Control 全实现，caller 归属已修正） |
 
 > [!WARNING] 注意
-> > **防递归**：把 hlog 后端的 Logger 再传给 `hertz.NewLogger`/`kitex.NewLogger` 会无限递归—— 桥接框架日志请用 `NewSlogLogger` 或 `NewStdLogger`。
+> > **防递归**：把 hlog 后端的 Logger 再传给 `hertz.NewLogger`/`kitexlog.NewLogger` 会无限递归—— 桥接框架日志请用 `NewSlogLogger` 或 `NewStdLogger`（kitexlog 会 panic 防御）。
 
 ## 多目标输出：Sink
 

@@ -7,7 +7,7 @@ kitex + 治理热更 + BizError 桥接 + nns-endpoint 熔断重试：CloudWeGo K
 ## 依赖
 
 ```bash
-go get github.com/oekit/kitex github.com/oekit/nns github.com/oekit/nns-endpoint github.com/oekit/bootstrap
+go get github.com/oekit/kitex github.com/oekit/logx github.com/oekit/nns github.com/oekit/nns-endpoint github.com/oekit/bootstrap
 ```
 
 ## 1. 日志桥接（klog → logx）
@@ -15,11 +15,13 @@ go get github.com/oekit/kitex github.com/oekit/nns github.com/oekit/nns-endpoint
 ```go
 import (
     "github.com/cloudwego/kitex/pkg/klog"
-    ekitkitex "github.com/oekit/kitex/kitex"
+    logxkitexlog "github.com/oekit/logx/kitexlog"
 )
 
-klog.SetLogger(ekitkitex.NewLogger(logx.NewSlogLogger("my-rpc")))
+klog.SetLogger(logxkitexlog.NewLogger(logx.NewSlogLogger("my-rpc")))
 ```
+
+> kitex 仓的 `kitex.NewLogger` 是同实现的 Deprecated 别名，新代码请直接用 `logx/kitexlog`。
 
 ## 2. Server 端
 
@@ -88,3 +90,9 @@ ep, err := factory.MakeEndpoint("payment-svc")
 key 匹配：精确 → 前缀 → 全局 `""`。非法值 fail-closed；kitex 侧 key 自动翻译
 （`svc:Method`/`svc`/`""` → 裸方法名/通配）。hertz 侧动态限流/超时见
 [oekit/middleware](https://github.com/oekit/middleware) 的 governance 目录。
+
+## 8. 更多弹性原语（按需引入）
+
+- **分布式限流**：`github.com/oekit/redisx` 的 `ratelimit` 子包——Redis Lua 固定窗口/令牌桶（三态返回），故障自动降级本地令牌桶并探活回切
+- **自适应熔断 / CPU 自适应降载 / 滑动窗口**：`github.com/oekit/concurrency` 的 `breaker` / `shedding` / `window` 子包（规范哨兵 `ErrCircuitOpen`）
+- HTTP 服务端过载保护：`oekit/middleware` 的 `SheddingMiddleware`（opt-in）

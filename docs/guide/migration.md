@@ -8,8 +8,10 @@ title: 迁移指南
 
 | 旧 | 新 | 状态 |
 |---|---|---|
-| git.enjoye.top/enjoydream/ekit/ | github.com/oekit// | 单体冻结维护，仅安全修复 |
+| git.enjoye.top/enjoydream/ekit/ | github.com/oekit/\<module\> | 单体冻结维护，仅安全修复 |
 | github.com/oekit/（16 微库） | github.com/oekit/pkg/ | 微仓已删除；旧版本经 proxy 缓存仍可解析 |
+| github.com/oekit/redis | github.com/oekit/redisx | 2026-10-16 更名（消 go-redis 包名撞车）；旧路径重定向 ≤ v0.4.0 |
+| github.com/oekit/gorm | github.com/oekit/gormx | 2026-10-16 更名（避 gorm.io/gorm 混淆）；旧路径重定向 ≤ v0.2.1 |
 
 ### 一条命令完成 import 改写
 
@@ -33,17 +35,17 @@ sed -E 's,git\.enjoye\.top/enjoydream/ekit/pkg/(errors|stringx),github.com/oekit
 | workflow（在单体） | oekit/workflow | 依赖 logx，独立成仓 |
 | examples/kitex（在单体） | oekit/kitex-examples | kitex 主仓 shed bootstrap 链 |
 
-## 版本对照（2026-10-15 快照）
+## 版本对照（2026-10-16 快照）
 
 | 模块 | 版本 | 模块 | 版本 |
 |---|---|---|---|
-| pkg | v0.1.1 | registry | v0.2.5 |
-| concurrency | v0.1.3 | timertask | v0.1.3 |
-| logx | v0.1.6 | nns / nns-endpoint | v0.3.2 / v0.1.2 |
-| metrics / tracing | v0.1.4 / v0.1.5 | middleware | v0.1.8 |
-| core / istio | v0.3.2 / v0.1.3 | gorm / redis / data | v0.1.7 / v0.1.4 / v0.3.2 |
-| httpx | v0.1.4 | bootstrap / handler | v0.2.4 / v0.1.9 |
-| hertz / kitex | v0.3.4 / v0.3.8 | workflow / kitex-examples | v0.2.4 / v0.1.2 |
+| pkg | v0.3.0 | registry | v0.3.0 |
+| concurrency | v0.3.1 | timertask | v0.1.4 |
+| logx | v0.2.0 | nns / nns-endpoint | v0.3.3 / v0.1.3 |
+| metrics / tracing | v0.1.5 / v0.2.0 | middleware | v0.4.0 |
+| core / istio | v0.5.0 / v0.1.4 | gormx / redisx / data | v0.3.0 / v0.5.1 / v0.4.1 |
+| httpx | v0.1.6 | bootstrap / handler | v0.4.2 / v0.1.11 |
+| hertz / kitex | v0.4.1 / v0.4.1 | workflow / kitex-examples | v0.2.5 / v0.1.7 |
 
 各模块以各自 tag 为准（`go get github.com/oekit/<mod>@latest`），上表仅作迁移快照。
 

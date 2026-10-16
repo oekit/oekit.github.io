@@ -8,7 +8,7 @@ config + gorm + crud + middleware + hertz + nns + bootstrap：从零组一个生
 
 ```bash
 go get github.com/oekit/pkg github.com/oekit/logx github.com/oekit/registry \
-  github.com/oekit/gorm github.com/oekit/middleware github.com/oekit/hertz github.com/oekit/bootstrap
+  github.com/oekit/gormx github.com/oekit/middleware github.com/oekit/hertz github.com/oekit/bootstrap
 ```
 
 ## 1. 配置加载
@@ -29,9 +29,9 @@ d := config.ParseDuration(cfg.WorkerInterval, time.Second)
 
 ```go
 import (
-    "github.com/oekit/gorm/crud"
-    "github.com/oekit/gorm/crud/gormrepo"
-    "github.com/oekit/gorm/gormx"
+    "github.com/oekit/gormx/crud"
+    "github.com/oekit/gormx/crud/gormrepo"
+    "github.com/oekit/gormx"
 )
 
 db, err := gormx.Open(dialector, gormx.WithConnectionPool(10, 100, time.Hour))
@@ -47,7 +47,7 @@ svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)
 ```go
 import (
     hertzserver "github.com/cloudwego/hertz/pkg/app/server"
-    "github.com/oekit/hertz/handler/crudh"
+    "github.com/oekit/handler/crudh"
     mw "github.com/oekit/middleware/middleware"
 )
 

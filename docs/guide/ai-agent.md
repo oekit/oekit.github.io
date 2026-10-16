@@ -27,7 +27,11 @@ title: AI Agent 使用指南
   └─ 只是带 JSON 解析的 HTTP      → pkg/httpjson（零依赖）
 搭 HTTP 服务？ ── oekit/middleware + oekit/hertz + oekit/bootstrap
 搭 RPC 服务？ ── oekit/kitex（+ oekit/nns + oekit/nns-endpoint）
-要数据库？ ── oekit/gormx（CRUD Service）；要 Redis？ ── oekit/redisxx
+要数据库？ ── oekit/gormx（CRUD Service）；要 Redis？ ── oekit/redisx（+ 分布式限流 ratelimit）
+要限流/熔断/降载？
+  ├─ 分布式限流 → oekit/redisx 的 ratelimit 子包
+  ├─ 进程内限流/自适应熔断/CPU 降载/滑动窗口 → oekit/concurrency（ratelimit/breaker/shedding）
+  └─ HTTP 服务端过载保护 → oekit/middleware 的 SheddingMiddleware（opt-in）
 ```
 
   
@@ -38,7 +42,14 @@ title: AI Agent 使用指南
 1. **日志用 kv 风格**：`log.Info("msg", "key", val)`，不要 printf 风格；         带 ctx 用 `CtxInfo/CtxError`（自动携带 trace_id）。
 1. **SDK 包声明包级 logger 必须用 `logx.Delegating("组件名")`**，         禁止 `logx.Default()`/`WithService`（init 时序导致消费方设置失效）。
 1. **禁止裸 `go func`**：用 `concurrency/async` 的 GoSafe 系列（panic 自动 recover）。
-1. **长驻服务的 bootstrap.Run 里必须 `@latest
+1. **长驻服务的 bootstrap.Run 里必须 `<-app.Context().Done()` 阻塞**——userFn 返回即服务结束。
+```
+
+## 新模块接入五步走
+
+```text
+1. 上面的决策树定位模块仓
+2. go get github.com/oekit/<mod>@latest
 3. 读该仓 AGENTS.md（硬规则）+ README 快速使用示例
 4. 写代码；不确定的 API 用 go doc / 直接看源码与 _test.go
 5. 测试规范：表驱动 + t.Run 子测试；文件名 xxx_test.go
@@ -59,7 +70,7 @@ title: AI Agent 使用指南
     不要在各模块仓的 ci.yml 里复制规则（那是迁移前的旧模式）。
   - 各仓 ci.yml 只携带按仓参数：`go-version`（跟仓库 go.mod 主次版本）、
     `coverage-threshold`（默认 30，0 关闭）、`test-script`、`additional-script`。
-  - 已知特例：`bootstrap` 用 `additional-script` 补测嵌套子模块；`kitex-examples`
+  - 已知特例：`bootstrap`、`logx` 用 `additional-script` 补测嵌套子模块；`kitex-examples`
     只 build 不测试（`test-script: go build ./...` + 关闭覆盖率门禁）。
   - 新仓接入：拷 `.github` README 里的接入模板，或跑其 `scripts/sync-callers.sh`
     从旧版完整 ci.yml 自动生成。
