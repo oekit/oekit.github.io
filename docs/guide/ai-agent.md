@@ -27,7 +27,7 @@ title: AI Agent 使用指南
   └─ 只是带 JSON 解析的 HTTP      → pkg/httpjson（零依赖）
 搭 HTTP 服务？ ── oekit/middleware + oekit/hertz + oekit/bootstrap
 搭 RPC 服务？ ── oekit/kitex（+ oekit/nns + oekit/nns-endpoint）
-要数据库？ ── oekit/gorm（CRUD Service）；要 Redis？ ── oekit/redisxx
+要数据库？ ── oekit/gormx（CRUD Service）；要 Redis？ ── oekit/redisxx
 ```
 
   
