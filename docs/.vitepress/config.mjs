@@ -29,11 +29,12 @@ export default defineConfig({
             { text: '01 快速开始', link: '/guide/getting-started' },
             { text: '02 日志（logx）', link: '/guide/logging' },
             { text: '03 错误处理', link: '/guide/errors' },
-            { text: '04 HTTP 服务全栈', link: '/guide/http-service' },
-            { text: '05 RPC 服务（Kitex）', link: '/guide/rpc-service' },
-            { text: '06 可观测性', link: '/guide/observability' },
-            { text: '07 迁移指南', link: '/guide/migration' },
-            { text: '08 AI Agent 使用', link: '/guide/ai-agent' }
+            { text: '04 缓存（data）', link: '/guide/caching' },
+            { text: '05 HTTP 服务全栈', link: '/guide/http-service' },
+            { text: '06 RPC 服务（Kitex）', link: '/guide/rpc-service' },
+            { text: '07 可观测性', link: '/guide/observability' },
+            { text: '08 迁移指南', link: '/guide/migration' },
+            { text: '09 AI Agent 使用', link: '/guide/ai-agent' }
           ]
         },
         {

@@ -45,6 +45,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [快速开始](https://oekit.github.io/guide/getting-started.html): 三种起步姿势 + 模块地图
 - [日志指南](https://oekit.github.io/guide/logging.html): logx 全量用法
 - [错误处理](https://oekit.github.io/guide/errors.html): Wrap/BizError/Fail 链路与类型同一性红线
+- [缓存指南](https://oekit.github.io/guide/caching.html): cache/cached/twolevel 三件套——写后失效/事务安全/查询缓存/两级缓存+失效广播
 - [HTTP 服务](https://oekit.github.io/guide/http-service.html): 全栈七步走
 - [RPC 服务](https://oekit.github.io/guide/rpc-service.html): 治理热更/BizError 桥接/端点熔断
 - [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
