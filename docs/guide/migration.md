@@ -8,7 +8,7 @@ title: 迁移指南
 
 | 旧 | 新 | 状态 |
 |---|---|---|
-| git.enjoye.top/enjoydream/ekit/ | github.com/oekit/<module> | 单体冻结维护，仅安全修复 |
+| git.enjoye.top/enjoydream/ekit/ | `github.com/oekit/<module>` | 单体冻结维护，仅安全修复 |
 | github.com/oekit/（16 微库） | github.com/oekit/pkg/ | 微仓已删除；旧版本经 proxy 缓存仍可解析 |
 | github.com/oekit/redis | github.com/oekit/redisx | 2026-10-16 更名（消 go-redis 包名撞车）；旧路径重定向 ≤ v0.4.0 |
 | github.com/oekit/gorm | github.com/oekit/gormx | 2026-10-16 更名（避 gorm.io/gorm 混淆）；旧路径重定向 ≤ v0.2.1 |

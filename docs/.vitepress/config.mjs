@@ -4,8 +4,12 @@ export default defineConfig({
   title: 'oekit',
   description: 'Open Easy Kit — 开源易用的 Go 工具集：21 个独立发版的模块矩阵',
   cleanUrls: false,
+  head: [
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     siteTitle: 'oekit',
+    logo: '/logo.png',
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/getting-started' },
