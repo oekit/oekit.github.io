@@ -29,7 +29,7 @@ sed -E 's,git\.enjoye\.top/enjoydream/ekit/pkg/(errors|stringx),github.com/oekit
 | 旧（ekit 单体） | 新（oekit） | 说明 |
 |---|---|---|
 | middleware 包（含 contrib） | oekit/middleware（包名 `mw`）+ contrib 子包 | Round-2 拆出，Round-3 成独立仓 |
-| handler/crudh·validatorh（在 hertz 仓） | oekit/handler | Round-3 拆出；hertz 主仓不再依赖 gorm |
+| handler/crudh·validatorh | oekit/hertz/crudh·validatorh | Round-3 拆出独立仓 oekit/handler，2026-10-16 收编回 hertz 子包 |
 | nns.MakeHTTPEndpoint / MakeGRPCEndpoint | oekit/nns-endpoint：`endpoint.NewHTTPEndpointFactory(nnsClient.ServiceClient())` | Round-4 分家，工厂生命周期由调用方管理 |
 | observability/logx · metrics · tracing | oekit/logx · oekit/metrics · oekit/tracing | Round-2 解散 observability |
 | workflow（在单体） | oekit/workflow | 依赖 logx，独立成仓 |
@@ -43,9 +43,9 @@ sed -E 's,git\.enjoye\.top/enjoydream/ekit/pkg/(errors|stringx),github.com/oekit
 | concurrency | v0.3.1 | timertask | v0.1.4 |
 | logx | v0.2.0 | nns / nns-endpoint | v0.3.3 / v0.1.3 |
 | metrics / tracing | v0.1.5 / v0.2.0 | middleware | v0.4.0 |
-| core / istio | v0.5.0 / v0.1.4 | gormx / redisx / data | v0.3.0 / v0.5.1 / v0.4.1 |
-| httpx | v0.1.6 | bootstrap / handler | v0.4.2 / v0.1.11 |
-| hertz / kitex | v0.4.1 / v0.4.1 | workflow / kitex-examples | v0.2.5 / v0.1.7 |
+| core | v0.5.0 | gormx / redisx / data | v0.3.0 / v0.5.1 / v0.4.1 |
+| httpx | v0.1.6 | bootstrap | v0.4.2 |
+| hertz / kitex | v0.5.0 / v0.5.0 | workflow / kitex-examples | v0.2.5 / v0.1.7 |
 
 各模块以各自 tag 为准（`go get github.com/oekit/<mod>@latest`），上表仅作迁移快照。
 

@@ -10,12 +10,10 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 ### 应用引导 · 框架生态
 - [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/Run 应用骨架 + healthz + 优雅关停
-- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）
-- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）
+- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）
+- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）+ istio（xDS 动态熔断）
 - [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw）+ contrib 桥接
-- [handler](https://github.com/oekit/handler): 泛型 CRUD HTTP Handler
 - [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
-- [istio](https://github.com/oekit/istio): Istio Proxyless——Kitex xDS 动态熔断（零内部依赖）
 - [kitex-examples](https://github.com/oekit/kitex-examples): Kitex echo 示例（client/server + 治理配置）
 
 ### 通信 · 服务治理

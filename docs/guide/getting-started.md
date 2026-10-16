@@ -61,7 +61,7 @@ go get github.com/oekit/kitex github.com/oekit/nns github.com/oekit/nns-endpoint
 
 | 能力层 | 模块 | 说明 |
 |---|---|---|
-| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [handler](https://github.com/oekit/handler) · [workflow](https://github.com/oekit/workflow) · [istio](https://github.com/oekit/istio) · [kitex-examples](https://github.com/oekit/kitex-examples) | 组合根、Hertz/Kitex 运行时、中间件栈、CRUD handler、流程编排、xDS 熔断 |
+| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) | 组合根、Hertz/Kitex 运行时（含 CRUD handler 与 xDS 熔断子包）、中间件栈、流程编排 |
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) | HTTP 客户端、端点熔断、WS/NATS、服务治理、注册发现 + Nacos |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) | SQL/CRUD、Redis、缓存、定时任务 |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) | 日志门面、OTel、Prometheus |

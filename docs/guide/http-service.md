@@ -47,7 +47,7 @@ svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)
 ```go
 import (
     hertzserver "github.com/cloudwego/hertz/pkg/app/server"
-    "github.com/oekit/handler/crudh"
+    "github.com/oekit/hertz/crudh"
     mw "github.com/oekit/middleware/middleware"
 )
 
