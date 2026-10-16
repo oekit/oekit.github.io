@@ -14,7 +14,7 @@ oekit 是 21 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 C
 |---|---|---|
 | 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) | 组合根与优雅关停、Hertz/Kitex 运行时集成（含 CRUD Handler 与 xDS 熔断子包）、HTTP 中间件栈、流程编排 |
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) | HTTP 客户端（LB/熔断/重试）、端点工厂、WS/NATS/MQ、服务治理门面、注册发现核心 + Nacos |
-| 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) | 数据访问门面 data（八子包 re-export 复刻 ekit data/ 能力面 + cached 缓存读写编排）：GORM 增强 + 框架无关 CRUD、Redis 客户端/缓存/分布式锁/分布式限流、缓存接口 + LocalCache/SingleFlightCache（实现在 pkg/cache）、分片定时任务 |
+| 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) | 数据访问门面 data（八子包 re-export 复刻 ekit data/ 能力面 + cached 缓存读写编排 + twolevel 两级缓存/失效广播）：GORM 增强 + 框架无关 CRUD、Redis 客户端/缓存/分布式锁/分布式限流、缓存接口 + LocalCache/SingleFlightCache（实现在 pkg/cache）、分片定时任务 |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) | 统一日志门面（多后端/Sink/caller）、OpenTelemetry + trace_id 真相源、Prometheus 弹性指标族 |
 | 基础库 | [pkg](https://github.com/oekit/pkg)（21 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) | 微工具集（errors/stringx/cache/…）、GoSafe/singleflight/retry、governance schema/lifecycle |
 
@@ -22,7 +22,7 @@ oekit 是 21 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 C
 
 - **服务发现**：`hertz` / `kitex` → `nns` → `registry`（Nacos 实现 + 多级降级链）
 - **端点弹性**：`nns-endpoint` → `httpx`（per-service 熔断 + 换实例重试，与 httpx 的 breaker-outside-retry 层次一致）
-- **数据访问**：`hertz/crudh` → `gormx`（泛型 CRUD Handler / 事务防丢更新）；`redisx` → `data`（CacheAside 接口与契约套件）；`data` 为门面（八子包 re-export pkg 与各子仓，cached 为唯一原生子包：写后失效/事务提交后失效的缓存编排）
+- **数据访问**：`hertz/crudh` → `gormx`（泛型 CRUD Handler / 事务防丢更新）；`redisx` → `data`（CacheAside 接口与契约套件）；`data` 为门面（八子包 re-export pkg 与各子仓，cached/twolevel 为原生子包：写后失效缓存编排 + 两级缓存与失效广播）
 - **优雅关停**：`hertz.RunServer` / `kitex.RunServer` → `bootstrap` 组合根（排空连接 → 释放资源）
 - **可观测贯通**：全矩阵统一走 `logx` / `tracing` / `metrics` 门面，底层实现可替换
 
