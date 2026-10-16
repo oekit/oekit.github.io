@@ -4,7 +4,7 @@ title: 架构总览
 
 # 架构总览
 
-oekit 是 23 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 CI）。依赖**严格自底向上**：上层随意组合，下层永不反向依赖，全矩阵无环。
+oekit 是 21 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 CI）。依赖**严格自底向上**：上层随意组合，下层永不反向依赖，全矩阵无环。
 
 ![oekit 模块矩阵 · 架构总览](/architecture.svg)
 
@@ -16,19 +16,19 @@ oekit 是 23 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 C
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) | HTTP 客户端（LB/熔断/重试）、端点工厂、WS/NATS/MQ、服务治理门面、注册发现核心 + Nacos |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) | 数据访问门面 data（八子包 re-export 复刻 ekit data/ 能力面）：GORM 增强 + 框架无关 CRUD、Redis 客户端/缓存/分布式锁/分布式限流、缓存接口 + LocalCache/SingleFlightCache（实现在 pkg/cache）、分片定时任务 |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) | 统一日志门面（多后端/Sink/caller）、OpenTelemetry + trace_id 真相源、Prometheus 弹性指标族 |
-| 基础库 | [pkg](https://github.com/oekit/pkg)（20 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) | 微工具集（errors/stringx/cache/…）、GoSafe/singleflight/retry、governance schema/lifecycle |
+| 基础库 | [pkg](https://github.com/oekit/pkg)（21 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) | 微工具集（errors/stringx/cache/…）、GoSafe/singleflight/retry、governance schema/lifecycle |
 
 ## 关键依赖链
 
 - **服务发现**：`hertz` / `kitex` → `nns` → `registry`（Nacos 实现 + 多级降级链）
 - **端点弹性**：`nns-endpoint` → `httpx`（per-service 熔断 + 换实例重试，与 httpx 的 breaker-outside-retry 层次一致）
-- **数据访问**：`handler` → `gorm`（CRUD Service / 事务防丢更新）；`redis` → `pkg/cache`（CacheAside 接口与契约套件）；`data` 为纯门面（re-export pkg 与各子仓）
+- **数据访问**：`hertz/crudh` → `gormx`（泛型 CRUD Handler / 事务防丢更新）；`redisx` → `data`（CacheAside 接口与契约套件）；`data` 为纯门面（re-export pkg 与各子仓）
 - **优雅关停**：`hertz.RunServer` / `kitex.RunServer` → `bootstrap` 组合根（排空连接 → 释放资源）
 - **可观测贯通**：全矩阵统一走 `logx` / `tracing` / `metrics` 门面，底层实现可替换
 
 ## 设计原则
 
-1. **依赖自底向上**——模块只能依赖更低能力层，同层依赖仅限同泳道组合（如 `handler` → `middleware`）。
+1. **依赖自底向上**——模块只能依赖更低能力层，同层依赖仅限同泳道组合（如 `nns-endpoint` → `httpx`）。
 2. **每仓独立发版**——SemVer 互不牵连；`matrix-tools` 每周巡检漂移（README 矩阵表 / AGENTS.md / 版本 pin）。
 3. **接口分层，实现可替换**——logx、registry、cache 均面向接口编程，业务可注入自定义实现。
 4. **AI Agent 友好**——每仓 `AGENTS.md` + 全站 [llms.txt](/llms.txt)，见《[AI Agent 使用](/guide/ai-agent.html)》。

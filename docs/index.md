@@ -3,7 +3,7 @@ layout: home
 hero:
   name: "oekit"
   text: "Open Easy Kit"
-  tagline: "开源 · 易用 · 工具集合 — 23 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
+  tagline: "开源 · 易用 · 工具集合 — 21 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
   actions:
     - theme: brand
       text: 快速开始
@@ -48,7 +48,7 @@ features:
 ## 快速开始
 
 ```bash
-# 微工具集（20 合 1）
+# 微工具集（21 合 1）
 go get github.com/oekit/pkg@latest
 
 # HTTP 服务全家

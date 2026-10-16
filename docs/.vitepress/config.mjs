@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'oekit',
-  description: 'Open Easy Kit — 开源易用的 Go 工具集：23 个独立发版的模块矩阵',
+  description: 'Open Easy Kit — 开源易用的 Go 工具集：21 个独立发版的模块矩阵',
   cleanUrls: false,
   themeConfig: {
     siteTitle: 'oekit',

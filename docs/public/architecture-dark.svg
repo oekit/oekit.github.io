@@ -91,9 +91,9 @@
   <rect x="32" y="882.0" width="1176" height="114" rx="12" fill="#151A20" stroke="#3D444D"/>
   <text x="48" y="906.0" font-size="13" font-weight="700" fill="#C9D1D9">基础库</text>
   <rect x="48" y="918" width="487" height="64" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="64" y="940" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 16 合 1</tspan></text>
+  <text x="64" y="940" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 21 合 1</tspan></text>
   <text x="64" y="956" font-size="10" fill="#7D8590">errors · validator · stringx · slicex · enumx · convert · encoding · jsonrepair · httpjson</text>
-  <text x="64" y="970" font-size="10" fill="#7D8590">mathx · pathx · pagination · ptrx · timex · uidgen · cache</text>
+  <text x="64" y="970" font-size="10" fill="#7D8590">mathx · pathx · pagination · ptrx · timex · uidgen · bloomx</text>
   <rect x="555" y="918" width="204" height="64" rx="8" fill="#10151D" stroke="#3D444D"/>
   <text x="571" y="942" font-size="15" font-weight="600" fill="#E6EDF3">concurrency</text>
   <text x="571" y="964" font-size="11.5" fill="#9DA7B3">GoSafe · singleflight · retry</text>
