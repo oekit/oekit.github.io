@@ -38,7 +38,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 ### 基础库
 - [pkg](https://github.com/oekit/pkg): 16 合 1 微工具集——errors（Wrap/BizError）、validator、stringx、slicex、enumx、convert、encoding、jsonrepair、httpjson、mathx、pathx、pagination、ptrx、timex(+cron)、uidgen、cache
-- [concurrency](https://github.com/oekit/concurrency): GoSafe 系列 safe-go、键控闸门、扇出、令牌桶、重试
+- [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载
 - [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
 
 ## 文档

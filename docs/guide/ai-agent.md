@@ -19,7 +19,7 @@ title: AI Agent 使用指南
   
 ```bash
 需要字符串/切片/类型转换/时间/ID？
-  └─ go get github.com/oekit/pkg     // 16 合 1，一个 module 全有
+  └─ go get github.com/oekit/pkg     // 20 合 1，一个 module 全有
 错误处理？也用 pkg/errors（BizError 双码）
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
 要发 HTTP 请求？

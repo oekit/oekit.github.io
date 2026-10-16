@@ -41,14 +41,14 @@ features:
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redis](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
-| 基础库 | [pkg](https://github.com/oekit/pkg)（16 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) |
+| 基础库 | [pkg](https://github.com/oekit/pkg)（20 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) |
 
 每个模块的 GitHub 仓库 README 均含可复制的最小示例；矩阵内依赖见各仓「矩阵总览」表。
 
 ## 快速开始
 
 ```bash
-# 微工具集（16 合 1）
+# 微工具集（20 合 1）
 go get github.com/oekit/pkg@latest
 
 # HTTP 服务全家
