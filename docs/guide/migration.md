@@ -13,7 +13,10 @@ title: 迁移指南
 | github.com/oekit/redis | github.com/oekit/redisx | 2026-10-16 更名（消 go-redis 包名撞车）；旧路径重定向 ≤ v0.4.0 |
 | github.com/oekit/gorm | github.com/oekit/gormx | 2026-10-16 更名（避 gorm.io/gorm 混淆）；旧路径重定向 ≤ v0.2.1 |
 
-### ekit 单体 import → oekit 模块（argus 实测全表）
+### ekit 单体 import → oekit 模块（完整路径映射）
+
+> 下表经真实单体项目全量迁移实测核对（18 条 import 路径 → 多模块），与
+> `go doc` / 目录树交叉验证。
 
 | ekit 单体路径 | oekit 新家 | 说明 |
 |---|---|---|
@@ -96,7 +99,7 @@ s{git\.enjoye\.top/enjoydream/ekit/bootstrap}{github.com/oekit/bootstrap/bootstr
 
 ## 混合依赖过渡期
 
-下游库（如 agentkit v0.14.x）仍在 ekit、主工程已迁 oekit 时，两侧
+下游库仍在 ekit、主工程已迁 oekit 时，两侧
 `logx.Logger` 接口**形状逐签名一致，但接口值不可互相赋值**——
 `SetLevel(Level)` / `WithAttrs(...Attr)` 里的 `Level` / `Attr` 是各包的
 命名类型，编译器报：
