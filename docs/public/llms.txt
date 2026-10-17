@@ -20,7 +20,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/New+Run 应用骨架 + healthz + 优雅关停（v0.4.0 删除 Run(Config{...})，改 `New(WithServiceName, WithShutdownTimeout)` 再 `b.Run(fn)`；Metrics/NNS/Tracing 在嵌套模块 `bootstrap/obs`、`bootstrap/nacos`）
 - [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）——双层目录 `hertz/hertz`、`hertz/hertz/sse`、`hertz/hertz/metrics`
 - [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）+ istio（xDS 动态熔断）
-- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw，路径 `middleware/middleware` 双层目录）+ contrib 桥接 + hmw（`middleware/traceid/hmw` → 模块根 `middleware/hmw`）
+- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（模块根包 mw，middleware/middleware 双层目录已收平）+ contrib 桥接 + hmw（模块根 `mw/...` 子包）
 - [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
 - [kitex-examples](https://github.com/oekit/kitex-examples): Kitex echo 示例（client/server + 治理配置）
 - [k8s](https://github.com/oekit/k8s): Kubernetes 客户端封装——RESTConfig/Clientset/DynamicClient 构建（显式 kubeconfig → in-cluster 自动 → KUBECONFIG/~/.kube/config 逐级回退，QPS/Burst 默认 50/100）+ leaderelection Lease 选主（OnStartedLeading/OnStoppedLeading 回调，主备单活）

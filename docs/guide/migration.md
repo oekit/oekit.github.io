@@ -22,7 +22,7 @@ title: 迁移指南
 |---|---|---|
 | `config`（`LoadDotEnv` / `Get*` / `OverlayMerge` / `ParseDuration`） | **`github.com/oekit/core/config`** | ⚠️ registry v0.2.6 曾有 `config/`，**v0.3.0 已移除**；config 新家是 core/config，不要去 registry 找 |
 | `middleware/traceid/hmw` | `github.com/oekit/middleware/hmw` | 挪到**模块根**（不再嵌在 traceid 下） |
-| `middleware`（包名 `mw`） | `github.com/oekit/middleware/middleware` | **双层目录**：模块名与同名子目录；包名仍是 `mw` |
+| `middleware`（包名 `mw`） | `github.com/oekit/middleware` | **双层目录**：模块名与同名子目录；包名仍是 `mw` |
 | `hertz` | `github.com/oekit/hertz/hertz` | **双层目录**（v0.4.1 回退 hertzx 更名后保留） |
 | `hertz/sse` | `github.com/oekit/hertz/hertz/sse` | 双层目录下的 sse |
 | `hertz/metrics` | `github.com/oekit/hertz/hertz/metrics` | 双层目录下的 metrics |
@@ -88,7 +88,7 @@ s{git\.enjoye\.top/enjoydream/ekit/data/(cache|gormx)}{github.com/oekit/data/$1}
 s{git\.enjoye\.top/enjoydream/ekit/handler/validatorh}{github.com/oekit/hertz/validatorh}g;
 s{git\.enjoye\.top/enjoydream/ekit/network/}{github.com/oekit/network/}g;
 s{git\.enjoye\.top/enjoydream/ekit/pkg/}{github.com/oekit/pkg/}g;
-s{git\.enjoye\.top/enjoydream/ekit/middleware}{github.com/oekit/middleware/middleware}g;
+s{git\.enjoye\.top/enjoydream/ekit/middleware}{github.com/oekit/middleware}g;
 s{git\.enjoye\.top/enjoydream/ekit/hertz}{github.com/oekit/hertz/hertz}g;
 s{git\.enjoye\.top/enjoydream/ekit/config}{github.com/oekit/core/config}g;
 s{git\.enjoye\.top/enjoydream/ekit/bootstrap}{github.com/oekit/bootstrap/bootstrap}g;

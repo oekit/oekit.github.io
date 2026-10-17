@@ -35,7 +35,7 @@ err := errors.NewNotFoundError("order not found")
 ## 统一出口：middleware.Fail
 
 ```go
-import mw "github.com/oekit/middleware/middleware"
+import mw "github.com/oekit/middleware"
 
 func getOrder(ctx context.Context, c *app.RequestContext) {
     ord, err := svc.Get(ctx, id)

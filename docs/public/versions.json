@@ -1,17 +1,26 @@
 {
-  "generatedAt": "2026-10-17T13:20:35Z",
+  "generatedAt": "2026-10-17T18:36:04Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.11.0",
+      "latest": "v0.12.0",
       "nested": [],
       "matrixDeps": [],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.10.0",
+          "line": "- **BREAKING** refactor!: `uidgen`、`validator` 两包拆分至新仓 [kitx](https://github.com/oekit/kitx)——机械替换 import 即可迁移：`github.com/oekit/pkg/uidgen` → `github.com/oekit/kitx/uidgen`、`github.com/oekit/pkg/vali"
+        },
+        {
+          "version": "v0.9.0",
+          "line": "- **BREAKING** feat(container): 新增泛型容器包 `container`，整体收编原 `collectionx`"
+        }
+      ]
     },
     {
       "module": "concurrency",
-      "latest": "v0.5.4",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -25,7 +34,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.5.0",
+      "latest": "v0.7.0",
       "nested": [
         {
           "path": "hertzlog",
@@ -33,11 +42,11 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.1"
+          "latest": "v0.1.2"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.1"
+          "latest": "v0.1.2"
         },
         {
           "path": "sink",
@@ -58,7 +67,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.6.0",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -69,8 +78,45 @@
       ]
     },
     {
+      "module": "kitx",
+      "latest": "v0.1.1",
+      "nested": [],
+      "matrixDeps": [
+        "pkg"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "metrics",
+      "latest": "v0.1.7",
+      "nested": [],
+      "matrixDeps": [
+        "core"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "tracing",
+      "latest": "v0.2.2",
+      "nested": [],
+      "matrixDeps": [
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "registry",
+      "latest": "v0.4.1",
+      "nested": [],
+      "matrixDeps": [
+        "core",
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
       "module": "data",
-      "latest": "v0.9.5",
+      "latest": "v0.9.8",
       "nested": [
         {
           "path": "all",
@@ -86,6 +132,10 @@
         "timertask"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.9.0",
+          "line": "- **BREAKING** fix(cache/cachetest): 删除壳残留的原生 AsideCache 族——`cache`"
+        },
         {
           "version": "v0.5.0",
           "line": "- **breaking** feat!: data 门面化——八子包 re-export 复刻 ekit data/ 能力面"
@@ -106,7 +156,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.5.4",
+      "latest": "v0.5.5",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -115,8 +165,36 @@
       "breakingIndex": []
     },
     {
+      "module": "redisx",
+      "latest": "v0.7.6",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "logx",
+        "pkg"
+      ],
+      "breakingIndex": [
+        {
+          "version": "v0.5.0",
+          "line": "- **breaking（0.x minor）**：模块更名 `github.com/oekit/redis` → `github.com/oekit/redisx`，"
+        }
+      ]
+    },
+    {
+      "module": "etcdx",
+      "latest": "v0.1.5",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "core",
+        "logx",
+        "registry"
+      ],
+      "breakingIndex": []
+    },
+    {
       "module": "httpx",
-      "latest": "v0.3.2",
+      "latest": "v0.5.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -130,7 +208,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.5.0",
+      "latest": "v0.5.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -141,7 +219,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.1.8",
+      "latest": "v0.1.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -151,7 +229,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.6.2",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -165,16 +243,52 @@
       "breakingIndex": []
     },
     {
+      "module": "k8s",
+      "latest": "v0.1.2",
+      "nested": [],
+      "matrixDeps": [
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "nns",
+      "latest": "v0.4.1",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "core",
+        "logx",
+        "registry"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "nns-endpoint",
+      "latest": "v0.2.3",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "core",
+        "httpx",
+        "logx",
+        "metrics",
+        "nns",
+        "registry"
+      ],
+      "breakingIndex": []
+    },
+    {
       "module": "bootstrap",
-      "latest": "v0.5.4",
+      "latest": "v0.6.2",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.2.5"
+          "latest": "v0.3.1"
         },
         {
           "path": "obs",
-          "latest": "v0.2.5"
+          "latest": "v0.2.6"
         }
       ],
       "matrixDeps": [
@@ -185,7 +299,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.5.10",
+      "latest": "v0.6.4",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -196,6 +310,50 @@
         "logx",
         "metrics",
         "middleware",
+        "nns",
+        "pkg",
+        "registry",
+        "tracing"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "kitex",
+      "latest": "v0.6.2",
+      "nested": [],
+      "matrixDeps": [
+        "bootstrap",
+        "concurrency",
+        "core",
+        "logx",
+        "metrics",
+        "nns",
+        "pkg",
+        "registry"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "workflow",
+      "latest": "v0.3.1",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "kitex-examples",
+      "latest": "v0.1.17",
+      "nested": [],
+      "matrixDeps": [
+        "bootstrap",
+        "concurrency",
+        "core",
+        "kitex",
+        "logx",
+        "metrics",
         "nns",
         "pkg",
         "registry",

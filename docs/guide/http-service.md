@@ -48,7 +48,7 @@ svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)
 import (
     hertzserver "github.com/cloudwego/hertz/pkg/app/server"
     "github.com/oekit/hertz/crudh"
-    mw "github.com/oekit/middleware/middleware"
+    mw "github.com/oekit/middleware"
 )
 
 h := hertzserver.New(hertzserver.WithHostPorts(":8080"))
