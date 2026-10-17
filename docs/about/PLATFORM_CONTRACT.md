@@ -272,7 +272,7 @@ TraceID 必须在 Response 和 AccessLog 之前，确保 trace_id 可被后续�
 |---|------|------|
 | `registry` | 薄抽象，provider 无关、框架无关 | `Registrar`（注册/注销）、`Discoverer`（发现）、`Subscriber`（订阅）、`ConfigStore`（配置存储） |
 | `registry/nacos` | registry 的 Nacos 实现 | 将 Nacos SDK 适配为 registry 接口 |
-| `registry/kitex` / `registry/hertz` | registry 的框架薄适配 | Registry/Resolver 桥接 + 实例类型转换（`convert.go`） |
+| kitex 仓 `kitex/registry` / hertz 仓 `hertz/registry` | registry 的框架薄适配 | Registry/Resolver 桥接 + 实例类型转换（`convert.go`） |
 | `nns` | 高级服务治理门面 | mock 模式、静态实例、缓存+singleflight、多级降级、服务配置热更新、端点工厂；`New(cfg)` 是 provider 选择点（Nacos 默认构造在此，SDK 客户端随 Close 释放） |
 | `nns/kitex` | NNS → Kitex 适配 | 继承 NNS 全部能力，桥接 Kitex resolver/registry |
 | `nns/client` | 治理核心（v0.29.0 起 provider 无关） | 实例缓存/降级链/订阅/配置加载；provider 全部经 `With*` 注入，可 mock 可替换 |
@@ -280,7 +280,7 @@ TraceID 必须在 Response 和 AccessLog 之前，确保 trace_id 可被后续�
 
 > 边界说明（v0.24+）：
 > - `registry` 核心已完全去框架化：Kitex/Hertz 实例类型转换函数（`InstancesToKitex`/`InstancesToHertz`）
->   已移至 `registry/kitex`、`registry/hertz` 的 `convert.go`，核心包不再 import 任何 transport 框架。
+>   已移至 kitex 仓 `kitex/registry`、hertz 仓 `hertz/registry` 的 `convert.go`，核心包不再 import 任何 transport 框架。
 > - `nns/{kitex,hertz}` 与 `registry/{kitex,hertz}` 的 4 个 Resolver 共享骨架（拉取 + 校验 + 错误包装）、
 >   `?tags` 解析与注册信息转换统一下沉 `internal/sdbridge`（`ResolverCore`/`ToInstance`/`ServiceNameFromDesc`）；
 >   各适配层只保留实例类型转换（`convert.go`）与框架 Result 组装的薄壳。

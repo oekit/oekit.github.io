@@ -77,7 +77,7 @@ h.Use(mw.BearerTokenAuth(mw.WithBearerToken(token), mw.WithAuthSkipPaths("/healt
 import (
     "github.com/oekit/nns"
     nacospkg "github.com/oekit/registry/nacos"
-    "github.com/oekit/registry/registry"
+    "github.com/oekit/registry"
 )
 
 nnsc := nns.New(nacospkg.Bootstrap{ServiceName: "order-service"},

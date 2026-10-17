@@ -83,7 +83,7 @@ import (
 	ekithertz "github.com/oekit/hertz/hertz"
 	health "github.com/oekit/hertz/hertz/health"
 	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
-	ekitkitex "github.com/oekit/kitex/kitex"
+	kitexgo "github.com/oekit/kitex"
 	"github.com/oekit/logx"
 	"github.com/oekit/tracing"
 	"github.com/cloudwego/hertz/pkg/app/server"
@@ -93,7 +93,7 @@ import (
 
 func main() {
 	// 1. 日志桥接：Kitex 框架日志 → logx（自动携带 trace_id）
-	klog.SetLogger(ekitkitex.NewLogger(logx.WithService("my-rpc")))
+	klog.SetLogger(kitexgo.NewLogger(logx.WithService("my-rpc")))
 
 	// 2. 启动编排
 	b, err := bootstrap.New(
@@ -108,7 +108,7 @@ func main() {
 	}
 	_ = b.Run(func(app *bootstrap.App) error {
 		svr := echo.NewServer(new(Impl),
-			server.WithSuite(ekitkitex.NewServerTracingSuite()),
+			server.WithSuite(kitexgo.NewServerTracingSuite()),
 		)
 
 		// 3. 运维端口：Kitex 自身无 HTTP 端点，用独立 Hertz 暴露 /metrics 与健康检查
@@ -118,7 +118,7 @@ func main() {
 		ekithertz.RunServer(app, "ops-metrics", opsH)
 
 		// 4. 生命周期管理
-		ekitkitex.RunServer(app, "kitex-echo", svr)
+		kitexgo.RunServer(app, "kitex-echo", svr)
 		<-app.Context().Done() // 阻塞直到收到 SIGINT/SIGTERM（userFn 返回 = 主动关机）
 		return nil
 	}); err != nil {
