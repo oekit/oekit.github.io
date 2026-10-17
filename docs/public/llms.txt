@@ -4,6 +4,14 @@
 
 oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格自底向上，每仓独立 SemVer + 独立 CI。每个仓库根目录都有 AGENTS.md（面向 AI Agent 的规范与硬规则）。
 
+## 版本矩阵（机器可读）
+
+- 机器可读版本矩阵：https://oekit.github.io/versions.json
+  （每模块 `latest` / `nested` / `matrixDeps` / `breakingIndex`；由 matrix-tools
+  `scripts/gen_versions.py` 生成，结构变更当天重跑即可刷新）
+- ekit→oekit import 改写：`matrix-tools/scripts/ekit2oekit.py`（AST/import 面 +
+  规则表 `--print-rules`；调用点级改动输出需人工清单）
+
 ## 模块
 
 依赖严格自底向上，五个能力层（架构图：https://oekit.github.io/about/architecture.html）

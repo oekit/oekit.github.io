@@ -1,0 +1,207 @@
+{
+  "generatedAt": "2026-10-17T13:20:35Z",
+  "org": "oekit",
+  "modules": [
+    {
+      "module": "pkg",
+      "latest": "v0.11.0",
+      "nested": [],
+      "matrixDeps": [],
+      "breakingIndex": []
+    },
+    {
+      "module": "concurrency",
+      "latest": "v0.5.4",
+      "nested": [],
+      "matrixDeps": [
+        "pkg"
+      ],
+      "breakingIndex": [
+        {
+          "version": "v0.5.3",
+          "line": "- fix(deps): pkg 地板 v0.9.3 → v0.10.0（BREAKING 拆分版；本仓仅引用 singleflighttest，零代码改动）"
+        }
+      ]
+    },
+    {
+      "module": "logx",
+      "latest": "v0.5.0",
+      "nested": [
+        {
+          "path": "hertzlog",
+          "latest": "v0.1.0"
+        },
+        {
+          "path": "hlog",
+          "latest": "v0.1.1"
+        },
+        {
+          "path": "kitexlog",
+          "latest": "v0.1.1"
+        },
+        {
+          "path": "sink",
+          "latest": "v0.1.0"
+        }
+      ],
+      "matrixDeps": [],
+      "breakingIndex": [
+        {
+          "version": "v0.3.0",
+          "line": "- **breaking / behavior change**：`NewSlogLogger` 尊重 `LOG_LEVEL`（原先忽略）。"
+        },
+        {
+          "version": "v0.1.8",
+          "line": "- **breaking**：hertzlog 删除旧适配别名 `AsHlogLogger`/`AsHlogLoggerFromXxx`，"
+        }
+      ]
+    },
+    {
+      "module": "core",
+      "latest": "v0.6.0",
+      "nested": [],
+      "matrixDeps": [],
+      "breakingIndex": [
+        {
+          "version": "Unreleased",
+          "line": "- **breaking**：`config.ConfigWatcher` 日志接口改为 `*slog.Logger`（原 `logx.Logger`），"
+        }
+      ]
+    },
+    {
+      "module": "data",
+      "latest": "v0.9.5",
+      "nested": [
+        {
+          "path": "all",
+          "latest": "v0.1.1"
+        }
+      ],
+      "matrixDeps": [
+        "concurrency",
+        "gormx",
+        "logx",
+        "pkg",
+        "redisx",
+        "timertask"
+      ],
+      "breakingIndex": [
+        {
+          "version": "v0.5.0",
+          "line": "- **breaking** feat!: data 门面化——八子包 re-export 复刻 ekit data/ 能力面"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "- **breaking** feat(all)!: `all/` 聚合模块全部版本 retract——一键全家桶由本"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "- **breaking** refactor(cache): 目录正名 `data/cache` → `cache`——import 路径"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "- **breaking** feat(cache): `LocalCache.Close()` → `Close(ctx context.Context) error`"
+        }
+      ]
+    },
+    {
+      "module": "gormx",
+      "latest": "v0.5.4",
+      "nested": [],
+      "matrixDeps": [
+        "logx",
+        "pkg"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "httpx",
+      "latest": "v0.3.2",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "core",
+        "logx",
+        "metrics",
+        "registry",
+        "tracing"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "network",
+      "latest": "v0.5.0",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "logx",
+        "tracing"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "timertask",
+      "latest": "v0.1.8",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "middleware",
+      "latest": "v0.6.2",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "core",
+        "logx",
+        "metrics",
+        "pkg",
+        "registry",
+        "tracing"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "bootstrap",
+      "latest": "v0.5.4",
+      "nested": [
+        {
+          "path": "nacos",
+          "latest": "v0.2.5"
+        },
+        {
+          "path": "obs",
+          "latest": "v0.2.5"
+        }
+      ],
+      "matrixDeps": [
+        "concurrency",
+        "logx"
+      ],
+      "breakingIndex": []
+    },
+    {
+      "module": "hertz",
+      "latest": "v0.5.10",
+      "nested": [],
+      "matrixDeps": [
+        "bootstrap",
+        "concurrency",
+        "core",
+        "gormx",
+        "kitx",
+        "logx",
+        "metrics",
+        "middleware",
+        "nns",
+        "pkg",
+        "registry",
+        "tracing"
+      ],
+      "breakingIndex": []
+    }
+  ]
+}
