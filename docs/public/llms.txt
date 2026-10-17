@@ -19,7 +19,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 ### 通信 · 服务治理
 - [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传/一致性哈希）
 - [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（per-service 熔断/换实例重试）
-- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus（`network/network/octopus` 双层目录）
+- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具（conn/mq/nats/streamx/wsutil）
 - [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
 - [registry](https://github.com/oekit/registry): 注册发现 SPI + Nacos 实现 + sdbridge（v0.3.0 起不再含 config 加载，config 新家见 core）
 

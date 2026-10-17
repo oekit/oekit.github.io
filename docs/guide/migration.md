@@ -28,7 +28,7 @@ title: 迁移指南
 | `hertz/metrics` | `github.com/oekit/hertz/hertz/metrics` | 双层目录下的 metrics |
 | `handler/validatorh` | `github.com/oekit/hertz/validatorh` | 收编回 hertz 子包 |
 | `handler/crudh` | `github.com/oekit/hertz/crudh` | 同上 |
-| `network/octopus` | `github.com/oekit/network/network/octopus` | **双层目录**（模块名/同名子目录） |
+| `network/octopus` | **已移除** | 业务推送客户端不属于通用网络客户端，oekit 不提供；请在业务仓自持 |
 | `bootstrap.Run(Config{...})` | `github.com/oekit/bootstrap/bootstrap` | **v0.4.0 删除 Run(Config)**——见下方改写示例 |
 | `data/cache`、`data/gormx` | `github.com/oekit/data/cache`、`github.com/oekit/data/gormx` | 同名直映 |
 | `concurrency/async` | `github.com/oekit/concurrency/async` | 同名直映 |
@@ -82,7 +82,6 @@ s{git\.enjoye\.top/enjoydream/ekit/observability/metrics}{github.com/oekit/metri
 s{git\.enjoye\.top/enjoydream/ekit/concurrency/async}{github.com/oekit/concurrency/async}g;
 s{git\.enjoye\.top/enjoydream/ekit/data/(cache|gormx)}{github.com/oekit/data/$1}g;
 s{git\.enjoye\.top/enjoydream/ekit/handler/validatorh}{github.com/oekit/hertz/validatorh}g;
-s{git\.enjoye\.top/enjoydream/ekit/network/octopus}{github.com/oekit/network/network/octopus}g;
 s{git\.enjoye\.top/enjoydream/ekit/pkg/}{github.com/oekit/pkg/}g;
 s{git\.enjoye\.top/enjoydream/ekit/middleware}{github.com/oekit/middleware/middleware}g;
 s{git\.enjoye\.top/enjoydream/ekit/hertz}{github.com/oekit/hertz/hertz}g;
