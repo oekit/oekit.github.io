@@ -9,7 +9,7 @@ title: AI Agent 使用指南
   
 | 入口 | 地址 | 用途 |
 |---|---|---|
-| llms.txt | [oekit.github.io/llms.txt](https://oekit.github.io/llms.txt) | 全矩阵机器可读索引：23 个模块一句话说明 + 全部文档链接，一次抓取即建立全局认知 |
+| llms.txt | [oekit.github.io/llms.txt](https://oekit.github.io/llms.txt) | 全矩阵机器可读索引：24 个模块一句话说明 + 全部文档链接，一次抓取即建立全局认知 |
 | AGENTS.md | 每个仓库根目录 | 该仓的权威开发规范：错误处理/日志/并发的硬规则 + 本仓包清单。改代码前必读 |
 | go doc | `go doc github.com/oekit/` | 接口签名以源码为准；每仓均带测试，可疑用法直接看 _test.go |
 
@@ -19,7 +19,8 @@ title: AI Agent 使用指南
   
 ```bash
 需要字符串/切片/类型转换/时间/ID？
-  └─ go get github.com/oekit/pkg     // 21 合 1，一个 module 全有
+  └─ go get github.com/oekit/pkg     // 19 合 1 基础微工具
+  └─ go get github.com/oekit/kitx    // 标识与校验（uidgen/validator）
 错误处理？也用 pkg/errors（BizError 双码）
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
 要发 HTTP 请求？

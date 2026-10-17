@@ -1,6 +1,6 @@
 # oekit
 
-> Open Easy Kit — 开源 · 易用 · 工具集合。23 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导。
+> Open Easy Kit — 开源 · 易用 · 工具集合。24 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导。
 
 oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格自底向上，每仓独立 SemVer + 独立 CI。每个仓库根目录都有 AGENTS.md（面向 AI Agent 的规范与硬规则）。
 
@@ -37,7 +37,8 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
 
 ### 基础库
-- [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError/Chain/In）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、container（Set/Ring/Queue/SafeMap/Map/Slice 泛型容器，v0.9.0 收编原 collectionx）、validator、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair、httpjson、mathx（Unstable 抖动）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、uidgen、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）、singleflighttest（契约测试套件）
+- [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError/Chain/In）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、container（Set/Ring/Queue/SafeMap/Map/Slice 泛型容器，v0.9.0 收编原 collectionx）、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair、httpjson、mathx（Unstable 抖动）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）、singleflighttest（契约测试套件）；v0.10.0 起 uidgen/validator 拆至 kitx
+- [kitx](https://github.com/oekit/kitx): 标识与校验——uidgen（Snowflake 全局单例 + Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex/RandomString 拒绝采样）+ validator（go-playground/validator v10 接口化门面，ValidationError Unwrap 为 BizError 400 对接 middleware.Fail）
 - [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮
 - [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version、**config 配置加载**（LoadDotEnv/Get*/OverlayMerge/ParseDuration——ekit `config` 包的新家；registry v0.3.0 已移除 config）
 
