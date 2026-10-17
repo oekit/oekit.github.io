@@ -9,19 +9,19 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 依赖严格自底向上，五个能力层（架构图：https://oekit.github.io/about/architecture.html）
 
 ### 应用引导 · 框架生态
-- [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/Run 应用骨架 + healthz + 优雅关停
-- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）
+- [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/New+Run 应用骨架 + healthz + 优雅关停（v0.4.0 删除 Run(Config{...})，改 `New(WithServiceName, WithShutdownTimeout)` 再 `b.Run(fn)`；Metrics/NNS/Tracing 在嵌套模块 `bootstrap/obs`、`bootstrap/nacos`）
+- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）——双层目录 `hertz/hertz`、`hertz/hertz/sse`、`hertz/hertz/metrics`
 - [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）+ istio（xDS 动态熔断）
-- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw）+ contrib 桥接
+- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（包名 mw，路径 `middleware/middleware` 双层目录）+ contrib 桥接 + hmw（`middleware/traceid/hmw` → 模块根 `middleware/hmw`）
 - [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
 - [kitex-examples](https://github.com/oekit/kitex-examples): Kitex echo 示例（client/server + 治理配置）
 
 ### 通信 · 服务治理
 - [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传/一致性哈希）
 - [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（per-service 熔断/换实例重试）
-- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus
+- [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具/Octopus（`network/network/octopus` 双层目录）
 - [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
-- [registry](https://github.com/oekit/registry): 注册发现 SPI + Nacos 实现 + config 配置加载 + sdbridge
+- [registry](https://github.com/oekit/registry): 注册发现 SPI + Nacos 实现 + sdbridge（v0.3.0 起不再含 config 加载，config 新家见 core）
 
 ### 数据访问
 - [gormx](https://github.com/oekit/gormx): SQL/GORM 全家（crud Service 事务防丢更新）
@@ -37,7 +37,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 ### 基础库
 - [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError/Chain/In）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、collectionx（Set/Ring/Queue/SafeMap 泛型容器）、validator、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair、httpjson、mathx（Unstable 抖动）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、uidgen、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）
 - [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮
-- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version
+- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version、**config 配置加载**（LoadDotEnv/Get*/OverlayMerge/ParseDuration——ekit `config` 包的新家；registry v0.3.0 已移除 config）
 
 ## 文档
 
@@ -50,7 +50,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [RPC 服务](https://oekit.github.io/guide/rpc-service.html): 治理热更/BizError 桥接/端点熔断
 - [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
 - [AI Agent 指南](https://oekit.github.io/guide/ai-agent.html): 人与 Agent 的接入手册
-- [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射
+- [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射（含完整 perl 改写脚本、双层目录说明、bootstrap.Run 删除改写、混合依赖过渡期 logx 桥）
 - [统一 CI](https://github.com/oekit/.github): 共享 reusable workflow——各仓 ci.yml 是薄调用层，改规则只改这一个仓
 - [平台契约](https://oekit.github.io/docs/PLATFORM_CONTRACT.html): 分层契约（ekit 时期文档）
 - [服务模板](https://oekit.github.io/docs/SERVICE_TEMPLATE.html): 服务脚手架示例
