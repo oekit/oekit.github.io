@@ -3,7 +3,7 @@ layout: home
 hero:
   name: "oekit"
   text: "Open Easy Kit"
-  tagline: "开源 · 易用 · 工具集合 — 21 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
+  tagline: "开源 · 易用 · 工具集合 — 23 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
   actions:
     - theme: brand
       text: 快速开始
@@ -37,9 +37,9 @@ features:
 
 | 能力层 | 模块 |
 |---|---|
-| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) |
+| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) · [k8s](https://github.com/oekit/k8s) |
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
-| 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
+| 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
 | 基础库 | [pkg](https://github.com/oekit/pkg)（21 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) |
 

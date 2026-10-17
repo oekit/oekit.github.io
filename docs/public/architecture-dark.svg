@@ -8,7 +8,7 @@
   <rect x="0" y="0" width="1240" height="1166.0" rx="16" fill="#0D1117"/>
   <rect x="0.5" y="0.5" width="1239" height="1165.0" rx="16" fill="none" stroke="#30363D"/>
   <text x="40" y="48" font-size="26" font-weight="700" fill="#E6EDF3">oekit 模块矩阵 · 架构总览</text>
-  <text x="40" y="74" font-size="13" fill="#9DA7B3">21 个独立发版的 Go 模块（SemVer + 独立 CI）· 依赖自底向上 · github.com/oekit</text>
+  <text x="40" y="74" font-size="13" fill="#9DA7B3">23 个独立发版的 Go 模块（SemVer + 独立 CI）· 依赖自底向上 · github.com/oekit</text>
   <text x="1200" y="48" font-size="12" fill="#7D8590" text-anchor="end">Go 1.25+ · MIT</text>
   <rect x="32" y="96" width="1176" height="56" rx="10" fill="#0D1117" stroke="#6E7681" stroke-dasharray="6 4"/>
   <text x="620" y="130" font-size="15" font-weight="600" fill="#C9D1D9" text-anchor="middle">你的服务 · 业务微服务（Hertz HTTP / Kitex RPC）</text>
@@ -16,12 +16,15 @@
   <text x="634" y="168" font-size="11" fill="#7D8590">组合 · 引导</text>
   <rect x="32" y="178.0" width="1176" height="220" rx="12" fill="#141A29" stroke="#39466F"/>
   <text x="48" y="202.0" font-size="13" font-weight="700" fill="#8DA2FB">应用引导 · 框架生态</text>
-  <rect x="48" y="214" width="175" height="72" rx="8" fill="#10151D" stroke="#39466F"/>
-  <text x="64" y="241" font-size="15" font-weight="600" fill="#A5B4FF">workflow</text>
-  <text x="64" y="264" font-size="11.5" fill="#9DA7B3">串行/并行/异步编排 · Hook</text>
-  <rect x="243" y="214" width="162" height="72" rx="8" fill="#10151D" stroke="#39466F" stroke-dasharray="5 4"/>
-  <text x="259" y="241" font-size="15" font-weight="600" fill="#A5B4FF">kitex-examples</text>
-  <text x="259" y="264" font-size="11.5" fill="#9DA7B3">echo 示例 · 治理配置</text>
+  <rect x="48" y="214" width="161" height="72" rx="8" fill="#10151D" stroke="#39466F"/>
+  <text x="64" y="241" font-size="15" font-weight="600" fill="#A5B4FF">k8s</text>
+  <text x="64" y="264" font-size="11.5" fill="#9DA7B3">客户端构建 · Lease 选主</text>
+  <rect x="229" y="214" width="175" height="72" rx="8" fill="#10151D" stroke="#39466F"/>
+  <text x="245" y="241" font-size="15" font-weight="600" fill="#A5B4FF">workflow</text>
+  <text x="245" y="264" font-size="11.5" fill="#9DA7B3">串行/并行/异步编排 · Hook</text>
+  <rect x="424" y="214" width="162" height="72" rx="8" fill="#10151D" stroke="#39466F" stroke-dasharray="5 4"/>
+  <text x="440" y="241" font-size="15" font-weight="600" fill="#A5B4FF">kitex-examples</text>
+  <text x="440" y="264" font-size="11.5" fill="#9DA7B3">echo 示例 · 治理配置</text>
   <rect x="48" y="312" width="220" height="72" rx="8" fill="#10151D" stroke="#39466F"/>
   <text x="64" y="339" font-size="15" font-weight="600" fill="#A5B4FF">hertz</text>
   <text x="64" y="362" font-size="11.5" fill="#9DA7B3">SSE/health · CRUD Handler · OTel</text>
@@ -67,12 +70,15 @@
   <rect x="244" y="714" width="185" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
   <text x="260" y="741" font-size="15" font-weight="600" fill="#FFC178">redisx</text>
   <text x="260" y="764" font-size="11.5" fill="#9DA7B3">客户端 · 缓存后端 · 分布式锁</text>
-  <rect x="449" y="714" width="166" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
-  <text x="465" y="741" font-size="15" font-weight="600" fill="#FFC178">data</text>
-  <text x="465" y="764" font-size="11.5" fill="#9DA7B3">LocalCache · 缓存检查器</text>
-  <rect x="635" y="714" width="150" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
-  <text x="651" y="741" font-size="15" font-weight="600" fill="#FFC178">timertask</text>
-  <text x="651" y="764" font-size="11.5" fill="#9DA7B3">分片定时 · 心跳续约</text>
+  <rect x="449" y="714" width="220" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
+  <text x="465" y="741" font-size="15" font-weight="600" fill="#FFC178">etcdx</text>
+  <text x="465" y="764" font-size="11.5" fill="#9DA7B3">客户端 · Lease 注册发现 · 分布式锁</text>
+  <rect x="689" y="714" width="166" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
+  <text x="705" y="741" font-size="15" font-weight="600" fill="#FFC178">data</text>
+  <text x="705" y="764" font-size="11.5" fill="#9DA7B3">LocalCache · 缓存检查器</text>
+  <rect x="875" y="714" width="150" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
+  <text x="891" y="741" font-size="15" font-weight="600" fill="#FFC178">timertask</text>
+  <text x="891" y="764" font-size="11.5" fill="#9DA7B3">分片定时 · 心跳续约</text>
   <line x1="620" y1="802" x2="620" y2="820" stroke="#6E7681" stroke-width="1.5" marker-end="url(#arr-gray)"/>
   <rect x="32" y="830.0" width="1176" height="122" rx="12" fill="#191430" stroke="#463A7A"/>
   <text x="48" y="854.0" font-size="13" font-weight="700" fill="#C4AFFF">可观测性</text>
@@ -94,7 +100,7 @@
   <text x="64" y="1040" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 21 合 1</tspan></text>
   <text x="64" y="1055" font-size="10" fill="#7D8590">errors · validator · stringx · slicex · enumx · convert · encoding · jsonrepair · httpjson</text>
   <text x="64" y="1067" font-size="10" fill="#7D8590">mathx · pathx · pagination · ptrx · timex · uidgen · bloomx</text>
-  <text x="64" y="1079" font-size="10" fill="#7D8590">cache · collectionx · contextx · bufiox · strmap</text>
+  <text x="64" y="1079" font-size="10" fill="#7D8590">cache · container · contextx · bufiox · strmap · singleflighttest</text>
   <rect x="555" y="1018" width="204" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
   <text x="571" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">concurrency</text>
   <text x="571" y="1068" font-size="11.5" fill="#9DA7B3">GoSafe · singleflight · retry</text>
@@ -104,7 +110,7 @@
   <line x1="269" y1="348" x2="285" y2="348" stroke="#7D94F7" stroke-width="1.5" marker-end="url(#arr-blue)"/>
   <path d="M 773 310 C 673 299, 492 299, 352 310" fill="none" stroke="#7D94F7" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-blue)"/>
   <line x1="222" y1="598" x2="238" y2="598" stroke="#4ADE9E" stroke-width="1.5" marker-end="url(#arr-teal)"/>
-  <line x1="430" y1="750" x2="446" y2="750" stroke="#FFB558" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <line x1="430" y1="750" x2="686" y2="750" stroke="#FFB558" stroke-width="1.5" marker-end="url(#arr-amber)"/>
   <text x="40" y="1132" font-size="11.5" fill="#7D8590">依赖方向：上层依赖下层，全矩阵无环 · 每仓独立发版（SemVer）+ 独立 CI（Lint / Test）</text>
   <text x="40" y="1150" font-size="11.5" fill="#7D8590">模块索引：https://github.com/oekit · 文档：https://oekit.github.io · llms.txt 供 AI Agent 检索</text>
 </svg>
