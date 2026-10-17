@@ -29,6 +29,7 @@ title: 迁移指南
 | `handler/validatorh` | `github.com/oekit/hertz/validatorh` | 收编回 hertz 子包 |
 | `handler/crudh` | `github.com/oekit/hertz/crudh` | 同上 |
 | `network/octopus` | **已移除** | 业务推送客户端不属于通用网络客户端，oekit 不提供；请在业务仓自持 |
+| `network/<pkg>`（conn/mq/nats/streamx/wsutil） | `github.com/oekit/network/<pkg>` | **v0.5.0 收平双层目录**：去掉中间的 `network/` 段；历史与旧 tag 已清空 |
 | `bootstrap.Run(Config{...})` | `github.com/oekit/bootstrap/bootstrap` | **v0.4.0 删除 Run(Config)**——见下方改写示例 |
 | `data/cache`、`data/gormx` | `github.com/oekit/data/cache`、`github.com/oekit/data/gormx` | 同名直映 |
 | `concurrency/async` | `github.com/oekit/concurrency/async` | 同名直映 |
@@ -38,9 +39,12 @@ title: 迁移指南
 | `pkg/*`（errors/stringx/...） | `github.com/oekit/pkg/*` | 16 微库并入 pkg |
 
 > [!NOTE] 双层目录布局
-> `middleware` / `hertz` / `network` 三个模块保留了「模块名/同名子目录」
+> `middleware` / `hertz` 两个模块保留了「模块名/同名子目录」
 > 双层结构（历史拆分留下，v0.x 为兼容未收拢）。import 时**模块段会重复一次**：
 > `github.com/oekit/hertz/hertz/sse`，不是 `github.com/oekit/hertz/sse`。
+>
+> `network` 自 v0.5.0 起已收平为仓库根一级：`github.com/oekit/network/<name>`
+> （`conn`/`mq`/`nats`/`streamx`/`wsutil`），不再有 `network/network/` 双层。
 
 ### bootstrap.Run 删除改写（v0.4.0）
 
@@ -82,6 +86,7 @@ s{git\.enjoye\.top/enjoydream/ekit/observability/metrics}{github.com/oekit/metri
 s{git\.enjoye\.top/enjoydream/ekit/concurrency/async}{github.com/oekit/concurrency/async}g;
 s{git\.enjoye\.top/enjoydream/ekit/data/(cache|gormx)}{github.com/oekit/data/$1}g;
 s{git\.enjoye\.top/enjoydream/ekit/handler/validatorh}{github.com/oekit/hertz/validatorh}g;
+s{git\.enjoye\.top/enjoydream/ekit/network/}{github.com/oekit/network/}g;
 s{git\.enjoye\.top/enjoydream/ekit/pkg/}{github.com/oekit/pkg/}g;
 s{git\.enjoye\.top/enjoydream/ekit/middleware}{github.com/oekit/middleware/middleware}g;
 s{git\.enjoye\.top/enjoydream/ekit/hertz}{github.com/oekit/hertz/hertz}g;
