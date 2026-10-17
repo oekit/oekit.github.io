@@ -21,7 +21,7 @@ title: AI Agent 使用指南
 需要字符串/切片/类型转换/时间/ID？
   └─ go get github.com/oekit/pkg     // 19 合 1 基础微工具
   └─ go get github.com/oekit/kitx    // 标识与校验（uidgen/validator）
-错误处理？也用 pkg/errors（BizError 双码）
+错误处理？服务形态用 pkg/errors（BizError 双码）；库形态用 stdlib errors/%w + 哨兵
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
 要发 HTTP 请求？
   ├─ 调内部服务（要发现/熔断/重试）→ oekit/httpx + oekit/nns
@@ -39,11 +39,20 @@ title: AI Agent 使用指南
 ## 硬规则红线（违反即产出错误代码）
 
   
-1. **错误处理只用一套**：`github.com/oekit/pkg/errors`。混用旧 `oekit/errors`         会导致 BizError 的 As/Is 互不识别——Not Found 会断裂成 500（这是真实发生过的事故）。
-1. **日志用 kv 风格**：`log.Info("msg", "key", val)`，不要 printf 风格；         带 ctx 用 `CtxInfo/CtxError`（自动携带 trace_id）。
-1. **SDK 包声明包级 logger 必须用 `logx.Delegating("组件名")`**，         禁止 `logx.Default()`/`WithService`（init 时序导致消费方设置失效）。
-1. **禁止裸 `go func`**：用 `concurrency/async` 的 GoSafe 系列（panic 自动 recover）。
-1. **长驻服务的 bootstrap.Run 里必须 `<-app.Context().Done()` 阻塞**——userFn 返回即服务结束。
+1. **错误处理（按形态两档）**
+    - **服务形态**（有 handler 层 / HTTP 状态码映射）：只用 `github.com/oekit/pkg/errors`
+      （BizError 双码）。混用旧 `oekit/errors` 会导致 BizError 的 As/Is 互不识别——
+      Not Found 会断裂成 500（这是真实发生过的事故）。
+    - **库形态**（被 import 的 SDK/组件库，无 handler）：标准库 `errors` /
+      `fmt.Errorf("%w")` + 导出哨兵/错误类型即可；**不必**引入 BizError。
+      若需与 oekit 服务互操作，仅要求错误链可被 `errors.Is/As` 穿透。
+1. **日志用 kv 风格**（全形态）：`log.Info("msg", "key", val)`，不要 printf 风格；
+   带 ctx 用 `CtxInfo/CtxError`（自动携带 trace_id）。
+1. **SDK 包声明包级 logger 必须用 `logx.Delegating("组件名")`**（全形态），
+   禁止 `logx.Default()`/`WithService`（init 时序导致消费方设置失效）。
+1. **禁止裸 `go func`**（全形态）：用 `concurrency/async` 的 GoSafe 系列（panic 自动 recover）。
+1. **长驻服务的 bootstrap.Run 里必须 `<-app.Context().Done()` 阻塞**（服务形态）——
+   userFn 返回即服务结束。
 ```
 
 ## 新模块接入五步走
@@ -58,7 +67,18 @@ title: AI Agent 使用指南
 
   
 > [!TIP] 提示
-> > **给 Agent 的提示**：本矩阵模块升级频繁（0.x 阶段），写死版本号前先查最新 tag；   旧路径 `git.enjoye.top/enjoydream/ekit`（单体，冻结）、`yi-nology`、   `openekit` 均已迁移到 `github.com/oekit`，不要生成旧路径的代码。
+> [!TIP] 提示
+> > **给 Agent 的提示**：本矩阵模块升级频繁（0.x 阶段），写死版本号前先查最新 tag。
+> > **查 tag 务必 `GOPROXY=direct`**——默认 proxy 的版本列表缓存滞后，高频发版日
+> > `go list -m -versions` 会给出陈旧列表，误以为已钉最新：
+> >
+> > ```bash
+> > GOPROXY=direct go list -m -versions github.com/oekit/pkg
+> > GOPROXY=direct go list -m github.com/oekit/pkg@latest
+> > ```
+> >
+> > 旧路径 `git.enjoye.top/enjoydream/ekit`（单体，冻结）、`yi-nology`、
+> > `openekit` 均已迁移到 `github.com/oekit`，不要生成旧路径的代码。
 
   
 ## 统一 CI 规则（改 CI 只去一个仓）
