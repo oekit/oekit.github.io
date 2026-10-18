@@ -9,7 +9,7 @@ metrics + tracing + traceid 三件套，Hertz/Kitex 双侧 instrumentation。
 ```go
 import (
     "github.com/oekit/metrics"
-    hertzmetrics "github.com/oekit/hertz/hertz/metrics"
+    hertzmetrics "github.com/oekit/hertz/metrics"
 )
 
 metrics.Init("my-service")
@@ -53,6 +53,8 @@ id := traceid.FromContext(ctx)
 ```
 
 logx 的 `Ctx*` 方法自动读取 ctx 里的 trace_id 输出 `[trace=xxx]`；
+裸 slog 项目用 `logx.TraceHandler(handler)` 给任意 slog.Handler 自动注入 trace_id
+（详见[日志指南](/guide/logging.html)）；
 响应体 `ResponseMiddleware` 也会回填 `trace_id` 字段，用户报障直接可查。
 
 ## 弹性指标怎么用

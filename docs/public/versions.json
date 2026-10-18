@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T18:36:04Z",
+  "generatedAt": "2026-10-18T01:35:48Z",
   "org": "oekit",
   "modules": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.8.0",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -72,7 +72,7 @@
       "matrixDeps": [],
       "breakingIndex": [
         {
-          "version": "Unreleased",
+          "version": "v0.6.0",
           "line": "- **breaking**：`config.ConfigWatcher` 日志接口改为 `*slog.Logger`（原 `logx.Logger`），"
         }
       ]
@@ -229,7 +229,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.8.0",
+      "latest": "v0.9.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",

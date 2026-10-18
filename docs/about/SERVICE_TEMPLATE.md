@@ -16,11 +16,11 @@ package main
 import (
 	"context"
 
-	"github.com/oekit/bootstrap/bootstrap"
+	"github.com/oekit/bootstrap"
 	bootstrapobs "github.com/oekit/bootstrap/obs"
-	ekithertz "github.com/oekit/hertz/hertz"
-	health "github.com/oekit/hertz/hertz/health"
-	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
+	"github.com/oekit/hertz"
+	health "github.com/oekit/hertz/health"
+	hertzmetrics "github.com/oekit/hertz/metrics"
 	mw "github.com/oekit/middleware"
 	"github.com/oekit/logx"
 	"github.com/oekit/tracing"
@@ -78,11 +78,11 @@ func main() {
 package main
 
 import (
-	"github.com/oekit/bootstrap/bootstrap"
+	"github.com/oekit/bootstrap"
 	bootstrapobs "github.com/oekit/bootstrap/obs"
-	ekithertz "github.com/oekit/hertz/hertz"
-	health "github.com/oekit/hertz/hertz/health"
-	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
+	"github.com/oekit/hertz"
+	health "github.com/oekit/hertz/health"
+	hertzmetrics "github.com/oekit/hertz/metrics"
 	kitexgo "github.com/oekit/kitex"
 	"github.com/oekit/logx"
 	"github.com/oekit/tracing"
@@ -133,11 +133,11 @@ func main() {
 package main
 
 import (
-	"github.com/oekit/bootstrap/bootstrap"
+	"github.com/oekit/bootstrap"
 	bootstrapobs "github.com/oekit/bootstrap/obs"
-	ekithertz "github.com/oekit/hertz/hertz"
-	health "github.com/oekit/hertz/hertz/health"
-	hertzmetrics "github.com/oekit/hertz/hertz/metrics"
+	"github.com/oekit/hertz"
+	health "github.com/oekit/hertz/health"
+	hertzmetrics "github.com/oekit/hertz/metrics"
 	mw "github.com/oekit/middleware"
 	"github.com/oekit/logx"
 	"github.com/oekit/tracing"
@@ -188,6 +188,6 @@ h := server.New(server.WithHostPorts(":8080"), tracing.Option)
 - [ ] 中间件栈：`DefaultMiddleware` 已注册（TraceID + Recovery + Response + AccessLog，零指标强制）；需要 HTTP 指标时 `h.Use(pm.Middleware())` 显式拼最前
 - [ ] 指标暴露：`hertzmetrics.InitAndRegister` 或 `h.GET("/metrics", hertzmetrics.MetricsHandler())` 已配置（注册表与 `PrometheusConfig.Registry` 缺省一致，均为 `metrics.Registry`）
 - [ ] 服务注册：`RunServer` 已调用（自动注册 shutdown 钩子）；userFn 内 `<-app.Context().Done()` 阻塞等信号
-- [ ] 健康检查：`health.RegisterHealthRoutes(h)` 已注册（包 `github.com/oekit/hertz/hertz/health`；/ping, /health, /buildVersion）
+- [ ] 健康检查：`health.RegisterHealthRoutes(h)` 已注册（包 `github.com/oekit/hertz/health`；/ping, /health, /buildVersion）
 - [ ] 错误处理：业务错误使用 `mw.Fail(ctx, c, err)` 而非手动构造响应
 - [ ] 分页参数：使用 `validatorh.BindPage(c)` 或 `validatorh.BindPageWithDefault(c, 1, 20)`

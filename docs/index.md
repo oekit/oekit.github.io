@@ -41,14 +41,14 @@ features:
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
-| 基础库 | [pkg](https://github.com/oekit/pkg)（19 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [kitx](https://github.com/oekit/kitx)（标识与校验）|
+| 基础库 | [pkg](https://github.com/oekit/pkg)（20 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [kitx](https://github.com/oekit/kitx)（标识与校验）|
 
 每个模块的 GitHub 仓库 README 均含可复制的最小示例；矩阵内依赖见各仓「矩阵总览」表。
 
 ## 快速开始
 
 ```bash
-# 微工具集（19 合 1）
+# 微工具集（20 合 1，零第三方依赖）
 go get github.com/oekit/pkg@latest
 
 # 标识与校验
@@ -65,5 +65,9 @@ go get github.com/oekit/middleware@latest github.com/oekit/hertz@latest
 | `git.enjoye.top/enjoydream/ekit/…`（单体，冻结维护） | `github.com/oekit/…` |
 | `github.com/oekit/<micro>`（16 微库） | `github.com/oekit/pkg/<micro>` |
 | `github.com/oekit/pkg/uidgen`、`github.com/oekit/pkg/validator`（v0.10.0 拆出） | `github.com/oekit/kitx/uidgen`、`github.com/oekit/kitx/validator` |
+| `github.com/oekit/pkg/collectionx`（pkg v0.9.0 收编） | `github.com/oekit/pkg/container` |
+| `github.com/oekit/logx/shutdown`（别名已弃用） | `github.com/oekit/core/lifecycle` |
+| `registry/registry`、`nns/nns`、`workflow/workflow`、`kitex/kitex`、`middleware/middleware`、`hertz/hertz` 双层路径（2026-10-17 收平） | `github.com/oekit/<mod>`（模块根） |
+| `httpx.WithBalance` / `loadbalance.Balancer` 家族（httpx v0.4.0 删除） | `httpx.WithSelector` / `loadbalance.Selector` |
 
 旧版本在 Go module proxy 缓存中仍可解析。

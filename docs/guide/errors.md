@@ -18,6 +18,10 @@ if errors.Is(err, sql.ErrNoRows) { ... }
 root := errors.Cause(err)
 ```
 
+> pkg v0.12.0 起 `errors.New/As/Is/Unwrap` 提供与 stdlib 同型的透传 shim——
+> 下游哨兵错误（`var ErrXxx = errors.New(...)`）不再需要双 import，
+> 「类型同一性」用同一个 `pkg/errors` 就能完整执行。
+
 ## BizError：业务码与 HTTP 码双轨
 
 ```go
@@ -29,7 +33,9 @@ err := errors.NewBizErrorWithStatus(40010, 409, "库存不足")
 err := errors.NewNotFoundError("order not found")
 ```
 
-- `ValidationError` 自动映射为 400
+- `ValidationError`（kitx/validator 校验失败）自动 Unwrap 为 BizError 映射 400
+- 并发任务的 panic 由 `concurrency/async` 收编为 typed `*PanicError{Value, Stack, Task}`
+  （v0.8.0 起，`errors.As` 可辨、携带栈）——panic 也走同一套 Is/As 链路
 - Kitex RPC 的对端业务异常经 [oekit/kitex](https://github.com/oekit/kitex) 的   `WithBizErrorBridge()` 转成本地 BizError（timeout→50400/504、no-instance→50300/503、ACL→40301/403）
 
 ## 统一出口：middleware.Fail

@@ -19,19 +19,21 @@ title: AI Agent 使用指南
   
 ```bash
 需要字符串/切片/类型转换/时间/ID？
-  └─ go get github.com/oekit/pkg     // 19 合 1 基础微工具
+  └─ go get github.com/oekit/pkg     // 20 合 1 基础微工具（零第三方依赖）
   └─ go get github.com/oekit/kitx    // 标识与校验（uidgen/validator）
 错误处理？服务形态用 pkg/errors（BizError 双码）；库形态用 stdlib errors/%w + 哨兵
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
 要发 HTTP 请求？
-  ├─ 调内部服务（要发现/熔断/重试）→ oekit/httpx + oekit/nns
+  ├─ 调内部服务（要发现/熔断/重试/LB）→ oekit/httpx + oekit/nns
   └─ 只是带 JSON 解析的 HTTP      → pkg/httpjson（零依赖）
 搭 HTTP 服务？ ── oekit/middleware + oekit/hertz + oekit/bootstrap
 搭 RPC 服务？ ── oekit/kitex（+ oekit/nns + oekit/nns-endpoint）
 要数据库？ ── oekit/gormx（CRUD Service）；要 Redis？ ── oekit/redisx（+ 分布式限流 ratelimit）
+要缓存编排？ ── oekit/data（cache/cached 写后失效/twolevel 两级广播）
+要 etcd？ ── oekit/etcdx（客户端/注册发现/分布式锁）；要 K8s 客户端或 Lease 选主？ ── oekit/k8s
 要限流/熔断/降载？
   ├─ 分布式限流 → oekit/redisx 的 ratelimit 子包
-  ├─ 进程内限流/自适应熔断/CPU 降载/滑动窗口 → oekit/concurrency（ratelimit/breaker/shedding）
+  ├─ 进程内限流/三态自适应熔断/CPU 降载/滑动窗口 → oekit/concurrency（ratelimit/breaker/shedding）
   └─ HTTP 服务端过载保护 → oekit/middleware 的 SheddingMiddleware（opt-in）
 ```
 
@@ -53,6 +55,9 @@ title: AI Agent 使用指南
 1. **禁止裸 `go func`**（全形态）：用 `concurrency/async` 的 GoSafe 系列（panic 自动 recover）。
 1. **长驻服务的 bootstrap.Run 里必须 `<-app.Context().Done()` 阻塞**（服务形态）——
    userFn 返回即服务结束。
+1. **server 就绪后必须触发 `app.Ready()`**（服务形态，bootstrap/nacos v0.3.0+）：
+   推荐 hertz/kitex `RunServer` 的 `WithOnReady`——不触发就绪门则 NNS 注册永不发生，
+   服务不可被发现。
 ```
 
 ## 新模块接入五步走
@@ -66,7 +71,6 @@ title: AI Agent 使用指南
 ```
 
   
-> [!TIP] 提示
 > [!TIP] 提示
 > > **给 Agent 的提示**：本矩阵模块升级频繁（0.x 阶段），写死版本号前先查最新 tag。
 > > **查 tag 务必 `GOPROXY=direct`**——默认 proxy 的版本列表缓存滞后，高频发版日

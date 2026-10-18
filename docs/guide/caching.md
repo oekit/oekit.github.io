@@ -137,5 +137,9 @@ defer tlc.Close(ctx)
 
 ## 依赖版本
 
-- `github.com/oekit/data` ≥ **v0.8.1**（MGet 快路径、Bus ctx 取消契约、bloom 降级门）
+- `github.com/oekit/data` ≥ **v0.9.0**（本指南语义面；当前 latest v0.9.8——v0.9.0 起
+  `cache`/`cachetest` 回归纯 re-export 门面，原生实现只剩 cached/twolevel 两个子包）
 - 配套：pkg ≥ v0.6.0（BatchGetter）、redisx ≥ v0.7.0（RedisCache.MGet 管道化）
+
+安装一律 `go get github.com/oekit/data@latest`；版本矩阵见站点
+[versions.json](/versions.json)。

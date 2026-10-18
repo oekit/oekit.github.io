@@ -17,16 +17,16 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 依赖严格自底向上，五个能力层（架构图：https://oekit.github.io/about/architecture.html）
 
 ### 应用引导 · 框架生态
-- [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/New+Run 应用骨架 + healthz + 优雅关停（v0.4.0 删除 Run(Config{...})，改 `New(WithServiceName, WithShutdownTimeout)` 再 `b.Run(fn)`；Metrics/NNS/Tracing 在嵌套模块 `bootstrap/obs`、`bootstrap/nacos`）
-- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）——双层目录 `hertz/hertz`、`hertz/hertz/sse`、`hertz/hertz/metrics`
-- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）+ istio（xDS 动态熔断）
-- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（模块根包 mw，middleware/middleware 双层目录已收平）+ contrib 桥接 + hmw（模块根 `mw/...` 子包）
+- [bootstrap](https://github.com/oekit/bootstrap): 组合根——App/New+Run 应用骨架 + healthz + 优雅关停（v0.4.0 删除 Run(Config{...})，改 `New(WithServiceName, WithShutdownTimeout)` 再 `b.Run(fn)`）；**就绪门** `App.Ready/ReadyChan/IsReady`（幂等并发安全）——嵌套 `bootstrap/nacos` 自 v0.3.0 起 NNS 注册延迟到 Ready 之后（server 就绪 → userFn 触发 Ready → 才进注册中心），关停序 nns 反注册先于 server 关闭；Metrics/Tracing 在嵌套模块 `bootstrap/obs`
+- [hertz](https://github.com/oekit/hertz): Hertz 运行时集成（日志桥接/生命周期/SSE/OTel）+ crudh/validatorh/versionh（泛型 CRUD Handler）——模块根扁平化（原 hertz/hertz 双层已收平）；`RunServer` 变参就绪门 `WithOnReady`（全部 HostPort TCP 探活可建连后回调，探活超时按启动失败优雅关机；`WithReadyProbeTimeout` 缺省 5s/`WithReadyAddr`）+ transportx（hertz→core/transport 适配器）+ chainmw 桥接
+- [kitex](https://github.com/oekit/kitex): Kitex 生态（治理热更/BizError 桥接/kitexotel）+ istio（xDS 动态熔断）——模块根扁平化（原 kitex/kitex 双层已并入 v0.6.0）；`RunServer` 变参就绪门（WithOnReady/WithReadyAddr/WithReadyProbeTimeout）+ `chainmw.ToKitex`（core/chain.Middleware → kitex 中间件）+ transportx
+- [middleware](https://github.com/oekit/middleware): Hertz 标准中间件栈（模块根包 mw，middleware/middleware 双层目录已收平）+ contrib 桥接 + hmw（模块根 `mw/...` 子包）+ chainmw 子包（transport 感知框架无关中间件，基于 core/chain+transport：Recovery 带 panic 隔离上报钩子/AccessLog skip+redact/MetadataPropagate——kitex 经 kitex/chainmw.ToKitex 复用，根包 Recovery/AccessLog 已薄壳化复用 chainmw 内核）
 - [workflow](https://github.com/oekit/workflow): 流程编排（Pipe/Parallel/Async/Switch + Hook）
 - [kitex-examples](https://github.com/oekit/kitex-examples): Kitex echo 示例（client/server + 治理配置）
 - [k8s](https://github.com/oekit/k8s): Kubernetes 客户端封装——RESTConfig/Clientset/DynamicClient 构建（显式 kubeconfig → in-cluster 自动 → KUBECONFIG/~/.kube/config 逐级回退，QPS/Burst 默认 50/100）+ leaderelection Lease 选主（OnStartedLeading/OnStoppedLeading 回调，主备单活）
 
 ### 通信 · 服务治理
-- [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断/重试/指标/OTel 透传/一致性哈希）
+- [httpx](https://github.com/oekit/httpx): HTTP 客户端（服务发现/熔断 ErrCircuitOpen/重试/指标/OTel 透传）+ loadbalance Selector 负载均衡（RoundRobin/Random/Weighted/一致性哈希权重感知虚拟副本/p2c 自适应——EWMA 经 DoneFunc 回写、WithFilter 元数据过滤；v0.4.0 起 Balancer 全家族删除无兼容路径）+ codec 注册制编解码器（json 内置 + form 表单，DoCodec）
 - [nns-endpoint](https://github.com/oekit/nns-endpoint): 端点工厂（per-service 熔断/换实例重试）
 - [network](https://github.com/oekit/network): WebSocket/NATS/MQ/流工具（conn/mq/nats/streamx/wsutil）
 - [nns](https://github.com/oekit/nns): 服务治理门面（发现/配置/实例缓存）
@@ -37,18 +37,18 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [redis](https://github.com/oekit/redisx): Redis 客户端/缓存后端/分布式锁
 - [etcdx](https://github.com/oekit/etcdx): etcd 全家——客户端封装（根包）+ registry 注册发现实现（Lease KeepAlive 注册/丢约自动重注册/prefix Watch 订阅/ConfigStore 配置监听，SPI 与 registry/nacos 互换）+ distlock 分布式锁（Session+Mutex，接口与 redisx/distlock.Locker 同形可互换）
 - [data](https://github.com/oekit/data): 数据访问门面——cache/rediscache/crud/distlock/gormx/redisx/timertask/cachetest 八子包 re-export（复刻 ekit data/ 能力面，类型同一）+ cached 缓存读写编排（写后失效/事务提交后失效/查询缓存版本号失效/GetByIDs 批量点读 MGet 快路径/bloom 防穿透）+ twolevel 两级缓存与跨实例失效广播
-- [timertask](https://github.com/oekit/timertask): 分片定时任务
+- [timertask](https://github.com/oekit/timertask): 分片定时任务（FNV-1a、心跳续约）+ 可选可靠投递 DeliveryAtLeastOnce（租约 + Ack + 可见性超时；过期租约回扫重投/死信，v0.1.7 起接入生命周期真正生效）
 
 ### 可观测性
-- [logx](https://github.com/oekit/logx): 统一日志门面（接口分层、多后端、Sink、caller 归属）+ shutdown
+- [logx](https://github.com/oekit/logx): 统一日志门面（接口分层、多后端、caller 归属；根包纯 stdlib）——WithFilter 脱敏/丢弃（FilterKey ***/FilterFunc 丢整条）、Slogger/SlogHandler 正向桥（三方 slog 消费 logx 生态）、TraceHandler 任意 slog.Handler 注入 trace_id、NewAuditLogger 审计留痕（级别锁 Info 不受 LOG_LEVEL 降级）、LevelEnabler 提前判级、ParseLogLevel (Level, error)/ParseLogLevelOr（v0.7.0）；Sink 在嵌套模块 logx/sink；优雅关停正身 core/lifecycle（logx/shutdown 仅余 Deprecated 别名）
 - [tracing](https://github.com/oekit/tracing): OTel Init + traceid 真相源 + http/redis 插桩
 - [metrics](https://github.com/oekit/metrics): Prometheus 门面 + 弹性指标族
 
 ### 基础库
-- [pkg](https://github.com/oekit/pkg): 21 合 1 微工具集——errors（Wrap/BizError/Chain/In）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、container（Set/Ring/Queue/SafeMap/Map/Slice 泛型容器，v0.9.0 收编原 collectionx）、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair、httpjson、mathx（Unstable 抖动）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）、singleflighttest（契约测试套件）；v0.10.0 起 uidgen/validator 拆至 kitx
+- [pkg](https://github.com/oekit/pkg): 20 合 1 微工具集（零第三方依赖，仅标准库）——errors（Wrap/BizError/Chain/In；v0.12.0 起 New/As/Is/Unwrap 与 stdlib 同型透传——哨兵/As 判定单 import 即可）、bloomx（布隆过滤器）、contextx（ValueOnlyFrom）、container（Set/Ring/Queue/SafeMap/Map/Slice 泛型容器，v0.9.0 收编原 collectionx）、stringx（含 trie 多模式替换器 Replacer/NewMask 敏感词遮罩）、slicex、enumx、convert、encoding（UseNumber 防精度丢失）、jsonrepair（v0.11.0 起含 UnmarshalLenient 宽松解析）、httpjson、mathx（Unstable 抖动；v0.11.0 起含单边向上 Upward）、pathx、pagination、ptrx、timex(+cron +时间段边界 BeginningOf/EndOf)、cache（CacheAside + BatchGetter(MGet) + LocalCache/SingleFlightCache + cachetest 契约）、bufiox（零拷贝缓冲 IO）、strmap（GC 友好只读 map）、singleflighttest（契约测试套件）；v0.10.0 起 uidgen/validator 拆至 kitx
 - [kitx](https://github.com/oekit/kitx): 标识与校验——uidgen（Snowflake 全局单例 + Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex/RandomString 拒绝采样）+ validator（go-playground/validator v10 接口化门面，ValidationError Unwrap 为 BizError 400 对接 middleware.Fail）
-- [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞、重试、令牌桶、滑动窗口、自适应熔断（ErrCircuitOpen）、CPU 自适应降载、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮
-- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约、网络 IP 工具、version、**config 配置加载**（LoadDotEnv/Get*/OverlayMerge/ParseDuration——ekit `config` 包的新家；registry v0.3.0 已移除 config）
+- [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞（DoShared 折叠可观测/Result.Waiters）、重试（DelayHint Retry-After 优先/JitterRatio 比例抖动 + retry/httpx Retryable）、令牌桶、滑动窗口、**三态自适应熔断**（ErrCircuitOpen；closed/open/half-open + GenBreaker 代绑定 AllowGen/SuccessGen/FailureGen/AbandonGen + WithProbeTimeout 缺省 1m + WithCooldown 独立冷却 + WithConsecutiveFailures 连续失败触发）、CPU 自适应降载、ratelimit Lockout 防爆破锁（v0.11.0，fail2ban 形态 keyed 锁定/成功 Reset）、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮；async panic 统一收编 typed *PanicError（errors.As 可辨携带栈）+ 实例级 Runner panic 路由
+- [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约 + Manager 优雅关停（自 logx/shutdown 迁入，日志 *slog.Logger——core 不再依赖 logx）、**transport 协议无关传输上下文**（Transporter/Header/ctx 存取，仅标准库）、**chain 中间件链**（Handler/Middleware/Chain/Recovery/Timeout）、网络 IP 工具、version、**config 配置加载**（LoadDotEnv/Get*/OverlayMerge/ParseDuration + default/env/range/options tag 校验 + OverlaySource 多源叠加 + ApplyEnvOverlay env 优先——ekit `config` 包的新家；registry v0.3.0 已移除 config）
 
 ## 文档
 
@@ -61,7 +61,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [RPC 服务](https://oekit.github.io/guide/rpc-service.html): 治理热更/BizError 桥接/端点熔断
 - [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
 - [AI Agent 指南](https://oekit.github.io/guide/ai-agent.html): 人与 Agent 的接入手册
-- [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射（含完整 perl 改写脚本、双层目录说明、bootstrap.Run 删除改写、混合依赖过渡期 logx 桥）
+- [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射（含完整 perl 改写脚本、矩阵内升级迁移对照、模块布局扁平化说明、bootstrap.Run 删除改写与就绪门契约、混合依赖过渡期 logx 桥）
 - [统一 CI](https://github.com/oekit/.github): 共享 reusable workflow——各仓 ci.yml 是薄调用层，改规则只改这一个仓
 - [平台契约](https://oekit.github.io/docs/PLATFORM_CONTRACT.html): 分层契约（ekit 时期文档）
 - [服务模板](https://oekit.github.io/docs/SERVICE_TEMPLATE.html): 服务脚手架示例

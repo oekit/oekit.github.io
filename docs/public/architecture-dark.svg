@@ -73,12 +73,12 @@
   <rect x="449" y="714" width="220" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
   <text x="465" y="741" font-size="15" font-weight="600" fill="#FFC178">etcdx</text>
   <text x="465" y="764" font-size="11.5" fill="#9DA7B3">客户端 · Lease 注册发现 · 分布式锁</text>
-  <rect x="689" y="714" width="166" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
+  <rect x="689" y="714" width="192" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
   <text x="705" y="741" font-size="15" font-weight="600" fill="#FFC178">data</text>
-  <text x="705" y="764" font-size="11.5" fill="#9DA7B3">LocalCache · 缓存检查器</text>
-  <rect x="875" y="714" width="150" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
-  <text x="891" y="741" font-size="15" font-weight="600" fill="#FFC178">timertask</text>
-  <text x="891" y="764" font-size="11.5" fill="#9DA7B3">分片定时 · 心跳续约</text>
+  <text x="705" y="764" font-size="11.5" fill="#9DA7B3">门面 · cached 编排 · 两级缓存</text>
+  <rect x="901" y="714" width="150" height="72" rx="8" fill="#10151D" stroke="#6B5222"/>
+  <text x="917" y="741" font-size="15" font-weight="600" fill="#FFC178">timertask</text>
+  <text x="917" y="764" font-size="11.5" fill="#9DA7B3">分片定时 · 心跳续约</text>
   <line x1="620" y1="802" x2="620" y2="820" stroke="#6E7681" stroke-width="1.5" marker-end="url(#arr-gray)"/>
   <rect x="32" y="830.0" width="1176" height="122" rx="12" fill="#191430" stroke="#463A7A"/>
   <text x="48" y="854.0" font-size="13" font-weight="700" fill="#C4AFFF">可观测性</text>
@@ -96,20 +96,20 @@
   <line x1="620" y1="954" x2="620" y2="972" stroke="#6E7681" stroke-width="1.5" marker-end="url(#arr-gray)"/>
   <rect x="32" y="982.0" width="1176" height="122" rx="12" fill="#151A20" stroke="#3D444D"/>
   <text x="48" y="1006.0" font-size="13" font-weight="700" fill="#C9D1D9">基础库</text>
-  <rect x="48" y="1018" width="487" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="64" y="1040" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 19 合 1</tspan></text>
-  <text x="64" y="1055" font-size="10" fill="#7D8590">errors · validator · stringx · slicex · enumx · convert · encoding · jsonrepair · httpjson</text>
-  <text x="64" y="1067" font-size="10" fill="#7D8590">mathx · pathx · pagination · ptrx · timex · uidgen · bloomx</text>
+  <rect x="48" y="1018" width="420" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
+  <text x="64" y="1040" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 20 合 1</tspan></text>
+  <text x="64" y="1055" font-size="10" fill="#7D8590">errors · stringx · slicex · enumx · convert · encoding · jsonrepair</text>
+  <text x="64" y="1067" font-size="10" fill="#7D8590">httpjson · mathx · pathx · pagination · ptrx · timex · bloomx</text>
   <text x="64" y="1079" font-size="10" fill="#7D8590">cache · container · contextx · bufiox · strmap · singleflighttest</text>
-  <rect x="555" y="1018" width="204" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="571" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">concurrency</text>
-  <text x="571" y="1068" font-size="11.5" fill="#9DA7B3">GoSafe · singleflight · retry</text>
-  <rect x="779" y="1018" width="218" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="795" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">core</text>
-  <text x="795" y="1068" font-size="11.5" fill="#9DA7B3">governance · lifecycle · IP 工具</text>
-  <rect x="1017" y="1018" width="150" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="1033" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">kitx</text>
-  <text x="1033" y="1068" font-size="11.5" fill="#9DA7B3">UUID/雪花 · 校验门面</text>
+  <rect x="488" y="1018" width="204" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
+  <text x="504" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">concurrency</text>
+  <text x="504" y="1068" font-size="11.5" fill="#9DA7B3">GoSafe · singleflight · retry</text>
+  <rect x="712" y="1018" width="248" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
+  <text x="728" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">core</text>
+  <text x="728" y="1068" font-size="11.5" fill="#9DA7B3">config · transport/chain · lifecycle</text>
+  <rect x="980" y="1018" width="150" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
+  <text x="996" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">kitx</text>
+  <text x="996" y="1068" font-size="11.5" fill="#9DA7B3">UUID/雪花 · 校验门面</text>
   <line x1="269" y1="348" x2="285" y2="348" stroke="#7D94F7" stroke-width="1.5" marker-end="url(#arr-blue)"/>
   <path d="M 773 310 C 673 299, 492 299, 352 310" fill="none" stroke="#7D94F7" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr-blue)"/>
   <line x1="222" y1="598" x2="238" y2="598" stroke="#4ADE9E" stroke-width="1.5" marker-end="url(#arr-teal)"/>
