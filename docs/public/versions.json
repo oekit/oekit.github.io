@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-18T06:04:02Z",
+  "generatedAt": "2026-10-18T13:15:39Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.13.0",
+      "latest": "v0.14.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -20,7 +20,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.14.0",
+      "latest": "v0.15.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -116,7 +116,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.11.0",
+      "latest": "v0.12.0",
       "nested": [
         {
           "path": "all",
@@ -166,7 +166,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.8.0",
+      "latest": "v0.9.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -194,7 +194,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.6.0",
+      "latest": "v0.6.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -229,7 +229,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.9.0",
+      "latest": "v0.10.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
