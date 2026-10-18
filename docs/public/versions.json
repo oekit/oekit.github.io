@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T16:49:52Z",
+  "generatedAt": "2026-10-18T17:46:56Z",
   "org": "oekit",
   "modules": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.16.0",
+      "latest": "v0.17.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -116,7 +116,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.13.0",
+      "latest": "v0.14.0",
       "nested": [
         {
           "path": "all",
@@ -156,7 +156,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.5.5",
+      "latest": "v0.6.0",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -229,7 +229,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.11.0",
+      "latest": "v0.12.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -253,7 +253,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.4.1",
+      "latest": "v0.4.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -299,7 +299,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.6.4",
+      "latest": "v0.7.0",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
