@@ -80,6 +80,44 @@ h.Use(mw.BearerTokenAuth(mw.WithBearerToken(token), mw.WithAuthSkipPaths("/healt
 > Kitex 服务经 `kitex/chainmw.ToKitex` 复用同一实现（panic 上报钩子已做隔离，
 > 监控 SDK panic 不影响业务）。凭证路径脱敏：`mw.WithAccessLogRedactPathPrefixes`。
 
+### 适用边界：响应体自管的服务（middleware v0.11.0+）
+
+标准栈面向**响应契约统一、由中间件包装**的服务（handler 用 `SuccessResp`/`ErrorResp`
+或返回裸 JSON，`ResponseMiddleware` 统一成 `{code, data, message, trace_id}`）。如果
+响应由各 handler 自己构造（与既有 API 对齐、自定义字段名、null 字段整个不出现等），
+不要让中间件接管响应——两条路：
+
+```go
+// 一键：TraceID → Recovery → AccessLog，响应构造权完全留在 handler
+h.Use(mw.DefaultMiddleware(mw.StackConfig{DisableResponseWrap: true})...)
+
+// 手拼：最小安全栈 + 按需挂访问日志
+h.Use(mw.MinimalMiddleware()...)
+h.Use(mw.AccessLogMiddleware())
+```
+
+访问日志要落到自家 `access_log` 表用 `WithAccessLogSink`——同一份记录（与日志同源、
+Path 已脱敏）旁路交给你的 DAO，`c` 可读鉴权中间件注入的 userId；sink 出错或 panic
+只记 Warn、不影响响应；`SkipPaths` 命中不触发。中间件也可按路由组装配（Hertz
+`Use`/`Group` 接受变参，栈切片直接 `...` 展开，组内再叠自家 JWT/ApiKey）：
+
+```go
+h.Use(mw.DefaultMiddleware(mw.StackConfig{
+    DisableResponseWrap: true,
+    SkipPaths:           []string{"/healthz", "/metrics"},
+    AccessLogOptions: []mw.AccessLogOption{mw.WithAccessLogSink(
+        func(ctx context.Context, c *app.RequestContext, rec mw.AccessRecord) error {
+            uid, _ := c.Get("userId")
+            return accessLogDAO.Save(ctx, uid, rec) // 落库失败不拖垮请求
+        })},
+})...)
+api := h.Group("/api", mw.DefaultMiddleware(cfg)...)
+user := api.Group("/user", auth.Required(svc))
+```
+
+无论哪种形态 **Recovery 都是硬性要求**（Hertz 无默认 PanicHandler，缺失则 panic 直接
+断连）；`mw.RecoveryMiddleware(mw.WithRecoveryErrorHandler(...))` 可换成自己的 500 响应体。
+
 ## 4. 服务注册：nns 一行接入
 
 ```go
