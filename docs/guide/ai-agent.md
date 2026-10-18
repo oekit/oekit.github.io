@@ -19,7 +19,7 @@ title: AI Agent 使用指南
   
 ```bash
 需要字符串/切片/类型转换/时间/ID？
-  └─ go get github.com/oekit/pkg     // 20 合 1 基础微工具（零第三方依赖）
+  └─ go get github.com/oekit/pkg     // 基础微工具集（零第三方依赖，按需 import）
   └─ go get github.com/oekit/kitx    // 标识与校验 + 非密码学哈希（uidgen/validator/hash）
 错误处理？服务形态用 pkg/errors（BizError 双码）；库形态用 stdlib errors/%w + 哨兵
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
