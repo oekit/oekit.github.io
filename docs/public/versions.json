@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T13:30:18Z",
+  "generatedAt": "2026-10-18T16:49:52Z",
   "org": "oekit",
   "modules": [
     {
@@ -67,7 +67,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.8.0",
+      "latest": "v0.9.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -116,7 +116,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.12.0",
+      "latest": "v0.13.0",
       "nested": [
         {
           "path": "all",
@@ -229,7 +229,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.10.0",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
