@@ -188,7 +188,7 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | 模块 | 版本 | 模块 | 版本 |
 |---|---|---|---|
 | pkg | v0.13.0 | registry | v0.4.1 |
-| concurrency | v0.13.1 | timertask | v0.1.9 |
+| concurrency | v0.14.0 | timertask | v0.1.9 |
 | logx | v0.7.0 | nns / nns-endpoint | v0.4.1 / v0.2.3 |
 | core / kitx | v0.8.0 / v0.2.0 | middleware | v0.9.0 |
 | metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.5.5 / v0.8.0 / v0.11.0 |

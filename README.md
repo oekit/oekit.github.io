@@ -7,9 +7,9 @@
 ## 结构（VitePress）
 
 - `docs/index.md` — 落地页（hero + 模块矩阵 + 快速开始）
-- `docs/guide/*.md` — 8 篇指南（Markdown 书写，TOC/侧边栏/上下篇自动生成）
-- `docs/about/*.md` — 平台契约、服务模板
-- `docs/public/` — 原样拷贝资产（llms.txt、旧路径重定向）
+- `docs/guide/*.md` — 9 篇指南（Markdown 书写，TOC/侧边栏/上下篇自动生成）
+- `docs/about/*.md` — 架构总览、平台契约（ekit 时期）、服务模板
+- `docs/public/` — 原样拷贝资产（llms.txt、versions.json、架构图 SVG、旧路径重定向）
 - `docs/.vitepress/config.mjs` — 导航与侧边栏配置
 
 ## 本地开发
@@ -32,20 +32,24 @@ npm run build    # 构建到 docs/.vitepress/dist
 
 ## 模块矩阵
 
-依赖严格自底向上（完整依赖表见各仓 README 的"矩阵总览"）：
+oekit 是 **24 个独立发版的 Go 模块仓库**（每仓独立 SemVer + 独立 CI）。依赖严格自底向上——上层随意组合，下层永不反向依赖（完整架构见 [docs/about/architecture.md](docs/about/architecture.md)，机器可读版本矩阵见 [docs/public/versions.json](docs/public/versions.json)）：
 
-| 层 | 模块 |
+| 能力层 | 模块 |
 |---|---|
-| L0 微工具库 / 基础件 | [errors](https://github.com/oekit/pkg/errors) · [validator](https://github.com/oekit/pkg/validator) · [stringx](https://github.com/oekit/pkg/stringx) · [slicex](https://github.com/oekit/pkg/slicex) · [enumx](https://github.com/oekit/pkg/enumx) · [convert](https://github.com/oekit/pkg/convert) · [encoding](https://github.com/oekit/pkg/encoding) · [jsonrepair](https://github.com/oekit/pkg/jsonrepair) · [httpjson](https://github.com/oekit/pkg/httpjson) · [mathx](https://github.com/oekit/pkg/mathx) · [pathx](https://github.com/oekit/pkg/pathx) · [pagination](https://github.com/oekit/pkg/pagination) · [ptrx](https://github.com/oekit/pkg/ptrx) · [timex](https://github.com/oekit/pkg/timex) · [uidgen](https://github.com/oekit/pkg/uidgen) · [cache](https://github.com/oekit/pkg/cache) · [concurrency](https://github.com/oekit/concurrency) · [logx](https://github.com/oekit/logx) · [core](https://github.com/oekit/core) |
-| L1 门面 / 注册发现 | [metrics](https://github.com/oekit/metrics) · [tracing](https://github.com/oekit/tracing) · [registry](https://github.com/oekit/registry) |
-| L2 领域件 | [data](https://github.com/oekit/data) · [gorm](https://github.com/oekit/gorm) · [redis](https://github.com/oekit/redis) · [httpx](https://github.com/oekit/httpx) · [timertask](https://github.com/oekit/timertask) · [middleware](https://github.com/oekit/middleware) · [nns](https://github.com/oekit/nns) · [nns-endpoint](https://github.com/oekit/nns-endpoint) |
-| L3 应用层 / 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) |
+| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) · [k8s](https://github.com/oekit/k8s) |
+| 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
+| 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
+| 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
+| 基础库 | [pkg](https://github.com/oekit/pkg)（20 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [kitx](https://github.com/oekit/kitx)（标识与校验 + hash）|
 
 ## 快速开始
 
 ```bash
-# 微工具集
+# 微工具集（20 合 1，零第三方依赖）
 go get github.com/oekit/pkg@latest
+
+# 标识与校验
+go get github.com/oekit/kitx@latest
 
 # HTTP 服务全家
 go get github.com/oekit/middleware github.com/oekit/hertz
@@ -56,53 +60,9 @@ go get github.com/oekit/middleware github.com/oekit/hertz
 | 旧路径（重定向仍可用） | 新路径 |
 |---|---|
 | `git.enjoye.top/enjoydream/ekit/…`（ekit 单体，冻结维护） | `github.com/oekit/…` |
-
-## License
-
-MIT — 见 [LICENSE](LICENSE)
-
-
-oekit 是一套按"框架耦合分层"组织的独立 Go 模块矩阵：**37 个活跃仓库（+1 归档），每仓独立发版（SemVer）、独立 CI、按需取用**。
-从 `errors` / `stringx` 这类零依赖微库，到 Hertz / Kitex 生态适配器，全部遵循同一套接口分层与开发规范。
-
-- 项目主页：**https://oekit.github.io/oekit/**
-- 组织：https://github.com/orgs/oekit/repositories
-- 协议：MIT
-
-## 名字由来
-
-| 字母 | 含义 |
-|---|---|
-| **o** | **Open** — 开源：MIT 协议，全部公开 |
-| **e** | **Easy** — 易用：一个 import 即用，微库零捆绑 |
-| **kit** | **Kit** — 工具集合：微库 → 门面 → 框架生态，同一套规范 |
-
-## 模块矩阵
-
-依赖严格自底向上（完整依赖表见各仓 README 的"矩阵总览"）：
-
-| 层 | 模块 |
-|---|---|
-| L0 微工具库 / 基础件 | [errors](https://github.com/oekit/pkg/errors) · [validator](https://github.com/oekit/pkg/validator) · [stringx](https://github.com/oekit/pkg/stringx) · [slicex](https://github.com/oekit/pkg/slicex) · [enumx](https://github.com/oekit/pkg/enumx) · [convert](https://github.com/oekit/pkg/convert) · [encoding](https://github.com/oekit/pkg/encoding) · [jsonrepair](https://github.com/oekit/pkg/jsonrepair) · [httpjson](https://github.com/oekit/pkg/httpjson) · [mathx](https://github.com/oekit/pkg/mathx) · [pathx](https://github.com/oekit/pkg/pathx) · [pagination](https://github.com/oekit/pkg/pagination) · [ptrx](https://github.com/oekit/pkg/ptrx) · [timex](https://github.com/oekit/pkg/timex) · [uidgen](https://github.com/oekit/pkg/uidgen) · [cache](https://github.com/oekit/pkg/cache) · [concurrency](https://github.com/oekit/concurrency) · [logx](https://github.com/oekit/logx) · [core](https://github.com/oekit/core) |
-| L1 门面 / 注册发现 | [metrics](https://github.com/oekit/metrics) · [tracing](https://github.com/oekit/tracing) · [registry](https://github.com/oekit/registry) |
-| L2 领域件 | [data](https://github.com/oekit/data) · [gorm](https://github.com/oekit/gorm) · [redis](https://github.com/oekit/redis) · [httpx](https://github.com/oekit/httpx) · [timertask](https://github.com/oekit/timertask) · [middleware](https://github.com/oekit/middleware) · [nns](https://github.com/oekit/nns) · [nns-endpoint](https://github.com/oekit/nns-endpoint) |
-| L3 应用层 / 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) |
-
-## 快速开始
-
-```bash
-# 微工具集
-go get github.com/oekit/pkg@latest
-
-# HTTP 服务全家
-go get github.com/oekit/middleware github.com/oekit/hertz
-```
-
-## 兼容性
-
-| 旧路径（重定向仍可用） | 新路径 |
-|---|---|
-| `git.enjoye.top/enjoydream/ekit/…`（ekit 单体，冻结维护） | `github.com/oekit/…` |
+| `github.com/oekit/<micro>`（16 微库，已删仓） | `github.com/oekit/pkg/<micro>` |
+| `github.com/oekit/pkg/uidgen`、`pkg/validator`（pkg v0.10.0 拆出） | `github.com/oekit/kitx/uidgen`、`kitx/validator` |
+| `github.com/oekit/redis` / `gorm` | `github.com/oekit/redisx` / `gormx` |
 
 ## License
 
