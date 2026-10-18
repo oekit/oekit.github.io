@@ -38,8 +38,9 @@ import (
 )
 
 db, err := gormx.Open(dialector, gormx.WithConnectionPool(10, 100, time.Hour))
-repo := gormrepo.NewGormRepository[Project](db)
-svc := crud.NewBaseService[Project, CreateProjectReq, UpdateProjectReq](repo)
+// 第二个类型参数 ID 为实体主键类型（gormx v0.6.0 起）：int64 自增 / string 文本主键 / UUID 均可
+repo := gormrepo.NewGormRepository[Project, int64](db)
+svc := crud.NewBaseService[Project, int64, CreateProjectReq, UpdateProjectReq](repo)
 ```
 
 > [!TIP] 提示

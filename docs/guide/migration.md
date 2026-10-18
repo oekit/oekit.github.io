@@ -191,9 +191,9 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | concurrency | v0.16.0 | timertask | v0.1.9 |
 | logx | v0.7.0 | nns / nns-endpoint | v0.4.1 / v0.2.3 |
 | core / kitx | v0.9.1 / v0.2.0 | middleware | v0.11.0 |
-| metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.5.5 / v0.9.0 / v0.13.0 |
+| metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.6.0 / v0.9.0 / v0.14.0 |
 | httpx | v0.6.1 | bootstrap | v0.6.2 |
-| hertz / kitex | v0.6.4 / v0.6.2 | workflow / kitex-examples | v0.3.1 / v0.1.17 |
+| hertz / kitex | v0.7.0 / v0.6.2 | workflow / kitex-examples | v0.3.1 / v0.1.17 |
 | etcdx / k8s / network | v0.1.5 / v0.1.2 / v0.5.4 | | |
 
 一次性拉齐这组经验证的兼容组合：`go get github.com/oekit/oekit@latest`（BOM 快照，

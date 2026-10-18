@@ -46,7 +46,7 @@ import (
     "github.com/oekit/data/crud"
 )
 
-repo := cached.NewRepository[User](rawRepo,
+repo := cached.NewRepository[User, int64](rawRepo,
     // 后端工厂：装饰器注入回源函数，后端形态与 TTL 由你决定——TTL 必须有限，
     // 它是删缓存失败时的唯一安全网
     func(src cache.SourceFunc[User]) cache.CacheAside[User] {
@@ -54,9 +54,9 @@ repo := cached.NewRepository[User](rawRepo,
             TTL: 10 * time.Minute, Source: src,
         }))
     },
-    cached.WithID[User](func(u *User) int64 { return u.ID }), // 嵌入 gormx.BaseModel 可省略
+    cached.WithID[User, int64](func(u *User) int64 { return u.ID }), // 嵌入 gormx.BaseModel 可省略
 )
-svc := crud.NewBaseService[User, CreateUserReq, UpdateUserReq](repo)
+svc := crud.NewBaseService[User, int64, CreateUserReq, UpdateUserReq](repo)
 ```
 
 接入后每个操作自动获得编排：
@@ -80,9 +80,9 @@ page := cache.NewLocalCache(cache.LocalConfig[cached.QueryPage[User]]{TTL: 5 * t
 versions := cache.NewLocalCache(cache.LocalConfig[string]{TTL: 24 * time.Hour}) // 版本键配长 TTL
 
 qc, err := cached.NewQueryCache[User](entityQ, page, versions, 5*time.Minute) // ttl 必须为正
-repo := cached.NewRepository[User](rawRepo, factory,
-    cached.WithID[User](idOf),
-    cached.WithQueryCache[User](qc),
+repo := cached.NewRepository[User, int64](rawRepo, factory,
+    cached.WithID[User, int64](idOf),
+    cached.WithQueryCache[User, int64](qc),
 )
 ```
 
