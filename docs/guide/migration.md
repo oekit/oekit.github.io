@@ -169,6 +169,7 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | `registry/registry`、`nns/nns`、`workflow/workflow`、`kitex/kitex`、`middleware/middleware`、`hertz/hertz` 双层路径 | 各模块根（`github.com/oekit/<mod>`） | registry/nns v0.4.0 · workflow v0.3.0 · kitex v0.6.0 · middleware/hertz 已收平 |
 | `logx.NewFileSink` 等根包 Sink | `github.com/oekit/logx/sink` 嵌套模块 | logx v0.4.0 |
 | `bootstrap.Run(Config{...})` | `bootstrap.New(With*...)` + `b.Run(fn)` + 就绪门 `app.Ready()` | bootstrap v0.4.0 / v0.6.0 |
+| 自实现 `concurrency.Breaker` 接口 | v0.13.0 起接口新增 `State()`（外部实现者需补方法；`NewBreaker` 用户无感）；同版行为变更：open 态不放流量（公式概率放行删除，仅 forcePass 探活 + 冷却期满半开探测） | concurrency v0.13.0 |
 
 ## API 变更对照（相对 ekit 单体）
 
@@ -186,12 +187,12 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 
 | 模块 | 版本 | 模块 | 版本 |
 |---|---|---|---|
-| pkg | v0.12.0 | registry | v0.4.1 |
-| concurrency | v0.12.0 | timertask | v0.1.9 |
+| pkg | v0.13.0 | registry | v0.4.1 |
+| concurrency | v0.13.1 | timertask | v0.1.9 |
 | logx | v0.7.0 | nns / nns-endpoint | v0.4.1 / v0.2.3 |
-| core / kitx | v0.8.0 / v0.1.1 | middleware | v0.9.0 |
-| metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.5.5 / v0.7.6 / v0.9.8 |
-| httpx | v0.5.0 | bootstrap | v0.6.2 |
+| core / kitx | v0.8.0 / v0.2.0 | middleware | v0.9.0 |
+| metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.5.5 / v0.8.0 / v0.11.0 |
+| httpx | v0.6.0 | bootstrap | v0.6.2 |
 | hertz / kitex | v0.6.4 / v0.6.2 | workflow / kitex-examples | v0.3.1 / v0.1.17 |
 | etcdx / k8s / network | v0.1.5 / v0.1.2 / v0.5.4 | | |
 

@@ -124,21 +124,29 @@ key 匹配：精确 → 前缀 → 全局 `""`。非法值 fail-closed；kitex �
 ## 9. 更多弹性原语（按需引入）
 
 - **分布式限流**：`github.com/oekit/redisx` 的 `ratelimit` 子包——Redis Lua 固定窗口/令牌桶（三态返回），故障自动降级本地令牌桶并探活回切
+- **分布式锁与信号量**：`redisx/distlock`——`Locker` 之外有 `Renew` 手动续期 / `WithAutoRenew` 覆盖 TryLock 自动续期（v0.8.0），以及 `Semaphore` ZSET 槽位信号量（Acquire 幂等刷新 + 原子清过期槽崩溃自愈；配额语义不做无 Redis 降级，fail-fast）
+- **防爆破锁**：`concurrency/ratelimit` 的 `Lockout`（v0.11.0，fail2ban 形态 keyed 锁定/成功 Reset）
 - **自适应熔断 / CPU 自适应降载 / 滑动窗口**：`github.com/oekit/concurrency` 的 `breaker` / `shedding` / `window` 子包（规范哨兵 `ErrCircuitOpen`）
 - HTTP 服务端过载保护：`oekit/middleware` 的 `SheddingMiddleware`（opt-in）
 
-### breaker 三态状态机使用规则（v0.9.0+）
+### breaker 三态状态机使用规则（v0.9.0+，v0.13.0 行为收敛）
 
 `concurrency/breaker` 自 v0.9.0 起是显式 closed/open/half-open 状态机，规则如下：
 
-- **触发**：错误率超阈值（SRE 公式接受预算耗尽）切入 open；`WithConsecutiveFailures(n)`
-  连续失败计数型与速率型并联（补低 QPS「连挂」信号，对齐 Envoy consecutive_5xx）
+- **触发**：速率型（SRE 公式：错误率超阈值即接受预算耗尽；**v0.13.0 起公式退役为
+  closed→open 触发器**，不再参与熔断期放行）与计数型 `WithConsecutiveFailures(n)`
+  （连续失败即熔断，对齐 Envoy consecutive_5xx，补低 QPS「连挂」信号）并联，任一命中切入 open
+- **熔断期流量（v0.13.0 行为变更）**：open 态**不放流量**——仅两条放行通道：
+  forcePass 强制探活（缺省 1s）+ 冷却期满的半开探测，其余一律拒绝并记丢弃样本。
+  公式概率放行与「公式愈合自动恢复」已删除——`WithConsecutiveFailures(3)` 触发后
+  流量真停（旧版公式短路会让计数型触发形同虚设）
 - **冷却与探测**：冷却期（`WithCooldown`，缺省回落 `WithProbeTimeout` 缺省 1m）期满后
-  首个放行请求即半开探测——绕过概率公式必达；探测成功关闸并清窗（旧失败样本不得
-  触发立即重开），失败重开重置计时；超 `WithProbeTimeout` 未回报视为失联自动回收，
-  可 `AbandonGen` 显式放弃
+  首个放行请求即半开探测；探测成功关闸并清窗（旧失败样本不得触发立即重开），
+  失败重开重置计时；超 `WithProbeTimeout` 未回报视为失联自动回收，可 `AbandonGen` 显式放弃
 - **代绑定**（`GenBreaker` 扩展接口，`Breaker` 零改动）：代仅在探测放行时自增，
   陈旧代（gen < 当前代）回报整体作废——一次调用的结果不会被算进另一次调用的账；
   **开放期普通失败只记窗口、不后移冷却计时**，恢复时间可预测
-- 兼容：`Allow`/`Do`/`DoWithAcceptable`/`NewBreaker` 签名与行为不变；LLM 等长尾调用
-  场景用 `WithCooldown`(业务冷却) + `WithProbeTimeout`(在途上界) 分开配（如 5m/60s）
+- **兼容面**：`Allow`/`Do`/`DoWithAcceptable`/`NewBreaker` 调用方签名不变
+  （v0.13.0 仅新增 `State()`/`State` 枚举可观测出口——**外部自实现 `Breaker` 接口的
+  需补实现**，库内构造的用户无感）；LLM 等长尾调用场景用 `WithCooldown`(业务冷却)
+  + `WithProbeTimeout`(在途上界) 分开配（如 5m/60s）

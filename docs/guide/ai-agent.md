@@ -20,19 +20,21 @@ title: AI Agent 使用指南
 ```bash
 需要字符串/切片/类型转换/时间/ID？
   └─ go get github.com/oekit/pkg     // 20 合 1 基础微工具（零第三方依赖）
-  └─ go get github.com/oekit/kitx    // 标识与校验（uidgen/validator）
+  └─ go get github.com/oekit/kitx    // 标识与校验 + 非密码学哈希（uidgen/validator/hash）
 错误处理？服务形态用 pkg/errors（BizError 双码）；库形态用 stdlib errors/%w + 哨兵
 需要日志？ ── github.com/oekit/logx      // WithService + Ctx* 方法
 要发 HTTP 请求？
   ├─ 调内部服务（要发现/熔断/重试/LB）→ oekit/httpx + oekit/nns
+  ├─ 存量 net/http 代码一行接入治理 → oekit/httpx 的 NewRoundTripper/StdClient（v0.6.0）
   └─ 只是带 JSON 解析的 HTTP      → pkg/httpjson（零依赖）
 搭 HTTP 服务？ ── oekit/middleware + oekit/hertz + oekit/bootstrap
 搭 RPC 服务？ ── oekit/kitex（+ oekit/nns + oekit/nns-endpoint）
-要数据库？ ── oekit/gormx（CRUD Service）；要 Redis？ ── oekit/redisx（+ 分布式限流 ratelimit）
+要数据库？ ── oekit/gormx（CRUD Service）
+要 Redis？ ── oekit/redisx（+ 分布式限流 ratelimit / 分布式锁·信号量 distlock）
 要缓存编排？ ── oekit/data（cache/cached 写后失效/twolevel 两级广播）
 要 etcd？ ── oekit/etcdx（客户端/注册发现/分布式锁）；要 K8s 客户端或 Lease 选主？ ── oekit/k8s
 要限流/熔断/降载？
-  ├─ 分布式限流 → oekit/redisx 的 ratelimit 子包
+  ├─ 分布式限流 → oekit/redisx 的 ratelimit 子包；防爆破锁 → oekit/concurrency 的 Lockout
   ├─ 进程内限流/三态自适应熔断/CPU 降载/滑动窗口 → oekit/concurrency（ratelimit/breaker/shedding）
   └─ HTTP 服务端过载保护 → oekit/middleware 的 SheddingMiddleware（opt-in）
 ```

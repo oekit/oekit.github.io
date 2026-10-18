@@ -137,9 +137,10 @@ defer tlc.Close(ctx)
 
 ## 依赖版本
 
-- `github.com/oekit/data` ≥ **v0.9.0**（本指南语义面；当前 latest v0.9.8——v0.9.0 起
+- `github.com/oekit/data` ≥ **v0.9.0**（本指南语义面；当前 latest v0.11.0——v0.9.0 起
   `cache`/`cachetest` 回归纯 re-export 门面，原生实现只剩 cached/twolevel 两个子包）
-- 配套：pkg ≥ v0.6.0（BatchGetter）、redisx ≥ v0.7.0（RedisCache.MGet 管道化）
+- 配套：pkg ≥ v0.13.0（BatchGetter + cachetest 契约时钟注入 `RunWithClock`）、
+  redisx ≥ v0.8.0（RedisCache.MGet 管道化 + distlock Semaphore 信号量）
 
 安装一律 `go get github.com/oekit/data@latest`；版本矩阵见站点
 [versions.json](/versions.json)。
