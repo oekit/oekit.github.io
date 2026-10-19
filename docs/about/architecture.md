@@ -22,7 +22,7 @@ oekit 是 24 个独立发版的 Go 模块仓库（每仓独立 SemVer + 独立 C
 
 - **服务发现**：`hertz` / `kitex` → `nns` → `registry`（Nacos 实现 + 多级降级链）
 - **就绪门与延迟注册**：`hertz.RunServer` / `kitex.RunServer`（`WithOnReady`，全部 HostPort TCP 探活可建连后才回调）→ `bootstrap.App.Ready()` → `bootstrap/nacos` 此刻才执行 NNS 注册；关停序 nns 反注册 → `server.Shutdown`（对齐 kratos Stop）
-- **端点弹性**：`nns-endpoint` → `httpx`（per-service 熔断 + 换实例重试，与 httpx 的 breaker-outside-retry 层次一致）；熔断语义统一由 `concurrency/breaker` 三态状态机（探测成功关闸清窗、代绑定防陈旧回报记账、冷却期独立于探测时限）供给
+- **端点弹性**：`nns-endpoint` → `httpx`（per-service 熔断 + 换实例重试，与 httpx 的 breaker-outside-retry 层次一致）；httpx / nns-endpoint 熔断器实现基于 gobreaker；`concurrency/breaker` 提供独立的 adaptive 熔断状态机与规范哨兵 `ErrCircuitOpen`（httpx 仅别名该哨兵，不复用其状态机）。**两套状态机数值序不同（gobreaker: Closed=0/HalfOpen=1/Open=2；concurrency/breaker: Closed=0/Open=1/HalfOpen=2），指标标签统一经 metrics/resilience 显式映射，不跨模块传裸 int。**
 - **中间件一份逻辑两端跑**：`core/chain`（stdlib 中间件链）+ `core/transport`（协议无关传输上下文）→ `middleware/chainmw`（Recovery 带 panic 隔离上报 / AccessLog skip+redact / MetadataPropagate）→ hertz 直用、kitex 经 `kitex/chainmw.ToKitex` 桥接
 - **数据访问**：`hertz/crudh` → `gormx`（泛型 CRUD Handler / 事务防丢更新）；`redisx` → `data`（CacheAside 接口与契约套件）；`data` 为门面（八子包 re-export pkg 与各子仓，cached/twolevel 为原生子包：写后失效缓存编排 + 两级缓存与失效广播）
 - **优雅关停**：`hertz.RunServer` / `kitex.RunServer` → `bootstrap` 组合根（就绪门 → 排空连接 → 释放资源；Manager 正身 `core/lifecycle`，`logx/shutdown` 仅余 Deprecated 别名）
