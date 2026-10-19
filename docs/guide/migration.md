@@ -47,6 +47,21 @@ title: 迁移指南
 > 是 `github.com/oekit/hertz/sse`，不是 `github.com/oekit/hertz/hertz/sse`。
 > bootstrap 的 `bootstrap/nacos`、`bootstrap/obs`、`logx/sink` 等是**独立嵌套模块**
 > （有自己的 tag），不是双层目录残留。
+>
+> **全矩阵共 7 个嵌套模块**（各自独立发版，import 路径即 module 路径）：
+> `bootstrap/nacos`、`bootstrap/obs`、`logx/sink`、`logx/hlog`、`logx/hertzlog`、
+> `logx/kitexlog`、`timertask/redis`。它们是**依赖隔离**的载体——只 import 根模块的
+> 消费者不会被拉入这些重依赖（`logx/sink` 隔离 lumberjack、`bootstrap/nacos` 隔离
+> 约 50 个阿里云 SDK、`timertask/redis` 隔离 go-redis）。需要时才单独装：
+>
+> ```bash
+> go get github.com/oekit/logx/sink@latest
+> go get github.com/oekit/bootstrap/nacos@latest
+> go get github.com/oekit/timertask/redis@latest
+> ```
+>
+> 完整 7 条（含各自职责与安装行）见 [llms.txt](https://oekit.github.io/llms.txt) 的
+> 「嵌套模块」段。
 
 ### bootstrap.Run 删除改写（v0.4.0）
 
@@ -172,6 +187,7 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | 自实现 `concurrency.Breaker` 接口 | v0.13.0 起接口新增 `State()`（外部实现者需补方法；`NewBreaker` 用户无感）；同版行为变更：open 态不放流量（公式概率放行删除，仅 forcePass 探活 + 冷却期满半开探测） | concurrency v0.13.0 |
 | `timertask.NewRedisBackend` / `RedisBackend` / `ShardManager` / `NewShardManager` | 嵌套模块 `github.com/oekit/timertask/redis`（`redis.New(...)`） | timertask v0.2.0（BREAKING——Redis 后端自根包迁出为嵌套模块；根包 require 仅 pkg，`import timertask` 与 `import timertask/local` 的模块依赖面均无 redis，纯 stdlib 嵌入式场景可用；`Task`/`Handler`/全部 `With*` 选项与 `LocalBackend` **一行不动**） |
 | `data/timertask` 壳的 `RedisBackend` / `NewRedisBackend` 等 4 个转发符号 | 直接依赖 `github.com/oekit/timertask/redis` | data v0.15.0（门面跟版：壳随源仓同步，Redis 形态不再经 data 门面转发） |
+| `kitex.NewLogger`（Kitex klog→logx 桥接，在 `github.com/oekit/kitex` 仓内） | `github.com/oekit/logx/kitexlog` 的 `kitexlog.NewLogger` | logx v0.2.0（**非 breaking 的可选迁移**——旧 `kitex.NewLogger` 保留 Deprecated 别名委托，不换也能跑；但只想要日志桥接的用户迁到 `logx/kitexlog` 后**不必再 import 重型 kitex 模块**，依赖图少一整个 kitex） |
 
 ## API 变更对照（相对 ekit 单体）
 
