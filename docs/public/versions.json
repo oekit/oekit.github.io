@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T16:15:33Z",
+  "generatedAt": "2026-10-19T17:10:26Z",
   "org": "oekit",
   "modules": [
     {
@@ -62,8 +62,20 @@
           "line": "`ParseLogLevel` 签名改为 `(Level, error)`（#13：原 `*Level` 失败为 nil，漏判空会在 LOG_LEVEL 配错时远端解引用 panic）；新增 `ParseLogLevelOr(s, def)`——「配错退默认」 免判空形态。矩阵内无外部消费方（已核对），BREAKING 影响面为矩阵外"
         },
         {
+          "version": "v0.4.0",
+          "line": "**refactor(shutdown)**：`Manager` 原语迁至 [oekit/core](https://github.com/oekit/core) `lifecycle` 包（与 `lifecycle.App` 契约同域，lifecycle 零外部依赖）。 `logx/shutdown` 保留类型别名转发一个版本（Deprecated），**v0.5.0 删除**； 请迁移到 `g"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "**refactor(sink)**：`Sink`/`MultiSink`/`FileSink`/`RotatingSink`/`RotatingOption` 整体迁至嵌套模块 `github.com/oekit/logx/sink`（含 lumberjack）。根包自此 **纯 stdlib、零外部依赖**，不再向只用门面的消费者传递 lumberjack （[#7](https://gith"
+        },
+        {
           "version": "v0.3.0",
           "line": "**breaking / behavior change**：`NewSlogLogger` 尊重 `LOG_LEVEL`（原先忽略）。 级别优先级：`WithLevel` > `LOG_LEVEL` > 默认 `LevelInfo`。裸调 `NewSlogLogger(svc)` 的消费方在部署了 `LOG_LEVEL=warn|error` 时会过滤 Info/Debug——**审计/合规类 "
+        },
+        {
+          "version": "v0.2.0",
+          "line": "**refactor**：本仓改为**嵌套多模块**布局——`hlog`/`hertzlog`/`kitexlog` 三个桥接 子包各自持有独立 go.mod（module `github.com/oekit/logx/hlog` / `.../hertzlog` / `.../kitexlog`，同仓不同模块，先例 oekit/bootstrap 的 `nacos/`、`obs/`）。 **im"
         },
         {
           "version": "v0.1.8",
@@ -414,6 +426,14 @@
         {
           "version": "v0.5.0",
           "line": "**核心包 `mw` 提升到模块根**：import 从 `github.com/oekit/middleware/middleware` 改为 `github.com/oekit/middleware`（包名仍为 `mw`）"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "**删除重复层** `middleware/contrib/`（与根 `contrib/` 字节级重复的副本）"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "**删除废弃转发层** `middleware/traceid/hmw/`（原 Deprecated 兼容层）"
         }
       ]
     },
