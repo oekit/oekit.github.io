@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T03:46:21Z",
+  "generatedAt": "2026-10-19T05:52:22Z",
   "org": "oekit",
   "modules": [
     {
@@ -34,7 +34,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.7.0",
+      "latest": "v0.7.1",
       "nested": [
         {
           "path": "hertzlog",
@@ -53,7 +53,9 @@
           "latest": "v0.1.0"
         }
       ],
-      "matrixDeps": [],
+      "matrixDeps": [
+        "core"
+      ],
       "breakingIndex": [
         {
           "version": "v0.3.0",
@@ -190,7 +192,6 @@
       "nested": [],
       "matrixDeps": [
         "concurrency",
-        "core",
         "logx",
         "registry"
       ],
@@ -202,7 +203,6 @@
       "nested": [],
       "matrixDeps": [
         "concurrency",
-        "core",
         "logx",
         "metrics",
         "pkg",
@@ -278,13 +278,10 @@
       "latest": "v0.2.4",
       "nested": [],
       "matrixDeps": [
-        "concurrency",
-        "core",
         "httpx",
         "logx",
         "metrics",
         "nns",
-        "pkg",
         "registry"
       ],
       "breakingIndex": []
@@ -304,6 +301,7 @@
       ],
       "matrixDeps": [
         "concurrency",
+        "core",
         "logx"
       ],
       "breakingIndex": []
@@ -360,13 +358,9 @@
       "nested": [],
       "matrixDeps": [
         "bootstrap",
-        "concurrency",
         "core",
         "kitex",
         "logx",
-        "metrics",
-        "nns",
-        "pkg",
         "registry",
         "tracing"
       ],
