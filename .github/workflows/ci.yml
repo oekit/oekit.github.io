@@ -1,6 +1,13 @@
 name: CI
 
+# 触发条件说明（2026-10-20 补）：
+# 原来只有 pull_request + workflow_dispatch，**push 到 main 不触发**——站点是发布物，
+# 「发布出去的这一刻内容对不对」才是门禁该管的事；合入后无人守 = 门禁形同虚设
+# （别人改了模块仓、或 bot 直接推 main，漂移都没人拦）。content job 成本极低
+# （clone 两个仓 + 跑一个 py 脚本，约 1 分钟），补上 push:main。
 on:
+  push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -23,3 +30,24 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build   # VitePress 构建内建死链检查，失败即挡
+
+  # 站点**内容正确性**门禁（2026-10-20 新增）。
+  # build job 只做死链检查——文案数字错、llms.txt 漏模块条目，它一律放行。
+  # 判据独立：期望值来自 matrix-tools 的模块登记表（matrix.py 的 MODULES），
+  # 不是站点自己的口径；模块仓的 go.mod 实数由 matrix-tools 仓的 audit.yml 侧
+  # 独立 oracle 复核。
+  content:
+    name: Content gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Checkout matrix-tools
+        uses: actions/checkout@v7
+        with:
+          repository: oekit/matrix-tools
+          path: matrix-tools
+
+      - name: 站点文案口径 + llms.txt 模块覆盖
+        run: python3 matrix-tools/scripts/verify_site_copy.py --site .
