@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T15:24:36Z",
+  "generatedAt": "2026-10-19T16:15:33Z",
   "org": "oekit",
   "modules": [
     {
@@ -254,7 +254,32 @@
         "logx",
         "pkg"
       ],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.6.0",
+          "line": "**BREAKING**: crud/gormrepo 主键类型泛型化（#7 问题 1）——接口全链路加 `ID comparable`"
+        },
+        {
+          "version": "v0.6.0",
+          "line": "crud：`Reader[T]`/`Writer[T]`/`Repository[T]`/`TxRepository[T]`/`Service[T, C, U]` → `[T, ID comparable]`；`BaseService`/`NewBaseService`/Set*Hook 签名同步（`id int64` → `id ID`）。 存量调用点机械迁移：`NewBaseService[T"
+        },
+        {
+          "version": "v0.6.0",
+          "line": "gormrepo：`GormRepository[T]` → `[T, ID comparable]`；`WithQueryDecorator`/`WithScopeRequired` 维持 `[T]`（decorator 不接触 ID，无需迁移）"
+        },
+        {
+          "version": "v0.6.0",
+          "line": "**行为加固（同波）**：GetByID/Delete/BatchDelete 主键条件从 GORM 内联值改为 `clause.PrimaryColumn`（schema 解析 + 参数化）——GORM 将内联非数字 string 按 SQL 片段解析， 内联形态对文本主键是注入面/语法错误；int64 路径 SQL 语义不变；GetByID 未命中错误格式 `id=%d` → `id=%v`"
+        },
+        {
+          "version": "v0.6.0",
+          "line": "根包 `model.go`（BaseModel 系列）与 `singleton.go`（Identifier）**保留 int64**： 自增主键便捷基类，文本主键项目自定义实体 struct 即可"
+        },
+        {
+          "version": "v0.6.0",
+          "line": "新增文本主键回归测试（string PK 全路径：GetByID/UpdateFields/Delete/BatchDelete/ BaseService 事务路径/-race）"
+        }
+      ]
     },
     {
       "module": "redisx",
@@ -528,6 +553,30 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.7.0",
+          "line": "**BREAKING**: crudh 主键类型泛型化（跟随 gormx v0.6.0 `[T, ID comparable]`，gormx#7 问题 1）"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "`Handler[T, C, U]` → `Handler[T, ID comparable, C, U]`；`HandlerOption`/`WithSortableColumns`/ `NewHandler` 签名跟随（`crud.Service[T, ID, C, U]`）"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "新增 `WithIDParser(fn func(string) (ID, error))`：路径参数 → ID 解析注入"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "缺省解析（不注入时）：int 系主键 `strconv.ParseInt`（宽度随 ID 类型，int64 与 v0.6 之前 行为一致）、string 主键直通；其余 comparable 类型必须显式注入，缺省解析失败按 400 拒绝 （fail-closed）"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "存量 int64 调用点机械迁移：`NewHandler[Item, C, U]` → `NewHandler[Item, int64, C, U]`； 文本主键项目传恒等解析 `WithIDParser[Doc, string, C, U](func(s string) (string, error) { return s, nil })`"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "新增文本主键端到端测试（hex 串路径参数经 WithIDParser 直通 + Get/Delete/404 链）与 `defaultParseID` 单测（int64/string 双形态）"
+        },
         {
           "version": "v0.5.1",
           "line": "**核心包 `hertz` 提升到模块根**：import 从 `github.com/oekit/hertz/hertz` 改为 `github.com/oekit/hertz`（包名仍为 `hertz`），消除双层目录"
