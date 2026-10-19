@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T00:38:48Z",
+  "generatedAt": "2026-10-19T03:46:21Z",
   "org": "oekit",
   "modules": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.17.0",
+      "latest": "v0.17.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -83,7 +83,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.2.0",
+      "latest": "v0.2.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -92,7 +92,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.7",
+      "latest": "v0.1.8",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -101,7 +101,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.2.2",
+      "latest": "v0.2.3",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -110,7 +110,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.4.1",
+      "latest": "v0.4.2",
       "nested": [],
       "matrixDeps": [
         "core",
@@ -120,7 +120,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.14.0",
+      "latest": "v0.14.1",
       "nested": [
         {
           "path": "all",
@@ -160,7 +160,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.6.0",
+      "latest": "v0.6.1",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -170,7 +170,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.9.0",
+      "latest": "v0.9.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -186,7 +186,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.1.5",
+      "latest": "v0.1.6",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -198,7 +198,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.0",
+      "latest": "v0.8.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -218,7 +218,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.5.4",
+      "latest": "v0.5.5",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -229,7 +229,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.1.9",
+      "latest": "v0.1.10",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -239,7 +239,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.12.0",
+      "latest": "v0.12.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -254,7 +254,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.2",
+      "latest": "v0.1.3",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -263,7 +263,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.4.2",
+      "latest": "v0.4.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -275,7 +275,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.3",
+      "latest": "v0.2.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -284,21 +284,22 @@
         "logx",
         "metrics",
         "nns",
+        "pkg",
         "registry"
       ],
       "breakingIndex": []
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.2",
+      "latest": "v0.6.3",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.2"
+          "latest": "v0.3.3"
         },
         {
           "path": "obs",
-          "latest": "v0.2.7"
+          "latest": "v0.2.8"
         }
       ],
       "matrixDeps": [
@@ -309,7 +310,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.7.0",
+      "latest": "v0.7.1",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -329,7 +330,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.6.2",
+      "latest": "v0.6.3",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -345,7 +346,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.1",
+      "latest": "v0.3.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -355,7 +356,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.17",
+      "latest": "v0.1.18",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
