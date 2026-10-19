@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T17:47:39Z",
+  "generatedAt": "2026-10-19T18:33:57Z",
   "org": "oekit",
   "modules": [
     {
@@ -110,7 +110,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.8",
+      "latest": "v0.1.9",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -334,7 +334,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.1",
+      "latest": "v0.8.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -519,11 +519,11 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.4"
+          "latest": "v0.3.5"
         },
         {
           "path": "obs",
-          "latest": "v0.2.8"
+          "latest": "v0.2.9"
         }
       ],
       "matrixDeps": [
