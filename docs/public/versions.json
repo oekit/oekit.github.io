@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-18T18:38:38Z",
+  "generatedAt": "2026-10-19T00:20:13Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.14.0",
+      "latest": "v0.15.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -198,17 +198,23 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.6.1",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
         "core",
         "logx",
         "metrics",
+        "pkg",
         "registry",
         "tracing"
       ],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.8.0",
+          "line": "- **breaking(包删除)**：移除 v0.7.0 内置的 `httpx/urlguard` 独立实现"
+        }
+      ]
     },
     {
       "module": "network",
