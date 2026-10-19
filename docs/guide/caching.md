@@ -131,15 +131,20 @@ defer tlc.Close(ctx)
 > >    （丢一条广播即无界陈旧）
 > > 3. **返回值一律只读**——缓存命中返回的是后端持有的引用（LocalCache 零拷贝），
 > >    改写会污染缓存并与并发读构成 data race
+> >    （需要「可随意改写的副本」时开 `LocalConfig.CloneOnRead`——pkg v0.16.0 起；
+> >    缺省关闭，仍是零拷贝共享引用）
 > > 4. **失效是 best-effort**——写库成功后删缓存失败不回滚写，错误走 `WithOnError` 上报
 > > 5. **并发回填存在窗口期竞态**（miss→回源旧值→并发写→回填旧值），cache-aside 固有，
 > >    由 TTL 兜底
 
 ## 依赖版本
 
-- `github.com/oekit/data` ≥ **v0.9.0**（本指南语义面；当前 latest v0.11.0——v0.9.0 起
+- `github.com/oekit/data` ≥ **v0.15.0**（本指南语义面；当前 latest v0.15.0——v0.9.0 起
   `cache`/`cachetest` 回归纯 re-export 门面，原生实现只剩 cached/twolevel 两个子包）
-- 配套：pkg ≥ v0.13.0（BatchGetter + cachetest 契约时钟注入 `RunWithClock`）、
+- 配套：pkg ≥ v0.16.0（BatchGetter + cachetest 契约时钟注入 `RunWithClock`；
+  v0.16.0 起 LocalCache 可选形状——`NoBackgroundSweep` 无后台清扫 goroutine +
+  `CloneOnRead` 读命中返回副本 + `EvictPolicy` 可选 LRU + `GetEx` 命中标志，
+  新能力以可选接口 `Sweeper`/`HitGetter` 外置，未加入 `Cache[T]`）、
   redisx ≥ v0.8.0（RedisCache.MGet 管道化 + distlock Semaphore 信号量）
 
 安装一律 `go get github.com/oekit/data@latest`；版本矩阵见站点

@@ -170,6 +170,8 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | `logx.NewFileSink` 等根包 Sink | `github.com/oekit/logx/sink` 嵌套模块 | logx v0.4.0 |
 | `bootstrap.Run(Config{...})` | `bootstrap.New(With*...)` + `b.Run(fn)` + 就绪门 `app.Ready()` | bootstrap v0.4.0 / v0.6.0 |
 | 自实现 `concurrency.Breaker` 接口 | v0.13.0 起接口新增 `State()`（外部实现者需补方法；`NewBreaker` 用户无感）；同版行为变更：open 态不放流量（公式概率放行删除，仅 forcePass 探活 + 冷却期满半开探测） | concurrency v0.13.0 |
+| `timertask.NewRedisBackend` / `RedisBackend` / `ShardManager` / `NewShardManager` | 嵌套模块 `github.com/oekit/timertask/redis`（`redis.New(...)`） | timertask v0.2.0（BREAKING——Redis 后端自根包迁出为嵌套模块；根包 require 仅 pkg，`import timertask` 与 `import timertask/local` 的模块依赖面均无 redis，纯 stdlib 嵌入式场景可用；`Task`/`Handler`/全部 `With*` 选项与 `LocalBackend` **一行不动**） |
+| `data/timertask` 壳的 `RedisBackend` / `NewRedisBackend` 等 4 个转发符号 | 直接依赖 `github.com/oekit/timertask/redis` | data v0.15.0（门面跟版：壳随源仓同步，Redis 形态不再经 data 门面转发） |
 
 ## API 变更对照（相对 ekit 单体）
 

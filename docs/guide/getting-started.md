@@ -8,7 +8,7 @@ title: 快速开始
 
 ### 姿势一：只要一个微库
 
-oekit 的 20 个基础工具包合在 [oekit/pkg](https://github.com/oekit/pkg) 一个 module 里（零第三方依赖，仅标准库），Go 按包编译，import 哪个用哪个：
+oekit 的 23 个基础工具包合在 [oekit/pkg](https://github.com/oekit/pkg) 一个 module 里（零第三方依赖，仅标准库），Go 按包编译，import 哪个用哪个：
 
 ```bash
 go get github.com/oekit/pkg@latest
