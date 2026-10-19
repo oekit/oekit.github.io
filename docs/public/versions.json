@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T16:54:11Z",
+  "generatedAt": "2026-10-19T17:47:39Z",
   "org": "oekit",
   "modules": [
     {
@@ -176,7 +176,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.15.0",
+      "latest": "v0.16.0",
       "nested": [
         {
           "path": "all",
@@ -515,11 +515,11 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.3",
+      "latest": "v0.6.4",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.3"
+          "latest": "v0.3.4"
         },
         {
           "path": "obs",
