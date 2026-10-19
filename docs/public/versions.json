@@ -1,13 +1,33 @@
 {
-  "generatedAt": "2026-10-19T18:33:57Z",
+  "generatedAt": "2026-10-19T19:12:25Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.16.0",
+      "latest": "v0.17.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
+        {
+          "version": "v0.17.0",
+          "line": "原实现 `keep = min(Keep, n/2)` 的收缩逻辑，在 `n ≤ 2*Keep` 时让**头尾两段保留位 首尾相接覆盖整段原文**——掩码主体 `****` 只是插在中间的装饰，原值被完整留在输出里"
+        },
+        {
+          "version": "v0.17.0",
+          "line": "实测（Keep=4）：`Mask(\"01234567\")` → `0123«probe:****»4567`（8 个字符原文全部可见）； `Mask(\"0123\")` → `01«probe:****»23`（4 个字符原文全部可见）——**脱敏原语等于没生效**"
+        },
+        {
+          "version": "v0.17.0",
+          "line": "修法：对齐同族 `guardx/logredact.MaskHint` 的 `HintMinLenRatio=4` 口径—— 命中长度 `n < Keep*4` 一律**整段全量打码**（不做头尾保留）；`n >= Keep*4` 才保留首尾各 Keep 个"
+        },
+        {
+          "version": "v0.17.0",
+          "line": "判据是**运行期按实际命中长度**判定（不是声明比声明）：`n=4/7/8` 全掩、`n=16` 起保留"
+        },
+        {
+          "version": "v0.17.0",
+          "line": "影响：依赖旧短值输出的消费方需同步——「留 8 藏 1 等于没藏」"
+        },
         {
           "version": "v0.10.0",
           "line": "**BREAKING** refactor!: `uidgen`、`validator` 两包拆分至新仓 [kitx](https://github.com/oekit/kitx)——机械替换 import 即可迁移：`github.com/oekit/pkg/uidgen` → `github.com/oekit/kitx/uidgen`、`github.com/oekit/pkg/valida"
@@ -384,7 +404,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.0",
+      "latest": "v0.2.1",
       "nested": [
         {
           "path": "redis",
@@ -396,8 +416,12 @@
       ],
       "breakingIndex": [
         {
+          "version": "v0.2.1",
+          "line": "v0.2.0 的 Breaking 段写「改用 `github.com/oekit/timertask/redis`（import 路径替换即可，API 不变）」 ——**这句是错的**：`timertask/redis` 不是根包下的子目录，它是**独立的 Go module** （有自己的 go.mod、自己的 tag `redis/v0.2.0`）。消费方只改 import 路径、**不新增"
+        },
+        {
           "version": "v0.2.0",
-          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（import 路径替换即可，API 不变）； 根包保留 `Task`/`Handler`/全部 `With*` 选项，既有调用点一行不动"
+          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是**独立 m"
         },
         {
           "version": "v0.2.0",
