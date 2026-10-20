@@ -9,7 +9,7 @@ title: AI Agent 使用指南
   
 | 入口 | 地址 | 用途 |
 |---|---|---|
-| llms.txt | [oekit.github.io/llms.txt](https://oekit.github.io/llms.txt) | 全矩阵机器可读索引：32 个发版单元一句话说明（24 个独立发版的 Go 模块 + 7 个嵌套模块）+ 全部文档链接，一次抓取即建立全局认知 |
+| llms.txt | [oekit.github.io/llms.txt](https://oekit.github.io/llms.txt) | 全矩阵机器可读索引：32 个发版单元一句话说明（24 个独立发版的 Go 模块 + 7 个嵌套模块 + 1 个 BOM 伞仓 `oekit`）+ 全部文档链接，一次抓取即建立全局认知 |
 | AGENTS.md | 每个仓库根目录 | 该仓的权威开发规范：错误处理/日志/并发的硬规则 + 本仓包清单。改代码前必读 |
 | go doc | `go doc github.com/oekit/` | 接口签名以源码为准；每仓均带测试，可疑用法直接看 _test.go |
 
