@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T23:03:58Z",
+  "generatedAt": "2026-10-20T01:33:29Z",
   "org": "oekit",
   "modules": [
     {
@@ -156,6 +156,10 @@
         {
           "version": "v0.2.0",
           "line": "`gormotel` 删除 `WithoutServerAddress` 选项（server.address 改为 `WithServerAddress` 显式配置）"
+        },
+        {
+          "version": "v0.2.0",
+          "line": "`instrumentation/redis` → `redisotel`；`instrumentation/httpotel` → `httpotel`"
         }
       ]
     },
@@ -565,6 +569,10 @@
           "line": "**核心包提升到模块根**：import 从 `github.com/oekit/bootstrap/bootstrap` 改为 `github.com/oekit/bootstrap`（包名仍为 `bootstrap`）"
         },
         {
+          "version": "v0.5.0",
+          "line": "**healthz 路径同步**：`github.com/oekit/bootstrap/bootstrap/healthz` → `github.com/oekit/bootstrap/healthz`"
+        },
+        {
           "version": "nacos/v0.3.0",
           "line": "**注册时机变更**：`WithNNS`/`WithRequiredNNS` 的服务注册由组件 Init 阶段延迟到 `app.Ready()` 之后（bootstrap v0.6.0 就绪门）。调用方必须在 server 就绪后触发 `app.Ready()`（推荐经 hertz/kitex `RunServer` 的 `WithOnReady`），否则服务不会 进入注册中心；Ready 永不触"
         },
@@ -624,6 +632,18 @@
         {
           "version": "v0.5.1",
           "line": "**核心包 `hertz` 提升到模块根**：import 从 `github.com/oekit/hertz/hertz` 改为 `github.com/oekit/hertz`（包名仍为 `hertz`），消除双层目录"
+        },
+        {
+          "version": "v0.5.1",
+          "line": "**子包收成一级**：`hertz/health` → `health`、`hertz/sse` → `sse`、 `hertz/metrics` → `metrics`、`hertz/render` → `render`、`hertz/adaptor` → `adaptor`"
+        },
+        {
+          "version": "v0.5.1",
+          "line": "**适配器扁平化**： `governance/hertz` → `governance`（包名 govhertz 不变，避免与 core/governance 冲突）、 `registry/hertz` → `registry`（包名 hertz → registry）、 `nns/hertz` → `nns`（包名 hertz → nns）"
+        },
+        {
+          "version": "v0.5.1",
+          "line": "**可观测路径收拢**：`observability/tracing/instrumentation/hertzotel` → `hertzotel`、 `observability/tracing/instrumentation/hertztracer` → `hertztracer`"
         }
       ]
     },
