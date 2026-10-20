@@ -1,6 +1,6 @@
 # oekit
 
-> Open Easy Kit — 开源 · 易用 · 工具集合。24 个独立发版的 Go 模块：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导。
+> Open Easy Kit — 开源 · 易用 · 工具集合。24 个独立发版的 Go 模块（根模块），另有 7 个嵌套模块各自独立发版，合计 32 个发版单元：微工具库、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导。
 
 oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格自底向上，每仓独立 SemVer + 独立 CI。每个仓库根目录都有 AGENTS.md（面向 AI Agent 的规范与硬规则）。
 
@@ -52,6 +52,32 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [kitx](https://github.com/oekit/kitx): 标识与校验——uidgen（Snowflake 全局单例 + Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex/RandomString 拒绝采样）+ validator（go-playground/validator v10 接口化门面，ValidationError Unwrap 为 BizError 400 对接 middleware.Fail）+ hash（v0.2.0 起非密码学 Md5Hex/Md5Bytes——缓存键/幂等键/短唯一 code，格式稳定承诺，禁用于凭据/签名）
 - [concurrency](https://github.com/oekit/concurrency): GoSafe/gopool、单飞（DoShared 折叠可观测/Result.Waiters）、重试（DelayHint Retry-After 优先/JitterRatio 比例抖动 + retry/httpx Retryable）、令牌桶、滑动窗口、**三态自适应熔断**（ErrCircuitOpen；closed/open/half-open + GenBreaker 代绑定 AllowGen/SuccessGen/FailureGen/AbandonGen + WithProbeTimeout 缺省 1m + WithCooldown 独立冷却 + WithConsecutiveFailures 连续失败触发；v0.13.0 起熔断期收敛到探测级——open 态不放流量，仅 forcePass 强制探活（缺省 1s）+ 冷却期满半开探测，SRE 公式退役为 closed→open 触发器；State()/State 枚举可观测出口）、ratelimit NewKeyedLimiterByFunc（v0.16.0，factory func(K) Limiter 按 key 定配额单管理器分档位）+ KeyedLimiter.Create 护栏内原子登记（v0.17.0，表满先回收空闲/已存在不覆盖/热更走 Replace）、CPU 自适应降载、ratelimit Lockout 防爆破锁（v0.11.0，fail2ban 形态 keyed 锁定/成功 Reset）、retry/httpx RetryableWithHeaders 403 头感知判定（v0.12.0/v0.13.1，HeaderSource 零依赖抽象 + 头值 OWS 修剪）、syncx FanInLimit 受限并发扇出 + FanInLimitCtx ctx 感知变体（v0.14.0：取消时未启动项 fn 一次不调/剩余槽快速排空 Canceled/在飞项照常落槽）、batch 攒批执行器（满条数/满字节/窗口去重）、timewheel 单级时间轮；async panic 统一收编 typed *PanicError（errors.As 可辨携带栈）+ 实例级 Runner panic 路由
 - [core](https://github.com/oekit/core): governance 治理 schema、lifecycle 契约 + Manager 优雅关停（自 logx/shutdown 迁入，日志 *slog.Logger——core 不再依赖 logx）、**transport 协议无关传输上下文**（Transporter/Header/ctx 存取，仅标准库）、**chain 中间件链**（Handler/Middleware/Chain/Recovery/Timeout）、网络 IP 工具、version、**config 配置加载**（LoadDotEnv/Get*/OverlayMerge/ParseDuration + default/env/range/options tag 校验 + OverlaySource 多源叠加 + ApplyEnvOverlay env 优先；v0.9.0 起 FieldSet 显式提供集合（yaml 显式 port:0 不再被 default/env 覆盖，LoadBootstrap 默认接线免指针化）+ require tag + ValidateTags env 卫生（格式/重名/拼写冒烟检查），v0.9.1 修 inline 字段标记——ekit `config` 包的新家；registry v0.3.0 已移除 config）
+
+## 嵌套模块（可选装 · 依赖隔离）
+
+> 嵌套模块是**独立发版**的 Go module（各自有 tag），职责是**依赖隔离**而非目录组织：
+> 只 import 根模块的消费者**不会**被拉入这些重依赖；需要时才单独 `go get`。
+
+- [bootstrap/nacos](https://github.com/oekit/bootstrap/tree/main/nacos): bootstrap 的 Nacos/NNS 服务治理接入——以 BootstrapperOption 注入，父仓保持零 Nacos 依赖（v0.3.0 起注册延迟到 App.Ready 之后）
+  - 安装：`go get github.com/oekit/bootstrap/nacos@latest`
+
+- [bootstrap/obs](https://github.com/oekit/bootstrap/tree/main/obs): bootstrap 的可观测性接入——以 BootstrapperOption 注入 Prometheus 指标（oekit/metrics）与 OpenTelemetry 追踪（oekit/tracing），父仓保持零 prometheus/otel 依赖
+  - 安装：`go get github.com/oekit/bootstrap/obs@latest`
+
+- [logx/sink](https://github.com/oekit/logx/tree/main/sink): logx 的输出目标实现——Sink 抽象 + MultiSink/FileSink/RotatingSink 三个内置实现，重依赖隔离在此，根包纯 stdlib
+  - 安装：`go get github.com/oekit/logx/sink@latest`
+
+- [logx/hlog](https://github.com/oekit/logx/tree/main/hlog): 基于 Hertz hlog 的 logx.Logger 实现（结构化 kv 降级为字符串拼接，输出格式与 Hertz hlog 对齐）
+  - 安装：`go get github.com/oekit/logx/hlog@latest`
+
+- [logx/hertzlog](https://github.com/oekit/logx/tree/main/hertzlog): Hertz 日志后端桥接——logrus/zap/zerolog/slog 四后端各自实现 hlog.FullLogger（依赖隔离，logx 根包不引三方日志库）
+  - 安装：`go get github.com/oekit/logx/hertzlog@latest`
+
+- [logx/kitexlog](https://github.com/oekit/logx/tree/main/kitexlog): Kitex 日志后端桥接——把 logx.Logger 适配为 Kitex klog.FullLogger（依赖隔离，logx 根包不引 kitex）
+  - 安装：`go get github.com/oekit/logx/kitexlog@latest`
+
+- [timertask/redis](https://github.com/oekit/timertask/tree/main/redis): timertask 的 Redis 后端——RedisBackend/ShardManager 与可靠投递，go-redis 隔离在此，根包零 redis 依赖（v0.2.0 起）
+  - 安装：`go get github.com/oekit/timertask/redis@latest`
 
 ## 文档
 
