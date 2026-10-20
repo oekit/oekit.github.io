@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T19:12:25Z",
+  "generatedAt": "2026-10-19T23:03:58Z",
   "org": "oekit",
   "modules": [
     {
@@ -408,7 +408,7 @@
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.0"
+          "latest": "v0.2.1"
         }
       ],
       "matrixDeps": [
