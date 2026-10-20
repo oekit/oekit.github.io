@@ -28,6 +28,40 @@ d := config.ParseDuration(cfg.WorkerInterval, time.Second)
 > 多源叠加热更（如「yaml 基线 + Nacos 覆盖」）用 `config.NewOverlaySource(base, override...)`
 > 配合 `ConfigWatcher[T]`；`default/env/range/options` struct tag 校验开箱即用。
 
+### 三个加载入口（core v0.11.0 起）
+
+配置从哪来，决定用哪个入口——三者**共享同一条解码线**，因此 tag 校验与
+严格模式的诊断**与来源无关**：
+
+```go
+// ① etc/ 约定：etc/config.yaml → etc/config-<envFlag>.yaml
+cfg, err := config.LoadBootstrap[MyConfig]("dev")
+
+// ② 任意路径：CLI -config 参数、容器内固定挂载位（如 /app/plugins.yaml）
+err = config.LoadFile("/app/plugins.yaml", &cfg)
+
+// ③ 字节源：API 下发、模板渲染、测试夹具
+err = config.Unmarshal([]byte(raw), &cfg)
+```
+
+> ⚠️ `Unmarshal` 是「**yaml 优先于 env**」：env 非零值**不会**覆盖文件值。
+> 需要 12-factor（env 优先）在 yaml 填充后调 `config.ApplyEnvOverlay(dst)`。
+
+### 严格模式：未知键拒载（core v0.10.0 起）
+
+默认行为不变（未知键静默忽略）；传 `config.WithStrict()` 后**未知键直接拒载**，
+错误同时回答三件事——**在哪一层写错了**（嵌套路径）、**这一层有哪些合法键**、
+**你是不是想写别的**（近似拼写建议）：
+
+```go
+cfg, err := config.LoadBootstrap[MyConfig]("dev", config.WithStrict())
+// parse config file etc/config-dev.yaml: config: 未知配置键 "llm.base_ur"（是否想写 "base_url"？）；该层合法键：api_key, base_url, timeout_ms
+```
+
+合法键最多列 12 个（200+ 字段的结构体全列出来是噪音）；`UnknownKeyError`
+是导出的类型，`errors.As` 后可取 `Path` / `Legal` / `Near` 自己处理。
+错误前缀按入口不同：`LoadBootstrap`/`LoadFile` 带文件路径，`Unmarshal` 只有 `parse config:`。
+
 ## 2. 存储层：gormx + crud
 
 ```go
