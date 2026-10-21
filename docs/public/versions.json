@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T15:29:00Z",
+  "generatedAt": "2026-10-21T18:14:40Z",
   "org": "oekit",
   "modules": [
     {
@@ -40,7 +40,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.19.0",
+      "latest": "v0.20.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
