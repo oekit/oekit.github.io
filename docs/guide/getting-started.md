@@ -78,3 +78,53 @@ go get github.com/oekit/kitex github.com/oekit/nns github.com/oekit/nns-endpoint
 
 > [!TIP] 提示
 > > **提示**：版本一律 `@latest`。每仓独立 SemVer，升级互不牵连。
+
+<!-- deps-table:start -->
+## 装它要拖多少东西（消费方实测）
+
+「按需取用」的另一面是**代价**：装一个模块会连带拉进多少东西。
+下表是**实测值**——在空消费方模块里 `go get github.com/oekit/<单元>@latest`
+之后数 `go list -m all` 得到的模块图（不含消费方自身）。
+不是任何仓 `go.mod` 的声明，声明不算证据。
+
+量级分档：零第三方 / 轻（≤5）/ 中（≤20）/ 重（>20）。
+机器可读版：[deps.json](https://oekit.github.io/deps.json)。
+
+由 `matrix-tools/scripts/consumer_probe.py` 测量、`gen_deps_doc.py` 生成，
+随矩阵周巡检刷新。
+
+| 模块 | 装它会拉进 | 其中第三方 | 量级 |
+|---|---|---|---|
+| [`logx`](https://github.com/oekit/logx) | 2 | 0 | 零第三方 |
+| [`oekit`](https://github.com/oekit/oekit) | 32 | 0 | 零第三方 |
+| [`pkg`](https://github.com/oekit/pkg) | 1 | 0 | 零第三方 |
+| [`timertask`](https://github.com/oekit/timertask) | 2 | 0 | 零第三方 |
+| [`concurrency`](https://github.com/oekit/concurrency) | 3 | 1 | 轻 |
+| [`logx/sink`](https://github.com/oekit/logx/sink) | 2 | 1 | 轻 |
+| [`workflow`](https://github.com/oekit/workflow) | 6 | 1 | 轻 |
+| [`core`](https://github.com/oekit/core) | 3 | 2 | 轻 |
+| [`bootstrap`](https://github.com/oekit/bootstrap) | 8 | 3 | 轻 |
+| [`kitx`](https://github.com/oekit/kitx) | 10 | 8 | 中 |
+| [`network`](https://github.com/oekit/network) | 16 | 12 | 中 |
+| [`gormx`](https://github.com/oekit/gormx) | 17 | 13 | 中 |
+| [`redisx`](https://github.com/oekit/redisx) | 17 | 13 | 中 |
+| [`timertask/redis`](https://github.com/oekit/timertask/redis) | 19 | 13 | 中 |
+| [`data`](https://github.com/oekit/data) | 22 | 15 | 中 |
+| [`logx/hlog`](https://github.com/oekit/logx/hlog) | 25 | 22 | 重 |
+| [`metrics`](https://github.com/oekit/metrics) | 41 | 39 | 重 |
+| [`logx/kitexlog`](https://github.com/oekit/logx/kitexlog) | 45 | 42 | 重 |
+| [`logx/hertzlog`](https://github.com/oekit/logx/hertzlog) | 45 | 44 | 重 |
+| [`registry`](https://github.com/oekit/registry) | 63 | 60 | 重 |
+| [`k8s`](https://github.com/oekit/k8s) | 80 | 77 | 重 |
+| [`etcdx`](https://github.com/oekit/etcdx) | 102 | 97 | 重 |
+| [`hertz`](https://github.com/oekit/hertz) | 113 | 99 | 重 |
+| [`httpx`](https://github.com/oekit/httpx) | 111 | 103 | 重 |
+| [`kitex-examples`](https://github.com/oekit/kitex-examples) | 118 | 104 | 重 |
+| [`tracing`](https://github.com/oekit/tracing) | 109 | 107 | 重 |
+| [`bootstrap/obs`](https://github.com/oekit/bootstrap/obs) | 134 | 126 | 重 |
+| [`bootstrap/nacos`](https://github.com/oekit/bootstrap/nacos) | 136 | 128 | 重 |
+| [`nns`](https://github.com/oekit/nns) | 134 | 128 | 重 |
+| [`nns-endpoint`](https://github.com/oekit/nns-endpoint) | 138 | 128 | 重 |
+| [`middleware`](https://github.com/oekit/middleware) | 187 | 179 | 重 |
+| [`kitex`](https://github.com/oekit/kitex) | 310 | 300 | 重 |
+<!-- deps-table:end -->
