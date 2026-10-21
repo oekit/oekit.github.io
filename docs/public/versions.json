@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T19:21:39Z",
+  "generatedAt": "2026-10-21T20:52:46Z",
   "org": "oekit",
   "modules": [
     {
@@ -214,7 +214,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.16.0",
+      "latest": "v0.17.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -225,6 +225,10 @@
         "timertask"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.17.0",
+          "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
+        },
         {
           "version": "v0.15.0",
           "line": "`timertask` 壳移除 `RedisBackend` / `ShardManager` / `NewRedisBackend` / `NewShardManager` 四个转发符号：源仓 timertask v0.2.0 起把 Redis 后端迁至嵌套模块 `github.com/oekit/timertask/redis`（根包不再引 go-redis，纯 stdlib 嵌入式场景可用）"
@@ -328,7 +332,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.9.1",
+      "latest": "v0.10.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -336,6 +340,10 @@
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.10.0",
+          "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
+        },
         {
           "version": "v0.5.0",
           "line": "**breaking（0.x minor）**：模块更名 `github.com/oekit/redis` → `github.com/oekit/redisx`， 消除与 go-redis（`package redis`）的包名撞车与 `/redis/redis` 路径口吃"
