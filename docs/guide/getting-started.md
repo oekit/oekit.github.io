@@ -4,6 +4,15 @@ title: 快速开始
 
 三种起步姿势：单个微库、可观测门面组合、HTTP/RPC 全栈骨架。
 
+> [!IMPORTANT] Go 版本前置
+> 各模块的最低 Go 版本由**它自己的 `go.mod`** 决定（唯一权威）：
+> 轻量模块（pkg / logx / core / concurrency / registry / timertask / workflow 等）要求 **Go ≥ 1.24**；
+> 框架生态那几个（hertz / kitex / httpx / middleware / tracing / k8s / etcdx / network / nns-endpoint）
+> 要求 **Go ≥ 1.26**。
+> 「一次拉齐」的伞仓快照（`go get github.com/oekit/oekit@latest`）统一要求 **Go ≥ 1.26.0**，
+> 并会把下游 go.mod 的 `go` 指令抬到 1.26.0（实测 `go: upgraded go 1.24 => 1.26.0`）——
+> 只按需取单个模块则不受影响。
+
 ## 三种起步姿势
 
 ### 姿势一：只要一个微库
