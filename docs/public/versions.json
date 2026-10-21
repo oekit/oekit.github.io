@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T19:14:33Z",
+  "generatedAt": "2026-10-21T04:20:35Z",
   "org": "oekit",
   "modules": [
     {
@@ -169,11 +169,21 @@
     },
     {
       "module": "registry",
-      "latest": "v0.4.2",
-      "nested": [],
+      "latest": "v0.5.0",
+      "nested": [
+        {
+          "path": "nacos",
+          "latest": "v0.1.0",
+          "hostVersion": "v0.5.0"
+        },
+        {
+          "path": "nacosimpl",
+          "latest": "v0.1.0",
+          "hostVersion": "v0.5.0"
+        }
+      ],
       "matrixDeps": [
-        "core",
-        "logx"
+        "core"
       ],
       "breakingIndex": [
         {
@@ -476,7 +486,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.4.3",
+      "latest": "v0.4.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -694,7 +704,6 @@
         "core",
         "kitex",
         "logx",
-        "registry",
         "tracing"
       ],
       "breakingIndex": []
