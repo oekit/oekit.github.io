@@ -3,7 +3,7 @@ layout: home
 hero:
   name: "oekit"
   text: "Open Easy Kit"
-  tagline: "开源 · 易用 · 工具集合 — 24 个独立发版的 Go 模块（根模块）＋ 7 个嵌套模块，合计 32 个发版单元：微工具库、标识与校验、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
+  tagline: "开源 · 易用 · 工具集合 — 24 个独立发版的 Go 模块（根模块）＋ 9 个嵌套模块，合计 34 个发版单元：微工具库、标识与校验、日志/追踪/指标门面、注册发现、HTTP/Kitex 生态、应用引导"
   actions:
     - theme: brand
       text: 快速开始
