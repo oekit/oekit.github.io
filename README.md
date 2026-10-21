@@ -32,7 +32,7 @@ npm run build    # 构建到 docs/.vitepress/dist
 
 ## 模块矩阵
 
-oekit 是 **24 个独立发版的 Go 模块仓库**（根模块）＋ **7 个嵌套模块**，合计 **32 个发版单元**（每仓独立 SemVer + 独立 CI）。依赖严格自底向上——上层随意组合，下层永不反向依赖（完整架构见 [docs/about/architecture.md](docs/about/architecture.md)，机器可读版本矩阵见 [docs/public/versions.json](docs/public/versions.json)）：
+oekit 是 **24 个独立发版的 Go 模块仓库**（根模块）＋ **9 个嵌套模块**，合计 **34 个发版单元**（每仓独立 SemVer + 独立 CI）。依赖严格自底向上——上层随意组合，下层永不反向依赖（完整架构见 [docs/about/architecture.md](docs/about/architecture.md)，机器可读版本矩阵见 [docs/public/versions.json](docs/public/versions.json)）：
 
 | 能力层 | 模块 |
 |---|---|
