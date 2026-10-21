@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T20:52:46Z",
+  "generatedAt": "2026-10-21T21:33:50Z",
   "org": "oekit",
   "modules": [
     {
@@ -527,7 +527,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.4",
+      "latest": "v0.2.5",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -608,7 +608,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.7.1",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -625,6 +625,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.8.0",
+          "line": "**BREAKING**: `CheckResult.Status` 由 `string` 改为 `health.Status`（底层仍是 `string`）。与字面量比较的调用点不受影响；把 `CheckResult.Status` 赋给 `string` 变量的调用点需显式 `string(...)` 转换"
+        },
         {
           "version": "v0.7.0",
           "line": "**BREAKING**: crudh 主键类型泛型化（跟随 gormx v0.6.0 `[T, ID comparable]`，gormx#7 问题 1）"
