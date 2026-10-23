@@ -60,7 +60,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [bootstrap/nacos](https://github.com/oekit/bootstrap/tree/main/nacos): bootstrap 的 Nacos/NNS 服务治理接入——以 BootstrapperOption 注入，父仓保持零 Nacos 依赖（v0.3.0 起注册延迟到 App.Ready 之后）
   - 安装：`go get github.com/oekit/bootstrap/nacos@latest`
-  - 版本：`v0.3.5` · 对应父仓 `bootstrap v0.6.4`
+  - 版本：`v0.3.6` · 对应父仓 `bootstrap v0.6.5`
 
 - [bootstrap/obs](https://github.com/oekit/bootstrap/tree/main/obs): bootstrap 的可观测性接入——以 BootstrapperOption 注入 Prometheus 指标（oekit/metrics）与 OpenTelemetry 追踪（oekit/tracing），父仓保持零 prometheus/otel 依赖
   - 安装：`go get github.com/oekit/bootstrap/obs@latest`
