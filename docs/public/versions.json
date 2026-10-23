@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T15:37:48Z",
+  "generatedAt": "2026-10-23T17:27:02Z",
   "org": "oekit",
   "modules": [
     {
@@ -40,7 +40,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.20.2",
+      "latest": "v0.20.3",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -332,7 +332,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.2",
+      "latest": "v0.10.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -608,7 +608,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.1",
+      "latest": "v0.8.2",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
