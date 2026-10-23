@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T03:14:57Z",
+  "generatedAt": "2026-10-23T04:01:25Z",
   "org": "oekit",
   "modules": [
     {
@@ -364,7 +364,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.1.6",
+      "latest": "v0.1.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -485,7 +485,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.3",
+      "latest": "v0.1.4",
       "nested": [],
       "matrixDeps": [
         "logx"
