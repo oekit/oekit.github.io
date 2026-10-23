@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-23T18:29:17Z",
+  "generatedAt": "2026-10-23T22:13:24Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.22.1",
+      "latest": "v0.23.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -332,7 +332,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.3",
+      "latest": "v0.10.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
