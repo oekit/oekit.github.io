@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T14:58:24Z",
+  "generatedAt": "2026-10-23T15:16:27Z",
   "org": "oekit",
   "modules": [
     {
@@ -332,7 +332,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.1",
+      "latest": "v0.10.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
