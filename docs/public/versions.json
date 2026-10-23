@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T04:01:25Z",
+  "generatedAt": "2026-10-23T14:58:24Z",
   "org": "oekit",
   "modules": [
     {
@@ -332,7 +332,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.0",
+      "latest": "v0.10.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -414,7 +414,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.5.5",
+      "latest": "v0.5.6",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -457,7 +457,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.13.1",
+      "latest": "v0.13.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -673,7 +673,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.6.5",
+      "latest": "v0.6.6",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
