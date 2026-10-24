@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T02:44:36Z",
+  "generatedAt": "2026-10-24T03:41:02Z",
   "org": "oekit",
   "modules": [
     {
@@ -732,7 +732,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.20",
+      "latest": "v0.1.21",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
