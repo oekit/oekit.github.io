@@ -48,11 +48,14 @@ title: 迁移指南
 > bootstrap 的 `bootstrap/nacos`、`bootstrap/obs`、`logx/sink` 等是**独立嵌套模块**
 > （有自己的 tag），不是双层目录残留。
 >
-> **全矩阵共 9 个嵌套模块**（各自独立发版，import 路径即 module 路径）：
+> **全矩阵共 11 个嵌套模块**（各自独立发版，import 路径即 module 路径）：
 > `bootstrap/nacos`、`bootstrap/obs`、`logx/sink`、`logx/hlog`、`logx/hertzlog`、
-> `logx/kitexlog`、`timertask/redis`。它们是**依赖隔离**的载体——只 import 根模块的
+> `logx/kitexlog`、`timertask/redis`、`registry/nacosimpl`、`registry/nacos`、
+> `kitex/observability/tracing/instrumentation/kitexotel`、`kitex/istio`。它们是**依赖隔离**的载体——只 import 根模块的
 > 消费者不会被拉入这些重依赖（`logx/sink` 隔离 lumberjack、`bootstrap/nacos` 隔离
-> 约 50 个阿里云 SDK、`timertask/redis` 隔离 go-redis）。需要时才单独装：
+> 约 50 个阿里云 SDK、`timertask/redis` 隔离 go-redis、`kitex/istio` 隔离 xds、
+> `kitex/.../kitexotel` 隔离 obs-opentelemetry——后两者不隔离时会把 apache/thrift
+> 抬到 v0.16.0，打断下游按 thrift 0.13 生成的 Thrift 代码）。需要时才单独装：
 >
 > ```bash
 > go get github.com/oekit/logx/sink@latest
@@ -60,7 +63,7 @@ title: 迁移指南
 > go get github.com/oekit/timertask/redis@latest
 > ```
 >
-> 完整 7 条（含各自职责与安装行）见 [llms.txt](https://oekit.github.io/llms.txt) 的
+> 完整 11 条（含各自职责与安装行）见 [llms.txt](https://oekit.github.io/llms.txt) 的
 > 「嵌套模块」段。
 
 ### bootstrap.Run 删除改写（v0.4.0）
