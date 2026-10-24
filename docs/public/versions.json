@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T23:21:53Z",
+  "generatedAt": "2026-10-24T02:19:32Z",
   "org": "oekit",
   "modules": [
     {
@@ -608,7 +608,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.2",
+      "latest": "v0.8.3",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -673,8 +673,19 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.6.6",
-      "nested": [],
+      "latest": "v0.7.0",
+      "nested": [
+        {
+          "path": "istio",
+          "latest": "v0.1.0",
+          "hostVersion": "v0.7.0"
+        },
+        {
+          "path": "observability/tracing/instrumentation/kitexotel",
+          "latest": "v0.1.0",
+          "hostVersion": "v0.7.0"
+        }
+      ],
       "matrixDeps": [
         "bootstrap",
         "concurrency",
@@ -686,6 +697,18 @@
         "registry"
       ],
       "breakingIndex": [
+        {
+          "version": "kitexotel/v0.1.0",
+          "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+        },
+        {
+          "version": "istio/v0.1.0",
+          "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+        },
+        {
+          "version": "v0.7.0",
+          "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+        },
         {
           "version": "v0.6.0",
           "line": "**主包提升至模块根**：`github.com/oekit/kitex/kitex` → `github.com/oekit/kitex`、 `.../kitex/kitex/kitexmeta` → `.../kitex/kitexmeta`（仅移动目录与导入路径，零逻辑变化）"
