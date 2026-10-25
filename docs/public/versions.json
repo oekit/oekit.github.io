@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-24T03:41:02Z",
+  "generatedAt": "2026-10-25T01:31:00Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.24.0",
+      "latest": "v0.25.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -40,12 +40,16 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.20.4",
+      "latest": "v0.21.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.21.0",
+          "line": "**BREAKING**: ratelimit.Limiter 接口启用 Wait(ctx context.Context) error——此前该行一直处于注释状态：接口上没有阻塞等待这一档，服务端限流中间件要回 X-RateLimit-Remaining 这类响应头拿不到实时令牌数、出站 HTTP 客户端节流要「等到有配额再发请求」也没有对应形态，消费方要么在库外自建第二份令牌桶实现（重复实现 "
+        },
         {
           "version": "v0.5.3",
           "line": "fix(deps): pkg 地板 v0.9.3 → v0.10.0（BREAKING 拆分版；本仓仅引用 singleflighttest，零代码改动）"
