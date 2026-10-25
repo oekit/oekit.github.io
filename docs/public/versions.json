@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T11:01:08Z",
+  "generatedAt": "2026-10-25T11:28:13Z",
   "org": "oekit",
   "modules": [
     {
@@ -633,6 +633,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.8.5",
+          "line": "feat(clientip): 跟随 pkg v0.26.0——**默认不采信 X-Real-IP**（BREAKING）：X-Real-IP 是单跳头，HTTP 头无法区分「代理写的」与「客户端自带的」，网关默认不写该头但原样透传客户端自带的 ⇒ 客户端可任意改写自己的客户端 IP（限流/锁定计数桶被绕过、审计与访问日志来源 IP 可改写，oekit/pkg#106）；GetClientIP /"
+        },
         {
           "version": "v0.8.0",
           "line": "**BREAKING**: `CheckResult.Status` 由 `string` 改为 `health.Status`（底层仍是 `string`）。与字面量比较的调用点不受影响；把 `CheckResult.Status` 赋给 `string` 变量的调用点需显式 `string(...)` 转换"
