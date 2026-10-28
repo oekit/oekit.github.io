@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T08:59:39Z",
+  "generatedAt": "2026-10-28T12:11:58Z",
   "org": "oekit",
   "modules": [
     {
@@ -79,11 +79,13 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.6"
+          "latest": "v0.1.6",
+          "hostVersion": "v0.8.0"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.6"
+          "latest": "v0.1.6",
+          "hostVersion": "v0.8.0"
         },
         {
           "path": "sink",
