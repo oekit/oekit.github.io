@@ -72,7 +72,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [logx/hlog](https://github.com/oekit/logx/tree/main/hlog): 基于 Hertz hlog 的 logx.Logger 实现（结构化 kv 降级为字符串拼接，输出格式与 Hertz hlog 对齐）
   - 安装：`go get github.com/oekit/logx/hlog@latest`
-  - 版本：`v0.1.5` · 对应父仓 `logx v0.7.2`
+  - 版本：`v0.1.6` · 对应父仓 `logx v0.8.0`
 
 - [logx/hertzlog](https://github.com/oekit/logx/tree/main/hertzlog): Hertz 日志后端桥接——logrus/zap/zerolog/slog 四后端各自实现 hlog.FullLogger（依赖隔离，logx 根包不引三方日志库）
   - 安装：`go get github.com/oekit/logx/hertzlog@latest`
@@ -80,11 +80,11 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [logx/kitexlog](https://github.com/oekit/logx/tree/main/kitexlog): Kitex 日志后端桥接——把 logx.Logger 适配为 Kitex klog.FullLogger（依赖隔离，logx 根包不引 kitex）
   - 安装：`go get github.com/oekit/logx/kitexlog@latest`
-  - 版本：`v0.1.5` · 对应父仓 `logx v0.7.2`
+  - 版本：`v0.1.6` · 对应父仓 `logx v0.8.0`
 
 - [timertask/redis](https://github.com/oekit/timertask/tree/main/redis): timertask 的 Redis 后端——RedisBackend/ShardManager 与可靠投递，go-redis 隔离在此，根包零 redis 依赖（v0.2.0 起）
   - 安装：`go get github.com/oekit/timertask/redis@latest`
-  - 版本：`v0.2.3` · 对应父仓 `timertask v0.2.3`
+  - 版本：`v0.2.4` · 对应父仓 `timertask v0.2.4`
 
 - [registry/nacosimpl](https://github.com/oekit/registry/tree/main/nacosimpl): Nacos SPI 实现——Discoverer/ConfigStore/Registrar 基于 nacos-sdk-go v2（nacos-sdk 重依赖隔离在此，registry 根仓零 nacos-sdk）
   - 安装：`go get github.com/oekit/registry/nacosimpl@latest`
@@ -101,7 +101,6 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [kitex/istio](https://github.com/oekit/kitex/tree/main/istio): Kitex 的 xDS / Proxyless / Istio 集成桥接——xDS 资源管理器 + 动态熔断（kitex-contrib/xds 重依赖隔离在此，kitex 根仓回归零 apache/thrift）
   - 安装：`go get github.com/oekit/kitex/istio@latest`
   - 版本：`v0.7.0` · 对应父仓 `kitex v0.7.0`
-
 ## 文档
 
 - [架构总览](https://oekit.github.io/about/architecture.html): 五能力层架构图 + 关键依赖链 + 设计原则
