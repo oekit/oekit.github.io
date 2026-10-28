@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T08:42:25Z",
+  "generatedAt": "2026-10-28T08:59:39Z",
   "org": "oekit",
   "modules": [
     {
@@ -79,13 +79,11 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.6",
-          "hostVersion": "v0.8.0"
+          "latest": "v0.1.6"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.6",
-          "hostVersion": "v0.8.0"
+          "latest": "v0.1.6"
         },
         {
           "path": "sink",
@@ -159,7 +157,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.0",
+      "latest": "v0.3.1",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -189,11 +187,13 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.0"
+          "latest": "v0.1.0",
+          "hostVersion": "v0.5.0"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.1"
+          "latest": "v0.1.1",
+          "hostVersion": "v0.5.1"
         }
       ],
       "matrixDeps": [
@@ -228,7 +228,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.19.4",
+      "latest": "v0.19.5",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -346,7 +346,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.6",
+      "latest": "v0.10.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -378,7 +378,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.1",
+      "latest": "v0.2.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -394,7 +394,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.3",
+      "latest": "v0.8.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -444,11 +444,12 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.3",
+      "latest": "v0.2.4",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.3"
+          "latest": "v0.2.4",
+          "hostVersion": "v0.2.4"
         }
       ],
       "matrixDeps": [
@@ -583,11 +584,13 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.7"
+          "latest": "v0.3.7",
+          "hostVersion": "v0.6.5"
         },
         {
           "path": "obs",
-          "latest": "v0.2.10"
+          "latest": "v0.2.10",
+          "hostVersion": "v0.6.5"
         }
       ],
       "matrixDeps": [
@@ -693,15 +696,17 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.0",
+      "latest": "v0.7.1",
       "nested": [
         {
           "path": "istio",
-          "latest": "v0.7.0"
+          "latest": "v0.7.0",
+          "hostVersion": "v0.7.0"
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.0"
+          "latest": "v0.7.0",
+          "hostVersion": "v0.7.0"
         }
       ],
       "matrixDeps": [
