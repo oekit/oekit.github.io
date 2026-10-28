@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-10-27T17:12:16Z",
+  "generatedAt": "2026-10-28T01:06:53Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.28.1",
+      "latest": "v0.29.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
+        {
+          "version": "v0.29.0",
+          "line": "**BREAKING**: fix(httpjson): `DoRaw` 签名变更 `(int, []byte, error)` → `(RawResponse, error)`——新增 `RawResponse.Truncated`，此前报文被静默截断（文档既写「不截断报文」又在下一段写了 limit，自相矛盾）且调用方**无法区分**半截报文与完整报文；`RawResponse` 同时承载 S"
+        },
         {
           "version": "v0.26.0",
           "line": "feat(convert): 客户端 IP 解析收紧——**默认不采信 X-Real-IP**（单跳头无法区分「代理写的」与「客户端自带的」，网关默认透传客户端自带的 ⇒ 客户端可任意改写自己的客户端 IP，限流/锁定绕过 + 审计 IP 可改写，#106）：ResolveClientIP 去掉 xri 入参（BREAKING），确需采信改用 ResolveClientIPWithXRI / Ge"
@@ -133,7 +137,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.3.1",
+      "latest": "v0.3.2",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -142,7 +146,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.9",
+      "latest": "v0.1.10",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -177,7 +181,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.0",
+      "latest": "v0.5.1",
       "nested": [
         {
           "path": "nacos",
@@ -372,18 +376,23 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.1.7",
+      "latest": "v0.2.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
         "logx",
         "registry"
       ],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.2.0",
+          "line": "**BREAKING**: fix(etcdx): 构造器不校验 nil client ⇒ 「构造时忘了传 client」被推迟到**第一次实际访问**才爆（`cli.Get`/`cli.Put` 上的空指针崩溃，堆栈里只有 etcd 内部帧，看不出根因，往往是生产环境第一次注册服务时）。`registry` 的四个构造器（`NewRegistrar`/`NewDiscoverer`/`NewSu"
+        }
+      ]
     },
     {
       "module": "httpx",
-      "latest": "v0.8.2",
+      "latest": "v0.8.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -433,7 +442,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.1",
+      "latest": "v0.2.3",
       "nested": [
         {
           "path": "redis",
@@ -502,7 +511,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.0",
+      "latest": "v0.5.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -511,6 +520,10 @@
         "registry"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.5.1",
+          "line": "fix(nns): 关闭流程的 ctx **无界** ⇒ SDK 不响应时 `Close()` 永久挂住（关闭流程要调 SDK 的 `Unsubscribe`/`StopListenConfig`，此前内部用 `context.Background()`，调用方既拿不到返回值也无从得知卡在哪一步）；且关闭错误只记日志、调用方拿不到任何错误。新增 `CloseWithContext(ctx) err"
+        },
         {
           "version": "v0.4.0",
           "line": "**包提升至模块根**："
