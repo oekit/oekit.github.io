@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-28T01:38:09Z",
+  "generatedAt": "2026-10-28T03:40:12Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.29.0",
+      "latest": "v0.29.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -48,7 +48,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.22.0",
+      "latest": "v0.22.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -66,7 +66,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.7.1",
+      "latest": "v0.7.2",
       "nested": [
         {
           "path": "hertzlog",
@@ -121,7 +121,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.12.0",
+      "latest": "v0.12.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -137,7 +137,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.3.2",
+      "latest": "v0.3.3",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -226,7 +226,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.19.3",
+      "latest": "v0.19.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -309,7 +309,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.6.2",
+      "latest": "v0.6.3",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -344,7 +344,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.5",
+      "latest": "v0.10.6",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -376,7 +376,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.0",
+      "latest": "v0.2.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -446,7 +446,7 @@
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.2",
+          "latest": "v0.2.3",
           "hostVersion": "v0.2.3"
         }
       ],
@@ -474,7 +474,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.13.2",
+      "latest": "v0.13.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -511,7 +511,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.2",
+      "latest": "v0.5.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
