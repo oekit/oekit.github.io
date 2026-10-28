@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-28T16:38:35Z",
+  "generatedAt": "2026-10-28T18:22:45Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.30.0",
+      "latest": "v0.31.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -52,7 +52,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.23.0",
+      "latest": "v0.23.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -435,7 +435,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.5.7",
+      "latest": "v0.7.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
