@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T03:51:34Z",
+  "generatedAt": "2026-10-28T07:59:59Z",
   "org": "oekit",
   "modules": [
     {
@@ -309,7 +309,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.6.3",
+      "latest": "v0.6.4",
       "nested": [],
       "matrixDeps": [
         "logx",
