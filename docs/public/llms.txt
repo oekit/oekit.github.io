@@ -84,7 +84,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [timertask/redis](https://github.com/oekit/timertask/tree/main/redis): timertask 的 Redis 后端——RedisBackend/ShardManager 与可靠投递，go-redis 隔离在此，根包零 redis 依赖（v0.2.0 起）
   - 安装：`go get github.com/oekit/timertask/redis@latest`
-  - 版本：`v0.2.4` · 对应父仓 `timertask v0.2.4`
+  - 版本：`v0.2.5` · 对应父仓 `timertask v0.2.5`
 
 - [registry/nacosimpl](https://github.com/oekit/registry/tree/main/nacosimpl): Nacos SPI 实现——Discoverer/ConfigStore/Registrar 基于 nacos-sdk-go v2（nacos-sdk 重依赖隔离在此，registry 根仓零 nacos-sdk）
   - 安装：`go get github.com/oekit/registry/nacosimpl@latest`
@@ -96,7 +96,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [kitex/observability/tracing/instrumentation/kitexotel](https://github.com/oekit/kitex/tree/main/observability/tracing/instrumentation/kitexotel): Kitex 的 OpenTelemetry tracing 接入——client/server suite + metainfo 透传（obs-opentelemetry 重依赖隔离在此，kitex 根仓回归零 apache/thrift）
   - 安装：`go get github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel@latest`
-  - 版本：`v0.7.0` · 对应父仓 `kitex v0.7.0`
+  - 版本：`v0.7.2` · 对应父仓 `kitex v0.7.2`
 
 - [kitex/istio](https://github.com/oekit/kitex/tree/main/istio): Kitex 的 xDS / Proxyless / Istio 集成桥接——xDS 资源管理器 + 动态熔断（kitex-contrib/xds 重依赖隔离在此，kitex 根仓回归零 apache/thrift）
   - 安装：`go get github.com/oekit/kitex/istio@latest`
