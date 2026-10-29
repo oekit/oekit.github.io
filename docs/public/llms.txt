@@ -64,7 +64,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [bootstrap/obs](https://github.com/oekit/bootstrap/tree/main/obs): bootstrap 的可观测性接入——以 BootstrapperOption 注入 Prometheus 指标（oekit/metrics）与 OpenTelemetry 追踪（oekit/tracing），父仓保持零 prometheus/otel 依赖
   - 安装：`go get github.com/oekit/bootstrap/obs@latest`
-  - 版本：`v0.2.10` · 对应父仓 `bootstrap v0.6.5`
+  - 版本：`v0.2.11` · 对应父仓 `bootstrap v0.6.6`
 
 - [logx/sink](https://github.com/oekit/logx/tree/main/sink): logx 的输出目标实现——Sink 抽象 + MultiSink/FileSink/RotatingSink 三个内置实现，重依赖隔离在此，根包纯 stdlib
   - 安装：`go get github.com/oekit/logx/sink@latest`
