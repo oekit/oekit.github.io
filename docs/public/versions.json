@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T12:04:45Z",
+  "generatedAt": "2026-11-01T12:42:34Z",
   "org": "oekit",
   "modules": [
     {
@@ -230,7 +230,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.19.6",
+      "latest": "v0.19.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -548,7 +548,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.6",
+      "latest": "v0.2.7",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -582,17 +582,17 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.6",
+      "latest": "v0.6.7",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.7",
-          "hostVersion": "v0.6.5"
+          "latest": "v0.3.8",
+          "hostVersion": "v0.6.7"
         },
         {
           "path": "obs",
-          "latest": "v0.2.11",
-          "hostVersion": "v0.6.6"
+          "latest": "v0.2.12",
+          "hostVersion": "v0.6.7"
         }
       ],
       "matrixDeps": [
@@ -629,7 +629,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.8",
+      "latest": "v0.8.9",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -698,7 +698,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.2",
+      "latest": "v0.7.3",
       "nested": [
         {
           "path": "istio",
@@ -707,8 +707,8 @@
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.2",
-          "hostVersion": "v0.7.2"
+          "latest": "v0.7.3",
+          "hostVersion": "v0.7.3"
         }
       ],
       "matrixDeps": [
@@ -757,7 +757,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.22",
+      "latest": "v0.1.23",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
