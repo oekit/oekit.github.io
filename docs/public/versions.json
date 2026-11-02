@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T16:35:40Z",
+  "generatedAt": "2026-11-02T16:49:09Z",
   "org": "oekit",
   "modules": [
     {
@@ -185,17 +185,17 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.1",
+      "latest": "v0.5.2",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.0",
-          "hostVersion": "v0.5.0"
+          "latest": "v0.1.1",
+          "hostVersion": "v0.5.2"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.1",
-          "hostVersion": "v0.5.1"
+          "latest": "v0.1.2",
+          "hostVersion": "v0.5.2"
         }
       ],
       "matrixDeps": [
