@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T13:07:21Z",
+  "generatedAt": "2026-11-02T16:35:40Z",
   "org": "oekit",
   "modules": [
     {
@@ -70,7 +70,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.0",
+      "latest": "v0.8.1",
       "nested": [
         {
           "path": "hertzlog",
