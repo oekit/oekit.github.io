@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T00:38:34Z",
+  "generatedAt": "2026-11-02T01:35:58Z",
   "org": "oekit",
   "modules": [
     {
@@ -230,7 +230,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.19.8",
+      "latest": "v0.19.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -380,7 +380,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.2",
+      "latest": "v0.2.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -435,7 +435,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.3",
+      "latest": "v0.7.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -548,7 +548,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.8",
+      "latest": "v0.2.9",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -629,7 +629,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.10",
+      "latest": "v0.8.11",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -742,7 +742,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.3",
+      "latest": "v0.3.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -757,7 +757,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.24",
+      "latest": "v0.1.25",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
