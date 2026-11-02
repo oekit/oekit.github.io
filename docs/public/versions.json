@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T08:42:13Z",
+  "generatedAt": "2026-11-02T13:07:21Z",
   "org": "oekit",
   "modules": [
     {
@@ -22,7 +22,7 @@
         },
         {
           "version": "v0.17.0",
-          "line": "原实现 `keep = min(Keep, n/2)` 的收缩逻辑，在 `n ≤ 2*Keep` 时让**头尾两段保留位 首尾相接覆盖整段原文**——掩码主体 `****` 只是插在中间的装饰，原值被完整留在输出里"
+          "line": "原实现 `keep = min(Keep, n/2)` 的收缩逻辑（#31），在 `n ≤ 2*Keep` 时让**头尾两段保留位 首尾相接覆盖整段原文**——掩码主体 `****` 只是插在中间的装饰，原值被完整留在输出里"
         },
         {
           "version": "v0.17.0",
@@ -464,7 +464,7 @@
         },
         {
           "version": "v0.2.0",
-          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是**独立 m"
+          "line": "**Redis 后端迁至嵌套模块**（#14）：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是*"
         },
         {
           "version": "v0.2.0",
@@ -500,7 +500,7 @@
         },
         {
           "version": "v0.5.0",
-          "line": "**删除废弃转发层** `middleware/traceid/hmw/`（原 Deprecated 兼容层）"
+          "line": "**删除废弃转发层** `middleware/traceid/hmw/`（原 Deprecated 兼容层）（#11）"
         }
       ]
     },
