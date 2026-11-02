@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T16:49:09Z",
+  "generatedAt": "2026-11-02T21:38:39Z",
   "org": "oekit",
   "modules": [
     {
@@ -70,7 +70,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.1",
+      "latest": "v0.8.2",
       "nested": [
         {
           "path": "hertzlog",
@@ -79,13 +79,13 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.6",
-          "hostVersion": "v0.8.0"
+          "latest": "v0.1.7",
+          "hostVersion": "v0.8.2"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.6",
-          "hostVersion": "v0.8.0"
+          "latest": "v0.1.7",
+          "hostVersion": "v0.8.2"
         },
         {
           "path": "sink",
@@ -185,17 +185,17 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.2",
+      "latest": "v0.5.3",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.1",
-          "hostVersion": "v0.5.2"
+          "latest": "v0.1.2",
+          "hostVersion": "v0.5.3"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.2",
-          "hostVersion": "v0.5.2"
+          "latest": "v0.1.3",
+          "hostVersion": "v0.5.3"
         }
       ],
       "matrixDeps": [
