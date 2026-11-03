@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T06:04:36Z",
+  "generatedAt": "2026-11-03T06:10:34Z",
   "org": "oekit",
   "modules": [
     {
@@ -325,6 +325,10 @@
       ],
       "breakingIndex": [
         {
+          "version": "v0.7.0",
+          "line": "⚠️ breaking：crud.Writer 四个写方法签名加 (int64, error)；BaseService.Delete 缺失记录由静默成功改 404"
+        },
+        {
           "version": "v0.6.0",
           "line": "**BREAKING**: crud/gormrepo 主键类型泛型化（#7 问题 1）——接口全链路加 `ID comparable`"
         },
@@ -523,7 +527,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.6",
+      "latest": "v0.5.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
