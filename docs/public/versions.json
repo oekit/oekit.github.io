@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T05:41:29Z",
+  "generatedAt": "2026-11-03T05:54:49Z",
   "org": "oekit",
   "modules": [
     {
@@ -52,7 +52,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.23.3",
+      "latest": "v0.23.4",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -348,7 +348,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.10.9",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -356,6 +356,10 @@
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.11.0",
+          "line": "⚠️ breaking：Pipeline()/TxPipeline() 返回类型 redis.Pipeliner → *redisx.Pipeline，需要原生管道的场景走 Raw()"
+        },
         {
           "version": "v0.10.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
