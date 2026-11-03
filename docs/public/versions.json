@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T07:11:42Z",
+  "generatedAt": "2026-11-03T10:42:14Z",
   "org": "oekit",
   "modules": [
     {
@@ -641,7 +641,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.13",
+      "latest": "v0.8.14",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
