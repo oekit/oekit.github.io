@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T10:42:14Z",
+  "generatedAt": "2026-11-03T15:38:06Z",
   "org": "oekit",
   "modules": [
     {
@@ -79,21 +79,25 @@
         {
           "path": "hertzlog",
           "latest": "v0.1.0",
+          "breakingIndex": [],
           "hostVersion": "v0.2.0"
         },
         {
           "path": "hlog",
           "latest": "v0.1.8",
+          "breakingIndex": [],
           "hostVersion": "v0.8.2"
         },
         {
           "path": "kitexlog",
           "latest": "v0.1.8",
+          "breakingIndex": [],
           "hostVersion": "v0.8.2"
         },
         {
           "path": "sink",
           "latest": "v0.1.0",
+          "breakingIndex": [],
           "hostVersion": "v0.4.0"
         }
       ],
@@ -194,11 +198,13 @@
         {
           "path": "nacos",
           "latest": "v0.1.3",
+          "breakingIndex": [],
           "hostVersion": "v0.5.3"
         },
         {
           "path": "nacosimpl",
           "latest": "v0.1.4",
+          "breakingIndex": [],
           "hostVersion": "v0.5.3"
         }
       ],
@@ -463,6 +469,12 @@
         {
           "path": "redis",
           "latest": "v0.2.7",
+          "breakingIndex": [
+            {
+              "version": "redis/v0.2.0",
+              "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——import 路径替换即可，API 不变："
+            }
+          ],
           "hostVersion": "v0.2.7"
         }
       ],
@@ -599,11 +611,30 @@
         {
           "path": "nacos",
           "latest": "v0.3.10",
+          "breakingIndex": [
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**feat!**：`WithNNS` 注册延迟到 `App.Ready()` 之后——修复「注册先于 server 监听、反注册后于 server 关闭」双序错误，关停序 nns-deregister → server.Shutdown 对齐 kratos Stop"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**注册时机变更**：`WithNNS`/`WithRequiredNNS` 的服务注册由组件 Init 阶段延迟到 `app.Ready()` 之后（bootstrap v0.6.0 就绪门）。调用方必须在 server 就绪后触发 `app.Ready()`（推荐经 hertz/kitex `RunServer` 的 `WithOnReady`），否则服务不会 进入注册中心；Ready 永不触"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**停机序修正**：反注册改在注册成功后经 `app.AddResource` 挂载——close 阶段按注册 逆序释放，关停序为 nns-deregister → server.Shutdown（对齐 go-kratos Stop 语义； 旧实现 server 已关闭后才反注册）"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "依赖升级：nns v0.4.0 / registry v0.4.0（双仓包提升至模块根）"
+            }
+          ],
           "hostVersion": "v0.6.8"
         },
         {
           "path": "obs",
           "latest": "v0.2.14",
+          "breakingIndex": [],
           "hostVersion": "v0.6.8"
         }
       ],
@@ -715,11 +746,23 @@
         {
           "path": "istio",
           "latest": "v0.7.0",
+          "breakingIndex": [
+            {
+              "version": "istio/v0.1.0",
+              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+            }
+          ],
           "hostVersion": "v0.7.0"
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
           "latest": "v0.7.7",
+          "breakingIndex": [
+            {
+              "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
+              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+            }
+          ],
           "hostVersion": "v0.7.5"
         }
       ],
@@ -735,7 +778,7 @@
       ],
       "breakingIndex": [
         {
-          "version": "kitexotel/v0.1.0",
+          "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
           "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
         },
         {
