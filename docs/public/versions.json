@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T15:38:06Z",
+  "generatedAt": "2026-11-03T15:54:40Z",
   "org": "oekit",
   "modules": [
     {
@@ -672,7 +672,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.8.14",
+      "latest": "v0.9.0",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -689,6 +689,14 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.9.0",
+          "line": "**crudh 分页契约统一为「有界 + 归一」**（BREAKING）：缺省 List 从「无参 = 全表」改为「page=1、page_size=20、最多 500 条」，且响应的 `page/page_size/pages` 与实际 LIMIT **恒等**"
+        },
+        {
+          "version": "v0.9.0",
+          "line": "**crudh 排序列白名单按实体字段生成**（BREAKING）：未设 `WithSortableColumns` 时从「任意标识符列可排序」改为「只允许实体类型 T 的字段（字段名 / json tag / gorm `column:` tag，小写口径）」，白名单外一律 **400 `invalid sort parameter`**"
+        },
         {
           "version": "v0.8.5",
           "line": "feat(clientip): 跟随 pkg v0.26.0——**默认不采信 X-Real-IP**（BREAKING）：X-Real-IP 是单跳头，HTTP 头无法区分「代理写的」与「客户端自带的」，网关默认不写该头但原样透传客户端自带的 ⇒ 客户端可任意改写自己的客户端 IP（限流/锁定计数桶被绕过、审计与访问日志来源 IP 可改写，oekit/pkg#106）；GetClientIP /"
