@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-11-03T05:54:49Z",
+  "generatedAt": "2026-11-03T06:04:36Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.32.0",
+      "latest": "v0.33.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
+        {
+          "version": "v0.33.0",
+          "line": "⚠️ breaking feat(stringx): Filter 语义对齐 slicex.Filter（保留命中），新增 KeepFunc/DeleteFunc 迁移位（#173）"
+        },
         {
           "version": "v0.30.0",
           "line": "fix(cache): `HashKey` 的参数边界歧义 ⇒ 不同参数组算出同一个缓存 key ⇒ 串数据——此前每个参数用 `%v:` 直接拼进 SHA-256 的摘要输入，参数值里的 `:` 与「参数边界」不可区分：`HashKey(\"p\",\"a\",\"b\") == HashKey(\"p\",\"a:b\")`、`HashKey(\"p\",\"a:b\",\"c\") == HashKey(\"p\",\"a\",\""
