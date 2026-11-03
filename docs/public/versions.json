@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-02T23:18:42Z",
+  "generatedAt": "2026-11-03T01:48:20Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.31.2",
+      "latest": "v0.32.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -79,13 +79,11 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.8",
-          "hostVersion": "v0.8.2"
+          "latest": "v0.1.8"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.8",
-          "hostVersion": "v0.8.2"
+          "latest": "v0.1.8"
         },
         {
           "path": "sink",
@@ -189,13 +187,11 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.3",
-          "hostVersion": "v0.5.3"
+          "latest": "v0.1.3"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.4",
-          "hostVersion": "v0.5.3"
+          "latest": "v0.1.4"
         }
       ],
       "matrixDeps": [
@@ -450,8 +446,7 @@
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.7",
-          "hostVersion": "v0.2.7"
+          "latest": "v0.2.7"
         }
       ],
       "matrixDeps": [
@@ -464,7 +459,7 @@
         },
         {
           "version": "v0.2.0",
-          "line": "**Redis 后端迁至嵌套模块**（#14）：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是*"
+          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是**独立 m"
         },
         {
           "version": "v0.2.0",
@@ -500,7 +495,7 @@
         },
         {
           "version": "v0.5.0",
-          "line": "**删除废弃转发层** `middleware/traceid/hmw/`（原 Deprecated 兼容层）（#11）"
+          "line": "**删除废弃转发层** `middleware/traceid/hmw/`（原 Deprecated 兼容层）"
         }
       ]
     },
@@ -586,13 +581,11 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.10",
-          "hostVersion": "v0.6.8"
+          "latest": "v0.3.10"
         },
         {
           "path": "obs",
-          "latest": "v0.2.14",
-          "hostVersion": "v0.6.8"
+          "latest": "v0.2.14"
         }
       ],
       "matrixDeps": [
@@ -707,8 +700,7 @@
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.6",
-          "hostVersion": "v0.7.5"
+          "latest": "v0.7.6"
         }
       ],
       "matrixDeps": [
