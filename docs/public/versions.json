@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T13:42:53Z",
+  "generatedAt": "2026-11-04T15:05:43Z",
   "org": "oekit",
   "modules": [
     {
@@ -240,7 +240,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.19.9",
+      "latest": "v0.20.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -251,6 +251,10 @@
         "timertask"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.20.0",
+          "line": "⚠️ breaking：`data/gormx` 壳移除 `OpenPureGoSQLite`——源 `gormx` v0.8.0 已把纯 Go sqlite 入口整体移出根包（拆 opt-in 子包 `gormx/sqlitedrv`，源仓 oekit/gormx#72：根包自动注册 `\"sqlite\"` 驱动名与 `modernc.org/sqlite` 同链即 init panic）。迁移："
+        },
         {
           "version": "v0.17.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
@@ -676,7 +680,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.9.0",
+      "latest": "v0.9.1",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
