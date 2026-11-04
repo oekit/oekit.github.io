@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T15:54:40Z",
+  "generatedAt": "2026-11-04T13:42:53Z",
   "org": "oekit",
   "modules": [
     {
@@ -323,13 +323,17 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.7.1",
+      "latest": "v0.8.0",
       "nested": [],
       "matrixDeps": [
         "logx",
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.8.0",
+          "line": "⚠️ breaking：`gormx.OpenPureGoSQLite`（根包入口）移除。迁移：改 import `github.com/oekit/gormx/sqlitedrv`，调用 `sqlitedrv.Open(dsn, opts...)` （迁移别名 `sqlitedrv.OpenPureGoSQLite` 同签名，可只改 import 路径）"
+        },
         {
           "version": "v0.7.0",
           "line": "⚠️ breaking：crud.Writer 四个写方法签名加 (int64, error)；BaseService.Delete 缺失记录由静默成功改 404"
