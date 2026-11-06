@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T16:28:06Z",
+  "generatedAt": "2026-11-06T16:45:09Z",
   "org": "oekit",
   "modules": [
     {
@@ -133,7 +133,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.12.2",
+      "latest": "v0.13.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
