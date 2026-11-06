@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-06T01:35:26Z",
+  "generatedAt": "2026-11-06T15:37:06Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.35.0",
+      "latest": "v0.35.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -56,7 +56,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.25.1",
+      "latest": "v0.26.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -78,30 +78,26 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.3",
+      "latest": "v0.8.4",
       "nested": [
         {
           "path": "hertzlog",
           "latest": "v0.1.0",
-          "breakingIndex": [],
           "hostVersion": "v0.2.0"
         },
         {
           "path": "hlog",
           "latest": "v0.1.9",
-          "breakingIndex": [],
           "hostVersion": "v0.8.3"
         },
         {
           "path": "kitexlog",
           "latest": "v0.1.9",
-          "breakingIndex": [],
           "hostVersion": "v0.8.3"
         },
         {
           "path": "sink",
           "latest": "v0.1.0",
-          "breakingIndex": [],
           "hostVersion": "v0.4.0"
         }
       ],
@@ -153,7 +149,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.4.0",
+      "latest": "v0.4.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -167,7 +163,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.12",
+      "latest": "v0.1.13",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -176,7 +172,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.3",
+      "latest": "v0.3.4",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -206,14 +202,12 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.5",
-          "breakingIndex": [],
+          "latest": "v0.1.7",
           "hostVersion": "v0.5.4"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.6",
-          "breakingIndex": [],
+          "latest": "v0.1.7",
           "hostVersion": "v0.5.4"
         }
       ],
@@ -249,7 +243,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.1",
+      "latest": "v0.20.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -260,10 +254,6 @@
         "timertask"
       ],
       "breakingIndex": [
-        {
-          "version": "v0.20.0",
-          "line": "⚠️ breaking：`data/gormx` 壳移除 `OpenPureGoSQLite`——源 `gormx` v0.8.0 已把纯 Go sqlite 入口整体移出根包（拆 opt-in 子包 `gormx/sqlitedrv`，源仓 oekit/gormx#72：根包自动注册 `\"sqlite\"` 驱动名与 `modernc.org/sqlite` 同链即 init panic）。迁移："
-        },
         {
           "version": "v0.17.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
@@ -392,10 +382,6 @@
       ],
       "breakingIndex": [
         {
-          "version": "v0.11.0",
-          "line": "⚠️ breaking：Pipeline()/TxPipeline() 返回类型 redis.Pipeliner → *redisx.Pipeline，需要原生管道的场景走 Raw()"
-        },
-        {
           "version": "v0.10.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
         },
@@ -419,7 +405,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.4",
+      "latest": "v0.2.5",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -474,7 +460,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.7",
+      "latest": "v0.7.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -485,18 +471,12 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.9",
+      "latest": "v0.2.11",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.11",
-          "breakingIndex": [
-            {
-              "version": "redis/v0.2.0",
-              "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
-            }
-          ],
-          "hostVersion": "v0.2.9"
+          "latest": "v0.2.13",
+          "hostVersion": "v0.2.11"
         }
       ],
       "matrixDeps": [
@@ -509,7 +489,7 @@
         },
         {
           "version": "v0.2.0",
-          "line": "**Redis 后端迁至嵌套模块**（#14）：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是*"
+          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是**独立 m"
         },
         {
           "version": "v0.2.0",
@@ -517,13 +497,13 @@
         },
         {
           "version": "redis/v0.2.0",
-          "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
+          "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——import 路径替换即可，API 不变："
         }
       ]
     },
     {
       "module": "middleware",
-      "latest": "v0.13.11",
+      "latest": "v0.13.12",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -535,10 +515,6 @@
         "tracing"
       ],
       "breakingIndex": [
-        {
-          "version": "v0.13.9",
-          "line": "**BREAKING** fix(accesslog): ClientIP 默认口径 fail-closed——不再采信任意来源的 X-Forwarded-For（[#83](https://github.com/oekit/middleware/issues/83)）——此前走 `c.ClientIP()`，hertz 默认信任任意网段的 XFF：直连方每请求换一个伪造 XFF 即可任意改写访问"
-        },
         {
           "version": "v0.5.0",
           "line": "**核心包 `mw` 提升到模块根**：import 从 `github.com/oekit/middleware/middleware` 改为 `github.com/oekit/middleware`（包名仍为 `mw`）"
@@ -555,7 +531,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.6",
+      "latest": "v0.1.7",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -564,7 +540,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.8",
+      "latest": "v0.5.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -597,7 +573,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.12",
+      "latest": "v0.2.13",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -631,36 +607,17 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.9",
+      "latest": "v0.6.14",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.13",
-          "breakingIndex": [
-            {
-              "version": "nacos/v0.3.0",
-              "line": "**feat!**：`WithNNS` 注册延迟到 `App.Ready()` 之后——修复「注册先于 server 监听、反注册后于 server 关闭」双序错误，关停序 nns-deregister → server.Shutdown 对齐 kratos Stop"
-            },
-            {
-              "version": "nacos/v0.3.0",
-              "line": "**注册时机变更**：`WithNNS`/`WithRequiredNNS` 的服务注册由组件 Init 阶段延迟到 `app.Ready()` 之后（bootstrap v0.6.0 就绪门）。调用方必须在 server 就绪后触发 `app.Ready()`（推荐经 hertz/kitex `RunServer` 的 `WithOnReady`），否则服务不会 进入注册中心；Ready 永不触"
-            },
-            {
-              "version": "nacos/v0.3.0",
-              "line": "**停机序修正**：反注册改在注册成功后经 `app.AddResource` 挂载——close 阶段按注册 逆序释放，关停序为 nns-deregister → server.Shutdown（对齐 go-kratos Stop 语义； 旧实现 server 已关闭后才反注册）"
-            },
-            {
-              "version": "nacos/v0.3.0",
-              "line": "依赖升级：nns v0.4.0 / registry v0.4.0（双仓包提升至模块根）"
-            }
-          ],
-          "hostVersion": "v0.6.9"
+          "latest": "v0.3.17",
+          "hostVersion": "v0.6.14"
         },
         {
           "path": "obs",
-          "latest": "v0.2.15",
-          "breakingIndex": [],
-          "hostVersion": "v0.6.9"
+          "latest": "v0.2.19",
+          "hostVersion": "v0.6.14"
         }
       ],
       "matrixDeps": [
@@ -697,7 +654,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.9.4",
+      "latest": "v0.9.6",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -774,29 +731,17 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.7",
+      "latest": "v0.7.10",
       "nested": [
         {
           "path": "istio",
           "latest": "v0.7.0",
-          "breakingIndex": [
-            {
-              "version": "istio/v0.1.0",
-              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
-            }
-          ],
           "hostVersion": "v0.7.0"
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.8",
-          "breakingIndex": [
-            {
-              "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
-              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
-            }
-          ],
-          "hostVersion": "v0.7.7"
+          "latest": "v0.7.11",
+          "hostVersion": "v0.7.10"
         }
       ],
       "matrixDeps": [
@@ -811,7 +756,7 @@
       ],
       "breakingIndex": [
         {
-          "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
+          "version": "kitexotel/v0.1.0",
           "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
         },
         {
@@ -830,7 +775,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.5",
+      "latest": "v0.3.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
