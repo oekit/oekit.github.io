@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T05:50:54Z",
+  "generatedAt": "2026-11-07T07:09:53Z",
   "org": "oekit",
   "modules": [
     {
@@ -62,6 +62,10 @@
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.27.0",
+          "line": "**BREAKING** feat!(fanout): `Option` 更名 `MapOption`——本仓 AGENTS.md 禁止裸 `Option`（多包 co-import 冲突），v0.26.0 引入该别名时违反了这条。只传 `fanout.WithOnItemError(...)` 的调用点不受影响；显式声明该类型变量会编译失败"
+        },
         {
           "version": "v0.24.0",
           "line": "**BREAKING** fix(retry): `Config.Delay` 负值 panic（#136）——此前 `time.After(负值)` 立即触发，三连败瞬间打完、退避静默归零：失效面正是 retry 包的核心价值（「打散同时失败的重试风暴」），而同函数 MaxDelay 负值有「安全忽略」守卫、Delay 没有且无文档，同函数两种契约。守卫落在退避公式唯一实现处（computedD"
@@ -219,7 +223,7 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.8",
+          "latest": "v0.1.9",
           "breakingIndex": [
             {
               "version": "nacos/v0.1.7",
@@ -230,7 +234,7 @@
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.8",
+          "latest": "v0.1.9",
           "breakingIndex": [],
           "hostVersion": "v0.5.5"
         }
@@ -524,7 +528,7 @@
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.14",
+          "latest": "v0.2.15",
           "breakingIndex": [
             {
               "version": "redis/v0.2.0",
@@ -686,7 +690,7 @@
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.18",
+          "latest": "v0.3.19",
           "breakingIndex": [
             {
               "version": "nacos/v0.3.0",
@@ -709,7 +713,7 @@
         },
         {
           "path": "obs",
-          "latest": "v0.2.20",
+          "latest": "v0.2.21",
           "breakingIndex": [],
           "hostVersion": "v0.6.15"
         }
@@ -832,6 +836,12 @@
       "latest": "v0.7.12",
       "nested": [
         {
+          "path": "cmd/thrift2openapi",
+          "latest": "v0.1.0",
+          "breakingIndex": [],
+          "hostVersion": "v0.7.12"
+        },
+        {
           "path": "istio",
           "latest": "v0.7.0",
           "breakingIndex": [
@@ -844,7 +854,7 @@
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.12",
+          "latest": "v0.7.13",
           "breakingIndex": [
             {
               "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
