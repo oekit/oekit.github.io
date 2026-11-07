@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-07T12:10:46Z",
+  "generatedAt": "2026-11-07T19:00:37Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.37.1",
+      "latest": "v0.37.4",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -56,12 +56,16 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.28.1",
+      "latest": "v0.28.3",
       "nested": [],
       "matrixDeps": [
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.28.2",
+          "line": "**BREAKING** refactor!(async): `PanicHandler` 签名统一为 `func(ctx context.Context, r any, stack []byte)`——与 gopool.PanicHandler 完全一致（#184）。ctx 为任务执行上下文（带 ctx 的 spawn 家族——GoWithContext / GoSafeWithContext "
+        },
         {
           "version": "v0.27.0",
           "line": "**BREAKING** feat!(fanout): `Option` 更名 `MapOption`——本仓 AGENTS.md 禁止裸 `Option`（多包 co-import 冲突），v0.26.0 引入该别名时违反了这条。只传 `fanout.WithOnItemError(...)` 的调用点不受影响；显式声明该类型变量会编译失败"
@@ -82,7 +86,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.6",
+      "latest": "v0.8.8",
       "nested": [
         {
           "path": "hertzlog",
@@ -141,7 +145,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.13.1",
+      "latest": "v0.13.2",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -275,7 +279,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.3",
+      "latest": "v0.20.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -362,7 +366,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.11.3",
+      "latest": "v0.11.5",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -409,7 +413,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.11.2",
+      "latest": "v0.11.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -461,7 +465,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.13",
+      "latest": "v0.8.14",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -562,7 +566,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.13.13",
+      "latest": "v0.13.14",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -756,7 +760,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.10.2",
+      "latest": "v0.10.3",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -833,7 +837,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.12",
+      "latest": "v0.7.13",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
