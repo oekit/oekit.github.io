@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T07:35:17Z",
+  "generatedAt": "2026-11-07T08:24:16Z",
   "org": "oekit",
   "modules": [
     {
@@ -56,7 +56,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.28.0",
+      "latest": "v0.28.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -461,7 +461,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.12",
+      "latest": "v0.8.13",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -598,7 +598,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.8",
+      "latest": "v0.1.9",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -756,7 +756,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.10.1",
+      "latest": "v0.10.2",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -914,7 +914,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.26",
+      "latest": "v0.1.27",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
