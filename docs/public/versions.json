@@ -836,12 +836,6 @@
       "latest": "v0.7.12",
       "nested": [
         {
-          "path": "cmd/thrift2openapi",
-          "latest": "v0.1.0",
-          "breakingIndex": [],
-          "hostVersion": "v0.7.12"
-        },
-        {
           "path": "istio",
           "latest": "v0.7.0",
           "breakingIndex": [
