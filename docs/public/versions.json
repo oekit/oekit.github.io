@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T12:10:46Z",
+  "generatedAt": "2026-11-07T17:44:04Z",
   "org": "oekit",
   "modules": [
     {
@@ -82,7 +82,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.6",
+      "latest": "v0.8.7",
       "nested": [
         {
           "path": "hertzlog",
@@ -275,7 +275,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.3",
+      "latest": "v0.20.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
