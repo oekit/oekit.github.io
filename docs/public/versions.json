@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-06T18:06:26Z",
+  "generatedAt": "2026-11-07T05:50:54Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.35.2",
+      "latest": "v0.37.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -56,7 +56,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.27.0",
+      "latest": "v0.28.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -78,26 +78,30 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.4",
+      "latest": "v0.8.6",
       "nested": [
         {
           "path": "hertzlog",
           "latest": "v0.1.0",
+          "breakingIndex": [],
           "hostVersion": "v0.2.0"
         },
         {
           "path": "hlog",
           "latest": "v0.1.9",
+          "breakingIndex": [],
           "hostVersion": "v0.8.3"
         },
         {
           "path": "kitexlog",
           "latest": "v0.1.9",
+          "breakingIndex": [],
           "hostVersion": "v0.8.3"
         },
         {
           "path": "sink",
           "latest": "v0.1.0",
+          "breakingIndex": [],
           "hostVersion": "v0.4.0"
         }
       ],
@@ -133,7 +137,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.13.0",
+      "latest": "v0.13.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -149,12 +153,16 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.4.1",
+      "latest": "v0.4.2",
       "nested": [],
       "matrixDeps": [
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.4.2",
+          "line": "fix(jwt): WithTTL(0) 从静默产出无 exp 令牌改为 panic + 显式 WithNoExpiry（BREAKING）（#65）"
+        },
         {
           "version": "v0.3.5",
           "line": "**BREAKING** fix(uidgen): `RandomHex(nBytes<=0)` 从静默返回空串改为 **panic**（[#50](https://github.com/oekit/kitx/issues/50)）——对标识符场景「非法长度=调用方 bug」，对 doc 同样点名的密钥/凭据场景（webhook secret、HMAC key、API token）静默空串是**最"
@@ -163,21 +171,30 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.13",
+      "latest": "v0.1.14",
       "nested": [],
       "matrixDeps": [
         "core"
       ],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.1.13",
+          "line": "**BREAKING** fix(resilience): `registerReuse` 同名异型 collector 从 panic 降级为「独立实例 + stderr WARN」（[#44](https://github.com/oekit/metrics/issues/44)）——同名同描述符但类型不同（消费方先注册过同名 GaugeVec 再换 CounterVec，或两个子系统共享 R"
+        }
+      ]
     },
     {
       "module": "tracing",
-      "latest": "v0.3.4",
+      "latest": "v0.3.5",
       "nested": [],
       "matrixDeps": [
         "logx"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.3.4",
+          "line": "**BREAKING** fix(init): 重 Init 的旧 provider 关闭与全局替换对称化（[#50](https://github.com/oekit/tracing/issues/50)、[#52](https://github.com/oekit/tracing/issues/52)）——此前 `prev.Shutdown` 无条件执行，而 `otel.SetMeterPro"
+        },
         {
           "version": "v0.2.0",
           "line": "删除逐字节重复包 `instrumentation/redis`（≡ `redisotel`）与 `instrumentation/httpotel`（≡ `httpotel`）"
@@ -198,23 +215,34 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.4",
+      "latest": "v0.5.5",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.7",
-          "hostVersion": "v0.5.4"
+          "latest": "v0.1.8",
+          "breakingIndex": [
+            {
+              "version": "nacos/v0.1.7",
+              "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
+            }
+          ],
+          "hostVersion": "v0.5.5"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.7",
-          "hostVersion": "v0.5.4"
+          "latest": "v0.1.8",
+          "breakingIndex": [],
+          "hostVersion": "v0.5.5"
         }
       ],
       "matrixDeps": [
         "core"
       ],
       "breakingIndex": [
+        {
+          "version": "nacos/v0.1.7",
+          "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
+        },
         {
           "version": "v0.4.0",
           "line": "**SPI 包提升至模块根**（与 bootstrap/gormx/hertz/httpx/middleware/network 收平先例一致）："
@@ -243,7 +271,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.2",
+      "latest": "v0.20.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -254,6 +282,10 @@
         "timertask"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.20.0",
+          "line": "⚠️ breaking：`data/gormx` 壳移除 `OpenPureGoSQLite`——源 `gormx` v0.8.0 已把纯 Go sqlite 入口整体移出根包（拆 opt-in 子包 `gormx/sqlitedrv`，源仓 oekit/gormx#72：根包自动注册 `\"sqlite\"` 驱动名与 `modernc.org/sqlite` 同链即 init panic）。迁移："
+        },
         {
           "version": "v0.17.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
@@ -326,7 +358,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.11.2",
+      "latest": "v0.11.3",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -373,7 +405,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.11.1",
+      "latest": "v0.11.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -381,6 +413,10 @@
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.11.0",
+          "line": "⚠️ breaking：Pipeline()/TxPipeline() 返回类型 redis.Pipeliner → *redisx.Pipeline，需要原生管道的场景走 Raw()"
+        },
         {
           "version": "v0.10.0",
           "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
@@ -405,7 +441,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.5",
+      "latest": "v0.2.6",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -421,7 +457,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.11",
+      "latest": "v0.8.12",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -432,6 +468,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.8.12",
+          "line": "feat(client): NewClient 构造失败显式返回 (*Client, error) + MustNewClient——与家族「错误显式返回」契约对齐（BREAKING，PR #93）（#83）"
+        },
         {
           "version": "v0.8.0",
           "line": "**breaking(包删除)**：移除 v0.7.0 内置的 `httpx/urlguard` 独立实现 （`IsBlockedIP`/`IsBlockedHost`/`IsBlockedURL`/`GuardAddr`/`GuardAddrContext`/ `SafeDialer`/`SetAllowPrivateForTest`）——与 pkg v0.15.0 的 `pkg/urlguar"
@@ -460,23 +500,38 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.9",
+      "latest": "v0.7.11",
       "nested": [],
       "matrixDeps": [
         "concurrency",
         "logx",
         "tracing"
       ],
-      "breakingIndex": []
+      "breakingIndex": [
+        {
+          "version": "v0.7.11",
+          "line": "fix(nats): Close(ctx) error 等待真正排空完成、超时回退强制关闭——Drain 无限阻塞关停关闭（BREAKING：Close 签名改带 ctx，PR #91）（#83 #86）"
+        },
+        {
+          "version": "v0.7.11",
+          "line": "fix(nats): RequestJSON 的 ctx 移至首参——与 Request 及 Go 惯例一致（BREAKING，PR #91）（#88）"
+        }
+      ]
     },
     {
       "module": "timertask",
-      "latest": "v0.2.11",
+      "latest": "v0.2.12",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.13",
-          "hostVersion": "v0.2.11"
+          "latest": "v0.2.14",
+          "breakingIndex": [
+            {
+              "version": "redis/v0.2.0",
+              "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
+            }
+          ],
+          "hostVersion": "v0.2.12"
         }
       ],
       "matrixDeps": [
@@ -489,7 +544,7 @@
         },
         {
           "version": "v0.2.0",
-          "line": "**Redis 后端迁至嵌套模块**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是**独立 m"
+          "line": "**Redis 后端迁至嵌套模块**（#14）：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 从根包移除，改用 `github.com/oekit/timertask/redis`（**API 不变，但 import 路径与 go.mod require 两处都要改**——`timertask/redis` 是*"
         },
         {
           "version": "v0.2.0",
@@ -497,13 +552,13 @@
         },
         {
           "version": "redis/v0.2.0",
-          "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——import 路径替换即可，API 不变："
+          "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
         }
       ]
     },
     {
       "module": "middleware",
-      "latest": "v0.13.12",
+      "latest": "v0.13.13",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -515,6 +570,14 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.13.13",
+          "line": "fix(auth): 认证缺配置从静默放行改为构造期 panic + WithAuthDisabled 显式开关——与限流 fail-fast 哲学统一（BREAKING，依赖旧行为需显式关闭）（#97）"
+        },
+        {
+          "version": "v0.13.9",
+          "line": "**BREAKING** fix(accesslog): ClientIP 默认口径 fail-closed——不再采信任意来源的 X-Forwarded-For（[#83](https://github.com/oekit/middleware/issues/83)）——此前走 `c.ClientIP()`，hertz 默认信任任意网段的 XFF：直连方每请求换一个伪造 XFF 即可任意改写访问"
+        },
         {
           "version": "v0.5.0",
           "line": "**核心包 `mw` 提升到模块根**：import 从 `github.com/oekit/middleware/middleware` 改为 `github.com/oekit/middleware`（包名仍为 `mw`）"
@@ -531,7 +594,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.7",
+      "latest": "v0.1.8",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -540,7 +603,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.9",
+      "latest": "v0.5.10",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -549,6 +612,10 @@
         "registry"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.5.9",
+          "line": "**BREAKING** fix(client): mock/未启用注册发现时 Register/Deregister 改为幂等 no-op success（[#66](https://github.com/oekit/nns/issues/66)）——此前返回 ErrRegistrarUnavailable，消费方无法区分「真故障」与「本来就没注册器」，被迫自维护 `Enabled && !Mo"
+        },
         {
           "version": "v0.4.0",
           "line": "**包提升至模块根**："
@@ -573,7 +640,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.13",
+      "latest": "v0.2.14",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -583,6 +650,14 @@
         "registry"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.2.14",
+          "line": "fix(pool): 默认不再注入 insecure 凭据——缺凭据显式报错，TLS 场景显式二选一（BREAKING，PR #78）（#77）"
+        },
+        {
+          "version": "v0.2.14",
+          "line": "fix(http): 适配 httpx v0.8.12 NewClient 两值签名——固定 options 走 MustNewClient 逃生舱（httpx#83 BREAKING 后续）"
+        },
         {
           "version": "v0.2.0",
           "line": "`balancerCache` → `selectorCache`（`loadbalance.Selector`，经服务配置 Lb 字段 `NewSelector(NormalizeSelectorName(lb))` 构造，不可识别回退 roundrobin）"
@@ -607,17 +682,36 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.14",
+      "latest": "v0.6.15",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.17",
-          "hostVersion": "v0.6.14"
+          "latest": "v0.3.18",
+          "breakingIndex": [
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**feat!**：`WithNNS` 注册延迟到 `App.Ready()` 之后——修复「注册先于 server 监听、反注册后于 server 关闭」双序错误，关停序 nns-deregister → server.Shutdown 对齐 kratos Stop"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**注册时机变更**：`WithNNS`/`WithRequiredNNS` 的服务注册由组件 Init 阶段延迟到 `app.Ready()` 之后（bootstrap v0.6.0 就绪门）。调用方必须在 server 就绪后触发 `app.Ready()`（推荐经 hertz/kitex `RunServer` 的 `WithOnReady`），否则服务不会 进入注册中心；Ready 永不触"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "**停机序修正**：反注册改在注册成功后经 `app.AddResource` 挂载——close 阶段按注册 逆序释放，关停序为 nns-deregister → server.Shutdown（对齐 go-kratos Stop 语义； 旧实现 server 已关闭后才反注册）"
+            },
+            {
+              "version": "nacos/v0.3.0",
+              "line": "依赖升级：nns v0.4.0 / registry v0.4.0（双仓包提升至模块根）"
+            }
+          ],
+          "hostVersion": "v0.6.15"
         },
         {
           "path": "obs",
-          "latest": "v0.2.19",
-          "hostVersion": "v0.6.14"
+          "latest": "v0.2.20",
+          "breakingIndex": [],
+          "hostVersion": "v0.6.15"
         }
       ],
       "matrixDeps": [
@@ -626,6 +720,10 @@
         "logx"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.6.10",
+          "line": "**BREAKING** fix(app): 关停错误上抛——资源关闭失败时退出码不再为 0（[#80](https://github.com/oekit/bootstrap/issues/80)）——`closeAll` 对 closer 错误只 `logger.Error` 后继续，错误进不了 lifecycle.Manager 的 shutdownErrs；`Run` 只返回 runErr—"
+        },
         {
           "version": "nacos/v0.3.0",
           "line": "**feat!**：`WithNNS` 注册延迟到 `App.Ready()` 之后——修复「注册先于 server 监听、反注册后于 server 关闭」双序错误，关停序 nns-deregister → server.Shutdown 对齐 kratos Stop"
@@ -654,7 +752,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.10.0",
+      "latest": "v0.10.1",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -731,17 +829,29 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.10",
+      "latest": "v0.7.12",
       "nested": [
         {
           "path": "istio",
           "latest": "v0.7.0",
+          "breakingIndex": [
+            {
+              "version": "istio/v0.1.0",
+              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+            }
+          ],
           "hostVersion": "v0.7.0"
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.11",
-          "hostVersion": "v0.7.10"
+          "latest": "v0.7.12",
+          "breakingIndex": [
+            {
+              "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
+              "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
+            }
+          ],
+          "hostVersion": "v0.7.12"
         }
       ],
       "matrixDeps": [
@@ -756,7 +866,7 @@
       ],
       "breakingIndex": [
         {
-          "version": "kitexotel/v0.1.0",
+          "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
           "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
         },
         {
@@ -775,13 +885,17 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.7",
+      "latest": "v0.3.8",
       "nested": [],
       "matrixDeps": [
         "concurrency",
         "logx"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.3.6",
+          "line": "**BREAKING** fix(async): `RunAsync` 补取消兜底——外部 cancel/超时后 `Future.Wait` 不再假成功（[#35](https://github.com/oekit/workflow/issues/35)）——`Run` 完成路径有取消兜底（全部任务走 skip/豁免 ⇒ firstErr 为 nil ⇒ 返回 ctx.Err()，「假成功」已修）"
+        },
         {
           "version": "v0.3.0",
           "line": "**包提升至模块根**：`github.com/oekit/workflow/workflow` → `github.com/oekit/workflow` （仅移动目录与导入路径，代码零逻辑变化；矩阵内无消费方）"
