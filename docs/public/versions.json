@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T04:46:35Z",
+  "generatedAt": "2026-11-08T05:11:16Z",
   "org": "oekit",
   "modules": [
     {
@@ -223,7 +223,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.8",
+      "latest": "v0.5.9",
       "nested": [
         {
           "path": "nacos",
