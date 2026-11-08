@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-08T00:39:58Z",
+  "generatedAt": "2026-11-08T04:46:35Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.37.4",
+      "latest": "v0.38.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -56,7 +56,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.28.4",
+      "latest": "v0.29.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -86,7 +86,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.10",
+      "latest": "v0.8.11",
       "nested": [
         {
           "path": "hertzlog",
@@ -145,7 +145,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.13.3",
+      "latest": "v0.13.4",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -179,7 +179,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.15",
+      "latest": "v0.1.16",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -193,7 +193,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.6",
+      "latest": "v0.3.7",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -223,7 +223,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.6",
+      "latest": "v0.5.8",
       "nested": [
         {
           "path": "nacos",
@@ -366,7 +366,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.11.6",
+      "latest": "v0.11.7",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -465,7 +465,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.15",
+      "latest": "v0.8.16",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -508,7 +508,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.12",
+      "latest": "v0.7.13",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -760,7 +760,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.10.4",
+      "latest": "v0.10.5",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
