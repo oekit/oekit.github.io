@@ -1,62 +1,102 @@
 {
-  "generatedAt": "2026-11-08T05:11:16Z",
+  "generatedAt": "2026-11-09T18:38:55Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.38.0",
+      "latest": "v0.41.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
         {
-          "version": "v0.33.0",
-          "line": "⚠️ breaking feat(stringx): Filter 语义对齐 slicex.Filter（保留命中），新增 KeepFunc/DeleteFunc 迁移位（#173）"
+          "version": "v0.38.1",
+          "line": "文档：矩阵总览表重新生成（pkg 27 合 1 DESC 轮）"
         },
         {
-          "version": "v0.30.0",
-          "line": "fix(cache): `HashKey` 的参数边界歧义 ⇒ 不同参数组算出同一个缓存 key ⇒ 串数据——此前每个参数用 `%v:` 直接拼进 SHA-256 的摘要输入，参数值里的 `:` 与「参数边界」不可区分：`HashKey(\"p\",\"a\",\"b\") == HashKey(\"p\",\"a:b\")`、`HashKey(\"p\",\"a:b\",\"c\") == HashKey(\"p\",\"a\",\""
+          "version": "v0.38.1",
+          "line": "文档：版本引用对齐 v0.38.0"
         },
         {
           "version": "v0.29.0",
-          "line": "**BREAKING**: fix(httpjson): `DoRaw` 签名变更 `(int, []byte, error)` → `(RawResponse, error)`——新增 `RawResponse.Truncated`，此前报文被静默截断（文档既写「不截断报文」又在下一段写了 limit，自相矛盾）且调用方**无法区分**半截报文与完整报文；`RawResponse` 同时承载 S"
+          "line": "**DoRaw 签名变更**（breaking）：(int, []byte, error) → (RawResponse, error)。 org 内零消费方，v0.28.1 才发布。"
         },
         {
           "version": "v0.26.0",
-          "line": "feat(convert): 客户端 IP 解析收紧——**默认不采信 X-Real-IP**（单跳头无法区分「代理写的」与「客户端自带的」，网关默认透传客户端自带的 ⇒ 客户端可任意改写自己的客户端 IP，限流/锁定绕过 + 审计 IP 可改写，#106）：ResolveClientIP 去掉 xri 入参（BREAKING），确需采信改用 ResolveClientIPWithXRI / Ge"
+          "line": "ResolveClientIP(remote, xff, trustedProxies) —— 去掉 xri 入参（BREAKING）；"
         },
         {
-          "version": "v0.17.0",
-          "line": "原实现 `keep = min(Keep, n/2)` 的收缩逻辑（#31），在 `n ≤ 2*Keep` 时让**头尾两段保留位 首尾相接覆盖整段原文**——掩码主体 `****` 只是插在中间的装饰，原值被完整留在输出里"
+          "version": "v0.26.0",
+          "line": "ResolveClientIPWithXRI(remote, xff, xri, trustedProxies) —— 显式开启；"
         },
         {
-          "version": "v0.17.0",
-          "line": "实测（Keep=4）：`Mask(\"01234567\")` → `0123«probe:****»4567`（8 个字符原文全部可见）； `Mask(\"0123\")` → `01«probe:****»23`（4 个字符原文全部可见）——**脱敏原语等于没生效**"
+          "version": "v0.26.0",
+          "line": "GetClientIPWithXRI / GetClientIPWithProxiesAndXRI —— net/http 适配层同款开关。"
         },
         {
-          "version": "v0.17.0",
-          "line": "修法：对齐同族 `guardx/logredact.MaskHint` 的 `HintMinLenRatio=4` 口径—— 命中长度 `n < Keep*4` 一律**整段全量打码**（不做头尾保留）；`n >= Keep*4` 才保留首尾各 Keep 个"
+          "version": "v0.26.0",
+          "line": "每一段候选先归一为裸 IP（去空白、剥端口、IPv6 压缩写法归一），**非法段直接跳过**， 不进返回值；整条链都没有合法候选时回退对端地址；"
         },
         {
-          "version": "v0.17.0",
-          "line": "判据是**运行期按实际命中长度**判定（不是声明比声明）：`n=4/7/8` 全掩、`n=16` 起保留"
+          "version": "v0.26.0",
+          "line": "XFF 存在且给出合法候选时，结果由 XFF 决定（整条链都可信 ⇒ 回退最左端）， 不再看 X-Real-IP——保持 v0.25.2 的既有优先级不变。"
         },
         {
-          "version": "v0.17.0",
-          "line": "影响：依赖旧短值输出的消费方需同步——「留 8 藏 1 等于没藏」"
+          "version": "v0.26.0",
+          "line": "裸 IP 一律归一为单主机网段（IPv4 /32、IPv6 /128）；"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "NewTrustedProxySet 构造期对非法条目**报错**（fail-fast）：静默跳过把「配置写错」 变成「安全策略降级」且不可观测；"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "清单形态的函数签名无法回报错误，非法条目仍按历史口径跳过，但裸 IP 一律生效。"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "TrustedProxySet —— 构造期解析一次、请求期只做网段包含判定，热路径零 CIDR 解析；"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "ResolveClientIPWithSet / ResolveClientIPWithSetAndXRI —— 集合形态入口， 采信规则与清单形态**逐字一致**（有用例做差分对表）。"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "空对端地址的语义写进文档并补测（返回空串：没有可信对端 ⇒ 不采信任何代理头）；"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "README 的 convert / encoding 行同步新签名与新原语。"
+        },
+        {
+          "version": "v0.26.0",
+          "line": "文档：版本引用对齐 v0.25.2"
         },
         {
           "version": "v0.10.0",
-          "line": "**BREAKING** refactor!: `uidgen`、`validator` 两包拆分至新仓 [kitx](https://github.com/oekit/kitx)——机械替换 import 即可迁移：`github.com/oekit/pkg/uidgen` → `github.com/oekit/kitx/uidgen`、`github.com/oekit/pkg/valida"
+          "line": "uidgen（Snowflake/UUID/随机串）与 validator（go-playground 门面）整体迁出，机械替换 import 即可迁移，包名与行为契约不变"
         },
         {
-          "version": "v0.9.0",
-          "line": "**BREAKING** feat(container): 新增泛型容器包 `container`，整体收编原 `collectionx` 子包——`Set`/`Ring`/`Queue`/`SafeMap` 类型名与方法签名不变，仅 import 路径由 `github.com/oekit/pkg/collectionx` 改为 `github.com/oekit/pkg/container`（"
+          "version": "v0.10.0",
+          "line": "go.mod 不再有任何 require（v0.9.3 拆出前有 go-playground 全链 9 个模块），go.sum 清空"
+        },
+        {
+          "version": "v0.10.0",
+          "line": "详见 kitx v0.1.0"
+        },
+        {
+          "version": "v0.10.0",
+          "line": "CI：工具链降至 1.24 实测最低支持版本；changelog MultiError 段纠正回 v0.9.1（其代码随 v0.9.1 发布）"
+        },
+        {
+          "version": "v0.10.0",
+          "line": "文档：安装行对齐 v0.9.3"
         }
       ]
     },
     {
       "module": "concurrency",
-      "latest": "v0.29.0",
+      "latest": "v0.31.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -86,7 +126,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.11",
+      "latest": "v0.8.12",
       "nested": [
         {
           "path": "hertzlog",
@@ -145,7 +185,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.13.4",
+      "latest": "v0.13.5",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -161,12 +201,20 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.4.3",
+      "latest": "v0.5.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.5.0",
+          "line": "**BREAKING** fix(uidgen): `RandomString(alphabet, n<=0)` 从静默空串改为 panic（kitx#88）——与 #50 对 `RandomHex` 的修法同口径：空串密钥是最危险的缺省（空 HMAC key 可被任意伪造、空 token 落库与「无 token」不可区分）"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "**BREAKING** fix(uidgen): `RandomString` 采样从字节口径改为 rune 口径（kitx#89）——多字节 alphabet 产出恰 n 个字符的合法 UTF-8（旧口径产孤立带头/续字节，进 JSON/DB utf8 列/日志即损坏）；`>256` panic 判据同步改按字符数计（300 字节的 100 个「字」不再被 #52 判据误杀）"
+        },
         {
           "version": "v0.4.2",
           "line": "fix(jwt): WithTTL(0) 从静默产出无 exp 令牌改为 panic + 显式 WithNoExpiry（BREAKING）（#65）"
@@ -179,7 +227,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.1.16",
+      "latest": "v0.2.0",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -193,7 +241,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.7",
+      "latest": "v0.3.9",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -223,24 +271,24 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.9",
+      "latest": "v0.5.11",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.10",
+          "latest": "v0.1.11",
           "breakingIndex": [
             {
               "version": "nacos/v0.1.7",
               "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
             }
           ],
-          "hostVersion": "v0.5.6"
+          "hostVersion": "v0.5.11"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.10",
+          "latest": "v0.1.12",
           "breakingIndex": [],
-          "hostVersion": "v0.5.6"
+          "hostVersion": "v0.5.11"
         }
       ],
       "matrixDeps": [
@@ -279,7 +327,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.7",
+      "latest": "v0.20.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -413,7 +461,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.11.4",
+      "latest": "v0.12.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -449,7 +497,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.7",
+      "latest": "v0.2.9",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -508,7 +556,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.13",
+      "latest": "v0.7.14",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -528,7 +576,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.13",
+      "latest": "v0.2.14",
       "nested": [
         {
           "path": "redis",
@@ -566,7 +614,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.13.15",
+      "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -602,7 +650,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.1.10",
+      "latest": "v0.2.0",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -611,7 +659,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.11",
+      "latest": "v0.5.13",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -648,7 +696,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.2.15",
+      "latest": "v0.3.0",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -690,7 +738,7 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.6.16",
+      "latest": "v0.7.0",
       "nested": [
         {
           "path": "nacos",
@@ -760,7 +808,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.10.5",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -899,7 +947,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.9",
+      "latest": "v0.3.10",
       "nested": [],
       "matrixDeps": [
         "concurrency",
