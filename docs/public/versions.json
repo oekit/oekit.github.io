@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-10T20:42:15Z",
+  "generatedAt": "2026-11-10T23:42:08Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.43.0",
+      "latest": "v0.44.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -189,7 +189,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.14.1",
+      "latest": "v0.14.2",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -336,7 +336,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.12",
+      "latest": "v0.21.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -349,7 +349,7 @@
       "breakingIndex": [
         {
           "version": "v0.21.0",
-          "line": "**BREAKING** refactor(cache): 壳类型改名跟随 pkg#355 禁裸 Option——`cache.Option` → `cache.CheckerOption`（= pkg `cache.CheckerOption`），地板同步抬至 pkg v0.43.0。显式命名该类型的调用方机械改名即可；改名动机是多包 co-import 冲突（仓规「函数选项模式 XxxOpti"
+          "line": "**BREAKING** refactor(cache): 壳类型改名跟随 pkg#355 禁裸 Option——`cache.Option` → `cache.CheckerOption`（= pkg `cache.CheckerOption`，随地板 pkg v0.43.0 一并落地）。显式命名该类型的调用方机械改名即可；改名动机是多包 co-import 冲突（仓规「函数选项模式 XxxOp"
         },
         {
           "version": "v0.20.0",
@@ -581,7 +581,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.10.0",
+      "latest": "v0.10.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -589,6 +589,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.10.1",
+          "line": "fix(sshx): ParseSinglePublicKey 兑现「恰好一把」，拒「一行塞两把」（#151）——doc 承诺拒两种输入，但第二种「一行里塞了两把」的防线（rest 非空）是不可达死代码：x/crypto 的 rest 是「第一行之后的余量」，单行输入恒为空、多行已被前一条判据拒掉 ⇒ 实际「一行塞两把」被放行，第二把被 authorized_keys 的 comment 字段吞下"
+        },
         {
           "version": "v0.10.0",
           "line": "fix(mq): MQClient.Close 改 Close(ctx) error（BREAKING）（#143）——门面此前把无 ctx 的 Close() error 写进契约，与 AGENTS.md「组件 Close 统一 Close(ctx) error」硬规则及同仓 nats.Client 实现三方分裂：实现者只能无界关停（#83/#86 事故形态，ctx 上界入口都没有）或放弃门面。"
@@ -599,18 +603,6 @@
         },
         {
           "version": "v0.7.11",
-          "line": "fix(nats): RequestJSON 的 ctx 移至首参——与 Request 及 Go 惯例一致（BREAKING，PR #91）（#88）"
-        },
-        {
-          "version": ".wt-151/v0.10.0",
-          "line": "fix(mq): MQClient.Close 改 Close(ctx) error（BREAKING）（#143）——门面此前把无 ctx 的 Close() error 写进契约，与 AGENTS.md「组件 Close 统一 Close(ctx) error」硬规则及同仓 nats.Client 实现三方分裂：实现者只能无界关停（#83/#86 事故形态，ctx 上界入口都没有）或放弃门面。"
-        },
-        {
-          "version": ".wt-151/v0.7.11",
-          "line": "fix(nats): Close(ctx) error 等待真正排空完成、超时回退强制关闭——Drain 无限阻塞关停关闭（BREAKING：Close 签名改带 ctx，PR #91）（#83 #86）"
-        },
-        {
-          "version": ".wt-151/v0.7.11",
           "line": "fix(nats): RequestJSON 的 ctx 移至首参——与 Request 及 Go 惯例一致（BREAKING，PR #91）（#88）"
         }
       ]
@@ -992,7 +984,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.4.0",
+      "latest": "v0.10.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
