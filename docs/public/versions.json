@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T17:46:32Z",
+  "generatedAt": "2026-11-10T17:52:59Z",
   "org": "oekit",
   "modules": [
     {
@@ -981,6 +981,49 @@
         "tracing"
       ],
       "breakingIndex": []
+    }
+  ],
+  "verifiedCombos": [
+    {
+      "tag": "v0.2.14",
+      "modules": {
+        "github.com/oekit/bootstrap": "v0.7.5",
+        "github.com/oekit/bootstrap/nacos": "v0.3.22",
+        "github.com/oekit/bootstrap/obs": "v0.2.24",
+        "github.com/oekit/concurrency": "v0.32.0",
+        "github.com/oekit/core": "v0.14.0",
+        "github.com/oekit/data": "v0.20.11",
+        "github.com/oekit/etcdx": "v0.2.11",
+        "github.com/oekit/gormx": "v0.11.12",
+        "github.com/oekit/hertz": "v0.11.4",
+        "github.com/oekit/httpx": "v0.9.3",
+        "github.com/oekit/k8s": "v0.2.2",
+        "github.com/oekit/kitex": "v0.7.18",
+        "github.com/oekit/kitex-examples": "v0.1.28",
+        "github.com/oekit/kitex/cmd/thrift2openapi": "v0.1.0",
+        "github.com/oekit/kitex/istio": "v0.7.0",
+        "github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel": "v0.7.16",
+        "github.com/oekit/kitx": "v0.6.2",
+        "github.com/oekit/logx": "v0.9.2",
+        "github.com/oekit/logx/hertzlog": "v0.1.1",
+        "github.com/oekit/logx/hlog": "v0.1.11",
+        "github.com/oekit/logx/kitexlog": "v0.1.11",
+        "github.com/oekit/logx/sink": "v0.1.1",
+        "github.com/oekit/metrics": "v0.2.3",
+        "github.com/oekit/middleware": "v0.16.2",
+        "github.com/oekit/network": "v0.9.2",
+        "github.com/oekit/nns": "v0.5.17",
+        "github.com/oekit/nns-endpoint": "v0.3.3",
+        "github.com/oekit/pkg": "v0.42.0",
+        "github.com/oekit/redisx": "v0.13.2",
+        "github.com/oekit/registry": "v0.5.14",
+        "github.com/oekit/registry/nacos": "v0.1.13",
+        "github.com/oekit/registry/nacosimpl": "v0.1.14",
+        "github.com/oekit/timertask": "v0.3.3",
+        "github.com/oekit/timertask/redis": "v0.2.18",
+        "github.com/oekit/tracing": "v0.3.10",
+        "github.com/oekit/workflow": "v0.3.12"
+      }
     }
   ]
 }
