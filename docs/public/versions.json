@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-10T17:52:59Z",
+  "generatedAt": "2026-11-10T19:49:49Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.42.0",
+      "latest": "v0.43.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -96,12 +96,16 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.32.0",
+      "latest": "v0.33.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.33.0",
+          "line": "fix(ratelimit): Limiter.Reserve 收敛为 (time.Duration, error) 双返回，「不可预留」统一规范哨兵 ErrNotReservable（#248 #250）——此前 TokenBucket 回最大 duration（≈292 年）、SlidingWindow 回 -1，两套互斥魔数、接口契约零声明：消费方持 Limiter 接口（KeyedLimi"
+        },
         {
           "version": "v0.28.2",
           "line": "**BREAKING** refactor!(async): `PanicHandler` 签名统一为 `func(ctx context.Context, r any, stack []byte)`——与 gopool.PanicHandler 完全一致（#184）。ctx 为任务执行上下文（带 ctx 的 spawn 家族——GoWithContext / GoSafeWithContext "
@@ -185,7 +189,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.14.0",
+      "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -201,7 +205,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.6.2",
+      "latest": "v0.7.0",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -228,12 +232,16 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.2.3",
+      "latest": "v0.2.4",
       "nested": [],
       "matrixDeps": [
         "core"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.2.4",
+          "line": "docs(metrics): doc.go 的 build.sh 注入指令改指真实注入面 `github.com/oekit/core/version` 并补全四个符号（#89）——原指令 `-X github.com/oekit/metrics/version.BuildCommit=...` 指向不存在的子包（真符号在 core/version，本包 Init 即 import 它），go t"
+        },
         {
           "version": "v0.1.13",
           "line": "**BREAKING** fix(resilience): `registerReuse` 同名异型 collector 从 panic 降级为「独立实例 + stderr WARN」（[#44](https://github.com/oekit/metrics/issues/44)）——同名同描述符但类型不同（消费方先注册过同名 GaugeVec 再换 CounterVec，或两个子系统共享 R"
@@ -242,7 +250,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.10",
+      "latest": "v0.4.0",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -415,7 +423,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.11.12",
+      "latest": "v0.11.13",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -498,7 +506,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.11",
+      "latest": "v0.2.12",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -514,7 +522,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.9.3",
+      "latest": "v0.9.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -577,18 +585,18 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.3.3",
+      "latest": "v0.3.4",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.18",
+          "latest": "v0.2.19",
           "breakingIndex": [
             {
               "version": "redis/v0.2.0",
               "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
             }
           ],
-          "hostVersion": "v0.3.3"
+          "hostVersion": "v0.3.4"
         }
       ],
       "matrixDeps": [
@@ -655,7 +663,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.2.2",
+      "latest": "v0.2.3",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -664,7 +672,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.17",
+      "latest": "v0.6.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -701,7 +709,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.3.3",
+      "latest": "v0.3.4",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -743,7 +751,7 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.7.5",
+      "latest": "v0.7.6",
       "nested": [
         {
           "path": "nacos",
@@ -952,13 +960,21 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.12",
+      "latest": "v0.4.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
         "logx"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.4.0",
+          "line": "fix(async): 取消类错误豁免判据改测调用方 ctx——兄弟失败砍掉的任务不再记 Error:nil，报 context.Canceled 与「确实跑完」可区分；任务自身的超时错误不再被兄弟失败连带吞掉（#82）——此前四处判据测的是框架派生、会被框架在任务失败时 cancel 的 childCtx，退化成「此刻有没有兄弟失败过」，doc「绝不吞错」形态被吞；行为变更：RunAsyncWi"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "**BREAKING** fix(hook): After 改按逆注册序执行——AOP 洋葱配对恢复，span/事务类嵌套 hook 不再交叉关闭（#84）——此前 Before 正序、After 也正序，外层 hook 的收尾先于内层执行（TracingHook 先关 span 导致 AuditHook 事件丢失/挂错 parent，事务型 hook 的 COMMIT 先于内层收尾）；文档原明写"
+        },
         {
           "version": "v0.3.6",
           "line": "**BREAKING** fix(async): `RunAsync` 补取消兜底——外部 cancel/超时后 `Future.Wait` 不再假成功（[#35](https://github.com/oekit/workflow/issues/35)）——`Run` 完成路径有取消兜底（全部任务走 skip/豁免 ⇒ firstErr 为 nil ⇒ 返回 ctx.Err()，「假成功」已修）"
@@ -985,7 +1001,7 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.2.14",
+      "tag": "v0.2.15",
       "modules": {
         "github.com/oekit/bootstrap": "v0.7.5",
         "github.com/oekit/bootstrap/nacos": "v0.3.22",
