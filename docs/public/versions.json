@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-09T18:38:55Z",
+  "generatedAt": "2026-11-10T07:45:29Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.41.0",
+      "latest": "v0.41.1",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -96,7 +96,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.31.0",
+      "latest": "v0.31.2",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -126,7 +126,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.8.12",
+      "latest": "v0.9.1",
       "nested": [
         {
           "path": "hertzlog",
@@ -136,15 +136,15 @@
         },
         {
           "path": "hlog",
-          "latest": "v0.1.10",
+          "latest": "v0.1.11",
           "breakingIndex": [],
-          "hostVersion": "v0.8.10"
+          "hostVersion": "v0.9.1"
         },
         {
           "path": "kitexlog",
-          "latest": "v0.1.10",
+          "latest": "v0.1.11",
           "breakingIndex": [],
-          "hostVersion": "v0.8.10"
+          "hostVersion": "v0.9.1"
         },
         {
           "path": "sink",
@@ -185,7 +185,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.13.5",
+      "latest": "v0.13.6",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -201,9 +201,10 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.5.0",
+      "latest": "v0.6.1",
       "nested": [],
       "matrixDeps": [
+        "logx",
         "pkg"
       ],
       "breakingIndex": [
@@ -227,7 +228,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.2.0",
+      "latest": "v0.2.2",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -241,7 +242,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.3.9",
+      "latest": "v0.3.10",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -271,24 +272,24 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.11",
+      "latest": "v0.5.12",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.11",
+          "latest": "v0.1.12",
           "breakingIndex": [
             {
               "version": "nacos/v0.1.7",
               "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
             }
           ],
-          "hostVersion": "v0.5.11"
+          "hostVersion": "v0.5.12"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.1.12",
+          "latest": "v0.1.13",
           "breakingIndex": [],
-          "hostVersion": "v0.5.11"
+          "hostVersion": "v0.5.12"
         }
       ],
       "matrixDeps": [
@@ -327,7 +328,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.20.9",
+      "latest": "v0.20.10",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -414,7 +415,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.11.7",
+      "latest": "v0.11.9",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -461,7 +462,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.12.0",
+      "latest": "v0.13.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -497,7 +498,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.2.9",
+      "latest": "v0.2.10",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -513,7 +514,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.8.16",
+      "latest": "v0.9.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -556,7 +557,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.7.14",
+      "latest": "v0.8.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -576,18 +577,18 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.2.14",
+      "latest": "v0.3.0",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.16",
+          "latest": "v0.2.17",
           "breakingIndex": [
             {
               "version": "redis/v0.2.0",
               "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
             }
           ],
-          "hostVersion": "v0.2.13"
+          "hostVersion": "v0.3.0"
         }
       ],
       "matrixDeps": [
@@ -614,7 +615,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.14.1",
+      "latest": "v0.15.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -626,6 +627,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.15.0",
+          "line": "- fix(contrib): JWTAuth 验签密钥改实例私有，多实例不再共享最后注册密钥；**BREAKING**：验签热轮换改为构造新实例重注册（#139）"
+        },
         {
           "version": "v0.13.13",
           "line": "fix(auth): 认证缺配置从静默放行改为构造期 panic + WithAuthDisabled 显式开关——与限流 fail-fast 哲学统一（BREAKING，依赖旧行为需显式关闭）（#97）"
@@ -650,7 +655,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.2.0",
+      "latest": "v0.2.1",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -659,7 +664,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.5.13",
+      "latest": "v0.5.16",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -696,7 +701,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.3.0",
+      "latest": "v0.3.2",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -738,11 +743,11 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.7.0",
+      "latest": "v0.7.3",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.20",
+          "latest": "v0.3.22",
           "breakingIndex": [
             {
               "version": "nacos/v0.3.0",
@@ -761,13 +766,13 @@
               "line": "依赖升级：nns v0.4.0 / registry v0.4.0（双仓包提升至模块根）"
             }
           ],
-          "hostVersion": "v0.6.16"
+          "hostVersion": "v0.7.3"
         },
         {
           "path": "obs",
-          "latest": "v0.2.22",
+          "latest": "v0.2.24",
           "breakingIndex": [],
-          "hostVersion": "v0.6.16"
+          "hostVersion": "v0.7.3"
         }
       ],
       "matrixDeps": [
@@ -808,7 +813,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.11.0",
+      "latest": "v0.11.2",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -885,7 +890,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.14",
+      "latest": "v0.7.16",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
@@ -906,14 +911,14 @@
         },
         {
           "path": "observability/tracing/instrumentation/kitexotel",
-          "latest": "v0.7.14",
+          "latest": "v0.7.16",
           "breakingIndex": [
             {
               "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
               "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
             }
           ],
-          "hostVersion": "v0.7.14"
+          "hostVersion": "v0.7.16"
         }
       ],
       "matrixDeps": [
@@ -947,7 +952,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.3.10",
+      "latest": "v0.3.11",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -976,6 +981,49 @@
         "tracing"
       ],
       "breakingIndex": []
+    }
+  ],
+  "verifiedCombos": [
+    {
+      "tag": "v0.2.13",
+      "modules": {
+        "github.com/oekit/bootstrap": "v0.7.3",
+        "github.com/oekit/bootstrap/nacos": "v0.3.22",
+        "github.com/oekit/bootstrap/obs": "v0.2.24",
+        "github.com/oekit/concurrency": "v0.31.2",
+        "github.com/oekit/core": "v0.13.6",
+        "github.com/oekit/data": "v0.20.10",
+        "github.com/oekit/etcdx": "v0.2.10",
+        "github.com/oekit/gormx": "v0.11.9",
+        "github.com/oekit/hertz": "v0.11.2",
+        "github.com/oekit/httpx": "v0.9.1",
+        "github.com/oekit/k8s": "v0.2.1",
+        "github.com/oekit/kitex": "v0.7.16",
+        "github.com/oekit/kitex-examples": "v0.1.28",
+        "github.com/oekit/kitex/cmd/thrift2openapi": "v0.1.0",
+        "github.com/oekit/kitex/istio": "v0.7.0",
+        "github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel": "v0.7.16",
+        "github.com/oekit/kitx": "v0.6.1",
+        "github.com/oekit/logx": "v0.9.1",
+        "github.com/oekit/logx/hertzlog": "v0.1.1",
+        "github.com/oekit/logx/hlog": "v0.1.11",
+        "github.com/oekit/logx/kitexlog": "v0.1.11",
+        "github.com/oekit/logx/sink": "v0.1.1",
+        "github.com/oekit/metrics": "v0.2.2",
+        "github.com/oekit/middleware": "v0.15.1",
+        "github.com/oekit/network": "v0.8.1",
+        "github.com/oekit/nns": "v0.5.16",
+        "github.com/oekit/nns-endpoint": "v0.3.2",
+        "github.com/oekit/pkg": "v0.41.1",
+        "github.com/oekit/redisx": "v0.13.1",
+        "github.com/oekit/registry": "v0.5.12",
+        "github.com/oekit/registry/nacos": "v0.1.12",
+        "github.com/oekit/registry/nacosimpl": "v0.1.13",
+        "github.com/oekit/timertask": "v0.3.0",
+        "github.com/oekit/timertask/redis": "v0.2.17",
+        "github.com/oekit/tracing": "v0.3.10",
+        "github.com/oekit/workflow": "v0.3.11"
+      }
     }
   ]
 }
