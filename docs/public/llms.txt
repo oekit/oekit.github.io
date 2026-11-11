@@ -117,6 +117,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - [RPC 服务](https://oekit.github.io/guide/rpc-service.html): 治理热更/BizError 桥接/端点熔断
 - [可观测性](https://oekit.github.io/guide/observability.html): metrics/tracing/traceid
 - [AI Agent 指南](https://oekit.github.io/guide/ai-agent.html): 人与 Agent 的接入手册
+- [选型速查](https://oekit.github.io/guide/selection.html): 「我要做 X → 用什么包」场景表 + 硬红线 + pkg 子包速查（与 AI skill skills/oekit 同源渲染）
 - [迁移指南](https://oekit.github.io/guide/migration.html): ekit 单体 → oekit 路径映射（含完整 perl 改写脚本、矩阵内升级迁移对照、模块布局扁平化说明、bootstrap.Run 删除改写与就绪门契约、混合依赖过渡期 logx 桥）
 - [统一 CI](https://github.com/oekit/.github): 共享 reusable workflow——各仓 ci.yml 是薄调用层，改规则只改这一个仓
 - [平台契约](https://oekit.github.io/docs/PLATFORM_CONTRACT.html): 分层契约（ekit 时期文档）
