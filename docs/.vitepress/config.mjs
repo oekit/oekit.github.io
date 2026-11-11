@@ -34,7 +34,8 @@ export default defineConfig({
             { text: '06 RPC 服务（Kitex）', link: '/guide/rpc-service' },
             { text: '07 可观测性', link: '/guide/observability' },
             { text: '08 迁移指南', link: '/guide/migration' },
-            { text: '09 AI Agent 使用', link: '/guide/ai-agent' }
+            { text: '09 AI Agent 使用', link: '/guide/ai-agent' },
+            { text: '10 选型速查（场景 → 包）', link: '/guide/selection' }
           ]
         },
         {
