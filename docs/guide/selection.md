@@ -8,7 +8,7 @@ title: 选型速查（场景 → 包）
 
 ## 使用流
 
-1. 下面场景表定位模块/子包；基础工具需求查 [pkg 子包速查](#pkg-子包速查31-合-1零第三方依赖)
+1. 下面场景表定位模块/子包；基础工具需求查 [pkg 子包速查](#pkg-子包速查33-合-1零第三方依赖)
 2. `go doc github.com/oekit/<pkg>` 或读包 `doc.go` 拿准签名
 3. 对照[硬规则](#硬规则速览全矩阵适用)
 4. 深入：该仓 AGENTS.md / 对应指南（[日志](/guide/logging) · [错误](/guide/errors) ·
@@ -82,7 +82,7 @@ title: 选型速查（场景 → 包）
 | 注册发现 / Nacos 配置 | `registry`（+嵌套 `registry/nacos`·`registry/nacosimpl`），客户端门面 `nns` | SPI 无关：Registrar/Discoverer/ConfigStore + registrymocks 测试替身；Nacos 重依赖在嵌套模块 | — |
 
 
-## pkg 子包速查（31 合 1，零第三方依赖）
+## pkg 子包速查（33 合 1，零第三方依赖）
 
 | 想做什么 | 子包 | 说明 |
 |---|---|---|
@@ -111,6 +111,8 @@ title: 选型速查（场景 → 包）
 | 子进程治理 | `procx` | 内存上限 cgroup v2；与 shellx 配套 |
 | 零依赖静态配置 | `config` | yaml 子集 + env 覆盖 + Redact |
 | singleflight 契约测试 | `singleflighttest` | 共享契约套件 |
+| 分布式锁契约（后端中立） | `distlock` | Locker 接口 + 哨兵错误集 + WithLock（WithoutCancel 释放）；redisx/etcdx 消费同一份 |
+| 反射深拷贝 / 类型解析 | `reflectx` | DeepCopyValue 指针环防护；config.SetFromString 字符串按 reflect.Kind 落位 |
 
 ## 硬规则速览（全矩阵适用）
 
@@ -213,7 +215,7 @@ title: 选型速查（场景 → 包）
 
 | 模块 | 一句话 | 深入 |
 |---|---|---|
-| [pkg](https://github.com/oekit/pkg) | 微工具集 31 合 1（errors/bloomx/contextx/ctxscope/container/stringx/slicex/enumx/convert… | `pkg/AGENTS.md` |
+| [pkg](https://github.com/oekit/pkg) | 微工具集 33 合 1（errors/bloomx/contextx/ctxscope/container/stringx/slicex/enumx/convert… | `pkg/AGENTS.md` |
 | [concurrency](https://github.com/oekit/concurrency) | 并发与流控原语（async/gopool/group/singleflight/progress/syncx/ratelimit/retry）+ window 滑动窗口… | `concurrency/AGENTS.md` |
 | [core](https://github.com/oekit/core) | 应用基建件——governance 治理 schema、config 配置加载（LoadBootstrap/LoadDotEnv/Get* 系、default/env… | `core/AGENTS.md` |
 | [kitx](https://github.com/oekit/kitx) | 标识与校验——uidgen（Snowflake 全局单例+Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex… | `kitx/AGENTS.md` |
