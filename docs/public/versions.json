@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T00:01:39Z",
+  "generatedAt": "2026-11-13T08:01:39Z",
   "org": "oekit",
   "modules": [
     {
@@ -100,7 +100,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.34.1",
+      "latest": "v0.35.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -314,7 +314,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.4.3",
+      "latest": "v0.4.4",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -344,11 +344,11 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.16",
+      "latest": "v0.6.0",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.14",
+          "latest": "v0.2.0",
           "breakingIndex": [
             {
               "version": "nacos/v0.1.14",
@@ -359,22 +359,23 @@
               "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
             }
           ],
-          "hostVersion": "v0.5.15"
+          "hostVersion": "v0.6.0"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.2.0",
+          "latest": "v0.3.0",
           "breakingIndex": [
             {
               "version": "nacosimpl/v0.2.0",
               "line": "**BREAKING**（nacosimpl v0.2.0，0.x minor）删 nacosimpl.GetPodIP 纯转发零调用导出（registry#139）——全仓零引用，注册地址改走 registry.ParseAddr / registry.InfoFrom（回环/非法地址 fail-closed），nacos/doc.go 注册示例同步改写"
             }
           ],
-          "hostVersion": "v0.5.15"
+          "hostVersion": "v0.6.0"
         }
       ],
       "matrixDeps": [
-        "core"
+        "core",
+        "pkg"
       ],
       "breakingIndex": [
         {
@@ -421,7 +422,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.21.2",
+      "latest": "v0.21.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -636,7 +637,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.11.1",
+      "latest": "v0.11.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -716,11 +717,11 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.2",
+      "latest": "v0.5.3",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.20",
+          "latest": "v0.2.21",
           "breakingIndex": [
             {
               "version": "redis/v0.2.20",
@@ -731,7 +732,7 @@
               "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
             }
           ],
-          "hostVersion": "v0.5.0"
+          "hostVersion": "v0.5.3"
         }
       ],
       "matrixDeps": [
@@ -766,7 +767,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.18.0",
+      "latest": "v0.18.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -810,7 +811,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.2.4",
+      "latest": "v0.2.5",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -824,7 +825,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.8.1",
+      "latest": "v0.8.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -873,7 +874,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.3.5",
+      "latest": "v0.3.6",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -1126,7 +1127,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.11.1",
+      "latest": "v0.11.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -1168,44 +1169,44 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.6.2",
+      "tag": "v0.6.3",
       "modules": {
         "github.com/oekit/bootstrap": "v0.7.10",
         "github.com/oekit/bootstrap/nacos": "v0.3.24",
         "github.com/oekit/bootstrap/obs": "v0.2.26",
-        "github.com/oekit/concurrency": "v0.34.1",
-        "github.com/oekit/core": "v0.15.1",
-        "github.com/oekit/data": "v0.21.2",
+        "github.com/oekit/concurrency": "v0.35.1",
+        "github.com/oekit/core": "v0.15.2",
+        "github.com/oekit/data": "v0.21.3",
         "github.com/oekit/etcdx": "v0.3.2",
         "github.com/oekit/gormx": "v0.11.15",
         "github.com/oekit/hertz": "v0.11.6",
-        "github.com/oekit/httpx": "v0.11.1",
-        "github.com/oekit/k8s": "v0.2.4",
+        "github.com/oekit/httpx": "v0.11.2",
+        "github.com/oekit/k8s": "v0.2.5",
         "github.com/oekit/kitex": "v0.7.19",
         "github.com/oekit/kitex-examples": "v0.1.29",
         "github.com/oekit/kitex/cmd/thrift2openapi": "v0.1.0",
         "github.com/oekit/kitex/istio": "v0.7.0",
         "github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel": "v0.7.16",
-        "github.com/oekit/kitx": "v0.9.1",
+        "github.com/oekit/kitx": "v0.9.2",
         "github.com/oekit/logx": "v0.10.0",
         "github.com/oekit/logx/hertzlog": "v0.1.2",
         "github.com/oekit/logx/hlog": "v0.1.12",
         "github.com/oekit/logx/kitexlog": "v0.1.12",
         "github.com/oekit/logx/sink": "v0.1.2",
         "github.com/oekit/metrics": "v0.3.1",
-        "github.com/oekit/middleware": "v0.18.0",
+        "github.com/oekit/middleware": "v0.18.1",
         "github.com/oekit/network": "v0.10.3",
-        "github.com/oekit/nns": "v0.8.1",
-        "github.com/oekit/nns-endpoint": "v0.3.5",
-        "github.com/oekit/pkg": "v0.47.0",
+        "github.com/oekit/nns": "v0.8.2",
+        "github.com/oekit/nns-endpoint": "v0.3.6",
+        "github.com/oekit/pkg": "v0.47.1",
         "github.com/oekit/redisx": "v0.15.0",
-        "github.com/oekit/registry": "v0.5.16",
-        "github.com/oekit/registry/nacos": "v0.1.14",
-        "github.com/oekit/registry/nacosimpl": "v0.2.0",
-        "github.com/oekit/timertask": "v0.5.2",
-        "github.com/oekit/timertask/redis": "v0.2.20",
-        "github.com/oekit/tracing": "v0.4.3",
-        "github.com/oekit/workflow": "v0.11.1"
+        "github.com/oekit/registry": "v0.6.0",
+        "github.com/oekit/registry/nacos": "v0.2.0",
+        "github.com/oekit/registry/nacosimpl": "v0.3.0",
+        "github.com/oekit/timertask": "v0.5.3",
+        "github.com/oekit/timertask/redis": "v0.2.21",
+        "github.com/oekit/tracing": "v0.4.4",
+        "github.com/oekit/workflow": "v0.11.2"
       }
     }
   ]
