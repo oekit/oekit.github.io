@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T12:30:12Z",
+  "generatedAt": "2026-11-13T13:33:12Z",
   "org": "oekit",
   "modules": [
     {
@@ -438,7 +438,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.21.3",
+      "latest": "v0.22.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -449,6 +449,10 @@
         "timertask"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.22.0",
+          "line": "**BREAKING**：redisx 门面删除 Batch 类型别名（源包 redisx v0.16.0 已删 Batch/NewBatch，门面跟版税同步裁剪）。下游迁移：data/redisx.Batch → data/redisx.Pipeline（方法同构）。地板全量追平 redisx v0.16.0 / pkg v0.48.0 / concurrency v0.36.0 / logx "
+        },
         {
           "version": "v0.21.0",
           "line": "**BREAKING** refactor(cache): 壳类型改名跟随 pkg#355 禁裸 Option——`cache.Option` → `cache.CheckerOption`（= pkg `cache.CheckerOption`，随地板 pkg v0.43.0 一并落地）。显式命名该类型的调用方机械改名即可；改名动机是多包 co-import 冲突（仓规「函数选项模式 XxxOp"
@@ -716,7 +720,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.10.3",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -725,6 +729,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.11.0",
+          "line": "**BREAKING**：删除 streamx.ErrStreamExhausted 别名（#104）——Source 契约口径唯一：耗尽即 io.EOF。下游迁移：errors.Is(err, ErrStreamExhausted) → errors.Is(err, io.EOF)（同一值，零行为变化）。地板随迁 pkg v0.48.0 / logx v0.11.0 / concurrency "
+        },
         {
           "version": "v0.10.1",
           "line": "fix(sshx): ParseSinglePublicKey 兑现「恰好一把」，拒「一行塞两把」（#151）——doc 承诺拒两种输入，但第二种「一行里塞了两把」的防线（rest 非空）是不可达死代码：x/crypto 的 rest 是「第一行之后的余量」，单行输入恒为空、多行已被前一条判据拒掉 ⇒ 实际「一行塞两把」被放行，第二把被 authorized_keys 的 comment 字段吞下"
@@ -745,7 +753,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.3",
+      "latest": "v0.5.4",
       "nested": [
         {
           "path": "redis",
@@ -839,7 +847,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.2.5",
+      "latest": "v0.3.0",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -857,7 +865,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.8.2",
+      "latest": "v0.9.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -866,6 +874,10 @@
         "registry"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.9.0",
+          "line": "**BREAKING**：删除 (*ServiceClient).GetRegistrar() 双访问器（#146 终局）——kitex/hertz 适配层已全迁 Registrar()。下游迁移：GetRegistrar() → Registrar()（完全等价）。地板随迁 pkg v0.48.0 / logx v0.11.0 / concurrency v0.36.0。"
+        },
         {
           "version": "v0.8.0",
           "line": "feat(client): OnConfigChange 返回注销句柄 + 新增 OffConfigChange 注销口（#157，oekit/nns-endpoint#135 对侧）——configChangeCallbacks 改存 ConfigChangeHandle 指针包装条目（与 instanceCallbacks 同口径：Go 函数值不可比较、指针可按身份摘除），OnConfigCh"
@@ -906,7 +918,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.3.6",
+      "latest": "v0.4.0",
       "nested": [],
       "matrixDeps": [
         "httpx",
@@ -1023,7 +1035,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.11.6",
+      "latest": "v0.12.0",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -1104,7 +1116,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.7.19",
+      "latest": "v0.8.0",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
@@ -1147,6 +1159,10 @@
         "tracing"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.8.0",
+          "line": "**BREAKING**：1) 删除 NewLogger（Deprecated 别名）——迁移 github.com/oekit/logx/kitexlog 的 kitexlog.NewLogger（行为一致）。2) 熔断指标面随 metrics v0.4.0 迁类型化入口（CircuitState 枚举/ObserveBreakerStateTyped/ObserveTransitionType"
+        },
         {
           "version": "observability/tracing/instrumentation/kitexotel/v0.1.0",
           "line": "**BREAKING**: 根模块依赖面断开 apache/thrift v0.16.0——kitexotel 与 istio 拆成嵌套模块（import 路径不变），根包 NewServerTracingSuite / NewClientTracingSuite 迁至 kitexotel；下游选到的 thrift 回到 v0.13.0（#37）"
