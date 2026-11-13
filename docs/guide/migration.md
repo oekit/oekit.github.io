@@ -48,10 +48,10 @@ title: 迁移指南
 > bootstrap 的 `bootstrap/nacos`、`bootstrap/obs`、`logx/sink` 等是**独立嵌套模块**
 > （有自己的 tag），不是双层目录残留。
 >
-> **全矩阵共 12 个嵌套模块**（各自独立发版，import 路径即 module 路径）：
+> **全矩阵共 13 个嵌套模块**（各自独立发版，import 路径即 module 路径）：
 > `bootstrap/nacos`、`bootstrap/obs`、`logx/sink`、`logx/hlog`、`logx/hertzlog`、
 > `logx/kitexlog`、`timertask/redis`、`registry/nacosimpl`、`registry/nacos`、
-> `kitex/observability/tracing/instrumentation/kitexotel`、`kitex/istio`。它们是**依赖隔离**的载体——只 import 根模块的
+> `kitex/observability/tracing/instrumentation/kitexotel`、`kitex/istio`、`kitex/cmd/thrift2openapi`、`tracing/tests`。它们是**依赖隔离**的载体——只 import 根模块的
 > 消费者不会被拉入这些重依赖（`logx/sink` 隔离 lumberjack、`bootstrap/nacos` 隔离
 > 约 50 个阿里云 SDK、`timertask/redis` 隔离 go-redis、`kitex/istio` 隔离 xds、
 > `kitex/.../kitexotel` 隔离 obs-opentelemetry——后两者不隔离时会把 apache/thrift

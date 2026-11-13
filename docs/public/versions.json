@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "generatedAt": "2026-11-13T03:05:46Z",
+=======
+  "generatedAt": "2026-11-13T00:01:39Z",
+>>>>>>> 89798b8a0e48d7fabe5f7e04d2da98c78325363b
   "org": "oekit",
   "modules": [
     {
@@ -314,7 +318,11 @@
     },
     {
       "module": "tracing",
+<<<<<<< HEAD
       "latest": "v0.4.4",
+=======
+      "latest": "v0.4.3",
+>>>>>>> 89798b8a0e48d7fabe5f7e04d2da98c78325363b
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -344,7 +352,11 @@
     },
     {
       "module": "registry",
+<<<<<<< HEAD
       "latest": "v0.5.17",
+=======
+      "latest": "v0.5.16",
+>>>>>>> 89798b8a0e48d7fabe5f7e04d2da98c78325363b
       "nested": [
         {
           "path": "nacos",
@@ -637,7 +649,11 @@
     },
     {
       "module": "httpx",
+<<<<<<< HEAD
       "latest": "v0.11.2",
+=======
+      "latest": "v0.11.1",
+>>>>>>> 89798b8a0e48d7fabe5f7e04d2da98c78325363b
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -825,7 +841,11 @@
     },
     {
       "module": "nns",
+<<<<<<< HEAD
       "latest": "v0.8.2",
+=======
+      "latest": "v0.8.1",
+>>>>>>> 89798b8a0e48d7fabe5f7e04d2da98c78325363b
       "nested": [],
       "matrixDeps": [
         "concurrency",
