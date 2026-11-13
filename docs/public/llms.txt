@@ -88,7 +88,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 
 - [registry/nacosimpl](https://github.com/oekit/registry/tree/main/nacosimpl): Nacos SPI 实现——Discoverer/ConfigStore/Registrar 基于 nacos-sdk-go v2（nacos-sdk 重依赖隔离在此，registry 根仓零 nacos-sdk）
   - 安装：`go get github.com/oekit/registry/nacosimpl@latest`
-  - 版本：`v0.2.0` · 对应父仓 `registry v0.5.15`
+  - 版本：`v0.2.1` · 对应父仓 `registry v0.5.17`
 
 - [registry/nacos](https://github.com/oekit/registry/tree/main/nacos): Nacos 客户端门面——Bootstrap 配置、client 工厂与 config 加载（实现 core/config.ConfigSource，配 ConfigWatcher 热更新）
   - 安装：`go get github.com/oekit/registry/nacos@latest`
