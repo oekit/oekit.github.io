@@ -97,12 +97,10 @@
   <rect x="32" y="982.0" width="1176" height="122" rx="12" fill="#151A20" stroke="#3D444D"/>
   <text x="48" y="1006.0" font-size="13" font-weight="700" fill="#C9D1D9">基础库</text>
   <rect x="48" y="1018" width="426" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
-  <text x="64" y="1040" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 33 合 1</tspan></text>
+  <text x="64" y="1040" font-size="15" font-weight="600" fill="#E6EDF3">pkg<tspan font-size="11.5" font-weight="400" fill="#7D8590"> 微工具集 23 合 1</tspan></text>
   <text x="64" y="1055" font-size="10" fill="#7D8590">errors · stringx · slicex · enumx · convert · encoding · jsonrepair · httpjson</text>
   <text x="64" y="1067" font-size="10" fill="#7D8590">mathx · pathx · pagination · ptrx · timex · bloomx · cache · container</text>
   <text x="64" y="1079" font-size="10" fill="#7D8590">contextx · bufiox · strmap · singleflighttest · urlguard · cli · pack</text>
-  <text x="64" y="1091" font-size="10" fill="#7D8590">config · tarx · resumable · procx · webhook · secretx · shellx · ctxscope</text>
-  <text x="64" y="1103" font-size="10" fill="#7D8590">distlock · reflectx</text>
   <rect x="494" y="1018" width="204" height="72" rx="8" fill="#10151D" stroke="#3D444D"/>
   <text x="510" y="1045" font-size="15" font-weight="600" fill="#E6EDF3">concurrency</text>
   <text x="510" y="1068" font-size="11.5" fill="#9DA7B3">GoSafe · singleflight · retry</text>
