@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T03:50:34Z",
+  "generatedAt": "2026-11-13T05:49:13Z",
   "org": "oekit",
   "modules": [
     {
@@ -100,7 +100,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.35.0",
+      "latest": "v0.35.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -344,11 +344,11 @@
     },
     {
       "module": "registry",
-      "latest": "v0.5.17",
+      "latest": "v0.6.0",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.1.14",
+          "latest": "v0.2.0",
           "breakingIndex": [
             {
               "version": "nacos/v0.1.14",
@@ -359,18 +359,18 @@
               "line": "fix(nacos): Group 空值统一回填 `DEFAULT_GROUP` + Listen/Watch 失败可感知（[#51](https://github.com/oekit/registry/issues/51)、[#53](https://github.com/oekit/registry/issues/53)）——文档与 yaml 注释宣称的 Group 默认值此前从未被应用：Ge"
             }
           ],
-          "hostVersion": "v0.5.15"
+          "hostVersion": "v0.6.0"
         },
         {
           "path": "nacosimpl",
-          "latest": "v0.2.1",
+          "latest": "v0.3.0",
           "breakingIndex": [
             {
               "version": "nacosimpl/v0.2.0",
               "line": "**BREAKING**（nacosimpl v0.2.0，0.x minor）删 nacosimpl.GetPodIP 纯转发零调用导出（registry#139）——全仓零引用，注册地址改走 registry.ParseAddr / registry.InfoFrom（回环/非法地址 fail-closed），nacos/doc.go 注册示例同步改写"
             }
           ],
-          "hostVersion": "v0.5.17"
+          "hostVersion": "v0.6.0"
         }
       ],
       "matrixDeps": [
@@ -422,7 +422,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.21.2",
+      "latest": "v0.21.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -717,11 +717,11 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.2",
+      "latest": "v0.5.3",
       "nested": [
         {
           "path": "redis",
-          "latest": "v0.2.20",
+          "latest": "v0.2.21",
           "breakingIndex": [
             {
               "version": "redis/v0.2.20",
@@ -732,7 +732,7 @@
               "line": "**从根包迁出**：`RedisBackend`/`NewRedisBackend`/`ShardManager`/`NewShardManager` 原位于 `github.com/oekit/timertask` 根包，v0.2.0 起迁至本模块——**import 路径与 go.mod require 两处都要改**（本模块是独立 module，须 `go get github.com/oe"
             }
           ],
-          "hostVersion": "v0.5.0"
+          "hostVersion": "v0.5.3"
         }
       ],
       "matrixDeps": [
