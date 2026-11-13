@@ -82,13 +82,11 @@ title: 选型速查（场景 → 包）
 | 注册发现 / Nacos 配置 | `registry`（+嵌套 `registry/nacos`·`registry/nacosimpl`），客户端门面 `nns` | SPI 无关：Registrar/Discoverer/ConfigStore + registrymocks 测试替身；Nacos 重依赖在嵌套模块 | — |
 
 
-## pkg 子包速查（33 合 1，零第三方依赖）
+## pkg 子包速查（31 合 1，零第三方依赖）
 
 | 想做什么 | 子包 | 说明 |
 |---|---|---|
 | 错误包装/业务错误 | `errors` | nil-safe Wrap/Cause + BizError 双码（服务形态唯一载体） |
-| 分布式锁契约 | `distlock` | Locker 接口 + 哨兵 + WithLock——redisx/etcdx 双后端互换单源（v0.45.0） |
-| 深拷贝/环防护 | `reflectx` | DeepCopy 按指针身份记环，map/slice 自引用同栈防护（v0.45.0） |
 | 字符串/脱敏/敏感词 | `stringx` | 工具集 + Replacer 最长匹配替换 + Masker 正则脱敏 |
 | 切片/枚举/类型转换 | `slicex` / `enumx` / `convert` | — |
 | 时间边界/cron | `timex` / `timex/cron` | BeginningOf/EndOf 七对 + cron 表达式 |
@@ -215,7 +213,7 @@ title: 选型速查（场景 → 包）
 
 | 模块 | 一句话 | 深入 |
 |---|---|---|
-| [pkg](https://github.com/oekit/pkg) | 微工具集 33 合 1（errors/bloomx/contextx/ctxscope/container/stringx/slicex/enumx/convert… | `pkg/AGENTS.md` |
+| [pkg](https://github.com/oekit/pkg) | 微工具集 31 合 1（errors/bloomx/contextx/ctxscope/container/stringx/slicex/enumx/convert… | `pkg/AGENTS.md` |
 | [concurrency](https://github.com/oekit/concurrency) | 并发与流控原语（async/gopool/group/singleflight/progress/syncx/ratelimit/retry）+ window 滑动窗口… | `concurrency/AGENTS.md` |
 | [core](https://github.com/oekit/core) | 应用基建件——governance 治理 schema、config 配置加载（LoadBootstrap/LoadDotEnv/Get* 系、default/env… | `core/AGENTS.md` |
 | [kitx](https://github.com/oekit/kitx) | 标识与校验——uidgen（Snowflake 全局单例+Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex… | `kitx/AGENTS.md` |
