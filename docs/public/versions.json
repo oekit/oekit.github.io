@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T03:15:30Z",
+  "generatedAt": "2026-11-13T03:50:34Z",
   "org": "oekit",
   "modules": [
     {
@@ -1127,7 +1127,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.11.1",
+      "latest": "v0.11.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
