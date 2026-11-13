@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T21:54:48Z",
+  "generatedAt": "2026-11-11T01:38:20Z",
   "org": "oekit",
   "units": [
     {
@@ -57,7 +57,7 @@
       "unit": "kitx",
       "module": "github.com/oekit/kitx",
       "ok": true,
-      "consumerModules": 11,
+      "consumerModules": 12,
       "thirdParty": 9,
       "thirdPartyList": [
         "github.com/gabriel-vasile/mimetype",
@@ -72,6 +72,7 @@
       ],
       "ownModules": [
         "github.com/oekit/kitx",
+        "github.com/oekit/logx",
         "github.com/oekit/pkg"
       ]
     },
@@ -275,8 +276,8 @@
       "unit": "data",
       "module": "github.com/oekit/data",
       "ok": true,
-      "consumerModules": 31,
-      "thirdParty": 24,
+      "consumerModules": 32,
+      "thirdParty": 25,
       "thirdPartyList": [
         "filippo.io/edwards25519",
         "github.com/alicebob/miniredis/v2",
@@ -296,6 +297,7 @@
         "go.uber.org/atomic",
         "golang.org/x/sys",
         "golang.org/x/text",
+        "golang.org/x/time",
         "gorm.io/driver/mysql",
         "gorm.io/gorm",
         "modernc.org/libc",
@@ -576,10 +578,11 @@
       "unit": "network",
       "module": "github.com/oekit/network",
       "ok": true,
-      "consumerModules": 16,
-      "thirdParty": 12,
+      "consumerModules": 19,
+      "thirdParty": 15,
       "thirdPartyList": [
         "github.com/antithesishq/antithesis-sdk-go",
+        "github.com/cespare/xxhash/v2",
         "github.com/google/go-tpm",
         "github.com/klauspost/compress",
         "github.com/minio/highwayhash",
@@ -588,6 +591,8 @@
         "github.com/nats-io/nats.go",
         "github.com/nats-io/nkeys",
         "github.com/nats-io/nuid",
+        "go.opentelemetry.io/otel",
+        "go.opentelemetry.io/otel/trace",
         "golang.org/x/crypto",
         "golang.org/x/sys",
         "golang.org/x/time"
@@ -1191,8 +1196,8 @@
       "unit": "hertz",
       "module": "github.com/oekit/hertz",
       "ok": true,
-      "consumerModules": 137,
-      "thirdParty": 121,
+      "consumerModules": 140,
+      "thirdParty": 124,
       "thirdPartyList": [
         "cloud.google.com/go/aiplatform",
         "cloud.google.com/go/appengine",
@@ -1262,6 +1267,8 @@
         "github.com/hertz-contrib/obs-opentelemetry/tracing",
         "github.com/hertz-contrib/requestid",
         "github.com/hertz-contrib/tracer",
+        "github.com/jinzhu/inflection",
+        "github.com/jinzhu/now",
         "github.com/jmespath/go-jmespath",
         "github.com/json-iterator/go",
         "github.com/klauspost/cpuid/v2",
@@ -1314,6 +1321,7 @@
         "gopkg.in/ini.v1",
         "gopkg.in/natefinch/lumberjack.v2",
         "gopkg.in/yaml.v3",
+        "gorm.io/gorm",
         "rsc.io/pdf"
       ],
       "ownModules": [
