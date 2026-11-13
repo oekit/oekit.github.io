@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T00:49:13Z",
+  "generatedAt": "2026-11-13T03:05:46Z",
   "org": "oekit",
   "modules": [
     {
@@ -314,7 +314,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.4.3",
+      "latest": "v0.4.4",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -874,7 +874,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.3.5",
+      "latest": "v0.3.6",
       "nested": [],
       "matrixDeps": [
         "httpx",
