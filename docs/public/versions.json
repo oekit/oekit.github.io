@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T01:23:25Z",
+  "generatedAt": "2026-11-14T04:18:30Z",
   "org": "oekit",
   "modules": [
     {
@@ -104,7 +104,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.36.0",
+      "latest": "v0.36.1",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -247,7 +247,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.15.2",
+      "latest": "v0.15.3",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -533,13 +533,17 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.12.0",
+      "latest": "v0.12.1",
       "nested": [],
       "matrixDeps": [
         "logx",
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.12.1",
+          "line": "fix: 审计批报 7 单——池配置逐项 set(#229)/SplitStatements 未闭合块注释 fail-closed(#230,**BREAKING:签名 +error**)/IntSoftDelete.Scan fail-closed(#231)/advisory lock 取消路径尽力解锁(#232)/分页溢出回显一致(#233)/ILIKE 方言分派 MySQL 改写 LOWE"
+        },
         {
           "version": "v0.12.0",
           "line": "**BREAKING**：删除 sqlitedrv.OpenPureGoSQLite 迁移别名（#72 迁移期旧名接替者退役）。下游迁移：sqlitedrv.OpenPureGoSQLite(dsn) → sqlitedrv.Open(dsn)（签名不变，纯改名）。地板随迁 pkg v0.48.0 / logx v0.11.0。"
@@ -753,7 +757,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.4",
+      "latest": "v0.5.5",
       "nested": [
         {
           "path": "redis",
@@ -1225,7 +1229,7 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.6.6",
+      "tag": "v0.6.7",
       "modules": {
         "github.com/oekit/bootstrap": "v0.7.11",
         "github.com/oekit/bootstrap/nacos": "v0.3.24",
@@ -1235,11 +1239,11 @@
         "github.com/oekit/data": "v0.22.0",
         "github.com/oekit/etcdx": "v0.3.2",
         "github.com/oekit/gormx": "v0.12.0",
-        "github.com/oekit/hertz": "v0.12.0",
+        "github.com/oekit/hertz": "v0.12.1",
         "github.com/oekit/httpx": "v0.12.0",
         "github.com/oekit/k8s": "v0.3.0",
         "github.com/oekit/kitex": "v0.8.2",
-        "github.com/oekit/kitex-examples": "v0.1.29",
+        "github.com/oekit/kitex-examples": "v0.1.30",
         "github.com/oekit/kitex/cmd/thrift2openapi": "v0.1.0",
         "github.com/oekit/kitex/istio": "v0.7.0",
         "github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel": "v0.7.16",
