@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T01:21:14Z",
+  "generatedAt": "2026-11-15T04:01:16Z",
   "org": "oekit",
   "modules": [
     {
@@ -273,7 +273,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.9.3",
+      "latest": "v0.9.4",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -312,7 +312,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.4.0",
+      "latest": "v0.4.1",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -334,7 +334,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.4.5",
+      "latest": "v0.4.6",
       "nested": [],
       "matrixDeps": [
         "logx"
@@ -364,7 +364,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.6.0",
+      "latest": "v0.6.1",
       "nested": [
         {
           "path": "nacos",
@@ -811,7 +811,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.19.2",
+      "latest": "v0.19.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -873,7 +873,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.9.0",
+      "latest": "v0.9.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -972,11 +972,11 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.7.11",
+      "latest": "v0.7.12",
       "nested": [
         {
           "path": "nacos",
-          "latest": "v0.3.24",
+          "latest": "v0.3.25",
           "breakingIndex": [
             {
               "version": "nacos/v0.3.0",
@@ -995,7 +995,7 @@
               "line": "依赖升级：nns v0.4.0 / registry v0.4.0（双仓包提升至模块根）"
             }
           ],
-          "hostVersion": "v0.7.8"
+          "hostVersion": "v0.7.12"
         },
         {
           "path": "obs",
