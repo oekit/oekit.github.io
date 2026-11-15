@@ -1,13 +1,17 @@
 {
-  "generatedAt": "2026-11-14T04:18:30Z",
+  "generatedAt": "2026-11-15T01:21:14Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.48.0",
+      "latest": "v0.50.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
+        {
+          "version": "v0.50.0",
+          "line": "feat: 下沉 sse 游标回放应答器（订阅先于回放去重+心跳注释帧+游标窗口，#483）与 canon 策略面规范形指纹（canonical→版本哈希+facet diff，#484）。BREAKING：摘除产品域两件 licensx(#486)/webhook IM 载荷(#485)——v0.49.0 曾随 tag 发出，现改道 yi-nology/gopkg（revert #508），0."
+        },
         {
           "version": "v0.48.0",
           "line": "**BREAKING**：删除 errors.Errorf Deprecated 兼容层（#401/#405 恢复件的终局退役）。下游迁移：普通格式化包装 fmt.Errorf(\"...: %w\", err)；kv 结构化上下文 errors.Wrap。跨 org 消费方（go-git-platform/go-gongfeng/guardx）已同列车迁移。wrap.go/doc.go 注释同步去 "
@@ -104,7 +108,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.36.1",
+      "latest": "v0.37.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -1229,16 +1233,16 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.6.7",
+      "tag": "v0.6.9",
       "modules": {
         "github.com/oekit/bootstrap": "v0.7.11",
         "github.com/oekit/bootstrap/nacos": "v0.3.24",
         "github.com/oekit/bootstrap/obs": "v0.2.26",
-        "github.com/oekit/concurrency": "v0.36.0",
-        "github.com/oekit/core": "v0.15.2",
+        "github.com/oekit/concurrency": "v0.37.0",
+        "github.com/oekit/core": "v0.15.3",
         "github.com/oekit/data": "v0.22.0",
         "github.com/oekit/etcdx": "v0.3.2",
-        "github.com/oekit/gormx": "v0.12.0",
+        "github.com/oekit/gormx": "v0.12.1",
         "github.com/oekit/hertz": "v0.12.1",
         "github.com/oekit/httpx": "v0.12.0",
         "github.com/oekit/k8s": "v0.3.0",
@@ -1258,12 +1262,12 @@
         "github.com/oekit/network": "v0.11.0",
         "github.com/oekit/nns": "v0.9.0",
         "github.com/oekit/nns-endpoint": "v0.4.0",
-        "github.com/oekit/pkg": "v0.48.0",
+        "github.com/oekit/pkg": "v0.50.0",
         "github.com/oekit/redisx": "v0.16.0",
         "github.com/oekit/registry": "v0.6.0",
         "github.com/oekit/registry/nacos": "v0.2.0",
         "github.com/oekit/registry/nacosimpl": "v0.3.0",
-        "github.com/oekit/timertask": "v0.5.4",
+        "github.com/oekit/timertask": "v0.5.5",
         "github.com/oekit/timertask/redis": "v0.2.21",
         "github.com/oekit/tracing": "v0.4.5",
         "github.com/oekit/workflow": "v0.11.2"
