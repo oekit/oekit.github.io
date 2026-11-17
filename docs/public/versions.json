@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-17T06:05:38Z",
+  "generatedAt": "2026-11-17T21:51:43Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.52.0",
+      "latest": "v0.53.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -108,7 +108,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.38.1",
+      "latest": "v0.39.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -150,7 +150,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.11.0",
+      "latest": "v0.12.0",
       "nested": [
         {
           "path": "hertzlog",
@@ -251,7 +251,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.15.4",
+      "latest": "v0.16.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -273,7 +273,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.10.1",
+      "latest": "v0.11.0",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -312,7 +312,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.4.1",
+      "latest": "v0.4.2",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -334,7 +334,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.4.7",
+      "latest": "v0.4.8",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -365,7 +365,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.6.2",
+      "latest": "v0.7.0",
       "nested": [
         {
           "path": "nacos",
@@ -443,7 +443,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.22.2",
+      "latest": "v0.22.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -538,7 +538,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.12.2",
+      "latest": "v0.13.0",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -597,7 +597,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.16.3",
+      "latest": "v0.16.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -653,7 +653,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.3.3",
+      "latest": "v0.3.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -674,7 +674,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.12.2",
+      "latest": "v0.12.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -729,7 +729,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.11.2",
+      "latest": "v0.11.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -762,7 +762,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.6",
+      "latest": "v0.5.7",
       "nested": [
         {
           "path": "redis",
@@ -812,7 +812,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.20.0",
+      "latest": "v0.20.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -856,7 +856,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.3.1",
+      "latest": "v0.3.2",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -875,7 +875,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.9.2",
+      "latest": "v0.9.3",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -929,9 +929,10 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.4.1",
+      "latest": "v0.4.2",
       "nested": [],
       "matrixDeps": [
+        "concurrency",
         "httpx",
         "logx",
         "metrics",
@@ -976,7 +977,7 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.7.13",
+      "latest": "v0.7.14",
       "nested": [
         {
           "path": "nacos",
@@ -1047,7 +1048,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.12.5",
+      "latest": "v0.12.6",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -1128,7 +1129,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.8.3",
+      "latest": "v0.8.4",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
@@ -1195,7 +1196,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.11.3",
+      "latest": "v0.11.4",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -1223,7 +1224,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.30",
+      "latest": "v0.1.31",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -1237,44 +1238,44 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.7.4",
+      "tag": "v0.7.6",
       "modules": {
-        "github.com/oekit/bootstrap": "v0.7.12",
+        "github.com/oekit/bootstrap": "v0.7.14",
         "github.com/oekit/bootstrap/nacos": "v0.3.25",
         "github.com/oekit/bootstrap/obs": "v0.2.26",
-        "github.com/oekit/concurrency": "v0.38.0",
-        "github.com/oekit/core": "v0.15.3",
-        "github.com/oekit/data": "v0.22.1",
-        "github.com/oekit/etcdx": "v0.3.2",
-        "github.com/oekit/gormx": "v0.12.1",
-        "github.com/oekit/hertz": "v0.12.4",
-        "github.com/oekit/httpx": "v0.12.1",
-        "github.com/oekit/k8s": "v0.3.0",
-        "github.com/oekit/kitex": "v0.8.2",
-        "github.com/oekit/kitex-examples": "v0.1.30",
+        "github.com/oekit/concurrency": "v0.39.0",
+        "github.com/oekit/core": "v0.16.0",
+        "github.com/oekit/data": "v0.22.3",
+        "github.com/oekit/etcdx": "v0.3.4",
+        "github.com/oekit/gormx": "v0.13.0",
+        "github.com/oekit/hertz": "v0.12.6",
+        "github.com/oekit/httpx": "v0.12.3",
+        "github.com/oekit/k8s": "v0.3.2",
+        "github.com/oekit/kitex": "v0.8.4",
+        "github.com/oekit/kitex-examples": "v0.1.31",
         "github.com/oekit/kitex/cmd/thrift2openapi": "v0.1.0",
         "github.com/oekit/kitex/istio": "v0.7.0",
         "github.com/oekit/kitex/observability/tracing/instrumentation/kitexotel": "v0.7.16",
-        "github.com/oekit/kitx": "v0.10.0",
-        "github.com/oekit/logx": "v0.11.0",
+        "github.com/oekit/kitx": "v0.11.0",
+        "github.com/oekit/logx": "v0.12.0",
         "github.com/oekit/logx/hertzlog": "v0.1.2",
         "github.com/oekit/logx/hlog": "v0.1.12",
         "github.com/oekit/logx/kitexlog": "v0.1.12",
         "github.com/oekit/logx/sink": "v0.1.2",
-        "github.com/oekit/metrics": "v0.4.1",
-        "github.com/oekit/middleware": "v0.20.0",
-        "github.com/oekit/network": "v0.11.1",
-        "github.com/oekit/nns": "v0.9.1",
-        "github.com/oekit/nns-endpoint": "v0.4.0",
-        "github.com/oekit/pkg": "v0.52.0",
-        "github.com/oekit/redisx": "v0.16.2",
-        "github.com/oekit/registry": "v0.6.1",
+        "github.com/oekit/metrics": "v0.4.2",
+        "github.com/oekit/middleware": "v0.20.1",
+        "github.com/oekit/network": "v0.11.3",
+        "github.com/oekit/nns": "v0.9.3",
+        "github.com/oekit/nns-endpoint": "v0.4.2",
+        "github.com/oekit/pkg": "v0.53.0",
+        "github.com/oekit/redisx": "v0.16.4",
+        "github.com/oekit/registry": "v0.7.0",
         "github.com/oekit/registry/nacos": "v0.2.0",
         "github.com/oekit/registry/nacosimpl": "v0.3.0",
-        "github.com/oekit/timertask": "v0.5.5",
+        "github.com/oekit/timertask": "v0.5.7",
         "github.com/oekit/timertask/redis": "v0.2.21",
-        "github.com/oekit/tracing": "v0.4.6",
-        "github.com/oekit/workflow": "v0.11.2"
+        "github.com/oekit/tracing": "v0.4.8",
+        "github.com/oekit/workflow": "v0.11.4"
       }
     }
   ]
