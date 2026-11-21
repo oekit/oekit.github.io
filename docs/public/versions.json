@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-20T01:23:45Z",
+  "generatedAt": "2026-11-21T06:57:08Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.55.1",
+      "latest": "v0.56.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -108,7 +108,7 @@
     },
     {
       "module": "concurrency",
-      "latest": "v0.39.2",
+      "latest": "v0.40.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -150,7 +150,7 @@
     },
     {
       "module": "logx",
-      "latest": "v0.12.0",
+      "latest": "v0.12.1",
       "nested": [
         {
           "path": "hertzlog",
@@ -251,7 +251,7 @@
     },
     {
       "module": "core",
-      "latest": "v0.17.2",
+      "latest": "v0.18.0",
       "nested": [],
       "matrixDeps": [
         "pkg"
@@ -273,7 +273,7 @@
     },
     {
       "module": "kitx",
-      "latest": "v0.12.2",
+      "latest": "v0.13.0",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -312,7 +312,7 @@
     },
     {
       "module": "metrics",
-      "latest": "v0.4.2",
+      "latest": "v0.4.3",
       "nested": [],
       "matrixDeps": [
         "core"
@@ -365,7 +365,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.8.2",
+      "latest": "v0.8.3",
       "nested": [
         {
           "path": "nacos",
@@ -445,7 +445,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.23.0",
+      "latest": "v0.24.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -540,7 +540,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.14.0",
+      "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -599,7 +599,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.16.6",
+      "latest": "v0.16.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -655,7 +655,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.3.6",
+      "latest": "v0.3.7",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -676,7 +676,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.13.0",
+      "latest": "v0.14.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -731,7 +731,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.11.4",
+      "latest": "v0.12.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -764,7 +764,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.11",
+      "latest": "v0.5.12",
       "nested": [
         {
           "path": "redis",
@@ -786,6 +786,10 @@
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.5.12",
+          "line": "docs: redis 键布局明写「单 slot 仅逻辑分片」（分片级 hash tag 属键空间 breaking，登记后续窗口）（#292）"
+        },
         {
           "version": "redis/v0.2.20",
           "line": "chore: Go 地板 1.24.0 → 1.26.0（根与 ci.yml/lint 配置；嵌套 redis 已就位）；pkg 依赖 v0.44.0 → v0.45.0（panic 收编单源 errors.Recovered）。**BREAKING**：local.Clock 接口新增 NewTimer(d time.Duration) Timer 方法——外部自定义 Clock 实现需补该方法"
@@ -814,7 +818,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.22.0",
+      "latest": "v0.23.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -877,7 +881,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.10.0",
+      "latest": "v0.10.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -931,7 +935,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.5.0",
+      "latest": "v0.5.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -1050,7 +1054,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.14.0",
+      "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
@@ -1131,7 +1135,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.8.7",
+      "latest": "v0.9.0",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
@@ -1226,7 +1230,7 @@
     },
     {
       "module": "kitex-examples",
-      "latest": "v0.1.31",
+      "latest": "v0.1.32",
       "nested": [],
       "matrixDeps": [
         "bootstrap",
