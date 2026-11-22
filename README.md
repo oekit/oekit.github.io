@@ -40,7 +40,7 @@ oekit 是 **24 个独立发版的 Go 模块仓库**（根模块）＋ **12 个�
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
-| 基础库 | [pkg](https://github.com/oekit/pkg)（23 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [kitx](https://github.com/oekit/kitx)（标识与校验 + hash）|
+| 基础库 | [pkg](https://github.com/oekit/pkg)（23 合 1）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [authx](https://github.com/oekit/authx)（标识与校验 + hash，原 kitx）|
 
 ## 快速开始
 
@@ -49,7 +49,7 @@ oekit 是 **24 个独立发版的 Go 模块仓库**（根模块）＋ **12 个�
 go get github.com/oekit/pkg@latest
 
 # 标识与校验
-go get github.com/oekit/kitx@latest
+go get github.com/oekit/authx@latest
 
 # HTTP 服务全家
 go get github.com/oekit/middleware github.com/oekit/hertz
@@ -61,7 +61,7 @@ go get github.com/oekit/middleware github.com/oekit/hertz
 |---|---|
 | `git.enjoye.top/enjoydream/ekit/…`（ekit 单体，冻结维护） | `github.com/oekit/…` |
 | `github.com/oekit/<micro>`（16 微库，已删仓） | `github.com/oekit/pkg/<micro>` |
-| `github.com/oekit/pkg/uidgen`、`pkg/validator`（pkg v0.10.0 拆出） | `github.com/oekit/kitx/uidgen`、`kitx/validator` |
+| `github.com/oekit/pkg/uidgen`、`pkg/validator`（pkg v0.10.0 拆出） | `github.com/oekit/authx/uidgen`、`authx/validator` |
 | `github.com/oekit/redis` / `gorm` | `github.com/oekit/redisx` / `gormx` |
 
 ## License

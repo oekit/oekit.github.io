@@ -10,7 +10,7 @@ title: 迁移指南
 |---|---|---|
 | git.enjoye.top/enjoydream/ekit/ | `github.com/oekit/<module>` | 单体冻结维护，仅安全修复 |
 | github.com/oekit/（16 微库） | github.com/oekit/pkg/ | 微仓已删除；旧版本经 proxy 缓存仍可解析 |
-| github.com/oekit/pkg/uidgen · validator | github.com/oekit/kitx/uidgen · validator | 2026-10-17 拆分（pkg v0.10.0，BREAKING）；包名与行为契约不变 |
+| github.com/oekit/pkg/uidgen · validator | github.com/oekit/authx/uidgen · validator | 2026-10-17 拆分（pkg v0.10.0，BREAKING；当时拆至 kitx，后改名 authx）；包名与行为契约不变 |
 | github.com/oekit/redis | github.com/oekit/redisx | 2026-10-16 更名（消 go-redis 包名撞车）；旧路径重定向 ≤ v0.4.0 |
 | github.com/oekit/gorm | github.com/oekit/gormx | 2026-10-16 更名（避 gorm.io/gorm 混淆）；旧路径重定向 ≤ v0.2.1 |
 
@@ -180,7 +180,7 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 
 | 旧（oekit 早期） | 新 | 版本 |
 |---|---|---|
-| `github.com/oekit/pkg/uidgen` · `pkg/validator` | `github.com/oekit/kitx/uidgen` · `kitx/validator` | pkg v0.10.0（BREAKING，机械替换 import） |
+| `github.com/oekit/pkg/uidgen` · `pkg/validator` | `github.com/oekit/authx/uidgen` · `authx/validator` | pkg v0.10.0（BREAKING，机械替换 import；当时拆至 kitx，后改名 authx） |
 | `github.com/oekit/pkg/collectionx` | `github.com/oekit/pkg/container` | pkg v0.9.0（类型名/签名不变） |
 | `github.com/oekit/logx/shutdown` | `github.com/oekit/core/lifecycle` | logx v0.5.0 弃用别名（Manager 正身在 core，零外部依赖） |
 | `httpx.WithBalance(strategy)` / `loadbalance.Balancer` 家族 | `httpx.WithSelector(sel)` / `loadbalance.NewSelector("roundrobin")`；`NewConsistentHashBalance` → `NewConsistentHashSelector`；`WeightedResolver` → `InstanceResolver` | httpx v0.4.0（BREAKING，无兼容路径；v0.5.0 起 Selector 另有 p2c 自适应策略） |
@@ -211,7 +211,7 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 | pkg | v0.14.0 | registry | v0.4.1 |
 | concurrency | v0.16.0 | timertask | v0.1.9 |
 | logx | v0.7.0 | nns / nns-endpoint | v0.4.1 / v0.2.3 |
-| core / kitx | v0.9.1 / v0.2.0 | middleware | v0.11.0 |
+| core / authx | v0.9.1 / v0.2.0 | middleware | v0.11.0 |
 | metrics / tracing | v0.1.7 / v0.2.2 | gormx / redisx / data | v0.6.0 / v0.9.0 / v0.14.0 |
 | httpx | v0.6.1 | bootstrap | v0.6.2 |
 | hertz / kitex | v0.7.0 / v0.6.2 | workflow / kitex-examples | v0.3.1 / v0.1.17 |
@@ -225,4 +225,4 @@ func (b bridgedLogger) SetLevel(lv oekitlogx.Level) {
 
 - ekit 单体（git.enjoye.top）— 冻结维护，完整历史与架构文档（docs/PLATFORM_CONTRACT.md）
 - oekit/observability — Round-2 解散（仓已删除）：logx→oekit/logx，metrics→oekit/metrics，tracing→oekit/tracing
-- oekit/{errors,validator,stringx,slicex,enumx,convert,encoding,jsonrepair,httpjson,mathx,pathx,pagination,ptrx,timex,uidgen,cache} — Round-4 微库，已并入 oekit/pkg（仓已删除；uidgen/validator 又于 pkg v0.10.0 拆至 oekit/kitx）
+- oekit/{errors,validator,stringx,slicex,enumx,convert,encoding,jsonrepair,httpjson,mathx,pathx,pagination,ptrx,timex,uidgen,cache} — Round-4 微库，已并入 oekit/pkg（仓已删除；uidgen/validator 又于 pkg v0.10.0 拆至 oekit/kitx，今 oekit/authx）
