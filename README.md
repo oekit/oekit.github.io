@@ -32,11 +32,11 @@ npm run build    # 构建到 docs/.vitepress/dist
 
 ## 模块矩阵
 
-oekit 是 **24 个独立发版的 Go 模块仓库**（根模块）＋ **12 个嵌套模块**，合计 **37 个发版单元**（每仓独立 SemVer + 独立 CI）。依赖严格自底向上——上层随意组合，下层永不反向依赖（完整架构见 [docs/about/architecture.md](docs/about/architecture.md)，机器可读版本矩阵见 [docs/public/versions.json](docs/public/versions.json)）：
+oekit 是 **23 个独立发版的 Go 模块仓库**（根模块）＋ **12 个嵌套模块**，合计 **36 个发版单元**（每仓独立 SemVer + 独立 CI）。依赖严格自底向上——上层随意组合，下层永不反向依赖（完整架构见 [docs/about/architecture.md](docs/about/architecture.md)，机器可读版本矩阵见 [docs/public/versions.json](docs/public/versions.json)）：
 
 | 能力层 | 模块 |
 |---|---|
-| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [kitex-examples](https://github.com/oekit/kitex-examples) · [k8s](https://github.com/oekit/k8s) |
+| 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [k8s](https://github.com/oekit/k8s) |
 | 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
 | 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
