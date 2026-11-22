@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T10:34:49Z",
+  "generatedAt": "2026-11-22T13:15:52Z",
   "org": "oekit",
   "modules": [
     {
@@ -8,6 +8,14 @@
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
+        {
+          "version": "v0.59.0",
+          "line": "v0.58.2 起标记 Deprecated 的 toolname 包**本版删除**——不再保留兼容壳。理由：归位公告（v0.58.2）已给出明确替代（github.com/oagentkit/toolname，API 逐字一致），兼容壳多留一天，「新代码该写哪个 import」的歧义就多一天。"
+        },
+        {
+          "version": "v0.59.0",
+          "line": "**下游要做什么**：import \"github.com/oekit/pkg/toolname\" 全部改指 \"github.com/oagentkit/toolname\"（v0.1.0+，API 逐字一致，仅 import 路径变化）。编译即红、改完即绿，无运行时行为变化。"
+        },
         {
           "version": "v0.50.0",
           "line": "feat: 下沉 sse 游标回放应答器（订阅先于回放去重+心跳注释帧+游标窗口，#483）与 canon 策略面规范形指纹（canonical→版本哈希+facet diff，#484）。BREAKING：摘除产品域两件 licensx(#486)/webhook IM 载荷(#485)——v0.49.0 曾随 tag 发出，现改道 yi-nology/gopkg（revert #508），0."
@@ -1244,7 +1252,7 @@
   ],
   "verifiedCombos": [
     {
-      "tag": "v0.7.14",
+      "tag": "v0.7.15",
       "modules": {
         "github.com/oekit/bootstrap": "v0.7.14",
         "github.com/oekit/bootstrap/nacos": "v0.3.25",
@@ -1273,7 +1281,7 @@
         "github.com/oekit/network": "v0.12.0",
         "github.com/oekit/nns": "v0.10.1",
         "github.com/oekit/nns-endpoint": "v0.5.1",
-        "github.com/oekit/pkg": "v0.57.1",
+        "github.com/oekit/pkg": "v0.59.0",
         "github.com/oekit/redisx": "v0.16.7",
         "github.com/oekit/registry": "v0.8.3",
         "github.com/oekit/registry/nacos": "v0.2.0",
