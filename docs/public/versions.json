@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-22T18:23:23Z",
+  "generatedAt": "2026-11-22T22:13:07Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.59.1",
+      "latest": "v0.60.0",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -280,14 +280,18 @@
       ]
     },
     {
-      "module": "kitx",
-      "latest": "v0.13.0",
+      "module": "authx",
+      "latest": "v0.14.0",
       "nested": [],
       "matrixDeps": [
         "logx",
         "pkg"
       ],
       "breakingIndex": [
+        {
+          "version": "v0.14.0",
+          "line": "**破坏性变更**：仓与 module 改名 kitx → authx——module path 由 github.com/oekit/kitx 改为 github.com/oekit/authx（消除与 RPC 框架仓 kitex 的一字之差误查面）。消费方须把 import 前缀与 require 一并改到新路径并抬到 v0.14.0；旧路径 github.com/oekit/kitx 冻结在"
+        },
         {
           "version": "v0.9.0",
           "line": "**BREAKING** feat(jwt): 解析侧缺省强制 exp（#135）——签发侧「永不过期令牌是最危险的缺省」（WithTTL(0) panic，#65）的解析侧闭环：golang-jwt v5 仅在 exp 存在时校验，无 exp 令牌此前缺省放行，#65 纪律在消费面单侧失效；现 Parse/ParseSymmetric/Manager.ParseTyped 对无 exp 令牌一律"
@@ -460,8 +464,7 @@
         "gormx",
         "logx",
         "pkg",
-        "redisx",
-        "timertask"
+        "redisx"
       ],
       "breakingIndex": [
         {
@@ -1065,11 +1068,11 @@
       "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [
+        "authx",
         "bootstrap",
         "concurrency",
         "core",
         "gormx",
-        "kitx",
         "logx",
         "metrics",
         "middleware",
@@ -1235,19 +1238,6 @@
           "line": "**包提升至模块根**：`github.com/oekit/workflow/workflow` → `github.com/oekit/workflow` （仅移动目录与导入路径，代码零逻辑变化；矩阵内无消费方）"
         }
       ]
-    },
-    {
-      "module": "kitex-examples",
-      "latest": "v0.1.32",
-      "nested": [],
-      "matrixDeps": [
-        "bootstrap",
-        "core",
-        "kitex",
-        "logx",
-        "tracing"
-      ],
-      "breakingIndex": []
     }
   ],
   "verifiedCombos": [

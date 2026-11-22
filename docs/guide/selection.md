@@ -77,7 +77,7 @@ title: 选型速查（场景 → 包）
 | 应用配置 | `core/config` | `LoadBootstrap`（etc/ 约定）/ `LoadFile`（任意路径）/ `Unmarshal`（字节源）共享同一条解码线；严格模式 `WithStrict()` 未知键拒载 | `Unmarshal` 是 yaml 优先于 env——要 12-factor 再调 `ApplyEnvOverlay` |
 | 零依赖嵌入配置 | `pkg/config` | yaml 子集 parser + env 覆盖 + 必填汇总校验 + 敏感字段 Redact dump | 需要完整 yaml/三方能力选 core/config（pkg 是零依赖仓） |
 | 优雅关停 | `core/lifecycle`（`bootstrap` 组合根） | Manager：closer 注册 / Drain 引用计数 / per-job 超时 / panic 隔离；关停序 nns 反注册 → server.Shutdown | 组件 Close 统一 `Close(ctx) error` + sync.Once 幂等 |
-| ID 生成 / 校验 / 哈希 | `kitx` | uidgen（Snowflake 单例 + Extract 元数据 / RFC4122 v4）；validator 校验失败 Unwrap 即 BizError 400；hash 非密码学缓存键 | — |
+| ID 生成 / 校验 / 哈希 | `authx`（原 kitx） | uidgen（Snowflake 单例 + Extract 元数据 / RFC4122 v4）；validator 校验失败 Unwrap 即 BizError 400；hash 非密码学缓存键 | — |
 | 日志后端桥接 / 文件轮转 | `logx/sink` · `logx/hlog` · `logx/hertzlog` · `logx/kitexlog`（嵌套模块按需引入） | 文件/轮转/多目标 Sink；logrus/zap/zerolog/slog 四后端桥 hlog；Kitex klog 桥接 | 防递归：hlog 后端别再传给框架桥（kitexlog panic 防御） |
 | 注册发现 / Nacos 配置 | `registry`（+嵌套 `registry/nacos`·`registry/nacosimpl`），客户端门面 `nns` | SPI 无关：Registrar/Discoverer/ConfigStore + registrymocks 测试替身；Nacos 重依赖在嵌套模块 | — |
 
@@ -93,7 +93,6 @@ title: 选型速查（场景 → 包）
 | 数学/路径/分页/指针 | `mathx` / `pathx` / `pagination` / `ptrx` | — |
 | JSON 修复/宽松解析 | `jsonrepair` | UnmarshalLenient + ExtractObject/ExtractArray |
 | HTTP + JSON（零依赖） | `httpjson` | 带解析的轻量请求 |
-| SSE 游标回放 | `sse` | 游标窗口回放 + 订阅先于回放去重 + 心跳帧 |
 | 编码 | `encoding` | — |
 | 本地缓存 | `cache` / `cache/cachetest` | CacheAside/LocalCache/SingleFlightCache + 契约套件（RunWithClock 假时钟；Comparable 仅 int/uint/string） |
 | 泛型容器 | `container` | Set/Ring/Queue/SafeMap/Slice（并发安全） |
@@ -102,7 +101,6 @@ title: 选型速查（场景 → 包）
 | 缓冲 IO | `bufiox` | — |
 | 并发安全 map | `strmap` | — |
 | secrets 凭证 | `secretx` | — |
-| PII 值面检测与打码 | `pii` | 手机号 + 18 位身份证四重校验，键值同走一条判定面 |
 | shell 词法判据 | `shellx` | Analyze 事实面（重定向/动态词），判不了就报错 |
 | 出站 SSRF 校验 | `urlguard` | CheckURL + DialFunc 预解析（与 httpx.WithSafeDial 组合） |
 | webhook 回调 | `webhook` | — |
@@ -115,9 +113,6 @@ title: 选型速查（场景 → 包）
 | 分布式锁契约（后端中立） | `distlock` | Locker/哨兵集/WithLock 单源——redisx·etcdx 后端消费（etcdx#123 治本） |
 | singleflight 契约测试 | `singleflighttest` | 共享契约套件 |
 | 反射深拷贝 / 类型解析 | `reflectx` | DeepCopyValue 指针环防护；config.SetFromString 字符串按 reflect.Kind 落位 |
-| 审计哈希链 | `auditchain` | append-only 链 + canonical 字段序 + verify 首断点即停 |
-| 策略面规范形指纹 | `canon` | canonical → 版本哈希 + facet diff |
-| 快照式订阅表 | `subhub` | 通用并发结构，原 goagent-kernel 内部件 |
 
 ## 硬规则速览（全矩阵适用）
 
@@ -181,11 +176,10 @@ title: 选型速查（场景 → 包）
 | 模块 | 一句话 | 深入 |
 |---|---|---|
 | [bootstrap](https://github.com/oekit/bootstrap) | 应用生命周期引导——New(WithServiceName/WithShutdownTimeout/WithBeforeServe) + Run(fn) + healthz | `bootstrap/AGENTS.md` |
-| [hertz](https://github.com/oekit/hertz) | Hertz 运行时集成（模块根扁平化）——日志桥接、生命周期、SSE/health/metrics、适配器、OTel、crudh/validatorh（基于 kitx… | `hertz/AGENTS.md` |
+| [hertz](https://github.com/oekit/hertz) | Hertz 运行时集成（模块根扁平化）——日志桥接、生命周期、SSE/health/metrics、适配器、OTel、crudh/validatorh（基于 authx… | `hertz/AGENTS.md` |
 | [kitex](https://github.com/oekit/kitex) | Kitex 生态——日志桥接、治理热更、生命周期、BizError 桥接、kitexotel、istio（xDS 动态熔断，原 istio 微库收编） | `kitex/AGENTS.md` |
 | [middleware](https://github.com/oekit/middleware) | Hertz 标准中间件栈（模块根 mw，双层目录已收平）+ contrib 桥接 + hmw + SheddingMiddleware 自适应降载 + chainmw… | `middleware/AGENTS.md` |
 | [workflow](https://github.com/oekit/workflow) | 组合式流程编排——串行/并行/异步/条件分支 + Hook AOP | `workflow/AGENTS.md` |
-| [kitex-examples](https://github.com/oekit/kitex-examples) | Kitex echo 示例——client/server + IDL + 治理配置 | `kitex-examples/AGENTS.md` |
 | [k8s](https://github.com/oekit/k8s) | Kubernetes 客户端封装——RESTConfig/Clientset/DynamicClient 构建（显式 kubeconfig → KUBECONFIG 显式意图… | `k8s/AGENTS.md` |
 
 ## 通信 · 服务治理
@@ -223,7 +217,7 @@ title: 选型速查（场景 → 包）
 | [pkg](https://github.com/oekit/pkg) | 微工具集 38 合 1（errors/bloomx/contextx/ctxscope/container/distlock/stringx/slicex/enumx… | `pkg/AGENTS.md` |
 | [concurrency](https://github.com/oekit/concurrency) | 并发与流控原语（async/gopool/group/singleflight/progress/syncx/ratelimit/retry）+ window 滑动窗口… | `concurrency/AGENTS.md` |
 | [core](https://github.com/oekit/core) | 应用基建件——governance 治理 schema、config 配置加载（LoadBootstrap/LoadDotEnv/Get* 系、default/env… | `core/AGENTS.md` |
-| [kitx](https://github.com/oekit/kitx) | 标识与校验——uidgen（Snowflake 全局单例+Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex… | `kitx/AGENTS.md` |
+| [authx](https://github.com/oekit/authx) | 标识与校验（2026-11-23 自 kitx 改名，消除与 RPC 框架仓 kitex 的一字之差误查面）——uidgen（Snowflake 全局单例+Extract… | `authx/AGENTS.md` |
 
 ### 嵌套模块（重依赖隔离载体）
 
