@@ -93,6 +93,7 @@ title: 选型速查（场景 → 包）
 | 数学/路径/分页/指针 | `mathx` / `pathx` / `pagination` / `ptrx` | — |
 | JSON 修复/宽松解析 | `jsonrepair` | UnmarshalLenient + ExtractObject/ExtractArray |
 | HTTP + JSON（零依赖） | `httpjson` | 带解析的轻量请求 |
+| SSE 游标回放 | `sse` | 游标窗口回放 + 订阅先于回放去重 + 心跳帧 |
 | 编码 | `encoding` | — |
 | 本地缓存 | `cache` / `cache/cachetest` | CacheAside/LocalCache/SingleFlightCache + 契约套件（RunWithClock 假时钟；Comparable 仅 int/uint/string） |
 | 泛型容器 | `container` | Set/Ring/Queue/SafeMap/Slice（并发安全） |
@@ -101,6 +102,7 @@ title: 选型速查（场景 → 包）
 | 缓冲 IO | `bufiox` | — |
 | 并发安全 map | `strmap` | — |
 | secrets 凭证 | `secretx` | — |
+| PII 值面检测与打码 | `pii` | 手机号 + 18 位身份证四重校验，键值同走一条判定面 |
 | shell 词法判据 | `shellx` | Analyze 事实面（重定向/动态词），判不了就报错 |
 | 出站 SSRF 校验 | `urlguard` | CheckURL + DialFunc 预解析（与 httpx.WithSafeDial 组合） |
 | webhook 回调 | `webhook` | — |
@@ -113,6 +115,9 @@ title: 选型速查（场景 → 包）
 | 分布式锁契约（后端中立） | `distlock` | Locker/哨兵集/WithLock 单源——redisx·etcdx 后端消费（etcdx#123 治本） |
 | singleflight 契约测试 | `singleflighttest` | 共享契约套件 |
 | 反射深拷贝 / 类型解析 | `reflectx` | DeepCopyValue 指针环防护；config.SetFromString 字符串按 reflect.Kind 落位 |
+| 审计哈希链 | `auditchain` | append-only 链 + canonical 字段序 + verify 首断点即停 |
+| 策略面规范形指纹 | `canon` | canonical → 版本哈希 + facet diff |
+| 快照式订阅表 | `subhub` | 通用并发结构，原 goagent-kernel 内部件 |
 
 ## 硬规则速览（全矩阵适用）
 
