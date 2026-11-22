@@ -93,7 +93,6 @@ title: 选型速查（场景 → 包）
 | 数学/路径/分页/指针 | `mathx` / `pathx` / `pagination` / `ptrx` | — |
 | JSON 修复/宽松解析 | `jsonrepair` | UnmarshalLenient + ExtractObject/ExtractArray |
 | HTTP + JSON（零依赖） | `httpjson` | 带解析的轻量请求 |
-| SSE 游标回放 | `sse` | 游标窗口回放 + 订阅先于回放去重 + 心跳帧 |
 | 编码 | `encoding` | — |
 | 本地缓存 | `cache` / `cache/cachetest` | CacheAside/LocalCache/SingleFlightCache + 契约套件（RunWithClock 假时钟；Comparable 仅 int/uint/string） |
 | 泛型容器 | `container` | Set/Ring/Queue/SafeMap/Slice（并发安全） |
@@ -102,7 +101,6 @@ title: 选型速查（场景 → 包）
 | 缓冲 IO | `bufiox` | — |
 | 并发安全 map | `strmap` | — |
 | secrets 凭证 | `secretx` | — |
-| PII 值面检测与打码 | `pii` | 手机号 + 18 位身份证四重校验，键值同走一条判定面 |
 | shell 词法判据 | `shellx` | Analyze 事实面（重定向/动态词），判不了就报错 |
 | 出站 SSRF 校验 | `urlguard` | CheckURL + DialFunc 预解析（与 httpx.WithSafeDial 组合） |
 | webhook 回调 | `webhook` | — |
@@ -115,16 +113,13 @@ title: 选型速查（场景 → 包）
 | 分布式锁契约（后端中立） | `distlock` | Locker/哨兵集/WithLock 单源——redisx·etcdx 后端消费（etcdx#123 治本） |
 | singleflight 契约测试 | `singleflighttest` | 共享契约套件 |
 | 反射深拷贝 / 类型解析 | `reflectx` | DeepCopyValue 指针环防护；config.SetFromString 字符串按 reflect.Kind 落位 |
-| 审计哈希链 | `auditchain` | append-only 链 + canonical 字段序 + verify 首断点即停 |
-| 策略面规范形指纹 | `canon` | canonical → 版本哈希 + facet diff |
-| 快照式订阅表 | `subhub` | 通用并发结构，原 goagent-kernel 内部件 |
 
 ## 硬规则速览（全矩阵适用）
 
 ### 分层与依赖
 - 依赖严格自底向上，禁止反向依赖；本仓的矩阵内依赖见 README「矩阵总览」表
 - 微工具集统一在 `github.com/oekit/pkg`；本仓新增基础工具前先确认 pkg 里没有
-- `pkg` 是**零第三方依赖仓**（go.mod 零 require，仅标准库，CI 强制）——需要三方能力的基础工具拆独立仓（先例：authx）
+- `pkg` 是**零第三方依赖仓**（go.mod 零 require，仅标准库，CI 强制）——需要三方能力的基础工具拆独立仓（先例：kitx）
 
 ### 错误处理
 - 业务错误（需 BizCode/HTTPCode 双轨、可被 As/Is 判定）统一用
@@ -185,7 +180,6 @@ title: 选型速查（场景 → 包）
 | [kitex](https://github.com/oekit/kitex) | Kitex 生态——日志桥接、治理热更、生命周期、BizError 桥接、kitexotel、istio（xDS 动态熔断，原 istio 微库收编） | `kitex/AGENTS.md` |
 | [middleware](https://github.com/oekit/middleware) | Hertz 标准中间件栈（模块根 mw，双层目录已收平）+ contrib 桥接 + hmw + SheddingMiddleware 自适应降载 + chainmw… | `middleware/AGENTS.md` |
 | [workflow](https://github.com/oekit/workflow) | 组合式流程编排——串行/并行/异步/条件分支 + Hook AOP | `workflow/AGENTS.md` |
-| [kitex-examples](https://github.com/oekit/kitex-examples) | Kitex echo 示例——client/server + IDL + 治理配置 | `kitex-examples/AGENTS.md` |
 | [k8s](https://github.com/oekit/k8s) | Kubernetes 客户端封装——RESTConfig/Clientset/DynamicClient 构建（显式 kubeconfig → KUBECONFIG 显式意图… | `k8s/AGENTS.md` |
 
 ## 通信 · 服务治理
@@ -223,7 +217,7 @@ title: 选型速查（场景 → 包）
 | [pkg](https://github.com/oekit/pkg) | 微工具集 38 合 1（errors/bloomx/contextx/ctxscope/container/distlock/stringx/slicex/enumx… | `pkg/AGENTS.md` |
 | [concurrency](https://github.com/oekit/concurrency) | 并发与流控原语（async/gopool/group/singleflight/progress/syncx/ratelimit/retry）+ window 滑动窗口… | `concurrency/AGENTS.md` |
 | [core](https://github.com/oekit/core) | 应用基建件——governance 治理 schema、config 配置加载（LoadBootstrap/LoadDotEnv/Get* 系、default/env… | `core/AGENTS.md` |
-| [authx](https://github.com/oekit/authx) | 标识与校验——uidgen（Snowflake 全局单例+Extract 元数据、手写 RFC 4122 v4 UUID 零第三方依赖、RandomHex… | `authx/AGENTS.md` |
+| [authx](https://github.com/oekit/authx) | 标识与校验（2026-11-23 自 kitx 改名，消除与 RPC 框架仓 kitex 的一字之差误查面）——uidgen（Snowflake 全局单例+Extract… | `authx/AGENTS.md` |
 
 ### 嵌套模块（重依赖隔离载体）
 
