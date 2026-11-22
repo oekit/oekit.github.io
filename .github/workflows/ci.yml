@@ -60,12 +60,18 @@ jobs:
           [ -n "$ref" ] || ref=main
           echo "ref=$ref" >> "$GITHUB_OUTPUT"
 
-      - name: Checkout matrix-tools
-        uses: actions/checkout@v7
-        with:
-          repository: oekit/matrix-tools
-          path: matrix-tools
-          ref: ${{ steps.src.outputs.ref }}
+      # ★ 源必须落在**站点工作区之外**：站点门禁会递归扫工作区里的 .md/.txt，
+      #   若把源克隆进工作区，判据会把**裁判自己的** CHANGELOG/文档一起扫进去
+      #   （实测：源的 CHANGELOG 里历史条目「24 个模块」被当成站点文案数 ⇒ 假红）。
+      #   ⇒ 克隆到 RUNNER_TEMP，扫描面只剩站点自己的文件。
+      - name: Fetch matrix-tools（源状态，取自站点声明）
+        run: |
+          dir="$RUNNER_TEMP/matrix-tools"
+          git clone --quiet https://github.com/oekit/matrix-tools "$dir"
+          cd "$dir"
+          git fetch --quiet origin "${{ steps.src.outputs.ref }}"
+          git checkout --quiet "${{ steps.src.outputs.ref }}"
+          echo "matrix-tools 已取到 ${{ steps.src.outputs.ref }}"
 
       - name: 站点文案口径 + llms.txt 模块覆盖
-        run: python3 matrix-tools/scripts/verify_site_copy.py --site .
+        run: python3 "$RUNNER_TEMP/matrix-tools/scripts/verify_site_copy.py" --site .
