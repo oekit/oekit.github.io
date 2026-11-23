@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:13:07Z",
+  "generatedAt": "2026-11-23T00:44:52Z",
   "org": "oekit",
   "modules": [
     {
@@ -346,7 +346,7 @@
     },
     {
       "module": "tracing",
-      "latest": "v0.4.8",
+      "latest": "v0.4.9",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -377,7 +377,7 @@
     },
     {
       "module": "registry",
-      "latest": "v0.8.3",
+      "latest": "v0.8.4",
       "nested": [
         {
           "path": "nacos",
@@ -457,7 +457,7 @@
     },
     {
       "module": "data",
-      "latest": "v0.24.1",
+      "latest": "v0.25.0",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -551,7 +551,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.14.1",
+      "latest": "v0.14.2",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -610,7 +610,7 @@
     },
     {
       "module": "redisx",
-      "latest": "v0.16.7",
+      "latest": "v0.16.8",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -666,7 +666,7 @@
     },
     {
       "module": "etcdx",
-      "latest": "v0.3.7",
+      "latest": "v0.3.8",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -687,7 +687,7 @@
     },
     {
       "module": "httpx",
-      "latest": "v0.14.0",
+      "latest": "v0.14.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -742,7 +742,7 @@
     },
     {
       "module": "network",
-      "latest": "v0.12.0",
+      "latest": "v0.12.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -775,7 +775,7 @@
     },
     {
       "module": "timertask",
-      "latest": "v0.5.12",
+      "latest": "v0.5.13",
       "nested": [
         {
           "path": "redis",
@@ -829,7 +829,7 @@
     },
     {
       "module": "middleware",
-      "latest": "v0.23.0",
+      "latest": "v0.23.1",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -873,7 +873,7 @@
     },
     {
       "module": "k8s",
-      "latest": "v0.3.2",
+      "latest": "v0.3.3",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -892,7 +892,7 @@
     },
     {
       "module": "nns",
-      "latest": "v0.10.1",
+      "latest": "v0.10.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -946,7 +946,7 @@
     },
     {
       "module": "nns-endpoint",
-      "latest": "v0.5.1",
+      "latest": "v0.5.2",
       "nested": [],
       "matrixDeps": [
         "concurrency",
@@ -994,7 +994,7 @@
     },
     {
       "module": "bootstrap",
-      "latest": "v0.7.14",
+      "latest": "v0.7.15",
       "nested": [
         {
           "path": "nacos",
@@ -1065,7 +1065,7 @@
     },
     {
       "module": "hertz",
-      "latest": "v0.14.1",
+      "latest": "v0.14.2",
       "nested": [],
       "matrixDeps": [
         "authx",
@@ -1146,7 +1146,7 @@
     },
     {
       "module": "kitex",
-      "latest": "v0.10.0",
+      "latest": "v0.10.1",
       "nested": [
         {
           "path": "cmd/thrift2openapi",
@@ -1213,7 +1213,7 @@
     },
     {
       "module": "workflow",
-      "latest": "v0.11.4",
+      "latest": "v0.11.5",
       "nested": [],
       "matrixDeps": [
         "concurrency",
