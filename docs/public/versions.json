@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-24T12:15:35Z",
+  "generatedAt": "2026-11-24T18:09:24Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.61.1",
+      "latest": "v0.61.3",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
@@ -349,7 +349,8 @@
       "latest": "v0.4.9",
       "nested": [],
       "matrixDeps": [
-        "logx"
+        "logx",
+        "pkg"
       ],
       "breakingIndex": [
         {
@@ -406,7 +407,9 @@
         }
       ],
       "matrixDeps": [
+        "concurrency",
         "core",
+        "logx",
         "pkg"
       ],
       "breakingIndex": [
@@ -461,8 +464,7 @@
         "gormx",
         "logx",
         "pkg",
-        "redisx",
-        "timertask"
+        "redisx"
       ],
       "breakingIndex": [
         {
@@ -549,7 +551,7 @@
     },
     {
       "module": "gormx",
-      "latest": "v0.15.0",
+      "latest": "v0.15.2",
       "nested": [],
       "matrixDeps": [
         "logx",
@@ -870,7 +872,8 @@
       "latest": "v0.3.3",
       "nested": [],
       "matrixDeps": [
-        "logx"
+        "logx",
+        "pkg"
       ],
       "breakingIndex": [
         {
@@ -891,6 +894,7 @@
         "concurrency",
         "core",
         "logx",
+        "pkg",
         "registry"
       ],
       "breakingIndex": [
@@ -941,10 +945,12 @@
       "latest": "v0.5.2",
       "nested": [],
       "matrixDeps": [
+        "concurrency",
         "httpx",
         "logx",
         "metrics",
         "nns",
+        "pkg",
         "registry"
       ],
       "breakingIndex": [
@@ -1058,11 +1064,11 @@
       "latest": "v0.14.2",
       "nested": [],
       "matrixDeps": [
+        "authx",
         "bootstrap",
         "concurrency",
         "core",
         "gormx",
-        "kitx",
         "logx",
         "metrics",
         "middleware",
