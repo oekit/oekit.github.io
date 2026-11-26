@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-11-24T18:57:10Z",
+  "generatedAt": "2026-11-26T00:28:52Z",
   "org": "oekit",
   "modules": [
     {
       "module": "pkg",
-      "latest": "v0.61.4",
+      "latest": "v0.61.5",
       "nested": [],
       "matrixDeps": [],
       "breakingIndex": [
