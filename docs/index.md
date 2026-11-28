@@ -38,10 +38,10 @@ features:
 | 能力层 | 模块 |
 |---|---|
 | 应用引导 · 框架生态 | [bootstrap](https://github.com/oekit/bootstrap) · [hertz](https://github.com/oekit/hertz) · [kitex](https://github.com/oekit/kitex) · [middleware](https://github.com/oekit/middleware) · [workflow](https://github.com/oekit/workflow) · [k8s](https://github.com/oekit/k8s) |
-| 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
 | 数据访问 | [gormx](https://github.com/oekit/gormx) · [redisx](https://github.com/oekit/redisx) · [etcdx](https://github.com/oekit/etcdx) · [data](https://github.com/oekit/data) · [timertask](https://github.com/oekit/timertask) |
-| 可观测性 | [logx](https://github.com/oekit/logx) · [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
-| 基础库 | [pkg](https://github.com/oekit/pkg)（微工具集）· [concurrency](https://github.com/oekit/concurrency) · [core](https://github.com/oekit/core) · [authx](https://github.com/oekit/authx)（标识与校验 + hash，原 kitx）|
+| 通信 · 服务治理 | [httpx](https://github.com/oekit/httpx) · [nns-endpoint](https://github.com/oekit/nns-endpoint) · [network](https://github.com/oekit/network) · [nns](https://github.com/oekit/nns) · [registry](https://github.com/oekit/registry) |
+| 可观测性 | [tracing](https://github.com/oekit/tracing) · [metrics](https://github.com/oekit/metrics) |
+| 基础库 | [pkg](https://github.com/oekit/pkg)（微工具集）· [concurrency](https://github.com/oekit/concurrency) · [logx](https://github.com/oekit/logx)（统一日志门面）· [core](https://github.com/oekit/core) · [authx](https://github.com/oekit/authx)（标识与校验 + hash，原 kitx）|
 
 每个模块的 GitHub 仓库 README 均含可复制的最小示例；矩阵内依赖见各仓「矩阵总览」表。
 
