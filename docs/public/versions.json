@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T03:22:42Z",
+  "generatedAt": "2026-11-28T09:53:12Z",
   "org": "oekit",
   "modules": [
     {
@@ -1089,6 +1089,10 @@
         {
           "version": "v0.9.0",
           "line": "**crudh 排序列白名单按实体字段生成**（BREAKING）：未设 `WithSortableColumns` 时从「任意标识符列可排序」改为「只允许实体类型 T 的字段（字段名 / json tag / gorm `column:` tag，小写口径）」，白名单外一律 **400 `invalid sort parameter`**"
+        },
+        {
+          "version": "v0.9.0",
+          "line": "**fix(governance)**（BREAKING）：策略键用 `string(c.Path())`（**原始路径**）⇒ 带路径参数的路由（如 `/order/123`）永远命中不了 path 级策略、只落到全局键 ⇒ 改用**路由模板**（静态路由不变；按具体实例路径配的策略需改到模板键）"
         },
         {
           "version": "v0.8.5",
