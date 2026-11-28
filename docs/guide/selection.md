@@ -81,6 +81,42 @@ title: 选型速查（场景 → 包）
 | 日志后端桥接 / 文件轮转 | `logx/sink` · `logx/hlog` · `logx/hertzlog` · `logx/kitexlog`（嵌套模块按需引入） | 文件/轮转/多目标 Sink；logrus/zap/zerolog/slog 四后端桥 hlog；Kitex klog 桥接 | 防递归：hlog 后端别再传给框架桥（kitexlog panic 防御） |
 | 注册发现 / Nacos 配置 | `registry`（+嵌套 `registry/nacos`·`registry/nacosimpl`），客户端门面 `nns` | SPI 无关：Registrar/Discoverer/ConfigStore + registrymocks 测试替身；Nacos 重依赖在嵌套模块 | — |
 
+### 场景安装行（复制即用）
+
+- 起 HTTP 服务（生产全栈）：`go get github.com/oekit/bootstrap github.com/oekit/hertz github.com/oekit/middleware`
+- 起 RPC 服务（Kitex）：`go get github.com/oekit/kitex github.com/oekit/bootstrap github.com/oekit/nns`
+- handler 错误出口：`go get github.com/oekit/pkg github.com/oekit/middleware`
+- 响应体自管的服务：`go get github.com/oekit/middleware`
+- 健康检查 / K8s 就绪：`go get github.com/oekit/bootstrap github.com/oekit/hertz`
+- K8s 客户端 / Lease 选主：`go get github.com/oekit/k8s`
+- 组合式流程编排：`go get github.com/oekit/workflow`
+- 内部服务 HTTP 调用（发现+熔断+重试+LB）：`go get github.com/oekit/httpx github.com/oekit/nns`
+- 出站 SSRF 防护：`go get github.com/oekit/pkg github.com/oekit/httpx`
+- RPC 依赖的 HTTP 端点（熔断+换实例重试）：`go get github.com/oekit/nns-endpoint github.com/oekit/nns`
+- 重试（带返回值/退避抖动）：`go get github.com/oekit/concurrency`
+- 中间件一份逻辑两端跑：`go get github.com/oekit/core github.com/oekit/middleware github.com/oekit/kitex`
+- RPC 业务异常透传：`go get github.com/oekit/kitex github.com/oekit/pkg`
+- CRUD 缓存编排：`go get github.com/oekit/data github.com/oekit/gormx`
+- 本地缓存：`go get github.com/oekit/pkg`
+- 分布式缓存：`go get github.com/oekit/data github.com/oekit/redisx`
+- 分布式锁 / 信号量：`go get github.com/oekit/redisx github.com/oekit/etcdx github.com/oekit/pkg`
+- 泛型 CRUD / 防丢更新：`go get github.com/oekit/gormx github.com/oekit/hertz`
+- 分片定时任务：`go get github.com/oekit/timertask`
+- 进程内限流 / 熔断 / 降载：`go get github.com/oekit/concurrency`
+- 分布式限流：`go get github.com/oekit/redisx`
+- HTTP 服务端过载保护：`go get github.com/oekit/middleware`
+- 防爆破锁：`go get github.com/oekit/concurrency github.com/oekit/redisx`
+- 防击穿 / 防穿透：`go get github.com/oekit/pkg github.com/oekit/data`
+- 日志：`go get github.com/oekit/logx`
+- 脱敏 / 审计日志：`go get github.com/oekit/logx`
+- 指标：`go get github.com/oekit/metrics github.com/oekit/hertz`
+- 追踪 / trace_id 串联：`go get github.com/oekit/tracing github.com/oekit/logx`
+- 应用配置：`go get github.com/oekit/core`
+- 零依赖嵌入配置：`go get github.com/oekit/pkg github.com/oekit/core`
+- 优雅关停：`go get github.com/oekit/core github.com/oekit/bootstrap`
+- ID 生成 / 校验 / 哈希：`go get github.com/oekit/authx`
+- 日志后端桥接 / 文件轮转：`go get github.com/oekit/logx`
+- 注册发现 / Nacos 配置：`go get github.com/oekit/registry github.com/oekit/nns`
 
 ## pkg 子包速查（38 合 1，零第三方依赖）
 
