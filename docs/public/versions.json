@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T00:28:52Z",
+  "generatedAt": "2026-11-28T03:22:42Z",
   "org": "oekit",
   "modules": [
     {
@@ -456,100 +456,6 @@
       ]
     },
     {
-      "module": "data",
-      "latest": "v0.25.0",
-      "nested": [],
-      "matrixDeps": [
-        "concurrency",
-        "gormx",
-        "logx",
-        "pkg",
-        "redisx"
-      ],
-      "breakingIndex": [
-        {
-          "version": "v0.22.0",
-          "line": "**BREAKING**：redisx 门面删除 Batch 类型别名（源包 redisx v0.16.0 已删 Batch/NewBatch，门面跟版税同步裁剪）。下游迁移：data/redisx.Batch → data/redisx.Pipeline（方法同构）。地板全量追平 redisx v0.16.0 / pkg v0.48.0 / concurrency v0.36.0 / logx "
-        },
-        {
-          "version": "v0.21.0",
-          "line": "**BREAKING** refactor(cache): 壳类型改名跟随 pkg#355 禁裸 Option——`cache.Option` → `cache.CheckerOption`（= pkg `cache.CheckerOption`，随地板 pkg v0.43.0 一并落地）。显式命名该类型的调用方机械改名即可；改名动机是多包 co-import 冲突（仓规「函数选项模式 XxxOp"
-        },
-        {
-          "version": "v0.20.0",
-          "line": "⚠️ breaking：`data/gormx` 壳移除 `OpenPureGoSQLite`——源 `gormx` v0.8.0 已把纯 Go sqlite 入口整体移出根包（拆 opt-in 子包 `gormx/sqlitedrv`，源仓 oekit/gormx#72：根包自动注册 `\"sqlite\"` 驱动名与 `modernc.org/sqlite` 同链即 init panic）。迁移："
-        },
-        {
-          "version": "v0.17.0",
-          "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
-        },
-        {
-          "version": "v0.15.0",
-          "line": "`timertask` 壳移除 `RedisBackend` / `ShardManager` / `NewRedisBackend` / `NewShardManager` 四个转发符号：源仓 timertask v0.2.0 起把 Redis 后端迁至嵌套模块 `github.com/oekit/timertask/redis`（根包不再引 go-redis，纯 stdlib 嵌入式场景可用）"
-        },
-        {
-          "version": "v0.15.0",
-          "line": "`timertask` 壳新增 `BackendConfig` / `ResolveOptions`（源仓 v0.2.0 新增—— 嵌套后端模块经该结构接收选项解析结果，下游选项写法 `timertask.WithWorkers(4)` 不变）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "go 地板 1.24.0 → **1.25.0**（`data/crud` 壳的类型别名从 `[T]` 参数化为 `[T, ID comparable]` 需要泛型 type alias 语言特性；CI 工具链已为 1.26 无需改动）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "`data/crud`：`Reader`/`Writer`/`Repository`/`TxRepository`/`Service`/`BaseService` 别名 → `[T, ID comparable]`，`NewBaseService[T, ID, CreateReq, UpdateReq]` 转发签名跟随 （与源包保持同一类型，双向赋值互通不变）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "`data/cached`：`CachedRepository[T]` → `[T, ID comparable]`，全部 `CachedOption` 跟随； `WithID(fn func(*T) ID)`；`GetByIDs(ctx, ids []ID) (map[ID]*T, error)`；bloom 门与 事务失效清单全链路 ID 泛型"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "**新增 `WithIDCodec`**：缓存键 ID 段编解码逃生口。缺省编解码支持 string 直通与全部 整型（十进制，**与 v0.13 及之前 int64 时代的键格式完全兼容**，存量缓存键零迁移）； 其余 comparable 类型（复合键等）必须显式注入，键解码失败 fail-fast 报错（绝不猜测性回源）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "缺省 ID 探测收紧：`GetID()` 方法 / `ID` 字段的类型须与 `ID` **精确一致** （int64 实体 + `ID=int64` 行为不变）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "`QueryCache[T]` 不涉及主键，签名不变"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "gormx 地板 v0.5.5 → **v0.6.0**（门面跟版税）"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "迁移：存量 int64 调用点机械补实参——`cached.NewRepository[User]` → `[User, int64]`、 `cached.WithID[User]` → `[User, int64]` 等；string 文本主键 / UUID 实体现已原生可用"
-        },
-        {
-          "version": "v0.14.0",
-          "line": "新增文本主键端到端测试（string PK：Create/GetByID/UpdateFields 失效/GetByIDs/Delete， 走真实 sqlite + SingleFlightCache，钉缺省键编解码往返）"
-        },
-        {
-          "version": "v0.9.0",
-          "line": "**BREAKING** fix(cache/cachetest): 删除壳残留的原生 AsideCache 族——`cache` 侧 `AsideCache`/`NewAsideCache`/`AsideOption`/`SourceFuncWithTTL`/`SourceFrom`/ `TTLCacheAside`/`OnStaleFunc`/`WithStaleIfError`/`WithO"
-        },
-        {
-          "version": "v0.5.0",
-          "line": "**breaking** feat!: data 门面化——八子包 re-export 复刻 ekit data/ 能力面 （cache/rediscache/crud/distlock/gormx/redisx/timertask/cachetest，类型为 泛型 type alias 与源包同一类型；实现住 pkg 与各子仓）"
-        },
-        {
-          "version": "v0.5.0",
-          "line": "**breaking** feat(all)!: `all/` 聚合模块全部版本 retract——一键全家桶由本 门面取代（期间短暂引入的 all/ 聚合嵌套模块一并废弃）"
-        },
-        {
-          "version": "v0.4.0",
-          "line": "**breaking** refactor(cache): 目录正名 `data/cache` → `cache`——import 路径 `github.com/oekit/data/data/cache` → `github.com/oekit/data/cache`（包名保持 `cache` 不变）；零已知消费方，redis 模块（github.com/oekit/redis）的 import"
-        },
-        {
-          "version": "v0.4.0",
-          "line": "**breaking** feat(cache): `LocalCache.Close()` → `Close(ctx context.Context) error` 对齐仓库生命周期硬规则——sync.Once 幂等保留，stop 后台 cleanup goroutine， ctx 预留（当前实现同步返回 nil，ctx 不阻塞）；零已知消费方"
-        }
-      ]
-    },
-    {
       "module": "gormx",
       "latest": "v0.15.3",
       "nested": [],
@@ -682,6 +588,100 @@
         {
           "version": "v0.2.0",
           "line": "**BREAKING**: fix(etcdx): 构造器不校验 nil client ⇒ 「构造时忘了传 client」被推迟到**第一次实际访问**才爆（`cli.Get`/`cli.Put` 上的空指针崩溃，堆栈里只有 etcd 内部帧，看不出根因，往往是生产环境第一次注册服务时）。`registry` 的四个构造器（`NewRegistrar`/`NewDiscoverer`/`NewSu"
+        }
+      ]
+    },
+    {
+      "module": "data",
+      "latest": "v0.25.0",
+      "nested": [],
+      "matrixDeps": [
+        "concurrency",
+        "gormx",
+        "logx",
+        "pkg",
+        "redisx"
+      ],
+      "breakingIndex": [
+        {
+          "version": "v0.22.0",
+          "line": "**BREAKING**：redisx 门面删除 Batch 类型别名（源包 redisx v0.16.0 已删 Batch/NewBatch，门面跟版税同步裁剪）。下游迁移：data/redisx.Batch → data/redisx.Pipeline（方法同构）。地板全量追平 redisx v0.16.0 / pkg v0.48.0 / concurrency v0.36.0 / logx "
+        },
+        {
+          "version": "v0.21.0",
+          "line": "**BREAKING** refactor(cache): 壳类型改名跟随 pkg#355 禁裸 Option——`cache.Option` → `cache.CheckerOption`（= pkg `cache.CheckerOption`，随地板 pkg v0.43.0 一并落地）。显式命名该类型的调用方机械改名即可；改名动机是多包 co-import 冲突（仓规「函数选项模式 XxxOp"
+        },
+        {
+          "version": "v0.20.0",
+          "line": "⚠️ breaking：`data/gormx` 壳移除 `OpenPureGoSQLite`——源 `gormx` v0.8.0 已把纯 Go sqlite 入口整体移出根包（拆 opt-in 子包 `gormx/sqlitedrv`，源仓 oekit/gormx#72：根包自动注册 `\"sqlite\"` 驱动名与 `modernc.org/sqlite` 同链即 init panic）。迁移："
+        },
+        {
+          "version": "v0.17.0",
+          "line": "**BREAKING**: 最低 Go 版本地板 1.24.0 → 1.26.0——工具链被钉在 1.24/1.25 的下游（GOTOOLCHAIN=local）会直接报 \"go: go.mod requires go >= 1.26.0\"，需升到 Go 1.26+。对外发布的地板本就是 1.26+（oekit BOM 徽章与 go.mod 均为 1.26），故不改变对外契约，只影响直接依赖本仓的"
+        },
+        {
+          "version": "v0.15.0",
+          "line": "`timertask` 壳移除 `RedisBackend` / `ShardManager` / `NewRedisBackend` / `NewShardManager` 四个转发符号：源仓 timertask v0.2.0 起把 Redis 后端迁至嵌套模块 `github.com/oekit/timertask/redis`（根包不再引 go-redis，纯 stdlib 嵌入式场景可用）"
+        },
+        {
+          "version": "v0.15.0",
+          "line": "`timertask` 壳新增 `BackendConfig` / `ResolveOptions`（源仓 v0.2.0 新增—— 嵌套后端模块经该结构接收选项解析结果，下游选项写法 `timertask.WithWorkers(4)` 不变）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "go 地板 1.24.0 → **1.25.0**（`data/crud` 壳的类型别名从 `[T]` 参数化为 `[T, ID comparable]` 需要泛型 type alias 语言特性；CI 工具链已为 1.26 无需改动）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "`data/crud`：`Reader`/`Writer`/`Repository`/`TxRepository`/`Service`/`BaseService` 别名 → `[T, ID comparable]`，`NewBaseService[T, ID, CreateReq, UpdateReq]` 转发签名跟随 （与源包保持同一类型，双向赋值互通不变）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "`data/cached`：`CachedRepository[T]` → `[T, ID comparable]`，全部 `CachedOption` 跟随； `WithID(fn func(*T) ID)`；`GetByIDs(ctx, ids []ID) (map[ID]*T, error)`；bloom 门与 事务失效清单全链路 ID 泛型"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "**新增 `WithIDCodec`**：缓存键 ID 段编解码逃生口。缺省编解码支持 string 直通与全部 整型（十进制，**与 v0.13 及之前 int64 时代的键格式完全兼容**，存量缓存键零迁移）； 其余 comparable 类型（复合键等）必须显式注入，键解码失败 fail-fast 报错（绝不猜测性回源）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "缺省 ID 探测收紧：`GetID()` 方法 / `ID` 字段的类型须与 `ID` **精确一致** （int64 实体 + `ID=int64` 行为不变）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "`QueryCache[T]` 不涉及主键，签名不变"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "gormx 地板 v0.5.5 → **v0.6.0**（门面跟版税）"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "迁移：存量 int64 调用点机械补实参——`cached.NewRepository[User]` → `[User, int64]`、 `cached.WithID[User]` → `[User, int64]` 等；string 文本主键 / UUID 实体现已原生可用"
+        },
+        {
+          "version": "v0.14.0",
+          "line": "新增文本主键端到端测试（string PK：Create/GetByID/UpdateFields 失效/GetByIDs/Delete， 走真实 sqlite + SingleFlightCache，钉缺省键编解码往返）"
+        },
+        {
+          "version": "v0.9.0",
+          "line": "**BREAKING** fix(cache/cachetest): 删除壳残留的原生 AsideCache 族——`cache` 侧 `AsideCache`/`NewAsideCache`/`AsideOption`/`SourceFuncWithTTL`/`SourceFrom`/ `TTLCacheAside`/`OnStaleFunc`/`WithStaleIfError`/`WithO"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "**breaking** feat!: data 门面化——八子包 re-export 复刻 ekit data/ 能力面 （cache/rediscache/crud/distlock/gormx/redisx/timertask/cachetest，类型为 泛型 type alias 与源包同一类型；实现住 pkg 与各子仓）"
+        },
+        {
+          "version": "v0.5.0",
+          "line": "**breaking** feat(all)!: `all/` 聚合模块全部版本 retract——一键全家桶由本 门面取代（期间短暂引入的 all/ 聚合嵌套模块一并废弃）"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "**breaking** refactor(cache): 目录正名 `data/cache` → `cache`——import 路径 `github.com/oekit/data/data/cache` → `github.com/oekit/data/cache`（包名保持 `cache` 不变）；零已知消费方，redis 模块（github.com/oekit/redis）的 import"
+        },
+        {
+          "version": "v0.4.0",
+          "line": "**breaking** feat(cache): `LocalCache.Close()` → `Close(ctx context.Context) error` 对齐仓库生命周期硬规则——sync.Once 幂等保留，stop 后台 cleanup goroutine， ctx 预留（当前实现同步返回 nil，ctx 不阻塞）；零已知消费方"
         }
       ]
     },
