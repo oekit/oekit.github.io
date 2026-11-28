@@ -116,6 +116,7 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - 健康检查 / K8s 就绪：`go get github.com/oekit/bootstrap github.com/oekit/hertz`
 - K8s 客户端 / Lease 选主：`go get github.com/oekit/k8s`
 - 组合式流程编排：`go get github.com/oekit/workflow`
+- 实时消息通道（WebSocket 房间广播 / NATS）：`go get github.com/oekit/network`
 - 内部服务 HTTP 调用（发现+熔断+重试+LB）：`go get github.com/oekit/httpx github.com/oekit/nns`
 - 出站 SSRF 防护：`go get github.com/oekit/pkg github.com/oekit/httpx`
 - RPC 依赖的 HTTP 端点（熔断+换实例重试）：`go get github.com/oekit/nns-endpoint github.com/oekit/nns`
@@ -143,7 +144,6 @@ oekit 是一套按"框架耦合分层"组织的 Go 模块矩阵。依赖严格�
 - ID 生成 / 校验 / 哈希：`go get github.com/oekit/authx`
 - 日志后端桥接 / 文件轮转：`go get github.com/oekit/logx`
 - 注册发现 / Nacos 配置：`go get github.com/oekit/registry github.com/oekit/nns`
-
 ## 文档
 
 - [架构总览](https://oekit.github.io/about/architecture.html): 五能力层架构图 + 关键依赖链 + 设计原则
